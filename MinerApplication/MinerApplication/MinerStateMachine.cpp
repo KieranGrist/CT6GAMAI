@@ -8,6 +8,8 @@
 #include "GoHomeAndSleep.h"
 #include "MiningForGold.h"
 #include "Miner.h"
+#include "CanaryStateMachine.h"
+#include "Canary.h"
 MinerStateMachine::MinerStateMachine()
 {
 	//Initalise Previous state to any state so it can be deleted for change state
@@ -65,7 +67,8 @@ void MinerStateMachine::CheckState()
 
 void MinerStateMachine::m_Canary()
 {
-	if (miner->m_CanaryReference->pState == miner->m_CanaryReference->c_StateMachine.FlyState)
+	void* temp = miner->m_CanaryReference->c_StateMachine.FlyState;
+	if (miner->m_CanaryReference->pState == temp)
 	{
 
 	}

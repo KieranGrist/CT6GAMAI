@@ -1,20 +1,14 @@
 ﻿  BankingGold.cpp
   Canary.cpp
-  CanaryStateMachine.cpp
-D:\814853\CT6GAMAI\MinerApplication\MinerApplication\CanaryStateMachine.cpp(49,24): warning C4804:  '>': unsafe use of type 'bool' in operation
-D:\814853\CT6GAMAI\MinerApplication\MinerApplication\CanaryStateMachine.cpp(57,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   CheckCanary.cpp
-  Died.cpp
-  Fly.cpp
   GoAndEat.cpp
   GoAndHAveADrink.cpp
   GoHomeAndSleep.cpp
   Miner.cpp
   MinerApplication.cpp
   MinerStateMachine.cpp
-D:\814853\CT6GAMAI\MinerApplication\MinerApplication\CanaryStateMachine.cpp(80,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\814853\CT6GAMAI\MinerApplication\MinerApplication\MinerStateMachine.cpp(68,5): error C2027:  use of undefined type 'Canary'
+D:\814853\CT6GAMAI\MinerApplication\MinerApplication\MinerStateMachine.cpp(69,91): error C2446:  '==': no conversion from 'Fly *' to 'State<Canary> *'
   MiningForGold.cpp
-  Sing.cpp
   Generating Code...
-D:\814853\CT6GAMAI\MinerApplication\MinerApplication\Miner.h(6): message :  see declaration of 'Canary'
+D:\814853\CT6GAMAI\MinerApplication\MinerApplication\MinerStateMachine.cpp(69,82): message :  Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+D:\814853\CT6GAMAI\MinerApplication\MinerApplication\MinerStateMachine.cpp(69,82): message : D:\814853\CT6GAMAI\MinerApplication\MinerApplication\GoAndHAveADrink.cpp : fatal error C1090: PDB API call failed, error code '3': D:\814853\CT6GAMAI\MinerApplication\MinerApplication\Debug\vc142.pdb

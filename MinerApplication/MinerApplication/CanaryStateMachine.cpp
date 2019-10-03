@@ -42,6 +42,7 @@ void CanaryStateMachine::CheckState()
 	{
 		c_Sing();
 	}
+	canary->pState = FlyState;
 }
 
 void CanaryStateMachine::Death()
