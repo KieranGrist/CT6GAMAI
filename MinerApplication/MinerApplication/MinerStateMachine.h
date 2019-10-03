@@ -38,7 +38,5 @@ public:
 	GoAndHaveADrink* DrinkState;
 	GoHomeAndSleep* HomeState;
 	MiningForGold* MiningState;
-
-
 };
 

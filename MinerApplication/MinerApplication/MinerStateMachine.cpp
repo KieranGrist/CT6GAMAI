@@ -20,6 +20,7 @@ MinerStateMachine::~MinerStateMachine()
 
 void MinerStateMachine::Update()
 {
+	
 	CheckState();
 }
 
@@ -29,7 +30,7 @@ void MinerStateMachine::ChangeState(State<Miner>* newState)
 	PreviousState = NULL;
 	PreviousState = miner->pState;
 
-	miner->pState =NULL;
+	miner->pState = NULL;
 	miner->pState = newState;
 }
 
@@ -64,7 +65,14 @@ void MinerStateMachine::CheckState()
 
 void MinerStateMachine::m_Canary()
 {
+	if (miner->m_CanaryReference->pState == miner->m_CanaryReference->c_StateMachine.FlyState)
+	{
 
+	}
+//	if (miner->m_CanaryReference->pState == m_CanaryReference->c_StateMachine.FlyState)
+	{
+
+	}
 }
 
 void MinerStateMachine::Bank()
@@ -98,21 +106,29 @@ void MinerStateMachine::Drink()
 
 void MinerStateMachine::Home()
 {
+	bool ChangedState = false;
 	if (miner->m_Hunger > 0)
 	{
 		cout << "I need food, i will now go and eat" << endl;
 		ChangeState(EatState);
+		ChangedState = true;
 	}
-	if (miner->m_Thirstiness > 0)
+	if (!ChangedState) 
 	{
-		cout << "I need drink, i will now go and drink" << endl;
-		ChangeState(DrinkState);
+		if (miner->m_Thirstiness > 0)
+		{
+			cout << "I need drink, i will now go and drink" << endl;
+			ChangeState(DrinkState);
+		}
 	}
-	if (miner->m_Tiredness <= 0)
+	if (!ChangedState)
 	{
-		cout << "I am at now ready for a new days work, I will now head ot the mine" << endl;
-		ChangeState(MiningState);
-		miner->m_Tiredness = 0;
+		if (miner->m_Tiredness <= 0)
+		{
+			cout << "I am at now ready for a new days work, I will now head ot the mine" << endl;
+			ChangeState(MiningState);
+			miner->m_Tiredness = 0;
+		}
 	}
 }
 

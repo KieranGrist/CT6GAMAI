@@ -11,6 +11,7 @@
 
 Miner::Miner()
 {
+	m_CanaryReference = new Canary;
 }
 
 

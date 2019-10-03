@@ -1,5 +1,20 @@
-﻿  Died.cpp
+﻿  BankingGold.cpp
+  Canary.cpp
+  CanaryStateMachine.cpp
+D:\814853\CT6GAMAI\MinerApplication\MinerApplication\CanaryStateMachine.cpp(49,24): warning C4804:  '>': unsafe use of type 'bool' in operation
+D:\814853\CT6GAMAI\MinerApplication\MinerApplication\CanaryStateMachine.cpp(57,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  CheckCanary.cpp
+  Died.cpp
   Fly.cpp
+  GoAndEat.cpp
+  GoAndHAveADrink.cpp
+  GoHomeAndSleep.cpp
+  Miner.cpp
+  MinerApplication.cpp
+  MinerStateMachine.cpp
+D:\814853\CT6GAMAI\MinerApplication\MinerApplication\CanaryStateMachine.cpp(80,12): warning C4244:  'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\814853\CT6GAMAI\MinerApplication\MinerApplication\MinerStateMachine.cpp(68,5): error C2027:  use of undefined type 'Canary'
+  MiningForGold.cpp
   Sing.cpp
   Generating Code...
-  MinerApplication.vcxproj -> D:\814853\CT6GAMAI\MinerApplication\Debug\MinerApplication.exe
+D:\814853\CT6GAMAI\MinerApplication\MinerApplication\Miner.h(6): message :  see declaration of 'Canary'

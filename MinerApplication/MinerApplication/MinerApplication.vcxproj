@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="BankingGold.h" />
     <ClInclude Include="Canary.h" />
+    <ClInclude Include="CanaryStateMachine.h" />
     <ClInclude Include="CheckCanary.h" />
     <ClInclude Include="Died.h" />
     <ClInclude Include="Fly.h" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClCompile Include="BankingGold.cpp" />
     <ClCompile Include="Canary.cpp" />
+    <ClCompile Include="CanaryStateMachine.cpp" />
     <ClCompile Include="CheckCanary.cpp" />
     <ClCompile Include="Died.cpp" />
     <ClCompile Include="Fly.cpp" />

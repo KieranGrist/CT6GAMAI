@@ -1,5 +1,5 @@
 #pragma once
-
+#include "CanaryStateMachine.h"
 template <class T>
 class State;
 class Miner;
@@ -8,6 +8,8 @@ class Canary
 public:
 	Canary();
 	~Canary();
+	CanaryStateMachine c_StateMachine;
+	void Start();
 
 	//Our state
 	State<Canary>* pState;
@@ -20,7 +22,7 @@ public:
 
 	//public members
 	//These values can be monitored and editted by our "states"
-	int c_Signing;
+	int c_Singing;
 	int c_Flying;
 	bool c_Dead;
 	Miner* c_MinerReference;

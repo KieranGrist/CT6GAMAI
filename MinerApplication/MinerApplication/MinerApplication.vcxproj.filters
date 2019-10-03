@@ -75,6 +75,9 @@
     <ClInclude Include="Died.h">
       <Filter>Header Files\Canary</Filter>
     </ClInclude>
+    <ClInclude Include="CanaryStateMachine.h">
+      <Filter>Header Files\Canary</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -120,6 +123,9 @@
       <Filter>Source Files\Canary</Filter>
     </ClCompile>
     <ClCompile Include="Died.cpp">
+      <Filter>Source Files\Canary</Filter>
+    </ClCompile>
+    <ClCompile Include="CanaryStateMachine.cpp">
       <Filter>Source Files\Canary</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,5 @@
 #pragma once
 #include "MinerStateMachine.h"
-
 //Forward declaring state to avoid issues with circular dependency
 template <class T>
 class State;
