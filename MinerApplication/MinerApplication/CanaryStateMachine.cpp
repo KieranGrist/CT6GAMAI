@@ -5,6 +5,8 @@
 #include "Died.h"
 #include "Sing.h"
 #include <time.h>
+#include "Miner.h"
+#include "Canary.h"
 #include <random>
 CanaryStateMachine::CanaryStateMachine()
 {
@@ -30,6 +32,7 @@ void CanaryStateMachine::ChangeState(State<Canary>* newState)
 
 void CanaryStateMachine::CheckState()
 {
+	CheckDeath();
 	if (canary->pState == FlyState)
 	{
 		c_Fly();
@@ -42,14 +45,31 @@ void CanaryStateMachine::CheckState()
 	{
 		c_Sing();
 	}
-	canary->pState = FlyState;
+}
+
+bool CanaryStateMachine::CheckDeath()
+{
+
+	if (canary->pState == DeathState||canary->IsDead)
+	{
+		return true;
+		canary->IsDead = true;
+		ChangeState(DeathState);
+	}
+	else
+	{
+		canary->c_MinerReference->FirstTime = true;
+		canary->IsDead = false;
+		return false;
+	}
 }
 
 void CanaryStateMachine::Death()
 {
-	if (canary->c_Dead > 4)
+	if (canary->c_Dead >= 5)
 	{
 		ChangeState(PreviousState);
+		canary->c_Dead = 0;
 	}
 }
 
@@ -61,8 +81,9 @@ void CanaryStateMachine::c_Fly()
 	random = rand() % 100;
 	random = rand() % 100;
 	bool StateChanged = false;
-	if (random > 60)
+	if (random >= 90)
 	{
+		canary->IsDead = true;
 		cout << "The bird has died from poision gas" << endl;
 		ChangeState(DeathState);
 		StateChanged = true;
@@ -71,7 +92,10 @@ void CanaryStateMachine::c_Fly()
 	{
 		if (canary->c_Flying > 10)
 		{
+			canary->IsDead = true;
 			cout << "The bird is tired of flying and is now going to sing" << endl;
+			canary->c_Flying = 0;
+			ChangeState(SingState);
 		}
 	}
 }
@@ -84,8 +108,9 @@ void CanaryStateMachine::c_Sing()
 	random = rand() % 100;
 	random = rand() % 100;
 	bool StateChanged = false;
-	if (random > 60)
+	if (random >= 90)
 	{
+		canary->IsDead = true;
 		cout << "The bird has died from poision gas" << endl;
 		ChangeState(DeathState);
 		StateChanged = true;
@@ -95,6 +120,8 @@ void CanaryStateMachine::c_Sing()
 		if (canary->c_Singing > 10)
 		{
 			cout << "The bird is tired of singing and wants to stretch its wings " << endl;
+			canary->c_Singing = 0;
+			ChangeState(FlyState);
 		}
 	}
 }

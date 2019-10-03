@@ -34,6 +34,8 @@ void Miner::Start()
 
 void Miner::Update()
 {
+	
+	cout << endl << endl;
 	m_StateMachine.miner = this;
 	m_StateMachine.Update();
 	pState->Execute(this);

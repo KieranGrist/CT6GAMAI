@@ -19,12 +19,12 @@ public:
 
 	//Use this method to change states, so the old state is correctly disposed of
 	void ChangeState(State<Canary>* newState);
-
+	bool IsDead;
 	//public members
 	//These values can be monitored and editted by our "states"
 	int c_Singing;
 	int c_Flying;
-	bool c_Dead;
+	int c_Dead;
 	Miner* c_MinerReference;
 };
 

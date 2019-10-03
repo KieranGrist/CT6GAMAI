@@ -29,6 +29,7 @@ public:
 	void Home();
 
 	void Mining();
+	bool BirdChecked;
 	
 	State<Miner>* PreviousState;
 	Miner* miner;

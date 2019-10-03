@@ -14,8 +14,7 @@ public:
 	void Update();
 	void ChangeState(State<Canary>* newState);
 	void CheckState();
-
-
+	bool CheckDeath();
 
 	void Death();
 

@@ -22,12 +22,15 @@ public:
 
 	//public members
 	//These values can be monitored and editted by our "states"
+	int m_Day = 0;
+	int m_PickaxePower = 0;
 	int m_Gold = 0;
 	int m_BankedGold = 0;
 	int m_Tiredness = 0;
 	int m_Thirstiness = 0;
 	int m_Hunger = 0;
-	bool m_CanHearCanary = 0;
+	bool m_CheckedCanary = false;
+	bool FirstTime = true;
 	Canary* m_CanaryReference;
 };
 
