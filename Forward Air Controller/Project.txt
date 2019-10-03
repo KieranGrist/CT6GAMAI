@@ -8,3 +8,6 @@ GIve Helicopter commands like land, unload, pick up cargo, pick up troops, parad
 AI can also do it them selves after a peroid of inactitivity where a Alien isolation style ai will take command.
 Ground AI are automatic and have basic battles.
 Gameplay includes trying to wipe out the squads and push for ground on the maps. Maps could by procedureally generated.
+
+Project will be built in. Most Probably using cubes or low-polly models
+Unity version Unity 2019.2.0f1 (64-bit)
