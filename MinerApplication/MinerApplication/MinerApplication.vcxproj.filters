@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Miner">
+      <UniqueIdentifier>{72a1b90b-0063-4f5f-b651-d1e1f79059b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Miner">
+      <UniqueIdentifier>{d18039ac-e9a6-4416-a2e9-70b6a9bb7d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Canary">
+      <UniqueIdentifier>{fff293b6-b2ec-4e42-9b18-8b7eedc3fb4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Canary">
+      <UniqueIdentifier>{c8976c31-8d69-4e2e-bc18-96e8ab759e41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,14 +36,44 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Miner.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Miner.h">
+      <Filter>Header Files\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="BankingGold.h">
+      <Filter>Header Files\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckCanary.h">
+      <Filter>Header Files\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="GoAndEat.h">
+      <Filter>Header Files\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="GoAndHAveADrink.h">
+      <Filter>Header Files\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="GoHomeAndSleep.h">
+      <Filter>Header Files\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="Canary.h">
+      <Filter>Header Files\Canary</Filter>
+    </ClInclude>
+    <ClInclude Include="MinerStateMachine.h">
+      <Filter>Header Files\Miner</Filter>
+    </ClInclude>
     <ClInclude Include="MiningForGold.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="Sing.h">
+      <Filter>Header Files\Canary</Filter>
+    </ClInclude>
+    <ClInclude Include="Fly.h">
+      <Filter>Header Files\Canary</Filter>
+    </ClInclude>
+    <ClInclude Include="Died.h">
+      <Filter>Header Files\Canary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -41,14 +83,44 @@
     <ClCompile Include="MinerApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Miner.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BankingGold.cpp">
+      <Filter>Source Files\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckCanary.cpp">
+      <Filter>Source Files\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="GoAndEat.cpp">
+      <Filter>Source Files\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="GoAndHAveADrink.cpp">
+      <Filter>Source Files\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="GoHomeAndSleep.cpp">
+      <Filter>Source Files\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="Miner.cpp">
+      <Filter>Source Files\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="Canary.cpp">
+      <Filter>Source Files\Canary</Filter>
+    </ClCompile>
     <ClCompile Include="MiningForGold.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="MinerStateMachine.cpp">
+      <Filter>Source Files\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="Sing.cpp">
+      <Filter>Source Files\Canary</Filter>
+    </ClCompile>
+    <ClCompile Include="Fly.cpp">
+      <Filter>Source Files\Canary</Filter>
+    </ClCompile>
+    <ClCompile Include="Died.cpp">
+      <Filter>Source Files\Canary</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

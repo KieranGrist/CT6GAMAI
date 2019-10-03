@@ -8,7 +8,7 @@
 int main()
 {
 	Miner *MainMiner = new Miner();
-
+	MainMiner->Start();
 	while (1)
 	{
 		MainMiner->Update();

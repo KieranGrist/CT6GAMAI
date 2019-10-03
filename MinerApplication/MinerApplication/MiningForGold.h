@@ -1,9 +1,9 @@
 #pragma once
 #include "State.h"
-
+#include "Miner.h"
 //Mining for gold state
 class MiningForGold :
-	public State
+	public State<Miner>
 {
 public:
 	MiningForGold();
