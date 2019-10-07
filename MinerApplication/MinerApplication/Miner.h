@@ -10,6 +10,7 @@ public:
 	Miner();
 	~Miner();
 	MinerStateMachine m_StateMachine;
+
 	//Our state
 	State<Miner>* pState;
 	void Start();

@@ -14,6 +14,7 @@ void CheckCanary::Execute(Miner* miner)
 {
 	
 	miner->m_CheckedCanary = true;
+	miner->m_CanaryReference->c_StateMachine.CheckDeath();
 	cout << "I am checking the canary" << endl;
 	if (miner->m_CanaryReference->IsDead == true)
 	{
@@ -22,7 +23,7 @@ void CheckCanary::Execute(Miner* miner)
 			miner->m_Day = 0;
 			miner->FirstTime = false;
 		}
-		cout << "*ALARM* *ALARM* THE BIRD HAS DIED, MINE WILL CLOSE FOR 5 DAYS" << "This is Day" << miner->m_CanaryReference->c_Dead << endl;
+		cout << "*ALARM* *ALARM* THE BIRD HAS DIED, MINE WILL CLOSE FOR 5 DAYS" << " This is Day" << miner->m_CanaryReference->c_Dead << endl;
 	}
 	else
 	{

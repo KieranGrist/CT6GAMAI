@@ -18,7 +18,7 @@ int main()
 	{
 		MainMiner->Update();
 		MainBird->Update();
-		Sleep(500); // wait 2000 milliseconds (2 seconds) before continuing
+		Sleep(2000); // wait 2000 milliseconds (2 seconds) before continuing
 	}
 
 	delete MainMiner;

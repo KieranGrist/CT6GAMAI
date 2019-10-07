@@ -111,11 +111,12 @@ void MinerStateMachine::Home()
 		cout << "The day has now ended, as such, you are sent to check the canary" << endl;
 		ChangeState(CanaryState);
 		BirdChecked = true;
+		cout << "The Bird Has been checked " << endl;
 	}
 	else
 	{
-		cout << "The Bird Has been checked " << endl;
-		miner->m_Day++;
+		
+
 		if (miner->m_Hunger > 0)
 		{
 			cout << "I need food, i will now go and eat" << endl;
@@ -134,9 +135,19 @@ void MinerStateMachine::Home()
 		{
 			if (miner->m_Tiredness <= 0)
 			{
-
-				cout << "I am at now ready for a new days work, I will now head ot the mine" << endl;
-				ChangeState(MiningState);
+				miner->m_Day++;
+				
+				if (miner->m_CanaryReference->c_StateMachine.CheckDeath())
+				{
+					cout << "Mine is still closed, I will rest for another day" << endl;
+					ChangeState(HomeState);
+				}
+				else
+				{
+					cout << "I am at now ready for a new days work, I will now head to the mine" << endl;
+					ChangeState(MiningState);
+				}
+		
 				miner->m_Tiredness = 0;
 				BirdChecked = false;
 			}

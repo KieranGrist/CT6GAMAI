@@ -50,7 +50,7 @@ void CanaryStateMachine::CheckState()
 bool CanaryStateMachine::CheckDeath()
 {
 
-	if (canary->pState == DeathState||canary->IsDead)
+	if (canary->pState == DeathState)
 	{
 		return true;
 		canary->IsDead = true;
@@ -68,7 +68,7 @@ void CanaryStateMachine::Death()
 {
 	if (canary->c_Dead >= 5)
 	{
-		ChangeState(PreviousState);
+		ChangeState(FlyState);
 		canary->c_Dead = 0;
 	}
 }
