@@ -18,13 +18,14 @@ public class Canary : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        c_StateMachine = new CanaryStateMachine();
         c_Singing = 0;
         c_Flying = 0;
         c_Dead = 0;
         c_StateMachine.DeathState = new Died();
         c_StateMachine.FlyState = new Fly();
         c_StateMachine.SingState = new Sing();
-        c_StateMachine.PreviousState = new Sing();
+        c_StateMachine.PreviousState = c_StateMachine.SingState;
         pState = c_StateMachine.FlyState;
     }
 
@@ -36,9 +37,9 @@ public class Canary : MonoBehaviour
         if (SleepTimer >= 2)
         {
             SleepTimer = 0;
-            c_StateMachine.canary = this;
+            c_StateMachine.canary = GetComponent<Canary>();
             c_StateMachine.Update();
-            pState.Execute(this);
+            pState.Execute(GetComponent<Canary>());
         }
     }
 }

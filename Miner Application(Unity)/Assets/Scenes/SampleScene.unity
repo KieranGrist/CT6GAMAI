@@ -227,6 +227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CanaryReference: {fileID: 1776044354}
+  m_StateMachine:
+    BirdChecked: 0
+    miner: {fileID: 0}
   m_Day: 0
   m_PickaxePower: 0
   m_Gold: 0
@@ -236,6 +239,8 @@ MonoBehaviour:
   m_Hunger: 0
   m_CheckedCanary: 0
   FirstTime: 1
+  SleepTimer: 0
+  m_TransformReference: {fileID: 0}
 --- !u!1 &267743765
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +290,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d15c5bc0ad122b846a723a5de295340b, type: 2}
+  - {fileID: 2100000, guid: 237d8d83258befb4f813061550bdf43d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -560,7 +565,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 237d8d83258befb4f813061550bdf43d, type: 2}
+  - {fileID: 2100000, guid: c894c8d3b2b2ec54083080299f8a8a0d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -827,7 +832,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c894c8d3b2b2ec54083080299f8a8a0d, type: 2}
+  - {fileID: 2100000, guid: d15c5bc0ad122b846a723a5de295340b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1252,11 +1257,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842e2a6ce46911545bb589951bb437d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  c_TransformReference: {fileID: 1776044353}
   IsDead: 0
   c_Singing: 0
   c_Flying: 0
   c_Dead: 0
   c_MinerReference: {fileID: 196995459}
+  SleepTimer: 0
 --- !u!1 &2074267902
 GameObject:
   m_ObjectHideFlags: 0

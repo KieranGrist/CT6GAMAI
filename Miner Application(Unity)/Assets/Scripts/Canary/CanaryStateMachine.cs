@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanaryStateMachine
+public class CanaryStateMachine 
 {
 
     public State<Canary> PreviousState;
@@ -14,7 +14,9 @@ public class CanaryStateMachine
 
    public void Update()
     {
-        CheckState();
+   
+            CheckState();
+  
     }
 
     public void ChangeState(State<Canary> newState)
@@ -65,8 +67,9 @@ public class CanaryStateMachine
     {
         if (canary.c_Dead >= 5)
         {
-            ChangeState(FlyState);
             canary.c_Dead = 0;
+            ChangeState(FlyState);
+            
         }
     }
 
@@ -81,7 +84,8 @@ public class CanaryStateMachine
         if (random >= 90)
         {
             canary.IsDead = true;
-           Debug.Log( "The bird has died from poision gas" );
+            canary.c_MinerReference.m_Day = 0;
+            Debug.Log( "The bird has died from poision gas" );
             ChangeState(DeathState);
             StateChanged = true;
         }
@@ -108,9 +112,11 @@ public class CanaryStateMachine
         if (random >= 90)
         {   
             canary.IsDead = true;
+            canary.c_MinerReference.m_Day = 0;
            Debug.Log( "The bird has died from poision gas" );
-            ChangeState(DeathState);
             StateChanged = true;
+            ChangeState(DeathState);
+        
         }
         if (!StateChanged)
         {

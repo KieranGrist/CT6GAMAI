@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class Miner : MonoBehaviour
 {
     public Canary m_CanaryReference;
@@ -18,8 +18,10 @@ public class Miner : MonoBehaviour
     public State<Miner> pState;
     public float SleepTimer =0;
     public Transform m_TransformReference;
+   
     void Start()
     {
+        m_StateMachine = new MinerStateMachine();
         m_StateMachine.BankingState = new BankingGold();
         m_StateMachine.CanaryState = new CheckCanary();
         m_StateMachine.EatState = new GoAndEat();
@@ -27,7 +29,6 @@ public class Miner : MonoBehaviour
         m_StateMachine.HomeState = new GoHomeAndSleep();
         m_StateMachine.MiningState = new MiningForGold();
         pState = m_StateMachine.MiningState;
-
     }
 
     // Update is called once per frame
@@ -37,10 +38,11 @@ public class Miner : MonoBehaviour
         SleepTimer += Time.deltaTime;
         if (SleepTimer >= 2)
         {
-            m_StateMachine.miner = this;
-            m_StateMachine.Update();
-            pState.Execute(this);
             SleepTimer = 0;
+            m_StateMachine.miner = GetComponent<Miner>();
+            m_StateMachine.Update();
+            pState.Execute(GetComponent<Miner>());
+   
         }
     }
 }

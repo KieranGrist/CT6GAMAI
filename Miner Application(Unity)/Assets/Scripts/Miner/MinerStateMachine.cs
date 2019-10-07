@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class MinerStateMachine 
 {
     public bool BirdChecked;
@@ -23,7 +23,8 @@ public class MinerStateMachine
     // Update is called once per frame
     public void Update()
     {
-        CheckState();
+ 
+            CheckState();
     }
     public void ChangeState(State<Miner> newState)
     {
