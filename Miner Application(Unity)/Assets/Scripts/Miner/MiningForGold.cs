@@ -10,8 +10,16 @@ public class MiningForGold : State<Miner>
     }
     public override void Execute(Miner agent)
     {
-        agent.transform.position = new Vector3(2, 0, 0);
-        agent.transform.position += new Vector3(0, 1, 0);
+
+        //do
+        //{
+
+        //    agent.transform.position = Vector3.Lerp(agent.transform.position, new Vector3(2, 1, 0),Time.deltaTime);
+           
+
+        //} while (agent.transform.position != new Vector3(2, 1, 0));
+
+
         //Print out information on what it is doing...
         Debug.Log("Digging for gold!");
 
