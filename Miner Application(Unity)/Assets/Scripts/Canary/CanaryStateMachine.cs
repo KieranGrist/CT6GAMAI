@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class CanaryStateMachine 
 {
-
+    public int RandomNum;
     public State<Canary> PreviousState;
     public  Canary canary;
     public  Died DeathState;
@@ -75,13 +75,23 @@ public class CanaryStateMachine
 
     public void c_Fly()
     {
- 
-        int random = Random.Range(0, 100);
-        random = Random.Range(0, 100);
-        random = Random.Range(0, 100);
-        random = Random.Range(0, 100);
+        int[] Array;
+        Array = new int[200];
+        int sum = 0;
+        int average = 0;
+        for (int i = 0; i < Array.Length; i++)
+        {
+            Array[i] = Random.Range(0, 100);
+        }
+        sum = 0;
+        for (int i = 0; i < Array.Length; i++)
+        {
+            sum += Array[i];
+        }
+        average = sum / Array.Length;
+        RandomNum = average;
         bool StateChanged = false;
-        if (random >= 90)
+        if (RandomNum >= 90)
         {
             canary.IsDead = true;
             canary.c_MinerReference.m_Day = 0;
@@ -103,13 +113,23 @@ public class CanaryStateMachine
 
     public void c_Sing()
     {
-       
-        int random = Random.Range(0, 100);;
-        random = Random.Range(0, 100);;
-        random = Random.Range(0, 100);;
-        random = Random.Range(0, 100);;
+        int[] Array;
+        Array = new int[200];
+        int sum = 0;
+        int average = 0;
+        for (int i = 0; i < Array.Length; i++)
+        {
+            Array[i] = Random.Range(0, 100);
+        }
+        sum = 0;
+        for (int i = 0; i < Array.Length; i++)
+        {
+            sum += Array[i];
+        }
+        average = sum / Array.Length;
+        RandomNum = average;
         bool StateChanged = false;
-        if (random >= 90)
+        if (RandomNum >= 90)
         {   
             canary.IsDead = true;
             canary.c_MinerReference.m_Day = 0;

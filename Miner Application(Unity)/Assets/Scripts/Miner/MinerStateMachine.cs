@@ -13,7 +13,7 @@ public class MinerStateMachine
     public GoAndHaveADrink DrinkState;
     public GoHomeAndSleep HomeState;
     public MiningForGold MiningState;
-
+    public GoToTheShop ShoppingState;
     // Start is called before the first frame update
     public void Start()
     {
@@ -41,7 +41,6 @@ public class MinerStateMachine
         {
             Bank();
         }
-
         if (miner.pState == EatState)
         {
             Eat();
@@ -62,6 +61,18 @@ public class MinerStateMachine
         {
             m_Canary();
         }
+        if (miner.pState == ShoppingState)
+        {
+            GoToShop();
+        }
+    }
+    public void GoToShop ()
+    {
+        if (!miner.m_CanShop)
+        {
+            Debug.Log("I have visited the shop and will continue to mine");
+            ChangeState(MiningState);
+        }
     }
 
     public void m_Canary()
@@ -79,6 +90,8 @@ public class MinerStateMachine
         {
             Debug.Log("I have banked all the gold, I now have " + miner.m_BankedGold + " Stored in the bank account I will carry on mining");
             ChangeState(MiningState);
+            miner.m_CanShop = true;
+     
         }
     }
 
@@ -157,7 +170,11 @@ public class MinerStateMachine
     public void Mining()
     {
         bool ChangedStates = false;
-
+        if (miner.m_CanShop)
+        {
+            ChangeState(ShoppingState);
+            ChangedStates = true;
+        }
         if (!ChangedStates)
         {
             if (miner.m_Gold >= 10)

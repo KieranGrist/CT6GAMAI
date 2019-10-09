@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class ShopKeeper : MonoBehaviour
 {
     public Transform s_TransformReference;
@@ -9,6 +9,8 @@ public class ShopKeeper : MonoBehaviour
     public State<ShopKeeper> pState;
     public Miner s_MinerReference;
     public int s_TimeTillNewStock;
+    public int s_Gold;
+    public bool s_PickaxePurchased;
     public int s_Cost;
     public int s_Tiredness;
     public float SleepTimer; 
