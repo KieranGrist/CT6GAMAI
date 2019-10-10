@@ -68,7 +68,7 @@
     <Compile Include="Assets\Scripts\Canary\Fly.cs" />
     <Compile Include="Assets\Scripts\Canary\Sing.cs" />
     <Compile Include="Assets\Scripts\Miner\BankingGold.cs" />
-    <Compile Include="Assets\Scripts\Miner\CheckCanary.cs" />
+    <Compile Include="Assets\Scripts\Miner\GoAndCheckTheBird.cs" />
     <Compile Include="Assets\Scripts\Miner\GoAndEat.cs" />
     <Compile Include="Assets\Scripts\Miner\GoAndHaveADrink.cs" />
     <Compile Include="Assets\Scripts\Miner\GoHomeAndSleep.cs" />
@@ -76,7 +76,6 @@
     <Compile Include="Assets\Scripts\Miner\Miner.cs" />
     <Compile Include="Assets\Scripts\Miner\MinerStateMachine.cs" />
     <Compile Include="Assets\Scripts\Miner\MiningForGold.cs" />
-    <Compile Include="Assets\Scripts\RandomNumberScript.cs" />
     <Compile Include="Assets\Scripts\Shopkeeper\Restock.cs" />
     <Compile Include="Assets\Scripts\Shopkeeper\Shop.cs" />
     <Compile Include="Assets\Scripts\Shopkeeper\ShopKeeper.cs" />

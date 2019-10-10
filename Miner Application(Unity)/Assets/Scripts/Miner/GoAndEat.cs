@@ -12,6 +12,6 @@ public class GoAndEat : State<Miner>
     {
         agent.TargetLocation = new Vector3(2, 1, -2);
         Debug.Log("Eating my Pasty");
-        agent.m_Hunger--;
+        agent.m_Hunger-= Time.deltaTime;
     }
 }

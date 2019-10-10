@@ -10,6 +10,7 @@ public class MiningForGold : State<Miner>
     }
     public override void Execute(Miner agent)
     {
+        agent.m_CheckedCanary = false;
        // agent.transform.position = new Vector3(2, 1, 0);
        agent.TargetLocation = new Vector3(2, 1, 0);
         //do
@@ -22,15 +23,21 @@ public class MiningForGold : State<Miner>
 
 
         //Print out information on what it is doing...
-        Debug.Log("Digging for gold!");
+    
 
         //Increment the miner's gold amount
-        agent.m_Gold+= agent.m_PickaxePower;
+        agent.MinerTimer += Time.deltaTime;
+        if (agent.MinerTimer >= agent.Speed)
+        {
+            Debug.Log("Digging for gold!");
+            agent.MinerTimer = 0;
+            agent.m_Gold += agent.m_PickaxePower;
+        }
         //Increment the miner's tiredness amount
-        agent.m_Tiredness++;
+        agent.m_Tiredness+= Time.deltaTime;
         //Increment the miner's thirstiness amount
-        agent.m_Thirstiness++;
+        agent.m_Thirstiness+= Time.deltaTime;
         //Increment the miner's hunger amount
-        agent.m_Hunger++;
+        agent.m_Hunger+= Time.deltaTime;
     }
 }

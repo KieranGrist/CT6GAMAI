@@ -7,12 +7,11 @@ public class Canary : MonoBehaviour
     public Transform c_TransformReference;
     public CanaryStateMachine c_StateMachine;
     public State<Canary> pState;
-    public bool IsDead;
     //public members
     //These values can be monitored and editted by our "states"
-    public int c_Singing;
-    public int c_Flying;
-    public int c_Dead;
+    public float c_Singing;
+    public float c_Flying;
+    public float c_Dead;
     public Miner c_MinerReference;
     public bool Moving = false;
     public float SleepTimer;
@@ -32,7 +31,6 @@ public class Canary : MonoBehaviour
         c_StateMachine.DeathState = new Died();
         c_StateMachine.FlyState = new Fly();
         c_StateMachine.SingState = new Sing();
-        c_StateMachine.PreviousState = c_StateMachine.SingState;
         pState = c_StateMachine.FlyState;
         c_StateMachine.canary = GetComponent<Canary>();
         c_StateMachine.Update();
@@ -72,7 +70,7 @@ public class Canary : MonoBehaviour
         {
             c_TransformReference = this.transform;
             SleepTimer += Time.deltaTime;
-            if (SleepTimer >= 2)
+            if (SleepTimer >= 0)
             {
                 SleepTimer = 0;
                 c_StateMachine.canary = GetComponent<Canary>();

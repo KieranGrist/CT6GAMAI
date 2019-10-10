@@ -8,27 +8,38 @@ public class GoToTheShop : State<Miner>
     {
         agent.TargetLocation = new Vector3(10, -4, -2);
         Debug.Log("I am going to visit the shop today");
-        if (agent.m_BankedGold >= agent.m_ShopKeeeperReference.s_Cost)
+        if (!agent.Moving)
         {
-            Debug.Log("I have enough money");
+            agent.m_Looking += Time.deltaTime;
+            Debug.Log("I have arrived and will look around ");
+            if (agent.m_Looking >= 5)
+            {
+                agent.m_Looking = 0;
+                if (agent.m_BankedGold >= agent.m_ShopKeeeperReference.s_Cost)
+                {
+                    Debug.Log("I have enough money");
 
-            if (agent.m_ShopKeeeperReference.pState == agent.m_ShopKeeeperReference.s_StateMachine.ShopState)
-            {
-                Debug.Log("I would like to buy a better pickaxe please");
-                agent.m_BankedGold -= agent.m_ShopKeeeperReference.s_Cost;
-                agent.m_ShopKeeeperReference.s_Gold += agent.m_ShopKeeeperReference.s_Cost;
-                agent.m_ShopKeeeperReference.s_PickaxePurchased = true;
-                agent.m_PickaxePower *= 2;
-            }
-            else
-            {
-                Debug.Log("The shop is not open right now");
+                    if (agent.m_ShopKeeeperReference.pState == agent.m_ShopKeeeperReference.s_StateMachine.ShopState)
+                    {
+                        Debug.Log("I would like to buy a better pickaxe please");
+                        agent.m_BankedGold -= agent.m_ShopKeeeperReference.s_Cost;
+                        agent.m_ShopKeeeperReference.s_Gold += agent.m_ShopKeeeperReference.s_Cost;
+                        agent.m_ShopKeeeperReference.s_PickaxePurchased = true;
+                        agent.m_PickaxePower *= 2;
+                        Debug.Log("I have purchased the pickaxe");
+                    }
+                    else
+                    {
+                        Debug.Log("The shop is not open right now");
+                    }
+                }
+                else
+                {
+                    Debug.Log("I do not have enough money");
+                }
+                agent.m_CanShop = false;
             }
         }
-        else
-        {
-            Debug.Log("I do not have enough money");
-        }
-        agent.m_CanShop = false;
+
     }
 }
