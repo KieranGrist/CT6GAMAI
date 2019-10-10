@@ -10,8 +10,7 @@ public class CheckCanary : State<Miner>
     }
     public override void Execute(Miner agent)
     {
-        agent.transform.position = new Vector3(4, 0, -2);
-        agent.transform.position += new Vector3(0, 1, 0);
+        agent.TargetLocation = new Vector3(4, 1, -2);
         agent.m_CheckedCanary = true;
         agent.m_CanaryReference.c_StateMachine.CheckDeath();
         Debug.Log("I am checking the canary");

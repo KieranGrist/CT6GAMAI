@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Shopkeeper\ShopKeeperStateMachine.cs" />
     <Compile Include="Assets\Scripts\Shopkeeper\Sleep.cs" />
     <Compile Include="Assets\Scripts\State.cs" />
+    <Compile Include="Assets\Scripts\Transition.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/814853/CT6GAMAI/Miner Application(Unity)/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

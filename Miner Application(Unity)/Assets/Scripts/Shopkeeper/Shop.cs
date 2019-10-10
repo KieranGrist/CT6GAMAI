@@ -6,7 +6,7 @@ public class Shop : State<ShopKeeper>
 {
     public override void Execute(ShopKeeper agent)
     {
-        agent.s_TransformReference.position = new Vector3(9, -4, -2);
+        agent.TargetLocation = new Vector3(9, -4, -2);
         agent.s_TimeTillNewStock++;
         agent.s_Tiredness++;
         Debug.Log("Manning the shop *whistles*");

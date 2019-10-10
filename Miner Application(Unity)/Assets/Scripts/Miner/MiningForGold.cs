@@ -10,7 +10,8 @@ public class MiningForGold : State<Miner>
     }
     public override void Execute(Miner agent)
     {
-        agent.transform.position = new Vector3(2, 1, 0);
+       // agent.transform.position = new Vector3(2, 1, 0);
+       agent.TargetLocation = new Vector3(2, 1, 0);
         //do
         //{
 

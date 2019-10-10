@@ -13,7 +13,14 @@ public class ShopKeeper : MonoBehaviour
     public bool s_PickaxePurchased;
     public int s_Cost;
     public int s_Tiredness;
-    public float SleepTimer; 
+    public float SleepTimer;
+    public bool Moving = false;
+    public float Speed;
+    public float Distance;
+    public Vector3 TargetLocation;
+    public Vector3 Direction;
+    public Vector3 Normalise;
+    public Vector3 M;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,20 +32,51 @@ public class ShopKeeper : MonoBehaviour
         s_StateMachine.ShopState = new Shop();
         s_StateMachine.SleepState = new Sleep();
         pState = s_StateMachine.ShopState;
-            
+        s_StateMachine.shopKeeper = GetComponent<ShopKeeper>();
+        s_StateMachine.Update();
+        pState.Execute(GetComponent<ShopKeeper>());
+        Speed = 1.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        s_TransformReference = this.transform;
-        SleepTimer += Time.deltaTime;
-        if (SleepTimer >= 2)
+        Distance = Vector3.Distance(TargetLocation, transform.position);
+        if (transform.position != TargetLocation)
         {
-            SleepTimer = 0;
-            s_StateMachine.shopKeeper = GetComponent<ShopKeeper>();
-            s_StateMachine.Update();
-            pState.Execute(GetComponent<ShopKeeper>());
+            if (Distance <= 0.05)
+            {
+                transform.position = TargetLocation;
+                Moving = false;
+            }
+            Moving = true;
+
+        }
+        else
+        {
+            Moving = false;
+        }
+
+        if (Moving == true)
+        {
+            // direction, normalise, direction * DeltaTime and speed, add that to current location
+            Direction = TargetLocation - transform.position;
+            Normalise = Direction.normalized;
+            M = Normalise * Time.deltaTime * Speed;
+
+            transform.position += M;
+        }
+        if (Moving == false)
+        {
+            s_TransformReference = this.transform;
+            SleepTimer += Time.deltaTime;
+            if (SleepTimer >= 2)
+            {
+                SleepTimer = 0;
+                s_StateMachine.shopKeeper = GetComponent<ShopKeeper>();
+                s_StateMachine.Update();
+                pState.Execute(GetComponent<ShopKeeper>());
+            }
         }
     }
 }

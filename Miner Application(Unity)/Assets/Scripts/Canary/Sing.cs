@@ -10,8 +10,7 @@ public class Sing : State<Canary>
     }
     public override void Execute(Canary agent)
     {
-        agent.transform.position = new Vector3(0, -5, 6);
-        agent.transform.position += new Vector3(0, 1, 0);
+        agent.TargetLocation = new Vector3(0, -4, 6);
         Debug.Log("Tweet, tweet, tweet");
         agent.c_Singing++;
     }

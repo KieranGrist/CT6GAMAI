@@ -801,6 +801,10 @@ MonoBehaviour:
   Array: 
   sum: 0
   average: 0
+  SleepTimer: 0
+  Max: 0
+  Min: 0
+  NumberOfTimesReachedTarget: 0
 --- !u!1 &990307289
 GameObject:
   m_ObjectHideFlags: 0

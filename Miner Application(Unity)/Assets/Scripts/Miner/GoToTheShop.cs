@@ -6,7 +6,7 @@ public class GoToTheShop : State<Miner>
 {
     public override void Execute(Miner agent)
     {
-        agent.m_TransformReference.position = new Vector3(10, -4, -2);
+        agent.TargetLocation = new Vector3(10, -4, -2);
         Debug.Log("I am going to visit the shop today");
         if (agent.m_BankedGold >= agent.m_ShopKeeeperReference.s_Cost)
         {

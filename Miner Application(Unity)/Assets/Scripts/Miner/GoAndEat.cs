@@ -10,8 +10,7 @@ public class GoAndEat : State<Miner>
     }
     public override void Execute(Miner agent)
     {
-        agent.transform.position = new Vector3(2, 0, -2);
-        agent.transform.position += new Vector3(0, 1, 0);
+        agent.TargetLocation = new Vector3(2, 1, -2);
         Debug.Log("Eating my Pasty");
         agent.m_Hunger--;
     }

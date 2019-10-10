@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
+
 public class MinerStateMachine 
 {
     public bool BirdChecked;
+    public float Desierability; 
     public State<Miner> PreviousState;
     public Miner miner;
+    public State<Miner>[] m_StateArrays;
+    public Transition<Miner>[] m_Transitions;
     public BankingGold BankingState;
     public CheckCanary CanaryState;
     public GoAndEat EatState;
@@ -15,10 +19,23 @@ public class MinerStateMachine
     public MiningForGold MiningState;
     public GoToTheShop ShoppingState;
     // Start is called before the first frame update
+    /*
+     * Current State, Condition, State Machine 
+     * 
+     * 
+     * An array of states, and array of transition conditions 
+     */
     public void Start()
     {
-       
-    }
+        Func<int, int> square = x => x * x;
+        m_StateArrays[0] = BankingState;
+        m_StateArrays[1] = CanaryState;
+        m_StateArrays[2] = EatState;
+        m_StateArrays[3] = DrinkState;
+        m_StateArrays[4] = HomeState;
+        m_StateArrays[5] = MiningState;
+        m_StateArrays[6] = ShoppingState;
+}
 
     // Update is called once per frame
     public void Update()
@@ -26,14 +43,7 @@ public class MinerStateMachine
  
             CheckState();
     }
-    public void ChangeState(State<Miner> newState)
-    {
-        PreviousState = null;
-        PreviousState = miner.pState;
 
-        miner.pState = null;
-        miner.pState = newState;
-    }
 
     public void CheckState()
     {
@@ -166,7 +176,14 @@ public class MinerStateMachine
             }
         }
     }
+    public void ChangeState(State<Miner> CurrentState, State<Miner> NewState)
+    {
+        PreviousState = null;
+        PreviousState = CurrentState;
 
+        miner.pState = null;
+        miner.pState = NewState;
+    }
     public void Mining()
     {
         bool ChangedStates = false;

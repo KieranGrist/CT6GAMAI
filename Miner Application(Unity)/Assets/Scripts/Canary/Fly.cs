@@ -10,8 +10,7 @@ public class Fly : State<Canary>
     }
     public override void Execute(Canary agent)
     {
-        agent.transform.position = new Vector3(2, -5, 6);
-        agent.transform.position += new Vector3(0, 1, 0);
+        agent.TargetLocation = new Vector3(2, -4, 6);
         Debug.Log("The Bird flys around the cage, energetically");
         agent.c_Flying++;
     }
