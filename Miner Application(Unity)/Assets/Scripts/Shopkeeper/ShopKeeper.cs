@@ -8,11 +8,11 @@ public class ShopKeeper : MonoBehaviour
     public ShopKeeperStateMachine s_StateMachine;
     public State<ShopKeeper> pState;
     public Miner s_MinerReference;
-    public int s_TimeTillNewStock;
+    public float s_TimeTillNewStock;
     public int s_Gold;
     public bool s_PickaxePurchased;
     public int s_Cost;
-    public int s_Tiredness;
+    public float s_Tiredness;
     public float SleepTimer;
     public bool Moving = false;
     public float Speed;
@@ -70,7 +70,7 @@ public class ShopKeeper : MonoBehaviour
         {
             s_TransformReference = this.transform;
             SleepTimer += Time.deltaTime;
-            if (SleepTimer >= 2)
+            if (SleepTimer >= 0)
             {
                 SleepTimer = 0;
                 s_StateMachine.shopKeeper = GetComponent<ShopKeeper>();

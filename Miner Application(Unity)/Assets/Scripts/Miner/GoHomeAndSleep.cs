@@ -15,6 +15,6 @@ public class GoHomeAndSleep : State<Miner>
   
         Debug.Log("I am at home and Sleeping");
         Debug.Log("Sleep ZZZ");
-        agent.m_Tiredness--;
+        agent.m_Tiredness-= Time.deltaTime;
     }
 }

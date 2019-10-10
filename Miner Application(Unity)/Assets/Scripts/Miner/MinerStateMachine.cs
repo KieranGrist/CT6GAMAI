@@ -5,230 +5,67 @@ using UnityEngine;
 
 public class MinerStateMachine 
 {
-    public bool BirdChecked;
-    public float Desierability; 
-    public State<Miner> PreviousState;
     public Miner miner;
-    public State<Miner>[] m_StateArrays;
-    public Transition<Miner>[] m_Transitions;
     public BankingGold BankingState;
-    public CheckCanary CanaryState;
     public GoAndEat EatState;
     public GoAndHaveADrink DrinkState;
     public GoHomeAndSleep HomeState;
     public MiningForGold MiningState;
     public GoToTheShop ShoppingState;
-    // Start is called before the first frame update
-    /*
-     * Current State, Condition, State Machine 
-     * 
-     * 
-     * An array of states, and array of transition conditions 
-     */
-    public void Start()
-    {
-        Func<int, int> square = x => x * x;
-        m_StateArrays[0] = BankingState;
-        m_StateArrays[1] = CanaryState;
-        m_StateArrays[2] = EatState;
-        m_StateArrays[3] = DrinkState;
-        m_StateArrays[4] = HomeState;
-        m_StateArrays[5] = MiningState;
-        m_StateArrays[6] = ShoppingState;
-}
-
+    public GoAndCheckTheBird CheckBirdState;
     // Update is called once per frame
     public void Update()
     {
  
             CheckState();
     }
-
-
     public void CheckState()
     {
-        if (miner.pState == BankingState)
-        {
-            Bank();
-        }
-        if (miner.pState == EatState)
-        {
-            Eat();
-        }
-        if (miner.pState == DrinkState)
-        {
-            Drink();
-        }
-        if (miner.pState == HomeState)
-        {
-            Home();
-        }
-        if (miner.pState == MiningState)
-        {
-            Mining();
-        }
-        if (miner.pState == CanaryState)
-        {
-            m_Canary();
-        }
-        if (miner.pState == ShoppingState)
-        {
-            GoToShop();
-        }
+        float MineDesire, ShopDesire, BankDesire, EatDesire, DrinkDesire, BirdDesire, HomeDesire;
+        
+        /*
+         * Mine Desire :
+         * Distance to mine and how tired/hunger/thirsty they are 
+         * 
+         * Shop Desire:
+         * Distance to shop and How much money they have
+         * 
+         * Bank Desire:
+         * 
+         * EatDesire:
+         * 
+         * DrinkDesire:
+         * 
+         * BirdDesire:
+         * 
+         * HomeDesire:
+         * 
+         */
+
+        //Mining State Checks
+        miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, BankingState, miner.m_Gold >= miner.m_PickaxePower*10);
+        miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, DrinkState, miner.m_Thirstiness >= 15);
+        miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, EatState, miner.m_Hunger >= 13);
+        miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, CheckBirdState, miner.m_Tiredness >= 20);
+
+        //Shopping State Checks
+        miner.pState = Transition<Miner>.Transist(miner.pState, ShoppingState, MiningState, !miner.m_CanShop);
+
+        //Banking State Checks 
+        miner.pState = Transition<Miner>.Transist(miner.pState, BankingState, ShoppingState, miner.m_Gold == 0);
+   
+        //Hunger State Checks
+        miner.pState = Transition<Miner>.Transist(miner.pState, EatState, MiningState, miner.m_Hunger <= 0);
+
+        //Drink State Checks
+        miner.pState = Transition<Miner>.Transist(miner.pState, DrinkState, MiningState, miner.m_Thirstiness <= 0);
+
+        //Bird State Checks
+        miner.pState = Transition<Miner>.Transist(miner.pState, CheckBirdState, HomeState, miner.m_Tiredness <= 0);
+
+        //Home State Checks
+        miner.pState = Transition<Miner>.Transist(miner.pState, HomeState, MiningState, miner.m_Tiredness <= 0 );
+      
     }
-    public void GoToShop ()
-    {
-        if (!miner.m_CanShop)
-        {
-            Debug.Log("I have visited the shop and will continue to mine");
-            ChangeState(MiningState);
-        }
-    }
-
-    public void m_Canary()
-    {
-        if (miner.m_CheckedCanary)
-        {
-            ChangeState(PreviousState);
-            miner.m_CheckedCanary = false;
-        }
-    }
-
-    public void Bank()
-    {
-        if (miner.m_Gold == 0)
-        {
-            Debug.Log("I have banked all the gold, I now have " + miner.m_BankedGold + " Stored in the bank account I will carry on mining");
-            ChangeState(MiningState);
-            miner.m_CanShop = true;
-     
-        }
-    }
-
-    public void Eat()
-    {
-        if (miner.m_Hunger <= 0)
-        {
-            Debug.Log( "I have eaten and will now return" );
-            ChangeState(PreviousState);
-            miner.m_Hunger = 0;
-        }
-    }
-
-    public void Drink()
-    {
-        if (miner.m_Thirstiness <= 0)
-        {
-            Debug.Log( "I have drinken and will now return" );
-            ChangeState(PreviousState);
-            miner.m_Thirstiness = 0;
-        }
-    }
-
-    public void Home()
-    {
-        bool ChangedState = false;
-        if (BirdChecked == false)
-        {
-            Debug.Log( "The day has now ended, as such, you are sent to check the canary" );
-            ChangeState(CanaryState);
-            BirdChecked = true;
-            Debug.Log( "The Bird Has been checked " );
-        }
-        else
-        {
-
-
-            if (miner.m_Hunger > 0)
-            {
-                Debug.Log( "I need food, i will now go and eat" );
-                ChangeState(EatState);
-                ChangedState = true;
-            }
-            if (!ChangedState)
-            {
-                if (miner.m_Thirstiness > 0)
-                {
-                    Debug.Log( "I need drink, i will now go and drink" );
-                    ChangeState(DrinkState);
-                }
-            }
-            if (!ChangedState)
-            {
-                if (miner.m_Tiredness <= 0)
-                {
-                    miner.m_Day++;
-
-                    if (miner.m_CanaryReference.c_StateMachine.CheckDeath())
-                    {
-                        Debug.Log( "Mine is still closed, I will rest for another day" );
-                        ChangeState(HomeState);
-                    }
-                    else
-                    {
-                        Debug.Log( "I am at now ready for a new days work, I will now head to the mine" );
-                        ChangeState(MiningState);
-                    }
-
-                    miner.m_Tiredness = 0;
-                    BirdChecked = false;
-                }
-            }
-        }
-    }
-    public void ChangeState(State<Miner> CurrentState, State<Miner> NewState)
-    {
-        PreviousState = null;
-        PreviousState = CurrentState;
-
-        miner.pState = null;
-        miner.pState = NewState;
-    }
-    public void Mining()
-    {
-        bool ChangedStates = false;
-        if (miner.m_CanShop)
-        {
-            ChangeState(ShoppingState);
-            ChangedStates = true;
-        }
-        if (!ChangedStates)
-        {
-            if (miner.m_Gold >= 10)
-            {
-                ChangeState(BankingState);
-                Debug.Log( "I have no more room for my gold, I must go to the bank" );
-                ChangedStates = true;
-            }
-        }
-        if (!ChangedStates)
-        {
-            if (miner.m_Tiredness >= 20)
-            {
-                ChangeState(HomeState);
-                Debug.Log( "I am tired I now need to go home and sleep" );
-                ChangedStates = true;
-            }
-        }
-        if (!ChangedStates)
-        {
-            if (miner.m_Thirstiness >= 15)
-            {
-                ChangeState(DrinkState);
-                Debug.Log( "I am thirsty I must go and have a drink" );
-                ChangedStates = true;
-            }
-        }
-        if (!ChangedStates)
-        {
-            if (miner.m_Hunger >= 13)
-            {
-                ChangeState(EatState);
-                ChangedStates = true;
-            }
-        }
-    }
-
-
 
 }

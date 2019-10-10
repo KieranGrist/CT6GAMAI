@@ -14,7 +14,15 @@ public class BankingGold : State<Miner>
         //Print out information of gold
         Debug.Log("Banking Gold");
         //Banking the Miners gold
-        agent.m_BankedGold += agent.m_Gold;
-        agent.m_Gold = 0;;
+        agent.MinerTimer += Time.deltaTime;
+        if (agent.MinerTimer >= 30)
+        {
+            agent.m_BankedGold += agent.m_Gold;
+
+            agent.m_Gold = 0;
+
+
+            agent.m_CanShop = true;
+        }
     }
 }
