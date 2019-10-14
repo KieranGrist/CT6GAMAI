@@ -12,7 +12,7 @@ public class MiningForGold : State<Miner>
     {
         agent.m_CheckedCanary = false;
        // agent.transform.position = new Vector3(2, 1, 0);
-       agent.TargetLocation = new Vector3(2, 1, 0);
+       agent.TargetLocation = agent.m_StateMachine.M_Transform.position;
         //do
         //{
 

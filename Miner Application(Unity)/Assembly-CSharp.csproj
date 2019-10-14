@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Canary\Died.cs" />
     <Compile Include="Assets\Scripts\Canary\Fly.cs" />
     <Compile Include="Assets\Scripts\Canary\Sing.cs" />
+    <Compile Include="Assets\Scripts\Helper.cs" />
     <Compile Include="Assets\Scripts\Miner\BankingGold.cs" />
     <Compile Include="Assets\Scripts\Miner\GoAndCheckTheBird.cs" />
     <Compile Include="Assets\Scripts\Miner\GoAndEat.cs" />

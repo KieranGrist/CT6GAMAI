@@ -22,6 +22,7 @@ public class Miner : MonoBehaviour
     public float m_Looking = 0;
     public float MinerTimer; //Timer that can be used by scripts to time actions
     public float SleepTimer = 0;
+
     public float Distance;
     public float Speed;
 
@@ -42,7 +43,7 @@ public class Miner : MonoBehaviour
 
     void Start()
     {
-        m_StateMachine = new MinerStateMachine();
+        //m_StateMachine = new MinerStateMachine();
         m_StateMachine.BankingState = new BankingGold();     
         m_StateMachine.BankingState = new BankingGold();     
         m_StateMachine.EatState = new GoAndEat();
