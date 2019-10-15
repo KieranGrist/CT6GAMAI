@@ -235,19 +235,14 @@ MonoBehaviour:
     E_Transform: {fileID: 1694115275}
     D_Transform: {fileID: 729691304}
     H_Transform: {fileID: 1780749613}
-    S_Transform: {fileID: 1472516679}
+    S_Transform: {fileID: 359304910}
     CB_Transform: {fileID: 1555010643}
     miner: {fileID: 196995459}
-    K: 1
-    MineDesire: 0
-    ShopDesire: 0
-    BankDesire: 0
-    EatDesire: 0
-    DrinkDesire: 0
-    BirdDesire: 0
-    HomeDesire: 0
-    GoldStatus: 0
-    DistanceToMine: 0
+    K: 0.5
+    goMineDesire:
+      GoldDesire: 0
+      DistanceToMine: 0
+      UnclappedMineDesire: 0
   m_Day: 0
   m_PickaxePower: 0
   m_BankedGold: 0
