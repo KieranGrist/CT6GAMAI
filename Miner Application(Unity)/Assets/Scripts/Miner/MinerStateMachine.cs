@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public struct GoMineDesire
+public struct DesireDebug
 {
-    public float GoldDesire;
-    public float DistanceToMine;
-    public float UnclappedMineDesire;
-};
-[System.Serializable]
-
-public struct GoShopDesire
-{
-    public float ShopDesire;
-    public float DistanceToShop;
-    public float UnclappedShopDesire;
+    public float Status;
+    public float DistanceToWayPoint;
+    public float UnclappedDesire;
+   
 }
 [System.Serializable]
 public class MinerStateMachine 
@@ -26,21 +19,22 @@ public class MinerStateMachine
     public Transform H_Transform;
     public Transform S_Transform;
     public Transform CB_Transform;
+    
     public Miner miner;
-    public PriorityQueue<Miner> MinerQueue;
+    public PriorityQueue<Miner> MinerQueue = new PriorityQueue<Miner>();
      public float K;
     //This is for debuging
  
-    public GoMineDesire goMineDesire;
-    public GoShopDesire goShopDesire;
-     float MineDesire;
-     float ShopDesire;
-     float BankDesire;
-     float EatDesire;
-     float DrinkDesire;
-     float BirdDesire;
-     float HomeDesire;
-
+    public DesireDebug goMineDesire;
+    public DesireDebug goShopDesire, goEatDesire, goHomeDesire, goBirdDesire, goBankDesire, goDrinkDesire;
+    public float MineDesire;
+    public float ShopDesire;
+    public float BankDesire;
+    public float EatDesire;
+    public float DrinkDesire;
+    public float BirdDesire;
+    public float HomeDesire;
+    public float HighestDesire;
     public GoAndCheckTheBird CheckBirdState;
     public BankingGold BankingState;
     public GoAndEat EatState;
@@ -59,60 +53,102 @@ public class MinerStateMachine
         // This will take in an agent and return a number between 0 and 1
         // 1.0 = Need to mine
         // 0 = No need to mine
-        float RET = ((miner.m_Gold - 10) * -1) / 10;
-        return RET;
+        return ((miner.m_Gold - 10) * -1) / 10;
+        
     }
     public float ShopStatus ()
     {
         return (miner.m_BankedGold) / 10;
     }
-    public void CheckState()
+    public float BankStatus()
     {
-
-    
-        /*
-         * Mine Desire :
-         * Distance to mine and how tired/hunger/thirsty they are 
-         * 
-         * Shop Desire:
-         * Distance to shop and How much money they have
-         * 
-         * Bank Desire:
-         * Distance to bank and how much money you have to bank
-         * 
-         * EatDesire:
-         * Distance to Home and how hungry you are  
-         * DrinkDesire:
-         * Distance to Home and how thirsty you are 
-         * BirdDesire:
-         * Distance to bird and time since the last check
-         * HomeDesire:
-         * Distance to home and how tired you are
-         */
-
+        return miner.m_Gold / 10;
+    }
+    public float BirdStatus()
+    {
+        return miner.m_Tiredness / 20;
+    }
+    public float DrinkStatus()
+    {
+        return miner.m_Thirstiness / 15;
+    }
+    public float EatStatus()
+    {
+        return miner.m_Hunger / 15;
+    }
+    public float HomeStatus()
+    {
+        return((miner.m_Tiredness - 20) * -1) / 20;
+    }
+    public void CheckDesire()
+    {
         if (Helper.DistanceToItem(miner.transform, M_Transform) > 0)
         {
-            goMineDesire.DistanceToMine = Helper.DistanceToItem(miner.transform, M_Transform);
-            goMineDesire.GoldDesire =  MineStatus();
-            goMineDesire.UnclappedMineDesire = K * (MineStatus() / Helper.DistanceToItem(miner.transform, M_Transform));
-            MineDesire = Mathf.Clamp(K * ( MineStatus() / Helper.DistanceToItem(miner.transform, M_Transform)), 0, 1);
+            goMineDesire.DistanceToWayPoint = Helper.DistanceToItem(miner.transform, M_Transform);
+            goMineDesire.Status = MineStatus();
+            goMineDesire.UnclappedDesire = K * (MineStatus() / Helper.DistanceToItem(miner.transform, M_Transform));
+            MineDesire = Mathf.Clamp(K * (MineStatus() / Helper.DistanceToItem(miner.transform, M_Transform)), 0.0f, 1.0f);
         }
         if (Helper.DistanceToItem(miner.transform, S_Transform) > 0)
         {
-            ShopDesire = Mathf.Clamp(K * (1 - ShopStatus() / Helper.DistanceToItem(miner.transform, S_Transform)), 0, 1);
+            goShopDesire.Status = ShopStatus();
+            goShopDesire.DistanceToWayPoint = Helper.DistanceToItem(miner.transform, S_Transform);
+            goShopDesire.UnclappedDesire = K * (ShopStatus() / Helper.DistanceToItem(miner.transform, S_Transform));
+            ShopDesire = Mathf.Clamp(K * (ShopStatus() / Helper.DistanceToItem(miner.transform, S_Transform)), 0.0f, 1.0f);
         }
-        BankDesire = K * (1 );
-        BirdDesire = K * (1);
-        DrinkDesire = K * (1);
-        EatDesire = K * (1);
-        HomeDesire = K * (1);
-        ShopDesire = K * (1);
-        // *bubble sort arrays 
-       
-        // Priority quee onto that que, that is going to have a map of data, value represting the desirability, other value is the state. what it does is it will evaulate a thing, get a score for the desire, here is the state for that, add that into a pair, add that to the priority que
-        // the Priority quee keep the highest number ontop and do the highest state first. 
+        if (Helper.DistanceToItem(miner.transform, B_Transform) > 0)
+        {
+            goBankDesire.Status = BankStatus();
+            goBankDesire.DistanceToWayPoint = Helper.DistanceToItem(miner.transform, B_Transform);
+            goBankDesire.UnclappedDesire = K * (ShopStatus() / Helper.DistanceToItem(miner.transform, B_Transform));
+            ShopDesire = Mathf.Clamp(K * (ShopStatus() / Helper.DistanceToItem(miner.transform, B_Transform)), 0.0f, 1.0f);
+        }
+        if (Helper.DistanceToItem(miner.transform, CB_Transform) > 0)
+        {
+            goBirdDesire.Status = BirdStatus();
+            goBirdDesire.DistanceToWayPoint = Helper.DistanceToItem(miner.transform, CB_Transform);
+            goBirdDesire.UnclappedDesire = K * (BirdStatus() / Helper.DistanceToItem(miner.transform, CB_Transform));
+            ShopDesire = Mathf.Clamp(K * (BirdStatus() / Helper.DistanceToItem(miner.transform, CB_Transform)), 0.0f, 1.0f);
+        }
+        if (Helper.DistanceToItem(miner.transform, D_Transform) > 0)
+        {
+            goDrinkDesire.Status = DrinkStatus();
+            goDrinkDesire.DistanceToWayPoint = Helper.DistanceToItem(miner.transform, D_Transform);
+            goDrinkDesire.UnclappedDesire = K * (DrinkStatus() / Helper.DistanceToItem(miner.transform, D_Transform));
+            ShopDesire = Mathf.Clamp(K * (DrinkStatus() / Helper.DistanceToItem(miner.transform, D_Transform)), 0.0f, 1.0f);
+        }
+        if (Helper.DistanceToItem(miner.transform, H_Transform) > 0)
+        {
+            goHomeDesire.Status = HomeStatus();
+            goHomeDesire.DistanceToWayPoint = Helper.DistanceToItem(miner.transform, H_Transform);
+            goHomeDesire.UnclappedDesire = K * (HomeStatus() / Helper.DistanceToItem(miner.transform, H_Transform));
+            ShopDesire = Mathf.Clamp(K * (HomeStatus() / Helper.DistanceToItem(miner.transform, H_Transform)), 0.0f, 1.0f);
+        }
+        if (Helper.DistanceToItem(miner.transform, E_Transform) > 0)
+        {
+            goEatDesire.Status = EatStatus();
+            goEatDesire.DistanceToWayPoint = Helper.DistanceToItem(miner.transform, E_Transform);
+            goEatDesire.UnclappedDesire = K * (EatStatus() / Helper.DistanceToItem(miner.transform, E_Transform));
+            ShopDesire = Mathf.Clamp(K * (EatStatus() / Helper.DistanceToItem(miner.transform, E_Transform)), 0.0f, 1.0f);
+        }
+    }
+    public void CheckState()
+    {
 
-        miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, BankingState, miner.m_Gold >= miner.m_PickaxePower*10);
+        MinerQueue.TaskQueue.Clear();
+        CheckDesire();
+        MinerQueue.TaskQueue.Add(new KeyValuePair<float, State<Miner>>(MineDesire, MiningState));
+        MinerQueue.TaskQueue.Add(new KeyValuePair<float, State<Miner>>(ShopDesire, ShoppingState));
+        MinerQueue.TaskQueue.Add(new KeyValuePair<float, State<Miner>>(BankDesire, BankingState));
+        MinerQueue.TaskQueue.Add(new KeyValuePair<float, State<Miner>>(DrinkDesire, DrinkState));
+        MinerQueue.TaskQueue.Add(new KeyValuePair<float, State<Miner>>(EatDesire, EatState));
+        MinerQueue.TaskQueue.Add(new KeyValuePair<float, State<Miner>>(HomeDesire, HomeState));
+        MinerQueue.TaskQueue.Add(new KeyValuePair<float, State<Miner>>(BirdDesire, CheckBirdState));
+
+        MinerQueue.Sort();
+        HighestDesire = MinerQueue.TaskQueue[0].Key;
+        // miner.pState = MinerQueue.TaskQueue[0].Value;
+        miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, BankingState, miner.m_Gold >= miner.m_PickaxePower * 10);
         miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, DrinkState, miner.m_Thirstiness >= 15);
         miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, EatState, miner.m_Hunger >= 13);
         miner.pState = Transition<Miner>.Transist(miner.pState, MiningState, CheckBirdState, miner.m_Tiredness >= 20);
@@ -122,7 +158,7 @@ public class MinerStateMachine
 
         //Banking State Checks 
         miner.pState = Transition<Miner>.Transist(miner.pState, BankingState, ShoppingState, miner.m_Gold == 0);
-   
+
         //Hunger State Checks
         miner.pState = Transition<Miner>.Transist(miner.pState, EatState, MiningState, miner.m_Hunger <= 0);
 
@@ -133,8 +169,8 @@ public class MinerStateMachine
         miner.pState = Transition<Miner>.Transist(miner.pState, CheckBirdState, HomeState, miner.m_Tiredness <= 0);
 
         //Home State Checks
-        miner.pState = Transition<Miner>.Transist(miner.pState, HomeState, MiningState, miner.m_Tiredness <= 0 );
-      
+        miner.pState = Transition<Miner>.Transist(miner.pState, HomeState, MiningState, miner.m_Tiredness <= 0);
+
     }
 
 }

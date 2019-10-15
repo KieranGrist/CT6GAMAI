@@ -16,8 +16,8 @@ public class Fly : State<Canary>
         if (agent.c_Singing >=0)
             agent.c_Singing -= Time.deltaTime;
 
-        int Rand = Random.Range(0, 100);
-        if (Rand >= 99)
+        int Rand = Random.Range(0, 1000);
+        if (Rand >= 999)
         {
             agent.c_Dead = 60;
         }

@@ -18,14 +18,14 @@ public class CanaryStateMachine
     public void CheckState()
     {
         //Fly State Checks
-        canary.pState = Transition<Canary>.Transist(canary.pState, FlyState, SingState, canary.c_Flying >= 10);
-        canary.pState = Transition<Canary>.Transist(canary.pState, FlyState, DeathState, canary.c_Dead >= 0);
+        canary.pState = Transition<Canary>.Transist(canary.pState, FlyState, SingState, canary.c_Flying > 10);
+        canary.pState = Transition<Canary>.Transist(canary.pState, FlyState, DeathState, canary.c_Dead > 0);
 
         //Sing State Checks
-        canary.pState = Transition<Canary>.Transist(canary.pState, SingState, FlyState, canary.c_Singing >= 10);
-        canary.pState = Transition<Canary>.Transist(canary.pState, SingState, DeathState, canary.c_Dead >= 0);
+        canary.pState = Transition<Canary>.Transist(canary.pState, SingState, FlyState, canary.c_Singing > 10);
+        canary.pState = Transition<Canary>.Transist(canary.pState, SingState, DeathState, canary.c_Dead > 0);
 
         //Death State Checks
-        canary.pState = Transition<Canary>.Transist(canary.pState, DeathState, SingState, canary.c_Dead <= 0);
+        canary.pState = Transition<Canary>.Transist(canary.pState, DeathState, SingState, canary.c_Dead < 0);
     }
 }

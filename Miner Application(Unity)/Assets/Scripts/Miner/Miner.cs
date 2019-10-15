@@ -15,20 +15,20 @@ public class Miner : MonoBehaviour
     public int m_PickaxePower = 1;
     public int m_BankedGold = 0;
     public int m_Gold = 0;
-
     public float m_Tiredness = 0;
     public float m_Thirstiness = 0;
     public float m_Hunger = 0;
     public float m_Looking = 0;
-    public float MinerTimer; //Timer that can be used by scripts to time actions
-    public float SleepTimer = 0;
-
-    public float Distance;
-    public float Speed;
-
     public bool m_CanShop = false;
     public bool m_CheckedCanary = false;
-    public bool FirstTime = true;
+
+
+
+    public float MinerTimer; //Timer that can be used by scripts to time actions
+
+
+    float Distance;
+    public float Speed;
     public bool Moving = false;
 
 
@@ -36,16 +36,16 @@ public class Miner : MonoBehaviour
 
 
 
-    public Vector3 TargetLocation;
-    public Vector3 Direction;
-    public Vector3 Normalise;
-    public Vector3 M;
+    public  Vector3 TargetLocation;
+    Vector3 Direction;
+    Vector3 Normalise;
+    Vector3 M;
 
     void Start()
     {
         //m_StateMachine = new MinerStateMachine();
-        m_StateMachine.BankingState = new BankingGold();     
-        m_StateMachine.BankingState = new BankingGold();     
+        m_StateMachine.BankingState = new BankingGold();
+        m_StateMachine.BankingState = new BankingGold();
         m_StateMachine.EatState = new GoAndEat();
         m_StateMachine.DrinkState = new GoAndHaveADrink();
         m_StateMachine.HomeState = new GoHomeAndSleep();
@@ -88,18 +88,14 @@ public class Miner : MonoBehaviour
 
             transform.position += M;
         }
-       else
-        { 
+        else
+        {
             m_TransformReference = this.transform;
-            SleepTimer += Time.deltaTime;
-            if (SleepTimer >= 0)
-            {
-                SleepTimer = 0;
-                m_StateMachine.miner = GetComponent<Miner>();
-                m_StateMachine.Update();
-                pState.Execute(GetComponent<Miner>());
 
-            }
+            m_StateMachine.miner = GetComponent<Miner>();
+            m_StateMachine.Update();
+            pState.Execute(GetComponent<Miner>());
+
         }
     }
 }
