@@ -38,3 +38,9 @@ Miner Application(Unity)/Library/
 CustomBehaviourTreeBroken/Logs/
 
 *.log
+
+GoalDrivenBehaviour/obj/
+
+GoalDrivenBehaviour/Library/
+
+GoalDrivenBehaviour/.vs/
