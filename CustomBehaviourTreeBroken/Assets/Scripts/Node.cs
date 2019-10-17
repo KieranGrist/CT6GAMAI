@@ -39,7 +39,7 @@ public abstract class BTNode
     /// </summary>
     public virtual void Reset()
     {
-        
+       
     }
 }
 
@@ -69,7 +69,7 @@ public abstract class CompositeNode : BTNode
         //Reset every child
         for (int j = 0; j < children.Count; j++)
         {
-            //children[j].Reset();
+            children[j].Reset();
         }
 
     }
@@ -89,12 +89,13 @@ public class Selector : CompositeNode
     public override BTStatus Execute()
     {
         BTStatus rv = BTStatus.FAILURE;
-        for (int i =0; i < this.children.Count; i++)
+        for (int i = CurrentChildIndex; i < this.children.Count; i++)
         {
             rv = this.children[i].Execute();
-
+            this.CurrentChildIndex = i;
             if (rv == BTStatus.RUNNING)
             {
+
                 return BTStatus.RUNNING;
             }
             if (rv == BTStatus.SUCCESS)
@@ -103,6 +104,7 @@ public class Selector : CompositeNode
                 return BTStatus.SUCCESS;
             }
         }
+        this.Reset();
         return rv;
     }
 }
@@ -118,8 +120,22 @@ public class Sequence : CompositeNode
     }
     public override BTStatus Execute()
     {
-        BTStatus rv = BTStatus.FAILURE;
-        
+        BTStatus rv = BTStatus.SUCCESS;
+        for (int i = CurrentChildIndex; i < this.children.Count; i++)
+        {
+            rv = this.children[i].Execute();
+            this.CurrentChildIndex=i;
+            if (rv == BTStatus.RUNNING)
+            {
+                return BTStatus.RUNNING;
+            }
+            if (rv == BTStatus.FAILURE)
+            {
+                this.Reset();
+                return BTStatus.FAILURE;
+            }
+        }
+        this.Reset();
         return rv;
     }
 }
@@ -145,7 +161,7 @@ public abstract class DecoratorNode : BTNode
     /// </summary>
     public override void Reset()
     {
-       
+        this.WrappedNode.Reset();
     }
 }
 

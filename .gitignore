@@ -11,3 +11,30 @@ Miner Application(Unity)/.vs/
 
 
 Forward Air Controller/
+
+
+
+CustomBehaviourTreeBroken/Temp/
+
+CustomBehaviourTreeBroken/.vs/
+Epsilon/.vs/
+
+Epsilon/Library/
+
+CustomBehaviourTreeBroken/Library/
+
+CustomBehaviourTreeBroken/obj/
+
+Epsilon/obj/
+
+Epsilon/Logs/
+
+Miner Application(Unity)/obj/
+
+Miner Application(Unity)/Logs/
+
+Miner Application(Unity)/Library/
+
+CustomBehaviourTreeBroken/Logs/
+
+*.log
