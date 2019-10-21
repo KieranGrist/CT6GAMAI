@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoalDrivenBehaviour", "Assembly-CSharp.csproj", "{8A934D9D-6FF6-BFAD-8C74-B05A06879636}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 16
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{8A934D9D-6FF6-BFAD-8C74-B05A06879636}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
