@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class GraphEdge 
 {
-    public GraphNode From ;
-    public GraphNode To ;
+    public GraphNode From;
+    public GraphNode To;
 
 }
