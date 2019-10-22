@@ -115,6 +115,10 @@ public class BuySword : CompositeGoal
         {
             subgoals.Push(new GetGold());
         }
+        else
+        {
+           //BuySwords
+        }
 
         return status;
     }
