@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-/// <summary>
-/// Helper class, this is used by the AIs to determine desier
-/// </summary>
 [System.Serializable]
 public class Helper
 {
@@ -18,10 +15,6 @@ public class Helper
         return RET;
     }
 }
-/// <summary>
-/// Priority system, usses desire or any other float value to sort which tasks are the most desireable to the AI and then executes them
-/// </summary>
-/// <typeparam name="T"></typeparam>
 [System.Serializable]
 public class PriorityQueue<T>
 {

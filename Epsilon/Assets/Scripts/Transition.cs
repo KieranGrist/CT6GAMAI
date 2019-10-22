@@ -4,20 +4,25 @@ using UnityEngine;
 using System;
 using System.Linq;
 
+/// <summary>
+/// Class that handles the transition from one state to the next
+/// </summary>
+/// <typeparam name="t"></typeparam>
 public class Transition<t>
 {
-    public static State<t> Transist(State<t> From, State<t> To, bool Condition, out bool RunFunction)
+    public static State<t> Transist(State<t> From, State<t> To, bool Condition, out bool RunFunction) //HIGHLY RECOMENDED YOU DO NOT USE THIS FUNCTION, IT CAN BE VERY DESTRUCTIVE. 
     {
-       
+
         RunFunction = false;
         if (Condition == true)
         {
             RunFunction = true;
             return To;
+
         }
         else
         {
-            RunFunction = false;    
+            RunFunction = false;
             return From;
         }
     }
@@ -26,7 +31,10 @@ public class Transition<t>
         RunFun = false;
         if (Condition == true)
         {
-            return To;
+            if (CurrentState == From)
+                return To;
+            else
+                return CurrentState;
         }
         else
         {
@@ -40,7 +48,10 @@ public class Transition<t>
     {
         if (Condition == true)
         {
-            return To;
+            if (CurrentState == From)
+                return To;
+            else
+                return CurrentState;
         }
         else
         {
