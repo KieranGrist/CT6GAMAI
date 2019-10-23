@@ -29,7 +29,7 @@ public class GraphNode : MonoBehaviour
                 Distance = Vector3.Distance(transform.position, Nodes[i].transform.position);
                 if (Vector3.Distance(transform.position, Nodes[i].transform.position) < 5)
                 {
-                    AdjacencyList.Add(new GraphEdge(this, Nodes[i]));
+                    AdjacencyList.Add(new GraphEdge(this, Nodes[i], Random.Range(1,14)));
                 }
             }
         }
@@ -48,13 +48,13 @@ public class GraphNode : MonoBehaviour
             TextLocation.y = item.From.transform.position.y + (item.To.transform.position.y - item.From.transform.position.y) / 2;
             TextLocation.z = item.From.transform.position.z + (item.To.transform.position.z - item.From.transform.position.z) / 2;
 
-            Handles.Label(TextLocation, "Cost " + Vector3.Distance(item.From.transform.position, item.To.transform.position));
+            Handles.Label(TextLocation, "Cost " + item.CumulativeCost);
             Gizmos.DrawLine(item.From.transform.position, item.To.transform.position);
         }
     }
     public IEnumerator CheckForUpdates()
     {
-        Reset();
+     
        yield return new WaitForSeconds(30);
     }
     // Update is called once per frame

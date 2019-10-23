@@ -15,7 +15,7 @@ edges (FIFO). Commonly called a Queue (whereas DFS used a Stack)
     public List<GraphNode> Route = new List<GraphNode>(); //Route that the AI took 
     public List<bool> Visited = new List<bool>(); //Nodes that the AI has visited
     public Queue<GraphEdge> graphEdges = new Queue<GraphEdge>(); //Stack of Edges
-    public List<GraphNode> RandomNodes = new List<GraphNode>();
+
     public Color LineColor;
     public GraphEdge Edge;
     public GraphNode Source;
@@ -36,7 +36,6 @@ edges (FIFO). Commonly called a Queue (whereas DFS used a Stack)
         Route = new List<GraphNode>();
         Visited = new List<bool>();
         graphEdges = new Queue<GraphEdge>();
-        RandomNodes = new List<GraphNode>();
         Edge = new GraphEdge();
         ReachedTarget = false;
         Distance = 0;
@@ -93,6 +92,7 @@ edges (FIFO). Commonly called a Queue (whereas DFS used a Stack)
         {
             for (int i = 0; i < Route.Count - 1; i++)
             {
+                Debug.DrawLine(Source.transform.position, Route[0].transform.position);
                 Debug.DrawLine(Route[i].transform.position, Route[i + 1].transform.position, LineColor);
             }
             if (A < Route.Count)

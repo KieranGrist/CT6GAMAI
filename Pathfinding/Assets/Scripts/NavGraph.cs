@@ -9,11 +9,10 @@ public class NavGraph : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-   
+        Reset();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Reset()
     {
         Nodes.Clear();
         Nodes.AddRange(FindObjectsOfType<GraphNode>());
@@ -22,5 +21,10 @@ public class NavGraph : MonoBehaviour
             Nodes[i].name = "Node " + i;
             Nodes[i].Index = i;
         }
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
