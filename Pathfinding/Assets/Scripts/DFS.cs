@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class DFS : MonoBehaviour
 {
+    //*Depth First Search algrotium searches all avaialable nodes and creates a path, it does not care how effective said path is and will use the first availabile path towards it
     /*The DFS algorithm will need to create two lists of equivalent size to
 the amount of nodes (pre-initializing this only once is a good idea)
  list of integers which stores the Route from one node to the other
@@ -39,16 +40,16 @@ a list)
      If the loop has ended and reached this point, it means no path to the target was
     found
     */
-    public NavGraph Graph;
-    public List<GraphNode> Route = new List<GraphNode>();
-    public List<GraphNode> Path = new List<GraphNode>();
-    public List<bool> Visited = new List<bool>();
-    public Stack<GraphEdge> graphEdges = new Stack<GraphEdge>();
+    public NavGraph Graph; //Navigation Graph containing all nodes 
+    public List<GraphNode> Route = new List<GraphNode>(); //Route that the AI took 
+    public List<bool> Visited = new List<bool>(); //Nodes that the AI has visited
+    public Stack<GraphEdge> graphEdges = new Stack<GraphEdge>(); //Stack of Edges
     public List<GraphNode> RandomNodes = new List<GraphNode>();
+    public Color LineColor;
     public GraphEdge Edge;
     public GraphNode Source;
     public GraphNode Target;
-    bool ReachedTarget;
+    public bool ReachedTarget;
     public GameObject Arty;
     float Distance;
     public float Speed;
@@ -62,11 +63,12 @@ a list)
     // Start is called before the first frame update
     void Start()
     {
+        LineColor = Color.red;
         A = 0;
         //Arty = GetComponent<GameObject>();
         Arty.transform.position = Source.gameObject.transform.position;
         ReachedTarget = false;
-        for (int i = 0; i < Graph.Nodes.Count + 2; i++)
+        for (int i = 0; i < Graph.Nodes.Count; i++)
         {
             Visited.Add(false);
         }
@@ -101,26 +103,26 @@ a list)
         {
             for (int i = 0; i < Route.Count - 1; i++)
             {
-                Debug.DrawLine(Route[i].transform.position, Route[i + 1].transform.position);
+                Debug.DrawLine(Route[i].transform.position, Route[i + 1].transform.position, LineColor);
             }
-            Distance = Vector3.Distance(TargetLocation[A], transform.position);
-            if (transform.position != TargetLocation[A])
+            if (A < Route.Count)
             {
+                Distance = Vector3.Distance(TargetLocation[A], transform.position);
+
                 if (Distance <= 0.05)
                 {
                     transform.position = TargetLocation[A];
                     Moving = false;
                     A++;
                 }
-                Moving = true;
-
+                else
+                {
+                    Moving = true;
+                }
             }
-            else
-            {
-                A++;
-                Moving = false;
-            }
+           
 
+            
             if (Moving == true)
             {
                 // direction, normalise, direction * DeltaTime and speed, add that to current location
@@ -134,25 +136,21 @@ a list)
             
             if (A >= Route.Count)
             {
-                      
-Route = new List<GraphNode>();
-Path = new List<GraphNode>();
-  Visited = new List<bool>();
-graphEdges = new Stack<GraphEdge>();
-RandomNodes = new List<GraphNode>();
-Edge;
- Source;
- Target;
- ReachedTarget;
-Arty;
- Distance;
- Speed;
- Moving = false;
-TargetLocation = new List<Vector3>();
-Direction;
-     Normalise;
-     M;
-      A;
+
+                Route = new List<GraphNode>();
+                Visited = new List<bool>();
+                graphEdges = new Stack<GraphEdge>();
+                RandomNodes = new List<GraphNode>();
+                Edge = new GraphEdge();                
+                ReachedTarget = false;
+                Distance = 0;
+          
+                Moving = false;
+                TargetLocation = new List<Vector3>();
+                Direction = new Vector3();
+                Normalise = new Vector3();
+                M = new Vector3();
+                A = 0;
                 for (int i = 0; i < Graph.Nodes.Count; i++)
                 {
                     if (Graph.Nodes[i] != Target)
@@ -160,21 +158,15 @@ Direction;
                         RandomNodes.Add(Graph.Nodes[i]);
                     }
                 }
-                for (int i = 0; i < Graph.Nodes.Count + 2; i++)
+                for (int i = 0; i < Graph.Nodes.Count; i++)
                 {
                     Visited.Add(false);
                 }
-                rando
                 ReachedTarget = false;
-                Route = new List<GraphNode>();
-                Path = new List<GraphNode>();
-                Visited = new List<bool>();
-                graphEdges = new Stack<GraphEdge>();
-                TargetLocation = new List<Vector3>();
+                Route = new List<GraphNode>();   
                 Source = Target;
                 Target = RandomNodes[Random.Range(0, RandomNodes.Count)];
-             
-                A = 0;
+                RandomNodes.Clear();
             }
         }
     }
@@ -189,7 +181,7 @@ Direction;
             // Route[Edge.To] = Edge.From;
             Route.Add(Edge.From);
             Visited[Edge.To.Index] = true;
-            Debug.DrawLine(Edge.From.transform.position, Edge.To.transform.position);
+            
             if (Edge.To == Target)
             {
                 Route.Add(Target);
