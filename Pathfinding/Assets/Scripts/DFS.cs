@@ -7,6 +7,7 @@ public class DFS : MonoBehaviour
     //*Depth First Search algrotium searches all avaialable nodes and creates a path, it does not care how effective said path is and will use the first availabile path towards it
     public NavGraph Graph; //Navigation Graph containing all nodes 
     public List<GraphNode> Route = new List<GraphNode>(); //Route that the AI took 
+    public List<GraphNode> Path = new List<GraphNode>();
     public List<bool> Visited = new List<bool>(); //Nodes that the AI has visited
     public Stack<GraphEdge> graphEdges = new Stack<GraphEdge>(); //Stack of Edges
     public Color LineColor;
@@ -14,46 +15,23 @@ public class DFS : MonoBehaviour
     public GraphNode Source;
     public GraphNode Target;
     public bool ReachedTarget;
-    public GameObject Arty;
-    float Distance;
-    public float Speed;
-    public bool Randomnise = true;
-    public bool Moving = false;
-    public List<Vector3> TargetLocation = new List<Vector3>();
-    Vector3 Direction;
-    Vector3 Normalise;
-    Vector3 M;
-    public int A;
+    bool FoundRoute;
+    float Timer;
     public void Reset()
     {
-        Route = new List<GraphNode>();
-        Visited = new List<bool>();
-        graphEdges = new Stack<GraphEdge>();
+        Route = new List<GraphNode>(); //Route that the AI took 
+        Visited = new List<bool>(); //Nodes that the AI has visited
+        graphEdges = new Stack<GraphEdge>(); //Stack of Edges
+        LineColor = Color.red;
         Edge = new GraphEdge();
         ReachedTarget = false;
-        Distance = 0;
-        LineColor = Color.red;
-        A = 0;
-        //Arty = GetComponent<GameObject>();
-        Arty.transform.position = Source.gameObject.transform.position;
-        ReachedTarget = false;
         for (int i = 0; i < Graph.Nodes.Count; i++)
         {
             Visited.Add(false);
-            Moving = false;
+            Route.Add(new GraphNode());
         }
-        TargetLocation = new List<Vector3>();
-        Direction = new Vector3();
-        Normalise = new Vector3();
-        M = new Vector3();
-        A = 0;
-        for (int i = 0; i < Graph.Nodes.Count; i++)
-        {
-            Visited.Add(false);
-        }
-        ReachedTarget = false;
-        Route = new List<GraphNode>();
-    }
+
+    }    
     // Start is called before the first frame update
     void Start()
     {
@@ -65,78 +43,66 @@ public class DFS : MonoBehaviour
         if (!ReachedTarget)
         {
             Visited[Source.Index] = true;
-
+            Route[Source.Index] = Source;
             for (int i = 0; i < Source.AdjacencyList.Count; i++)
             {
                 graphEdges.Push(Source.AdjacencyList[i]);
             }
-            ReachedTarget = CalculateRoute();
+            CalculateRoute();
+            ReachedTarget = FoundRoute;
+        
             if (ReachedTarget)
             {
+                Path.Clear();
+                Path.Add(Target);
+                GraphNode currentNode = Target;
+                Path.Add(currentNode);
                 for (int i = 0; i < Route.Count; i++)
                 {
-                    TargetLocation.Add(Route[i].transform.position);
-
+                    currentNode = Route[i];
+                    Path.Add(currentNode);
                 }
+
             }
         }
         else
         {
-            if (Route.Count > 2)
+            Timer += Time.deltaTime;
+            if (Timer > 20)
             {
+                for (int i = 0; i < Path.Count - 1; i++)
+                {
+                    Debug.DrawLine(Path[i].transform.position, Path[i + 1].transform.position, Color.green, 2.0f);
+
+                }
                 for (int i = 0; i < Route.Count - 1; i++)
                 {
-                    if (Source != null && Route != null)
-                    {
-                        Debug.DrawLine(Source.transform.position, Route[0].transform.position);
+                    Debug.DrawLine(Route[i].transform.position, Route[i + 1].transform.position, Color.black, 2.0f);
 
-
-                        Debug.DrawLine(Route[i].transform.position, Route[i + 1].transform.position, LineColor);
-                    }
                 }
             }
-            if (A < Route.Count)
-            {
-                Distance = Vector3.Distance(TargetLocation[A], transform.position);
-
-                if (Distance <= 0.05)
-                {
-                    transform.position = TargetLocation[A];
-                    Moving = false;
-                    A++;
-                }
-                else
-                {
-                    Moving = true;
-                }
-            }
-            if (Moving == true)
-            {
-                // direction, normalise, direction * DeltaTime and speed, add that to current location
-                Direction = TargetLocation[A] - transform.position;
-                Normalise = Direction.normalized;
-                M = Normalise * Time.deltaTime * Speed;
-
-                Arty.transform.position += M;
-            }
-        
         }
-    }
 
-    public bool CalculateRoute()
+    }
+    public void CalculateRoute()
     {
+        Timer = 0;
+        float Col = 0;
+        FoundRoute = false;
         while (graphEdges.Count > 0)
         {
+            
             Edge = graphEdges.Pop();
+            Debug.DrawLine(Edge.From.transform.position, Edge.To.transform.position, new Color(Col, 0,0) ,20.0f);
+            Col += 0.05f;
             // Route[Edge.To] = Edge.From;
-            Route.Add(Edge.From);
+            Route[Edge.To.Index] = (Edge.From);
             Visited[Edge.To.Index] = true;
             
             if (Edge.To == Target)
-            {
-                Route.Add(Target);
-                return true;
-               
+            {              
+                 FoundRoute = true;
+              
             }
             else
             {
@@ -149,6 +115,6 @@ public class DFS : MonoBehaviour
                 }
             }
         }
-        return false;
+        
     }
 }

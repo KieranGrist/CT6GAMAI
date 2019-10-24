@@ -503,6 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Graph: {fileID: 963194229}
   Route: []
+  Path: []
   Visited: 
   LineColor: {r: 0, g: 0, b: 0, a: 0}
   Edge:
@@ -513,12 +514,6 @@ MonoBehaviour:
   Source: {fileID: 0}
   Target: {fileID: 0}
   ReachedTarget: 0
-  Arty: {fileID: 832322831}
-  Speed: 2
-  Randomnise: 1
-  Moving: 0
-  TargetLocation: []
-  A: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +525,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194230}
   - component: {fileID: 963194229}
   - component: {fileID: 963194231}
   m_Layer: 0
@@ -618,25 +612,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Nodes: []
---- !u!114 &963194230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57195261b71df2741a6f729a39a594f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Source: {fileID: 0}
-  RandomNodes: []
-  Graph: {fileID: 963194229}
-  Target: {fileID: 0}
-  BFSAI: {fileID: 1281249786}
-  DFSAI: {fileID: 832322836}
-  DJAI: {fileID: 1933740702}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +626,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Node: {fileID: 3571583104481458938, guid: 84c2887895204f048b8baeb3776b9074, type: 3}
   graph: {fileID: 963194229}
-  target: {fileID: 963194230}
+  DepthAI: {fileID: 832322836}
+  SourceNode: {fileID: 0}
+  TargetNode: {fileID: 0}
   Area: 7
   gameObjects: []
 --- !u!1 &1148201391
@@ -956,7 +933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572040055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -57.3, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 1, z: 15}
   m_Children:
   - {fileID: 605727590}

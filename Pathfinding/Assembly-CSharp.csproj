@@ -69,7 +69,6 @@
     <Compile Include="Assets\Scripts\GenerateNav.cs" />
     <Compile Include="Assets\Scripts\GraphEdge.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />
-    <Compile Include="Assets\Scripts\MasterTarget.cs" />
     <Compile Include="Assets\Scripts\NavGraph.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/814853/CT6GAMAI/Pathfinding/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
