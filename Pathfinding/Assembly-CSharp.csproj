@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\BFS.cs" />
     <Compile Include="Assets\Scripts\DFS.cs" />
     <Compile Include="Assets\Scripts\DJALGO.cs" />
+    <Compile Include="Assets\Scripts\GenerateNav.cs" />
     <Compile Include="Assets\Scripts\GraphEdge.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />
     <Compile Include="Assets\Scripts\MasterTarget.cs" />

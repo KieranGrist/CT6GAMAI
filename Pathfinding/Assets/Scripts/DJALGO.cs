@@ -41,7 +41,8 @@ as from the previous lecture)
     public Queue<GraphEdge> graphEdges = new Queue<GraphEdge>(); //Stack of Edges
     public List<GraphEdge> TraveresedEdges = new List<GraphEdge>();
     public List<Vector3> TargetLocation = new List<Vector3>();
-    public List<float> Cost;
+    public List<float> MinPriorirityQueue = new List<float>();
+    public List<float> Cost = new List<float>();
     public Color LineColor;
     public GraphEdge Edge;
     public GraphNode Source;
@@ -50,7 +51,6 @@ as from the previous lecture)
     public GameObject Arty;
     float Distance;
     public float Speed;
-    public bool Randomnise = true;
     public bool Moving = false;
 
     Vector3 Direction;
@@ -72,33 +72,35 @@ as from the previous lecture)
         Cost.Clear();
         for (int i = 0; i < Graph.Nodes.Count; i++)
         {
-         
-            Cost.Add(-10);
-            Route.Add(new GraphNode());
-            TargetLocation.Add(new Vector3());
 
-            TraveresedEdges.Add(new GraphEdge());
+            Cost.Add(float.MaxValue);
+            Route.Add(new GraphNode());
+           // TargetLocation.Add(new Vector3());
+
+
 
         }
     }
     // Update is called once per frame
     void Update()
     {
-       
+
         if (!ReachedTarget)
         {
+            Reset();
             Cost[Source.Index] = 0;
             for (int i = 0; i < Source.AdjacencyList.Count; i++)
             {
                 graphEdges.Enqueue(Source.AdjacencyList[i]);
-
+                MinPriorirityQueue.Add(Source.AdjacencyList[i].CumulativeCost);
             }
             ReachedTarget = CalculateRoute();
         }
+
     }
     public bool CalculateRoute()
     {
-        //bool TargetNodeFoundTrue = false;
+        bool TargetNodeFoundTrue = false;
         while (graphEdges.Count > 0)
         {
             Edge = graphEdges.Dequeue();
@@ -107,24 +109,59 @@ as from the previous lecture)
             {
                 Route[Edge.To.Index] = Edge.From;
                 Cost[Edge.To.Index] = Cost[Edge.From.Index] + Edge.CumulativeCost;
-               
+                if (Edge.To == Target)
+                {
+                    Route.Add(Target);
+                    TargetNodeFoundTrue = true;
+
+                }
             }
-            for (int i = 0; i < Graph.Nodes.Count; i++)
+            for (int i = 0; i < Edge.To.AdjacencyList.Count; i++)
             {
                 for (int b = 0; b < Graph.Nodes[i].AdjacencyList.Count; b++)
                 {
+                    bool RET = false;
                     for (int c = 0; c < TraveresedEdges.Count; c++)
                     {
-                        if (Graph.Nodes[i].AdjacencyList[b] != TraveresedEdges[c])
+                        if (!RET)
                         {
-                            graphEdges.Enqueue(Graph.Nodes[i].AdjacencyList[b]) ;
+                            if (Graph.Nodes[i].AdjacencyList[b].ID != TraveresedEdges[c].ID)
+                            {
+                                RET = false;
+                            }
+                            else
+                            {
+                                RET = true;
+                            }
+
                         }
+
                     }
-                       
+                    for (int c = 0; c < MinPriorirityQueue.Count; c++)
+                    {
+                        if (!RET)
+                        {
+                            if (Graph.Nodes[i].AdjacencyList[b].CumulativeCost != MinPriorirityQueue[c])
+                            {
+                                RET = false;
+                            }
+                            else
+                            {
+                                RET = true;
+                            }
+
+                        }
+          
+                    }
+                    if (RET == false)
+                    {
+                        graphEdges.Enqueue(Graph.Nodes[i].AdjacencyList[b]);
+                        MinPriorirityQueue.Add(Graph.Nodes[i].AdjacencyList[b].CumulativeCost);
+                    }
                 }
             }
         }
-        return false;
-
+        return true;
     }
 }
+                 

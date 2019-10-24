@@ -15,20 +15,21 @@ public class GraphNode : MonoBehaviour
     void Start()
     {
         //CumilitiveCost += Distance;
-        Reset();
+      //  Reset();
     }
     public void Reset()
     {
-        List<GraphNode> Nodes = new List<GraphNode>();
+        List<GraphNode> Nodes = new List<GraphNode>();    
         Nodes.AddRange(FindObjectsOfType<GraphNode>());
         AdjacencyList.Clear();
+        AdjacencyList = new List<GraphEdge>();
         for (int i = 0; i < Nodes.Count; i++)
         {
             if (Nodes[i] != this)
             {
                 Distance = Vector3.Distance(transform.position, Nodes[i].transform.position);
-                if (Vector3.Distance(transform.position, Nodes[i].transform.position) < 5)
-                {
+                if (Vector3.Distance(transform.position, Nodes[i].transform.position) < 2.25f)
+                {   
                     AdjacencyList.Add(new GraphEdge(this, Nodes[i], Random.Range(1,14)));
                 }
             }
@@ -37,7 +38,7 @@ public class GraphNode : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        transform.position += new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+       // transform.position += new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
     }
     private void OnDrawGizmosSelected()
     {
@@ -60,6 +61,6 @@ public class GraphNode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(CheckForUpdates());
+      //  StartCoroutine(CheckForUpdates());
     }
 }

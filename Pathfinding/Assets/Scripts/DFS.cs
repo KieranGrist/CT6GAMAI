@@ -32,8 +32,16 @@ public class DFS : MonoBehaviour
         Edge = new GraphEdge();
         ReachedTarget = false;
         Distance = 0;
-
-        Moving = false;
+        LineColor = Color.red;
+        A = 0;
+        //Arty = GetComponent<GameObject>();
+        Arty.transform.position = Source.gameObject.transform.position;
+        ReachedTarget = false;
+        for (int i = 0; i < Graph.Nodes.Count; i++)
+        {
+            Visited.Add(false);
+            Moving = false;
+        }
         TargetLocation = new List<Vector3>();
         Direction = new Vector3();
         Normalise = new Vector3();
@@ -49,15 +57,7 @@ public class DFS : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LineColor = Color.red;
-        A = 0;
-        //Arty = GetComponent<GameObject>();
-        Arty.transform.position = Source.gameObject.transform.position;
-        ReachedTarget = false;
-        for (int i = 0; i < Graph.Nodes.Count + 100; i++)
-        {
-            Visited.Add(false);
-        }
+
     }
     // Update is called once per frame
     void Update()
@@ -82,10 +82,18 @@ public class DFS : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < Route.Count - 1; i++)
+            if (Route.Count > 2)
             {
-                Debug.DrawLine(Source.transform.position, Route[0].transform.position);
-                Debug.DrawLine(Route[i].transform.position, Route[i + 1].transform.position, LineColor);
+                for (int i = 0; i < Route.Count - 1; i++)
+                {
+                    if (Source != null && Route != null)
+                    {
+                        Debug.DrawLine(Source.transform.position, Route[0].transform.position);
+
+
+                        Debug.DrawLine(Route[i].transform.position, Route[i + 1].transform.position, LineColor);
+                    }
+                }
             }
             if (A < Route.Count)
             {

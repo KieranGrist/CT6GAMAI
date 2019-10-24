@@ -14,17 +14,20 @@ public class MasterTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Reset();
+
     }
     public void Reset()
     {
+        Source = new GraphNode();
+        Target = new GraphNode();
+        
         RandomNodes.AddRange(FindObjectsOfType<GraphNode>());
         Source = RandomNodes[Random.Range(0, RandomNodes.Count)];
         BFSAI.transform.position = Source.transform.position;
         DFSAI.transform.position = Source.transform.position;
-        DJAI.transform.position = Source.transform.position;
-        Source = Target;
-        Graph.Reset();
+         DJAI.transform.position = Source.transform.position;
+      //  Source = Target;
+        
 
         RandomNodes.Clear();
         for (int i = 0; i < Graph.Nodes.Count; i++)
@@ -34,7 +37,7 @@ public class MasterTarget : MonoBehaviour
                 RandomNodes.Add(Graph.Nodes[i]);
             }
         }
-
+        Target = RandomNodes[Random.Range(0, RandomNodes.Count)];
         BFSAI.Target = Target;
         BFSAI.Source = Source;
         DFSAI.Target = Target;  
@@ -45,7 +48,7 @@ public class MasterTarget : MonoBehaviour
         DFSAI.Reset();
         DJAI.Reset();
         RandomNodes.Clear();
-        Target = RandomNodes[Random.Range(0, RandomNodes.Count)];
+        
     }
     // Update is called once per frame
     void Update()
@@ -61,7 +64,8 @@ public class MasterTarget : MonoBehaviour
                     RandomNodes.Add(Graph.Nodes[i]);
                 }
             }
-
+            Target = RandomNodes[Random.Range(0, RandomNodes.Count)];
+     
             BFSAI.Target = Target;
             BFSAI.Source = Source;
             DFSAI.Target = Target;
@@ -72,8 +76,8 @@ public class MasterTarget : MonoBehaviour
             DFSAI.Reset();
             DJAI.Reset();
             RandomNodes.Clear();
-            Target = RandomNodes[Random.Range(0, RandomNodes.Count)];
+           
         }
-
+ 
     }
 }
