@@ -62,14 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\APATH.cs" />
     <Compile Include="Assets\Scripts\BFS.cs" />
     <Compile Include="Assets\Scripts\DFS.cs" />
-    <Compile Include="Assets\Scripts\DJALGO.cs" />
-    <Compile Include="Assets\Scripts\GenerateNav.cs" />
     <Compile Include="Assets\Scripts\GraphEdge.cs" />
     <Compile Include="Assets\Scripts\GraphNode.cs" />
     <Compile Include="Assets\Scripts\NavGraph.cs" />
+    <Compile Include="Assets\Scripts\Pathfinder.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/814853/CT6GAMAI/Pathfinding/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
