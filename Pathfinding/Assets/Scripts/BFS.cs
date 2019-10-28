@@ -16,7 +16,6 @@ public class BFS : Pathfinder
         graphNodes = new Queue<GraphEdge>();
         for (int i = 0; i < Graph.Nodes.Count; i++)
         {
-            Route.Add(Graph.Nodes[i]);
             Visited.Add(false);
         }
         Visited[Source.Index] = true;
@@ -28,25 +27,31 @@ public class BFS : Pathfinder
         {
             edge = graphNodes.Dequeue();
             edge.From.GetComponent<Renderer>().material.color = Color.black;
-            Route[edge.To.Index] = edge.From;
+            if (!Route.Contains(edge.From))
+                Route.Add(edge.From);
             Visited[edge.To.Index] = true;
             if (edge.To == Target)
             {
                 Route.Add(edge.To);
                 ReachedTarget = true;
                 CR_running = false;
+                StartCoroutine(CalculatePath(Source, Target));
                 yield break;
             }
             for (int i = 0; i < edge.To.AdjacencyList.Count; i++)
             {
-                if (!Visited[edge.To.AdjacencyList[i].To.Index])
+                if (edge.To.Walkable)
                 {
-                    graphNodes.Enqueue(edge.To.AdjacencyList[i]);
+                    if (!Visited[edge.To.AdjacencyList[i].To.Index])
+                    {
+                        graphNodes.Enqueue(edge.To.AdjacencyList[i]);
+                    }
                 }
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.05f);
         }
         ReachedTarget = false;
         CR_running = false;
     }
+
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GraphNode : MonoBehaviour
 {
     public int Index;
+    public bool Walkable = true;
     public List<GraphEdge> AdjacencyList = new List<GraphEdge>();
     private void OnDrawGizmosSelected()
     {
@@ -19,6 +20,15 @@ public class GraphNode : MonoBehaviour
             //  Handles.Label(TextLocation, "Cost " + item.CumulativeCost);
             Gizmos.DrawLine(item.From.transform.position, item.To.transform.position);
         }
+    }
+    public GraphNode()
+    {
+        Walkable = true;
+        Index = 0;
+    }
+    public GraphNode(bool Walkable = true)
+    {
+        this.Walkable = Walkable;         
     }
     public void Reset()
     {
@@ -35,6 +45,17 @@ public class GraphNode : MonoBehaviour
                     AdjacencyList.Add(new GraphEdge(this, Nodes[i]));
                 }
             }
+        }
+    }
+     void Start()
+    {
+        Walkable = true;  
+    }
+    void Update()
+    {
+        if (!Walkable)
+        {
+            GetComponent<Renderer>().material.color = Color.white;
         }
     }
 }

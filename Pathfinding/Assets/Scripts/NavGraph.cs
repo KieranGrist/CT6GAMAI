@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 
 public class NavGraph : MonoBehaviour
-{
+{    
     public Pathfinder pathfindingTechnique;
     Pathfinder PreviousPathfinder;
     public GameObject GO_Node;
@@ -31,7 +31,7 @@ public class NavGraph : MonoBehaviour
         }
         SourceNode = Nodes[0];
         SourceNode.GetComponent<Renderer>().material.color = Color.green;
-        TargetNode = Nodes[Nodes.Count - 1];
+        TargetNode = Nodes[1];
         TargetNode.GetComponent<Renderer>().material.color = Color.red;
         PreviousSource = SourceNode;
         PreviousTarget = TargetNode;
@@ -44,6 +44,10 @@ public class NavGraph : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            pathfindingTechnique.ReachedTarget = true;
+        }
         if (Area != PreviousArea)
         {
             CalculateNewGraph();
@@ -51,7 +55,22 @@ public class NavGraph : MonoBehaviour
         PreviousArea = Area;
         SourceNode.GetComponent<Renderer>().material.color = Color.green;
         TargetNode.GetComponent<Renderer>().material.color = Color.red;
+        for (int i = 0; i < Nodes.Count; i++)
+        {
+            if (Nodes[i] != SourceNode && Nodes[i] != TargetNode && !pathfindingTechnique.Route.Contains(Nodes[i]) && pathfindingTechnique.Path.Contains(Nodes[i]))
+            {
+                Nodes[i].GetComponent<Renderer>().material.color = Color.yellow;
 
+            }
+            if (Nodes[i] != SourceNode && Nodes[i] != TargetNode && pathfindingTechnique.Route.Contains(Nodes[i]) && !pathfindingTechnique.Path.Contains(Nodes[i]))
+                {
+                Nodes[i].GetComponent<Renderer>().material.color = Color.black;
+            }
+            if (Nodes[i] != SourceNode && Nodes[i] != TargetNode && Nodes[i].Walkable && !pathfindingTechnique.Route.Contains(Nodes[i]) && !pathfindingTechnique.Path.Contains(Nodes[i]))
+            {
+                Nodes[i].GetComponent<Renderer>().material.color = Color.blue;
+            }
+        }
         if (!pathfindingTechnique.CR_running)
         {
             if (!pathfindingTechnique.ReachedTarget)
@@ -61,7 +80,16 @@ public class NavGraph : MonoBehaviour
         }
         if (pathfindingTechnique.ReachedTarget)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(2))
+            {
+                Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100.0f))
+                {
+                    hit.transform.gameObject.GetComponent<GraphNode>().Walkable = !hit.transform.gameObject.GetComponent<GraphNode>().Walkable;
+                }
+            }
+                if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -83,15 +111,13 @@ public class NavGraph : MonoBehaviour
             }
             if (PreviousSource != SourceNode|| PreviousTarget != TargetNode || pathfindingTechnique != PreviousPathfinder)
             {
-                for (int i = 0; i < Nodes.Count; i++)
-                {
-                    Nodes[i].GetComponent<Renderer>().material.color = Color.blue;
-                }
+                pathfindingTechnique.Route.Clear();
+                pathfindingTechnique.Path.Clear();
                 pathfindingTechnique.ReachedTarget = false;
             }
-            for (int i = 0; i < pathfindingTechnique.Route.Count - 1; i++)
+            for (int i = 0; i < pathfindingTechnique.Path.Count - 1; i++)
             {
-                Debug.DrawLine(pathfindingTechnique.Route[i].transform.position, pathfindingTechnique.Route[i + 1].transform.position, Color.red);
+                Debug.DrawLine(pathfindingTechnique.Path[i].transform.position, pathfindingTechnique.Path[i + 1].transform.position, Color.red);
             }
             PreviousSource = SourceNode;
             PreviousTarget = TargetNode;

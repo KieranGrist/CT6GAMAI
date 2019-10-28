@@ -290,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 14, z: -1}
+  m_LocalPosition: {x: 0, y: 28, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -313,7 +313,7 @@ MonoBehaviour:
   SourceNode: {fileID: 0}
   TargetNode: {fileID: 0}
   Nodes: []
-  Area: 6
+  Area: 12
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d4d7c722a65b04ebfadee8b6a6b4d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Path: []
   Visited: 
   edge:
     From: {fileID: 0}
@@ -404,7 +405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202956923}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 20, y: 14, z: -1}
+  m_LocalPosition: {x: 25, y: 28, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -422,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ef30b463d9dbd49af6c10a9c443585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Path: []
   Visited: 
   edge:
     From: {fileID: 0}
@@ -447,4 +449,4 @@ MonoBehaviour:
   SourceNode: {fileID: 0}
   TargetNode: {fileID: 0}
   Nodes: []
-  Area: 6
+  Area: 12
