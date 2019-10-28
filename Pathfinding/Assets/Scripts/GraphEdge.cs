@@ -4,21 +4,11 @@ using UnityEngine;
 [System.Serializable]
 public class GraphEdge
 {
-    public GraphNode From;
-    public GraphNode To;
-    public float CumulativeCost;
-    public int ID;
-    public GraphEdge(GraphNode From, GraphNode To, float Cost)
+    public GraphNode From, To;
+    // Start is called before the first frame update
+    public GraphEdge(GraphNode From, GraphNode To)
     {
         this.From = From;
         this.To = To;
-        this.CumulativeCost = Cost;
-     
-
-    }
-
-    public GraphEdge()
-    {
-   
     }
 }
