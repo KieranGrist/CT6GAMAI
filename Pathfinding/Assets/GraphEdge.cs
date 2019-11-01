@@ -4,8 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class GraphEdge
 {
-    public GraphNode From, To;
-    // Start is called before the first frame update
+    public GraphNode From;
+    public GraphNode To;
     public GraphEdge(GraphNode From, GraphNode To)
     {
         this.From = From;
