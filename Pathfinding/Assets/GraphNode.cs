@@ -17,7 +17,7 @@ public class GraphNode : MonoBehaviour
     }
     private void Start()
     {
-         foreach (var item in Neighbours)
+        foreach (var item in Neighbours)
         {
             item.From = GetComponent<GraphNode>();
         }
@@ -39,5 +39,28 @@ public class GraphNode : MonoBehaviour
         this.Index = Index;
         this.Walkable = Walkable;
     }
+    public void Reset()
+    {
+        List<GraphNode> Nodes = new List<GraphNode>();
+        Nodes.AddRange(FindObjectsOfType<GraphNode>());
 
+        for (int i = 0; i < Nodes.Count; i++)
+        {
+            if (Nodes[i] != this)
+            {
+
+                if (Vector3.Distance(transform.position, Nodes[i].transform.position) < 2.25)
+                {
+                    Neighbours.Add(new GraphEdge(this, Nodes[i]));
+                }
+            }
+        }
+    }
+    void Update()
+    {
+        if (!Walkable)
+        {
+            GetComponent<Renderer>().material.color = Color.white;
+        }
+    }
 }
