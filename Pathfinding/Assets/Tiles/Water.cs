@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
-public class Water : Tile
+public class Water : TileNode
 {
+    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Water";
-        GetComponent<Renderer>().sharedMaterial.color = Color.blue;
+        color = Color.blue;     
+    //    GetComponent<Renderer>().sharedMaterial.color = Color.blue;
         Cost = 10;
         Reset();
     }
@@ -22,6 +24,7 @@ public class Water : Tile
 
     public override void Update()
     {
-        GetComponent<Renderer>().material.color = Color.blue;
+        color = Color.blue;
+    //    GetComponent<Renderer>().sharedMaterial.color = Color.blue;
     }
 }

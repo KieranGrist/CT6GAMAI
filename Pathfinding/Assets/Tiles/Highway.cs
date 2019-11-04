@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
-public class Highway : Tile
+public class Highway : TileNode
 {
+    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Highway";
-        GetComponent<Renderer>().sharedMaterial.color = new Color(255, 165, 0);
+        color = new Color(255, 165, 0);
+    //    GetComponent<Renderer>().sharedMaterial.color = new Color(255, 165, 0);
         Cost = 2;
         Reset();
     }
@@ -20,6 +22,8 @@ public class Highway : Tile
 
     public override void Update()
     {
-        GetComponent<Renderer>().material.color = new Color(255, 165, 0);
+        color = new Color(255, 165, 0);
+    //    GetComponent<Renderer>().sharedMaterial.color = new Color(255, 165, 0);
+
     }
 }

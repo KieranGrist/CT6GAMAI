@@ -14,7 +14,7 @@ public class TileGen : MonoBehaviour
             for (float z = transform.position.z - Area; z < transform.position.z + Area; z++)
             {
                 GameObject go = Instantiate(Cube, transform.position, transform.rotation);
-                go.AddComponent<Tile>();
+                go.AddComponent<TileNode>();
                 go.transform.parent = GetComponent<Transform>();
                 go.transform.position = new Vector3(x, 2, z);
 

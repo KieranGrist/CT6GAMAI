@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
-public class Hills : Tile
+public class Hills : TileNode
 {
+    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Hills";
-        GetComponent<Renderer>().sharedMaterial.color = new Color(34, 139, 34);
+        color = new Color(34, 139, 34);
+    //    GetComponent<Renderer>().sharedMaterial.color = new Color(34, 139, 34);
         Cost = 7;
         Reset();
     }
@@ -20,6 +22,7 @@ public class Hills : Tile
 
     public override void Update()
     {
-        GetComponent<Renderer>().material.color = new Color(34, 139, 34);
+        color = new Color(34, 139, 34);
+    //    GetComponent<Renderer>().sharedMaterial.color = new Color(34, 139, 34);
     }
 }

@@ -62,15 +62,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ColorSeter.cs" />
     <Compile Include="Assets\DistanceCalculator.cs" />
     <Compile Include="Assets\Graph\GraphEdge.cs" />
+    <Compile Include="Assets\Graph\GraphMap.cs" />
     <Compile Include="Assets\Graph\GraphNode.cs" />
-    <Compile Include="Assets\Graph\NavGraph.cs" />
     <Compile Include="Assets\Pathfinder.cs" />
     <Compile Include="Assets\Pathfinders\BFS.cs" />
     <Compile Include="Assets\Pathfinders\DFS.cs" />
-    <Compile Include="Assets\RPG\Tile.cs" />
-    <Compile Include="Assets\Snow.cs" />
+    <Compile Include="Assets\RPG\NavMesh.cs" />
+    <Compile Include="Assets\RPG\TileEdge.cs" />
+    <Compile Include="Assets\RPG\TileNode.cs" />
     <Compile Include="Assets\TileGen.cs" />
     <Compile Include="Assets\Tiles\Blocked.cs" />
     <Compile Include="Assets\Tiles\Bridge.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Assets\Tiles\Highway.cs" />
     <Compile Include="Assets\Tiles\Hills.cs" />
     <Compile Include="Assets\Tiles\Residential.cs" />
+    <Compile Include="Assets\Tiles\Snow.cs" />
     <Compile Include="Assets\Tiles\Source.cs" />
     <Compile Include="Assets\Tiles\Water.cs" />
     <None Include="Assets\Tiles\JIC.txt" />

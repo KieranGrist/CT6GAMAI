@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
-public class Grass : Tile
+public class Grass : TileNode
 {
+    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Grass";
-        GetComponent<Renderer>().sharedMaterial.color = Color.green;
+        color = Color.green;
+    //    GetComponent<Renderer>().sharedMaterial.color = Color.green;
         Cost = 4;
         Reset();
     }
@@ -21,6 +23,7 @@ public class Grass : Tile
 
     public override void Update()
     {
-        GetComponent<Renderer>().material.color = Color.green;
+        color = Color.green;
+    //    GetComponent<Renderer>().sharedMaterial.color = Color.green;
     }
 }

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
-public class Bridge : Tile
+public class Bridge : TileNode
 {
+    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Bridge";
-        GetComponent<Renderer>().sharedMaterial.color = new Color(255, 127, 80,1);
+        color = new Color(255, 127, 80);
+    //    GetComponent<Renderer>().sharedMaterial.color = new Color(255, 127, 80);
         Cost = 2;
         Reset();
     }
@@ -20,6 +22,7 @@ public class Bridge : Tile
 
     public override void Update()
     {
-        GetComponent<Renderer>().material.color = new Color(255, 127, 80);
+        color = new Color(255, 127, 80);
+    //    GetComponent<Renderer>().sharedMaterial.color = new Color(255, 127, 80);
     }
 }

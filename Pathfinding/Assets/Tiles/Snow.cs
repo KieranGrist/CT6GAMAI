@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
-public class Snow : Tile
+public class Snow : TileNode
 {
+    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Snow";
-        GetComponent<Renderer>().sharedMaterial.color = Color.white;
+    //    GetComponent<Renderer>().sharedMaterial.color = Color.white;
         Cost = 2;
         Reset();
     }
@@ -20,6 +21,7 @@ public class Snow : Tile
 
     public override void Update()
     {
-        GetComponent<Renderer>().material.color = Color.white;
+        color = Color.white;
+    //    GetComponent<Renderer>().sharedMaterial.color = Color.white;
     }
 }

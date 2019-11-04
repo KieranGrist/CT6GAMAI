@@ -62,7 +62,7 @@ public class GraphNode : MonoBehaviour
     {
         if (!Walkable)
         {
-            GetComponent<Renderer>().material.color = Color.white;
+            GetComponent<Material>().color = Color.white;
         }
     }
 }

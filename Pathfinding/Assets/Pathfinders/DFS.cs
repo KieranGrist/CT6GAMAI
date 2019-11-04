@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class DFS : Pathfinder
 {
-    public DFS(NavGraph navGraph) : base(navGraph)
+    public DFS(GraphMap navGraph) : base(navGraph)
     {
      
     }

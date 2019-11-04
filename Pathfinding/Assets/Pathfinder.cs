@@ -4,11 +4,12 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Pathfinder : MonoBehaviour
 {
-    public NavGraph Graph;
+    public NavMesh TileMap;
+    public GraphMap Graph;
     public List<int> Route = new List<int>();
     public List<bool> Visited = new List<bool>();
     public List<int> GeneratedPath = new List<int>();
-    public Pathfinder(NavGraph Graph)
+    public Pathfinder(GraphMap Graph)
     {
         this.Graph = Graph;
     }

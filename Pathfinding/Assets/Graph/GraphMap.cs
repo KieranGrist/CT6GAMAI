@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class NavGraph : MonoBehaviour
+public class GraphMap : MonoBehaviour
 {
     public Pathfinder PathfindingTechnique;
     Pathfinder PreviousPathfinder;
@@ -25,6 +25,7 @@ public class NavGraph : MonoBehaviour
             CalculateNewGraph();
         else
         {
+            Nodes.AddRange( FindObjectsOfType<GraphNode>());
             PreviousArea = Area;    
             for (int i = 0; i < Nodes.Count; i++)
             {
@@ -33,9 +34,9 @@ public class NavGraph : MonoBehaviour
              //   Nodes[i].Reset();
             }
             SourceNode = Nodes[0];
-            SourceNode.GetComponent<Renderer>().material.color = Color.green;
+            SourceNode.GetComponent<Material>().color = Color.green;
             TargetNode = Nodes[4];
-            TargetNode.GetComponent<Renderer>().material.color = Color.red;
+            TargetNode.GetComponent<Material>().color = Color.red;
             PreviousSource = SourceNode;
             PreviousTarget = TargetNode;
         }
@@ -56,9 +57,9 @@ public class NavGraph : MonoBehaviour
             }
         }
         SourceNode = Nodes[0];
-        SourceNode.GetComponent<Renderer>().material.color = Color.green;
+        SourceNode.GetComponent<Material>().color = Color.green;
         TargetNode = Nodes[4];
-        TargetNode.GetComponent<Renderer>().material.color = Color.red;
+        TargetNode.GetComponent<Material>().color = Color.red;
         PreviousSource = SourceNode;
         PreviousTarget = TargetNode;
         for (int i = 0; i < Nodes.Count; i++)
@@ -80,7 +81,7 @@ public class NavGraph : MonoBehaviour
                 FoundRoute = false;
                 RouteDrawn = false;
                 PathDrawn = false;
-                PreviousSource.GetComponent<Renderer>().material.color = Color.blue;
+                PreviousSource.GetComponent<Material>().color = Color.blue;
                 SourceNode = hit.transform.gameObject.GetComponent<GraphNode>();
             }
         }
@@ -93,7 +94,7 @@ public class NavGraph : MonoBehaviour
                 FoundRoute = false;
                 RouteDrawn = false;
                 PathDrawn = false;
-                PreviousTarget.GetComponent<Renderer>().material.color = Color.blue;
+                PreviousTarget.GetComponent<Material>().color = Color.blue;
                 TargetNode = hit.transform.gameObject.GetComponent<GraphNode>();
             }
         }
@@ -106,8 +107,8 @@ public class NavGraph : MonoBehaviour
                 hit.transform.gameObject.GetComponent<GraphNode>().Walkable = !hit.transform.gameObject.GetComponent<GraphNode>().Walkable;
             }
         }
-        SourceNode.GetComponent<Renderer>().material.color = Color.green;
-        TargetNode.GetComponent<Renderer>().material.color = Color.red;
+        SourceNode.GetComponent<Material>().color = Color.green;
+        TargetNode.GetComponent<Material>().color = Color.red;
     }
     void DrawRoute()
     {
@@ -115,7 +116,7 @@ public class NavGraph : MonoBehaviour
         for (int i = 0; i < PathfindingTechnique.Route.Count; i++)
         {
             if (PathfindingTechnique.Route[i]!=-10)
-            Nodes[PathfindingTechnique.Route[i]].GetComponent<Renderer>().material.color = Color.black;
+            Nodes[PathfindingTechnique.Route[i]].GetComponent<Material>().color = Color.black;
 
         }
 
@@ -125,7 +126,7 @@ public class NavGraph : MonoBehaviour
         PathDrawn = true;
         for (int i = PathfindingTechnique.GeneratedPath.Count -1; i > 0; i--)
         {
-            Nodes[PathfindingTechnique.GeneratedPath[i]].GetComponent<Renderer>().material.color = Color.yellow;
+            Nodes[PathfindingTechnique.GeneratedPath[i]].GetComponent<Material>().color = Color.yellow;
 
         }
 
@@ -150,9 +151,9 @@ public class NavGraph : MonoBehaviour
         {
             PathfindingTechnique.Route.Clear();
             PathfindingTechnique.GeneratedPath.Clear();
-            for (int i = 0; i < Nodes.Count; i++)          
-                    Nodes[i].GetComponent<Renderer>().material.color = Color.blue;
-                
+            for (int i = 0; i < Nodes.Count; i++)
+                Nodes[i].GetComponent<Material>().color = Color.blue;
+
             FoundRoute = false;
             RouteDrawn = false;
             PathDrawn = false;
@@ -179,11 +180,11 @@ public class NavGraph : MonoBehaviour
         for (int i = 0; i < Nodes.Count; i++)
         {
             if (!PathfindingTechnique.Route.Contains(Nodes[i].Index) && !PathfindingTechnique.GeneratedPath.Contains(Nodes[i].Index) && Nodes[i] != SourceNode && Nodes[i] != TargetNode && Nodes[i].Walkable)
-            
-                Nodes[i].GetComponent<Renderer>().material.color = Color.blue;
-            
+
+                Nodes[i].GetComponent<Material>().color = Color.blue;
+
             if (!Nodes[i].Walkable)
-                Nodes[i].GetComponent<Renderer>().material.color = Color.white;
+                Nodes[i].GetComponent<Material>().color = Color.white;
 
         }
         PreviousArea = Area;

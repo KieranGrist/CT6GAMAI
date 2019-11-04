@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
-public class Empty : Tile
+public class Empty : TileNode
 {
+    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Empty";
-        GetComponent<Renderer>().sharedMaterial.color = Color.black;
+        color = Color.black;
+    //    GetComponent<Renderer>().sharedMaterial.color = Color.black;
         Cost = float.PositiveInfinity;
         Walkable = false;
         Reset();
@@ -22,6 +24,6 @@ public class Empty : Tile
 
     public override void Update()
     {
-        GetComponent<Renderer>().material.color = Color.black;
+    //    GetComponent<Renderer>().sharedMaterial.color = Color.black;
     }
 }
