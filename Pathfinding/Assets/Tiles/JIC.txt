@@ -1,0 +1,14 @@
+BLUE = WATER = 10
+GREEN = GRASS = 4 
+DARK GREEN = HILLS = 7
+WHITE = SNOW = 9
+Black = UNPASSABLE TILE = infinity
+Orange = Hihgway/Road = 2 
+Light Orange = Bridge = 4
+Pink = Residential = 6
+
+Source = Purple
+Destination = Red
+
+Route = Transparent gray
+Path = Transparent Yellow

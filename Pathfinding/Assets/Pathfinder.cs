@@ -25,7 +25,8 @@ public abstract class Pathfinder : MonoBehaviour
     }
     public List<int> CalculatePath(GraphNode Source, GraphNode Target)
     {
-        List<int> Path = new List<int>();
+        List<int> Path = new List<int>();
+
         int currentNode = Target.Index;
         Path.Add(currentNode);
         while (currentNode != Source.Index)
