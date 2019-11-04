@@ -5,13 +5,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Water : TileNode
 {
-    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Water";
-        color = Color.blue;     
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.blue;
+        GetComponent<Renderer>().material = WaterMat;
         Cost = 10;
         Reset();
     }
@@ -23,8 +21,7 @@ public class Water : TileNode
     }
 
     public override void Update()
-    {
-        color = Color.blue;
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.blue;
+    {      
+        GetComponent<Renderer>().material = WaterMat;
     }
 }

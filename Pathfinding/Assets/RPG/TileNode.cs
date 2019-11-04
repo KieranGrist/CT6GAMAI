@@ -21,6 +21,7 @@ Path = Transparent Yellow
 */
 public abstract class TileNode : MonoBehaviour
 {
+    public t
     public float Cost = float.MaxValue;
     public float Distance = 1.25f;
     public int Index;

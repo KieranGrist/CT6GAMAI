@@ -5,12 +5,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Snow : TileNode
 {
-    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Snow";
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.white;
+        GetComponent<Renderer>().material = SourceMat;
         Cost = 2;
         Reset();
     }
@@ -21,7 +20,7 @@ public class Snow : TileNode
 
     public override void Update()
     {
-        color = Color.white;
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.white;
+        GetComponent<Renderer>().material = SourceMat;
+        Cost = 2;
     }
 }

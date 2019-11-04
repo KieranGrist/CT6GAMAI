@@ -11,7 +11,7 @@ public class Hills : TileNode
         Distance = 1.25f;
         name = "Hills";
         color = new Color(34, 139, 34);
-    //    GetComponent<Renderer>().sharedMaterial.color = new Color(34, 139, 34);
+        GetComponent<Renderer>().sharedMaterial.color = new Color(34, 139, 34);
         Cost = 7;
         Reset();
     }
@@ -23,6 +23,6 @@ public class Hills : TileNode
     public override void Update()
     {
         color = new Color(34, 139, 34);
-    //    GetComponent<Renderer>().sharedMaterial.color = new Color(34, 139, 34);
+        GetComponent<Renderer>().sharedMaterial.color = new Color(34, 139, 34);
     }
 }

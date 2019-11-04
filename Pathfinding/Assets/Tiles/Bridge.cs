@@ -5,13 +5,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Bridge : TileNode
 {
-    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Bridge";
-        color = new Color(255, 127, 80);
-    //    GetComponent<Renderer>().sharedMaterial.color = new Color(255, 127, 80);
+        GetComponent<Renderer>().material = BridgeMat;
         Cost = 2;
         Reset();
     }
@@ -22,7 +20,6 @@ public class Bridge : TileNode
 
     public override void Update()
     {
-        color = new Color(255, 127, 80);
-    //    GetComponent<Renderer>().sharedMaterial.color = new Color(255, 127, 80);
+        GetComponent<Renderer>().material = BridgeMat;
     }
 }

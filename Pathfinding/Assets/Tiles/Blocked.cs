@@ -10,8 +10,8 @@ public class Blocked : TileNode
     {
         Distance = 1.25f;
         name = "Blocked";
-        color = Color.black;
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.black;
+
+        GetComponent<Renderer>().material = BlockedMat;
         Cost = float.PositiveInfinity;
         Walkable = false;
         Reset();
@@ -26,6 +26,6 @@ public class Blocked : TileNode
 
     public override void Update()
     {
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.black;
+        GetComponent<Renderer>().material = BlockedMat;
     }
 }

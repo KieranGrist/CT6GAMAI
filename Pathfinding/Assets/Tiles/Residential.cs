@@ -5,16 +5,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Residential : TileNode
 {
-    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Residential";
-        Color test = new Color();
-           test = Color.red;
-        test = new Color(255, 20, 147);
-        color = new Color(255, 20, 147);
-    //    GetComponent<Renderer>().sharedMaterial.color = test;
+        GetComponent<Renderer>().material = ResidentialMat;
         Cost = 6;
         Reset();
     }
@@ -25,7 +20,6 @@ public class Residential : TileNode
 
     public override void Update()
     {
-        color = new Color(255, 20, 147);
-    //    GetComponent<Renderer>().sharedMaterial.color = new Color(255, 20, 147);
+        GetComponent<Renderer>().material = ResidentialMat;
     }
 }

@@ -5,24 +5,22 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Destination : TileNode
 {
-    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Destination";
-        color = Color.red;
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.red;
+        GetComponent<Renderer>().material = DestinationMat;
         Cost = 0;
         Reset();
     }
     public override void Start()
     {
         Cost = 0;
-  
+
     }
 
     public override void Update()
     {
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.red;
+        GetComponent<Renderer>().material = DestinationMat;
     }
-}   
+}

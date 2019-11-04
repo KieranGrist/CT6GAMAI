@@ -10,7 +10,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{51620EE3-3DEA-7333-6E7A-6011D65ABAFB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Tiles\Residential.cs" />
     <Compile Include="Assets\Tiles\Snow.cs" />
     <Compile Include="Assets\Tiles\Source.cs" />
+    <Compile Include="Assets\Tiles\TileMaterials.cs" />
     <Compile Include="Assets\Tiles\Water.cs" />
     <None Include="Assets\Tiles\JIC.txt" />
     <Reference Include="Unity.Timeline.Editor">

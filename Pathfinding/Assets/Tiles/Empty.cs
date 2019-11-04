@@ -5,13 +5,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Empty : TileNode
 {
-    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Empty";
-        color = Color.black;
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.black;
+        GetComponent<Renderer>().material = EmptyMat;
         Cost = float.PositiveInfinity;
         Walkable = false;
         Reset();
@@ -19,11 +17,11 @@ public class Empty : TileNode
     public override void Start()
     {
         Cost = float.PositiveInfinity;
-        Walkable = false;  
+        Walkable = false;
     }
 
     public override void Update()
     {
-    //    GetComponent<Renderer>().sharedMaterial.color = Color.black;
+        GetComponent<Renderer>().material = EmptyMat;
     }
 }
