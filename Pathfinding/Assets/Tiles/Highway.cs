@@ -10,7 +10,7 @@ public class Highway : TileNode
         Distance = 1.25f;
         name = "Highway";
 
-        GetComponent<Renderer>().material = HighwayMat;
+        GetComponent<Renderer>().material = MaterialManager.HighwayMat;
         Cost = 2;
         Reset();
     }
@@ -21,7 +21,7 @@ public class Highway : TileNode
 
     public override void Update()
     {
-        GetComponent<Renderer>().material = HighwayMat;
+        GetComponent<Renderer>().material = MaterialManager.HighwayMat;
 
     }
 }

@@ -9,7 +9,7 @@ public class Source : TileNode
     {
         Distance = 1.25f;
         name = "Source";
-        GetComponent<Renderer>().material = SourceMat;
+        GetComponent<Renderer>().material = MaterialManager.SourceMat;
         Cost = 0;
         Reset();
     }
@@ -21,6 +21,6 @@ public class Source : TileNode
 
     public override void Update()
     {
-        GetComponent<Renderer>().material = SourceMat;
+        GetComponent<Renderer>().material = MaterialManager.SourceMat;
     }
 }

@@ -21,7 +21,7 @@ Path = Transparent Yellow
 */
 public abstract class TileNode : MonoBehaviour
 {
-    public t
+    public TileMaterials MaterialManager;
     public float Cost = float.MaxValue;
     public float Distance = 1.25f;
     public int Index;
@@ -51,7 +51,7 @@ public abstract class TileNode : MonoBehaviour
         {
             if (Nodes[i] != this)
             {
-
+                
                 if (Vector3.Distance(transform.position, Nodes[i].transform.position) < Distance)
                 {
                     Neighbours.Add(new TileEdge(this, Nodes[i]));

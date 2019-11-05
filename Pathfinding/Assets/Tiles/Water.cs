@@ -9,7 +9,7 @@ public class Water : TileNode
     {
         Distance = 1.25f;
         name = "Water";
-        GetComponent<Renderer>().material = WaterMat;
+        GetComponent<Renderer>().material = MaterialManager.WaterMat;
         Cost = 10;
         Reset();
     }
@@ -22,6 +22,6 @@ public class Water : TileNode
 
     public override void Update()
     {      
-        GetComponent<Renderer>().material = WaterMat;
+        GetComponent<Renderer>().material = MaterialManager.WaterMat;
     }
 }

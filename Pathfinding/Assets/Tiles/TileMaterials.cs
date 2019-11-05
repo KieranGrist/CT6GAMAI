@@ -1,8 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public static class TileMaterials
+[System.Serializable]
+public class TileMaterials : MonoBehaviour
 {
-    public static Material BlockedMat, BridgeMat, DestinationMat, EmptyMat, GrassMat, HighwayMat, HillsMat, ResidentialMat, SnowMat, SourceMat, WaterMat;
+    public Material BlockedMat;
+    public Material BridgeMat;
+    public Material DestinationMat;
+    public Material EmptyMat;
+    public Material GrassMat;
+    public Material HighwayMat;
+    public Material HillsMat;
+    public Material ResidentialMat;
+    public Material SnowMat;
+    public Material SourceMat;
+    public Material WaterMat;
 }

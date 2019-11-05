@@ -9,7 +9,7 @@ public class Grass : TileNode
     {
         Distance = 1.25f;
         name = "Grass";
-        GetComponent<Renderer>().sharedMaterial.color = Color.green;
+        GetComponent<Renderer>().material = MaterialManager.GrassMat;
         Cost = 4;
         Reset();
     }
@@ -21,6 +21,6 @@ public class Grass : TileNode
 
     public override void Update()
     {
-        GetComponent<Renderer>().sharedMaterial.color = Color.green;
+        GetComponent<Renderer>().material = MaterialManager.GrassMat;
     }
 }

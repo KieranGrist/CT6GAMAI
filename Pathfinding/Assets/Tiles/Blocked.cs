@@ -11,7 +11,7 @@ public class Blocked : TileNode
         Distance = 1.25f;
         name = "Blocked";
 
-        GetComponent<Renderer>().material = BlockedMat;
+        GetComponent<Renderer>().material = MaterialManager.BlockedMat;
         Cost = float.PositiveInfinity;
         Walkable = false;
         Reset();
@@ -26,6 +26,6 @@ public class Blocked : TileNode
 
     public override void Update()
     {
-        GetComponent<Renderer>().material = BlockedMat;
+        GetComponent<Renderer>().material = MaterialManager.BlockedMat;
     }
 }

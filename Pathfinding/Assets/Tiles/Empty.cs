@@ -9,7 +9,7 @@ public class Empty : TileNode
     {
         Distance = 1.25f;
         name = "Empty";
-        GetComponent<Renderer>().material = EmptyMat;
+        GetComponent<Renderer>().material = MaterialManager.EmptyMat;
         Cost = float.PositiveInfinity;
         Walkable = false;
         Reset();
@@ -22,6 +22,6 @@ public class Empty : TileNode
 
     public override void Update()
     {
-        GetComponent<Renderer>().material = EmptyMat;
+        GetComponent<Renderer>().material = MaterialManager.EmptyMat;
     }
 }

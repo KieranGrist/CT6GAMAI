@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Pathfinder : MonoBehaviour
 {
-    public NavMesh TileMap;
+    public NavGraph TileMap;
     public GraphMap Graph;
     public List<int> Route = new List<int>();
     public List<bool> Visited = new List<bool>();
@@ -14,7 +14,18 @@ public abstract class Pathfinder : MonoBehaviour
         this.Graph = Graph;
     }
     public abstract bool CalculateRoute(GraphNode Source, GraphNode Target);
-    public void Reset()
+    public abstract bool CalculateRoute(TileNode Source, TileNode Target);
+    public void TileReset()
+    {
+        Route = new List<int>(TileMap.Nodes.Count);
+        Visited = new List<bool>(TileMap.Nodes.Count);
+        for (int i = 0; i < TileMap.Nodes.Count; i++)
+        {
+            Route.Add(-10);
+            Visited.Add(false);
+        }
+    }
+    public void GraphReset()
     {
         Route = new List<int>(Graph.Nodes.Count);       
         Visited = new List<bool>(Graph.Nodes.Count);
@@ -35,6 +46,19 @@ public abstract class Pathfinder : MonoBehaviour
             currentNode = Route[currentNode];
             Path.Add(currentNode);
         }        
+        return Path;
+    }
+    public List<int> CalculatePath(TileNode Source, TileNode Target)
+    {
+        List<int> Path = new List<int>();
+      
+        int currentNode = Target.Index;
+        Path.Add(currentNode);
+        while (currentNode != Source.Index)
+        {
+            currentNode = Route[currentNode];
+            Path.Add(currentNode);
+        }
         return Path;
     }
 }

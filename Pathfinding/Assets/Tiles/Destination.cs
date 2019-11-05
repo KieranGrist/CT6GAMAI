@@ -9,7 +9,7 @@ public class Destination : TileNode
     {
         Distance = 1.25f;
         name = "Destination";
-        GetComponent<Renderer>().material = DestinationMat;
+        GetComponent<Renderer>().material = MaterialManager.DestinationMat;
         Cost = 0;
         Reset();
     }
@@ -21,6 +21,6 @@ public class Destination : TileNode
 
     public override void Update()
     {
-        GetComponent<Renderer>().material = DestinationMat;
+        GetComponent<Renderer>().material = MaterialManager.DestinationMat;
     }
 }

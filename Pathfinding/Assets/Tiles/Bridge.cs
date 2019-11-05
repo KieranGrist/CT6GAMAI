@@ -9,7 +9,7 @@ public class Bridge : TileNode
     {
         Distance = 1.25f;
         name = "Bridge";
-        GetComponent<Renderer>().material = BridgeMat;
+        GetComponent<Renderer>().material = MaterialManager.BridgeMat;
         Cost = 2;
         Reset();
     }
@@ -20,6 +20,6 @@ public class Bridge : TileNode
 
     public override void Update()
     {
-        GetComponent<Renderer>().material = BridgeMat;
+        GetComponent<Renderer>().material = MaterialManager.BridgeMat;
     }
 }
