@@ -8,7 +8,7 @@ public class Water : TileNode
     void Awake()
     {
         Distance = 1.25f;
-        name = "Water";
+        name = "Water Tile. ID: " +Index;
         GetComponent<Renderer>().material = MaterialManager.WaterMat;
         Cost = 10;
         Reset();
@@ -16,12 +16,14 @@ public class Water : TileNode
 
     public override void Start()
     {
+       
         Cost = 10;
         Reset();
     }
 
     public override void Update()
-    {      
+    {
+        name = "Water Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.WaterMat;
     }
 }

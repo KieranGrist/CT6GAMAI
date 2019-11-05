@@ -8,7 +8,7 @@ public class Residential : TileNode
     void Awake()
     {
         Distance = 1.25f;
-        name = "Residential";
+        name = "Residential Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.ResidentialMat;
         Cost = 6;
         Reset();
@@ -20,6 +20,7 @@ public class Residential : TileNode
 
     public override void Update()
     {
+        name = "Residential Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.ResidentialMat;
     }
     

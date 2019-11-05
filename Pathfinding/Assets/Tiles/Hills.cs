@@ -9,7 +9,7 @@ public class Hills : TileNode
     void Awake()
     {
         Distance = 1.25f;
-        name = "Hills";
+        name = "Hills Tile. ID: " + Index;
         color = new Color(34, 139, 34);
         GetComponent<Renderer>().material = MaterialManager.HillsMat;
         Cost = 7;
@@ -22,6 +22,7 @@ public class Hills : TileNode
 
     public override void Update()
     {
+        name = "Hills Tile. ID: " + Index;
         color = new Color(34, 139, 34);
         GetComponent<Renderer>().material = MaterialManager.HillsMat;
     }

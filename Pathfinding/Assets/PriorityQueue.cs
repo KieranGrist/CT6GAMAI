@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PriorityQueue<T ,Q> where T : IComparable<T>
 {
-    private List<KeyValuePair<T,Q>> data;
+    public List<KeyValuePair<T,Q>> data;
 
     public PriorityQueue()
     {

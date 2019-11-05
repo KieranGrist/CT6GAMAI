@@ -8,7 +8,7 @@ public class Empty : TileNode
     void Awake()
     {
         Distance = 1.25f;
-        name = "Empty";
+        name = "Empty Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.EmptyMat;
         Cost = int.MaxValue;
         Walkable = false;
@@ -22,6 +22,7 @@ public class Empty : TileNode
 
     public override void Update()
     {
+        name = "Empty Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.EmptyMat;
     }
 }

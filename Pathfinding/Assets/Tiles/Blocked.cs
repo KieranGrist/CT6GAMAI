@@ -8,8 +8,7 @@ public class Blocked : TileNode
     void Awake()
     {
         Distance = 1.25f;
-        name = "Blocked";
-
+        name = "Blocked Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.BlockedMat;
         Cost = int.MaxValue;
         Walkable = false;
@@ -17,7 +16,7 @@ public class Blocked : TileNode
     }
     public override void Start()
     {
-        name = "Blocked";
+    
         Cost = int.MaxValue;
         Walkable = false;
 
@@ -25,6 +24,7 @@ public class Blocked : TileNode
 
     public override void Update()
     {
+        name = "Blocked Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.BlockedMat;
     }
 }

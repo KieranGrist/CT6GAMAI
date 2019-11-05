@@ -8,7 +8,7 @@ public class Grass : TileNode
     void Awake()
     {
         Distance = 1.25f;
-        name = "Grass";
+        name = "Grass Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.GrassMat;
         Cost = 4;
         Reset();
@@ -21,6 +21,7 @@ public class Grass : TileNode
 
     public override void Update()
     {
+        name = "Grass Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.GrassMat;
     }
 }

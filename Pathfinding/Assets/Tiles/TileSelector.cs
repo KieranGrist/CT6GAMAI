@@ -19,6 +19,7 @@ public enum TileType
 [ExecuteInEditMode]
 public class TileSelector : MonoBehaviour
 {
+    public TileMaterials tileMaterials;
 
     public TileType type = TileType.Empty;
     TileType PreviousType;
@@ -27,28 +28,28 @@ public class TileSelector : MonoBehaviour
     {
         if (!Application.isPlaying)
         {
+            gameObject.GetComponent<TileNode>().MaterialManager = tileMaterials;
+            gameObject.GetComponent<TileNode>().enabled = true;
             if (type != PreviousType)
             {
                 foreach (var item in gameObject.GetComponents<TileNode>())
                 {
                     DestroyImmediate(item);
                 }
-        
+     
                 switch (type)
                 {
                     case TileType.Blocked:
-                        gameObject.AddComponent<Blocked>();
-                     //   gameObject.GetComponent<Blocked>().enabled = true;
+                        gameObject.AddComponent<Blocked>();            
+ 
                         gameObject.GetComponent<Blocked>().Reset();
                         break;
                     case TileType.Bridge:
                         gameObject.AddComponent<Bridge>();
-                  //      gameObject.GetComponent<Bridge>().enabled = true;
                         gameObject.GetComponent<Bridge>().Reset();
                         break;
                     case TileType.Empty:
                         gameObject.AddComponent<Empty>();
-                 
                         gameObject.GetComponent<Empty>().Reset();
                         break;
                     case TileType.Grass:
@@ -64,11 +65,11 @@ public class TileSelector : MonoBehaviour
                         gameObject.GetComponent<Hills>().Reset();
                         break;
                     case TileType.Residential:
-                        gameObject.AddComponent<Residential>();
+                        gameObject.AddComponent<Residential>();       
                         gameObject.GetComponent<Residential>().Reset();
                         break;
                     case TileType.Snow:
-                        gameObject.AddComponent<Snow>();
+                        gameObject.AddComponent<Snow>();          
                         gameObject.GetComponent<Snow>().Reset();
                         break;
                     case TileType.Water:
@@ -77,6 +78,7 @@ public class TileSelector : MonoBehaviour
                         break;
 
                 }
+                PreviousType = type;
 
             }
         }
@@ -85,27 +87,28 @@ public class TileSelector : MonoBehaviour
     {
         if (!Application.isPlaying)
         {
+            gameObject.GetComponent<TileNode>().MaterialManager = tileMaterials;
+            gameObject.GetComponent<TileNode>().enabled = true;
             if (type != PreviousType)
             {
                 foreach (var item in gameObject.GetComponents<TileNode>())
                 {
                     DestroyImmediate(item);
                 }
+
                 switch (type)
                 {
                     case TileType.Blocked:
                         gameObject.AddComponent<Blocked>();
-                        //   gameObject.GetComponent<Blocked>().enabled = true;
+
                         gameObject.GetComponent<Blocked>().Reset();
                         break;
                     case TileType.Bridge:
                         gameObject.AddComponent<Bridge>();
-                        //      gameObject.GetComponent<Bridge>().enabled = true;
                         gameObject.GetComponent<Bridge>().Reset();
                         break;
                     case TileType.Empty:
                         gameObject.AddComponent<Empty>();
-
                         gameObject.GetComponent<Empty>().Reset();
                         break;
                     case TileType.Grass:
@@ -134,9 +137,8 @@ public class TileSelector : MonoBehaviour
                         break;
 
                 }
-
+                PreviousType = type;
             }
-            PreviousType = type; 
         }
     }
 }

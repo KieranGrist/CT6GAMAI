@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8807436653012511362}
   - component: {fileID: 8807436653012511361}
   - component: {fileID: 8807436653012511360}
-  m_Layer: 0
-  m_Name: CCube
+  m_Layer: 2
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

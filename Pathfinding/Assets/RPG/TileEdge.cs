@@ -13,6 +13,6 @@ public class TileEdge
     }
     public int GetCost()
     {
-        return From.Cost + To.Cost;
+        return To.Cost;
     }
 }

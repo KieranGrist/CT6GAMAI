@@ -8,7 +8,7 @@ public class Snow : TileNode
     void Awake()
     {
         Distance = 1.25f;
-        name = "Snow";
+        name = "Snow Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.SnowMat;
         Cost = 9;
         Reset();
@@ -20,6 +20,7 @@ public class Snow : TileNode
 
     public override void Update()
     {
+        name = "Snow Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.SnowMat;
         Cost = 9;
     }

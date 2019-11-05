@@ -8,7 +8,7 @@ public class Highway : TileNode
     void Awake()
     {
         Distance = 1.25f;
-        name = "Highway";
+        name = "Highway Tile. ID: " + Index;
 
         GetComponent<Renderer>().material = MaterialManager.HighwayMat;
         Cost = 2;
@@ -21,6 +21,7 @@ public class Highway : TileNode
 
     public override void Update()
     {
+        name = "Highway Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.HighwayMat;
 
     }
