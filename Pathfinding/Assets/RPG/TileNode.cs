@@ -22,7 +22,7 @@ Path = Transparent Yellow
 public abstract class TileNode : MonoBehaviour
 {
     public TileMaterials MaterialManager;
-    public float Cost = float.MaxValue;
+    public int Cost = int.MaxValue;
     public float Distance = 1.25f;
     public int Index;
     public bool Walkable;

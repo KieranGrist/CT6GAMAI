@@ -6,7 +6,9 @@ public abstract class Pathfinder : MonoBehaviour
 {
     public NavGraph TileMap;
     public GraphMap Graph;
+    public int PathCost = 0;
     public List<int> Route = new List<int>();
+    public List<int> Cost = new List<int>();
     public List<bool> Visited = new List<bool>();
     public List<int> GeneratedPath = new List<int>();
     public Pathfinder(GraphMap Graph)
@@ -19,9 +21,11 @@ public abstract class Pathfinder : MonoBehaviour
     {
         Route = new List<int>(TileMap.Nodes.Count);
         Visited = new List<bool>(TileMap.Nodes.Count);
+        Cost = new List<int>(TileMap.Nodes.Count);
         for (int i = 0; i < TileMap.Nodes.Count; i++)
         {
             Route.Add(-10);
+            Cost.Add(int.MaxValue);
             Visited.Add(false);
         }
     }

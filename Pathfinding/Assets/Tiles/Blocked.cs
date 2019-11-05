@@ -5,21 +5,20 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Blocked : TileNode
 {
-    public Color color;
     void Awake()
     {
         Distance = 1.25f;
         name = "Blocked";
 
         GetComponent<Renderer>().material = MaterialManager.BlockedMat;
-        Cost = float.PositiveInfinity;
+        Cost = int.MaxValue;
         Walkable = false;
         Reset();
     }
     public override void Start()
     {
         name = "Blocked";
-        Cost = float.PositiveInfinity;
+        Cost = int.MaxValue;
         Walkable = false;
 
     }

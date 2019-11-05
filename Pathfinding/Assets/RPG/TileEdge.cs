@@ -11,4 +11,8 @@ public class TileEdge
         this.From = From;
         this.To = To;
     }
+    public int GetCost()
+    {
+        return From.Cost + To.Cost;
+    }
 }

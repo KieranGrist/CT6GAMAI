@@ -10,13 +10,13 @@ public class Empty : TileNode
         Distance = 1.25f;
         name = "Empty";
         GetComponent<Renderer>().material = MaterialManager.EmptyMat;
-        Cost = float.PositiveInfinity;
+        Cost = int.MaxValue;
         Walkable = false;
         Reset();
     }
     public override void Start()
     {
-        Cost = float.PositiveInfinity;
+        Cost = int.MaxValue;
         Walkable = false;
     }
 

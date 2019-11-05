@@ -22,4 +22,5 @@ public class Residential : TileNode
     {
         GetComponent<Renderer>().material = MaterialManager.ResidentialMat;
     }
+    
 }
