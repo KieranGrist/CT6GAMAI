@@ -35,8 +35,7 @@ public class AIAgent : MonoBehaviour
                 {
                     PreviousNodeID = hit.transform.gameObject.GetComponent<TileNode>().Index;
                     GameObject GO = Instantiate(navGraph.Cube, transform.position, transform.rotation);
-                    GO.transform.position = PreviousNode.transform.position;
-                    GO.GetComponent<Renderer>().material.color = new Color(0, 0, 1, 127);
+                    GO.transform.position = PreviousNode.transform.position;   
                     GO.transform.position += new Vector3(0, 0.1f, 0);
                     GO.transform.localScale = new Vector3(1, 1, 1);
                     GO.name = "Path Node";

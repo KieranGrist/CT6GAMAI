@@ -9,13 +9,14 @@ public class Empty : TileNode
     {
         Distance = 1.25f;
         name = "Empty Tile. ID: " + Index;
-        GetComponent<Renderer>().material = MaterialManager.EmptyMat;
+  
         Cost = int.MaxValue;
         Walkable = false;
         Reset();
     }
     public override void Start()
     {
+        GetComponent<Renderer>().material = MaterialManager.EmptyMat;
         Cost = int.MaxValue;
         Walkable = false;
     }

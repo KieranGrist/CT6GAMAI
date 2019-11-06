@@ -7636,7 +7636,7 @@ GameObject:
   - component: {fileID: 177947851}
   - component: {fileID: 177947847}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 843'
+  m_Name: 'Snow Tile. ID: 843'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7665,11 +7665,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 177947845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 843
   Walkable: 1
@@ -7710,7 +7710,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7752,7 +7752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &178023253
 GameObject:
   m_ObjectHideFlags: 0
@@ -12320,7 +12320,7 @@ GameObject:
   - component: {fileID: 254161090}
   - component: {fileID: 254161094}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 808'
+  m_Name: 'Snow Tile. ID: 808'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12353,7 +12353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!65 &254161091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12384,7 +12384,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12422,11 +12422,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 254161088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 808
   Walkable: 1
@@ -14863,7 +14863,7 @@ GameObject:
   - component: {fileID: 299902338}
   - component: {fileID: 299902334}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 789'
+  m_Name: 'Snow Tile. ID: 789'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14892,11 +14892,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 299902332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 789
   Walkable: 1
@@ -14939,7 +14939,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14981,7 +14981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &303276299
 GameObject:
   m_ObjectHideFlags: 0
@@ -17405,7 +17405,7 @@ GameObject:
   - component: {fileID: 332449575}
   - component: {fileID: 332449571}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 770'
+  m_Name: 'Snow Tile. ID: 770'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17434,11 +17434,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 332449569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 770
   Walkable: 1
@@ -17481,7 +17481,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17523,7 +17523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &337390852
 GameObject:
   m_ObjectHideFlags: 0
@@ -21239,7 +21239,7 @@ GameObject:
   - component: {fileID: 400885852}
   - component: {fileID: 400885856}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 742'
+  m_Name: 'Hills Tile. ID: 742'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21272,7 +21272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 5
 --- !u!65 &400885853
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21303,7 +21303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 9a48db3cf2c4a9a46a613a7fa0d03e02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21341,11 +21341,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 400885850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 6572cafe4057e1b40bd52731538680ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 7
   Distance: 1.25
   Index: 742
   Walkable: 1
@@ -21356,6 +21356,7 @@ MonoBehaviour:
     To: {fileID: 511575736}
   - From: {fileID: 400885856}
     To: {fileID: 164036168}
+  color: {r: 34, g: 139, b: 34, a: 1}
 --- !u!1 &403325453
 GameObject:
   m_ObjectHideFlags: 0
@@ -25917,7 +25918,7 @@ GameObject:
   - component: {fileID: 511575732}
   - component: {fileID: 511575736}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 707'
+  m_Name: 'Hills Tile. ID: 707'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25950,7 +25951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 5
 --- !u!65 &511575733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25981,7 +25982,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 9a48db3cf2c4a9a46a613a7fa0d03e02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -26019,11 +26020,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 511575730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 6572cafe4057e1b40bd52731538680ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 7
   Distance: 1.25
   Index: 707
   Walkable: 1
@@ -26036,6 +26037,7 @@ MonoBehaviour:
     To: {fileID: 807162751}
   - From: {fileID: 511575736}
     To: {fileID: 400885856}
+  color: {r: 34, g: 139, b: 34, a: 1}
 --- !u!1 &517027246
 GameObject:
   m_ObjectHideFlags: 0
@@ -28731,7 +28733,7 @@ GameObject:
   - component: {fileID: 565159793}
   - component: {fileID: 565159789}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 686'
+  m_Name: 'Snow Tile. ID: 686'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28760,11 +28762,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 565159787}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 686
   Walkable: 1
@@ -28805,7 +28807,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28847,7 +28849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &569290634
 GameObject:
   m_ObjectHideFlags: 0
@@ -33146,7 +33148,7 @@ GameObject:
   - component: {fileID: 636491333}
   - component: {fileID: 636491329}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 653'
+  m_Name: 'Snow Tile. ID: 653'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33175,11 +33177,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 636491327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 653
   Walkable: 1
@@ -33222,7 +33224,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33264,7 +33266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!1 &637539203
 GameObject:
   m_ObjectHideFlags: 0
@@ -35018,7 +35020,7 @@ GameObject:
   - component: {fileID: 657249163}
   - component: {fileID: 657249159}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 639'
+  m_Name: 'Snow Tile. ID: 639'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35047,11 +35049,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 657249157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 639
   Walkable: 1
@@ -35094,7 +35096,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -35136,7 +35138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!1 &662016350
 GameObject:
   m_ObjectHideFlags: 0
@@ -40642,7 +40644,7 @@ GameObject:
   - component: {fileID: 765484026}
   - component: {fileID: 765484030}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 597'
+  m_Name: 'Hills Tile. ID: 597'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40675,7 +40677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 5
 --- !u!65 &765484027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40706,7 +40708,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 9a48db3cf2c4a9a46a613a7fa0d03e02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -40744,11 +40746,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 765484024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 6572cafe4057e1b40bd52731538680ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 7
   Distance: 1.25
   Index: 597
   Walkable: 1
@@ -40759,6 +40761,7 @@ MonoBehaviour:
     To: {fileID: 400885856}
   - From: {fileID: 765484030}
     To: {fileID: 268216142}
+  color: {r: 34, g: 139, b: 34, a: 1}
 --- !u!1 &765674374
 GameObject:
   m_ObjectHideFlags: 0
@@ -42517,7 +42520,7 @@ GameObject:
   - component: {fileID: 790905264}
   - component: {fileID: 790905260}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 583'
+  m_Name: 'Snow Tile. ID: 583'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42546,11 +42549,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 790905258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 583
   Walkable: 1
@@ -42593,7 +42596,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -42635,7 +42638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!1 &796941495
 GameObject:
   m_ObjectHideFlags: 0
@@ -43455,7 +43458,7 @@ GameObject:
   - component: {fileID: 807162747}
   - component: {fileID: 807162751}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 576'
+  m_Name: 'Hills Tile. ID: 576'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43488,7 +43491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 5
 --- !u!65 &807162748
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43519,7 +43522,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 9a48db3cf2c4a9a46a613a7fa0d03e02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -43557,11 +43560,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 807162745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 6572cafe4057e1b40bd52731538680ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 7
   Distance: 1.25
   Index: 576
   Walkable: 1
@@ -43574,6 +43577,7 @@ MonoBehaviour:
     To: {fileID: 765484030}
   - From: {fileID: 807162751}
     To: {fileID: 511575736}
+  color: {r: 34, g: 139, b: 34, a: 1}
 --- !u!1 &807950603
 GameObject:
   m_ObjectHideFlags: 0
@@ -54697,7 +54701,7 @@ GameObject:
   - component: {fileID: 973644164}
   - component: {fileID: 973644160}
   m_Layer: 8
-  m_Name: 'Water Tile. ID: 492'
+  m_Name: 'Grass Tile. ID: 492'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54726,11 +54730,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 973644158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83e920d28721d4399c0617d02c3440, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 10
+  Cost: 4
   Distance: 1.25
   Index: 492
   Walkable: 1
@@ -54773,7 +54777,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 259bb4e21b5d6a9479ad0fa5ec7de6ab, type: 2}
+  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -54815,7 +54819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 8
+  type: 3
 --- !u!1 &975926383
 GameObject:
   m_ObjectHideFlags: 0
@@ -66608,7 +66612,7 @@ GameObject:
   - component: {fileID: 1204719753}
   - component: {fileID: 1204719749}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 403'
+  m_Name: 'Snow Tile. ID: 403'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66637,11 +66641,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1204719747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 403
   Walkable: 1
@@ -66684,7 +66688,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -66726,7 +66730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!1 &1207673692
 GameObject:
   m_ObjectHideFlags: 0
@@ -66742,7 +66746,7 @@ GameObject:
   - component: {fileID: 1207673698}
   - component: {fileID: 1207673694}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 402'
+  m_Name: 'Water Tile. ID: 402'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66771,11 +66775,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1207673692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: eb83e920d28721d4399c0617d02c3440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 10
   Distance: 1.25
   Index: 402
   Walkable: 1
@@ -66818,7 +66822,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 259bb4e21b5d6a9479ad0fa5ec7de6ab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -66860,7 +66864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 8
 --- !u!1 &1210796439
 GameObject:
   m_ObjectHideFlags: 0
@@ -68480,7 +68484,7 @@ GameObject:
   - component: {fileID: 1234820666}
   - component: {fileID: 1234820662}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 389'
+  m_Name: 'Snow Tile. ID: 389'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68509,11 +68513,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234820660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 389
   Walkable: 1
@@ -68556,7 +68560,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -68598,7 +68602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1245734567
 GameObject:
   m_ObjectHideFlags: 0
@@ -72206,7 +72210,7 @@ GameObject:
   - component: {fileID: 1322119065}
   - component: {fileID: 1322119061}
   m_Layer: 8
-  m_Name: 'Water Tile. ID: 362'
+  m_Name: 'Grass Tile. ID: 362'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72235,11 +72239,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1322119059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83e920d28721d4399c0617d02c3440, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 10
+  Cost: 4
   Distance: 1.25
   Index: 362
   Walkable: 1
@@ -72282,7 +72286,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 259bb4e21b5d6a9479ad0fa5ec7de6ab, type: 2}
+  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72324,7 +72328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 8
+  type: 3
 --- !u!1 &1324981699
 GameObject:
   m_ObjectHideFlags: 0
@@ -73803,7 +73807,7 @@ GameObject:
   - component: {fileID: 1352774616}
   - component: {fileID: 1352774620}
   m_Layer: 8
-  m_Name: 'Water Tile. ID: 350'
+  m_Name: 'Grass Tile. ID: 350'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73836,7 +73840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 8
+  type: 3
 --- !u!65 &1352774617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73867,7 +73871,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 259bb4e21b5d6a9479ad0fa5ec7de6ab, type: 2}
+  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73905,11 +73909,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1352774614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83e920d28721d4399c0617d02c3440, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 10
+  Cost: 4
   Distance: 1.25
   Index: 350
   Walkable: 1
@@ -76363,7 +76367,7 @@ GameObject:
   - component: {fileID: 1380709567}
   - component: {fileID: 1380709563}
   m_Layer: 8
-  m_Name: 'Water Tile. ID: 339'
+  m_Name: 'Grass Tile. ID: 339'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76392,11 +76396,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1380709561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83e920d28721d4399c0617d02c3440, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 10
+  Cost: 4
   Distance: 1.25
   Index: 339
   Walkable: 1
@@ -76439,7 +76443,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 259bb4e21b5d6a9479ad0fa5ec7de6ab, type: 2}
+  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76481,7 +76485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 8
+  type: 3
 --- !u!1 &1381877759
 GameObject:
   m_ObjectHideFlags: 0
@@ -79308,7 +79312,7 @@ GameObject:
   - component: {fileID: 1437077089}
   - component: {fileID: 1437077085}
   m_Layer: 8
-  m_Name: 'Water Tile. ID: 317'
+  m_Name: 'Grass Tile. ID: 317'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79337,11 +79341,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437077083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83e920d28721d4399c0617d02c3440, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 10
+  Cost: 4
   Distance: 1.25
   Index: 317
   Walkable: 1
@@ -79384,7 +79388,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 259bb4e21b5d6a9479ad0fa5ec7de6ab, type: 2}
+  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79426,7 +79430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 8
+  type: 3
 --- !u!1 &1438043684
 GameObject:
   m_ObjectHideFlags: 0
@@ -82657,7 +82661,7 @@ GameObject:
   - component: {fileID: 1479955756}
   - component: {fileID: 1479955752}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 292'
+  m_Name: 'Snow Tile. ID: 292'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82686,11 +82690,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1479955750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 292
   Walkable: 1
@@ -82733,7 +82737,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82775,7 +82779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!1 &1481567127
 GameObject:
   m_ObjectHideFlags: 0
@@ -86673,7 +86677,7 @@ GameObject:
   - component: {fileID: 1542436041}
   - component: {fileID: 1542436045}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 262'
+  m_Name: 'Snow Tile. ID: 262'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86706,7 +86710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!65 &1542436042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -86737,7 +86741,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86775,11 +86779,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1542436039}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 262
   Walkable: 1
@@ -88675,7 +88679,7 @@ GameObject:
   - component: {fileID: 1560850810}
   - component: {fileID: 1560850806}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 254'
+  m_Name: 'Snow Tile. ID: 254'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88704,11 +88708,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1560850804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 254
   Walkable: 1
@@ -88749,7 +88753,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88791,7 +88795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1562479650
 GameObject:
   m_ObjectHideFlags: 0
@@ -92427,7 +92431,7 @@ GameObject:
   - component: {fileID: 1607247524}
   - component: {fileID: 1607247520}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 226'
+  m_Name: 'Snow Tile. ID: 226'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92456,11 +92460,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1607247518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 226
   Walkable: 1
@@ -92501,7 +92505,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92543,7 +92547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1607599752
 GameObject:
   m_ObjectHideFlags: 0
@@ -93499,7 +93503,7 @@ GameObject:
   - component: {fileID: 1637032587}
   - component: {fileID: 1637032583}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 218'
+  m_Name: 'Snow Tile. ID: 218'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93528,11 +93532,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1637032581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 218
   Walkable: 1
@@ -93575,7 +93579,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93617,7 +93621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!1 &1643577150
 GameObject:
   m_ObjectHideFlags: 0
@@ -94703,7 +94707,7 @@ GameObject:
   - component: {fileID: 1660882971}
   - component: {fileID: 1660882975}
   m_Layer: 8
-  m_Name: 'Water Tile. ID: 209'
+  m_Name: 'Grass Tile. ID: 209'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94736,7 +94740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 8
+  type: 3
 --- !u!65 &1660882972
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -94767,7 +94771,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 259bb4e21b5d6a9479ad0fa5ec7de6ab, type: 2}
+  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94805,11 +94809,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1660882969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83e920d28721d4399c0617d02c3440, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 10
+  Cost: 4
   Distance: 1.25
   Index: 209
   Walkable: 1
@@ -100862,7 +100866,7 @@ GameObject:
   - component: {fileID: 1772081368}
   - component: {fileID: 1772081364}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 163'
+  m_Name: 'Snow Tile. ID: 163'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100891,11 +100895,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1772081362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 163
   Walkable: 1
@@ -100938,7 +100942,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100980,7 +100984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1774180912
 GameObject:
   m_ObjectHideFlags: 0
@@ -100996,7 +101000,7 @@ GameObject:
   - component: {fileID: 1774180918}
   - component: {fileID: 1774180914}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 162'
+  m_Name: 'Snow Tile. ID: 162'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101025,11 +101029,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1774180912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 162
   Walkable: 1
@@ -101072,7 +101076,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101114,7 +101118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1774307891
 GameObject:
   m_ObjectHideFlags: 0
@@ -101664,7 +101668,7 @@ GameObject:
   - component: {fileID: 1791157711}
   - component: {fileID: 1791157715}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 157'
+  m_Name: 'Snow Tile. ID: 157'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101697,7 +101701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!65 &1791157712
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -101728,7 +101732,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101766,11 +101770,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1791157709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 157
   Walkable: 1
@@ -102066,7 +102070,7 @@ GameObject:
   - component: {fileID: 1797234136}
   - component: {fileID: 1797234132}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 154'
+  m_Name: 'Snow Tile. ID: 154'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102095,11 +102099,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1797234130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 154
   Walkable: 1
@@ -102142,7 +102146,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102184,7 +102188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1798112003
 GameObject:
   m_ObjectHideFlags: 0
@@ -102600,7 +102604,7 @@ GameObject:
   - component: {fileID: 1804049575}
   - component: {fileID: 1804049571}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 150'
+  m_Name: 'Snow Tile. ID: 150'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102629,11 +102633,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1804049569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 150
   Walkable: 1
@@ -102676,7 +102680,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102718,7 +102722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1808927621
 GameObject:
   m_ObjectHideFlags: 0
@@ -103940,7 +103944,7 @@ GameObject:
   - component: {fileID: 1830465002}
   - component: {fileID: 1830464998}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 140'
+  m_Name: 'Snow Tile. ID: 140'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103969,11 +103973,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1830464996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 140
   Walkable: 1
@@ -104014,7 +104018,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104056,7 +104060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1831756813
 GameObject:
   m_ObjectHideFlags: 0
@@ -104340,7 +104344,7 @@ GameObject:
   - component: {fileID: 1837020353}
   - component: {fileID: 1837020349}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 137'
+  m_Name: 'Snow Tile. ID: 137'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104369,11 +104373,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1837020347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 137
   Walkable: 1
@@ -104414,7 +104418,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104456,7 +104460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1838916990
 GameObject:
   m_ObjectHideFlags: 0
@@ -104874,7 +104878,7 @@ GameObject:
   - component: {fileID: 1854462246}
   - component: {fileID: 1854462242}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 133'
+  m_Name: 'Snow Tile. ID: 133'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104903,11 +104907,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1854462240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 133
   Walkable: 1
@@ -104950,7 +104954,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104992,7 +104996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!1 &1855816603
 GameObject:
   m_ObjectHideFlags: 0
@@ -107678,7 +107682,7 @@ GameObject:
   - component: {fileID: 1925453932}
   - component: {fileID: 1925453928}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 112'
+  m_Name: 'Snow Tile. ID: 112'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107707,11 +107711,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1925453926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 112
   Walkable: 1
@@ -107752,7 +107756,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107794,7 +107798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1928083777
 GameObject:
   m_ObjectHideFlags: 0
@@ -109151,7 +109155,7 @@ GameObject:
   - component: {fileID: 1948933737}
   - component: {fileID: 1948933741}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 101'
+  m_Name: 'Snow Tile. ID: 101'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109184,7 +109188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!65 &1948933738
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109215,7 +109219,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109253,11 +109257,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1948933735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 101
   Walkable: 1
@@ -109283,7 +109287,7 @@ GameObject:
   - component: {fileID: 1950045043}
   - component: {fileID: 1950045039}
   m_Layer: 8
-  m_Name: 'Grass Tile. ID: 100'
+  m_Name: 'Snow Tile. ID: 100'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109312,11 +109316,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1950045037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 4
+  Cost: 9
   Distance: 1.25
   Index: 100
   Walkable: 1
@@ -109359,7 +109363,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109401,7 +109405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 3
+  type: 7
 --- !u!1 &1951626383
 GameObject:
   m_ObjectHideFlags: 0
@@ -109819,7 +109823,7 @@ GameObject:
   - component: {fileID: 1958947467}
   - component: {fileID: 1958947463}
   m_Layer: 8
-  m_Name: 'Highway Tile. ID: 96'
+  m_Name: 'Snow Tile. ID: 96'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109848,11 +109852,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1958947461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbec0ab9babe8e4ebf0d395cba6afd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb653017d1227045a364d7af2ab14cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 2
+  Cost: 9
   Distance: 1.25
   Index: 96
   Walkable: 1
@@ -109895,7 +109899,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f069b41fef4929f4dbd2964246c6f368, type: 2}
+  - {fileID: 2100000, guid: 8921a607fd2a0eb4282b2bf2637d60e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109937,7 +109941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 4
+  type: 7
 --- !u!1 &1960952596
 GameObject:
   m_ObjectHideFlags: 0
@@ -119436,7 +119440,7 @@ GameObject:
   - component: {fileID: 2099941885}
   - component: {fileID: 2099941889}
   m_Layer: 8
-  m_Name: 'Water Tile. ID: 24'
+  m_Name: 'Grass Tile. ID: 24'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119469,7 +119473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterials: {fileID: 1371025040}
-  type: 8
+  type: 3
 --- !u!65 &2099941886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -119500,7 +119504,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 259bb4e21b5d6a9479ad0fa5ec7de6ab, type: 2}
+  - {fileID: 2100000, guid: c99480a6b494a0c4ca5dcf43a53c5192, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119538,11 +119542,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2099941883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb83e920d28721d4399c0617d02c3440, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361ecb927deab44fa0af40b752eedbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialManager: {fileID: 1371025040}
-  Cost: 10
+  Cost: 4
   Distance: 1.25
   Index: 24
   Walkable: 1

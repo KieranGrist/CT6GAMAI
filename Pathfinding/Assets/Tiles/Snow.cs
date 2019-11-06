@@ -9,12 +9,13 @@ public class Snow : TileNode
     {
         Distance = 1.25f;
         name = "Snow Tile. ID: " + Index;
-        GetComponent<Renderer>().material = MaterialManager.SnowMat;
+
         Cost = 9;
         Reset();
     }
     public override void Start()
     {
+        GetComponent<Renderer>().material = MaterialManager.SnowMat;
         Cost = 9;
     }
 

@@ -9,12 +9,13 @@ public class Bridge : TileNode
     {
         Distance = 1.25f;
         name = "Bridge Tile. ID: " + Index;
-        GetComponent<Renderer>().material = MaterialManager.BridgeMat;
+     
         Cost = 2;
         Reset();
     }
     public override void Start()
     {
+        GetComponent<Renderer>().material = MaterialManager.BridgeMat;
         Cost = 2;
     }
 

@@ -9,19 +9,19 @@ public class Residential : TileNode
     {
         Distance = 1.25f;
         name = "Residential Tile. ID: " + Index;
-        GetComponent<Renderer>().material = MaterialManager.ResidentialMat;
         Cost = 6;
         Reset();
     }
     public override void Start()
     {
+        GetComponent<Renderer>().material = MaterialManager.ResidentialMat;
         Cost = 6;
     }
 
     public override void Update()
     {
-        name = "Residential Tile. ID: " + Index;
         GetComponent<Renderer>().material = MaterialManager.ResidentialMat;
+        name = "Residential Tile. ID: " + Index;
     }
     
 }

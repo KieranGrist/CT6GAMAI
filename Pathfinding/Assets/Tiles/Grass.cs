@@ -9,12 +9,13 @@ public class Grass : TileNode
     {
         Distance = 1.25f;
         name = "Grass Tile. ID: " + Index;
-        GetComponent<Renderer>().material = MaterialManager.GrassMat;
+
         Cost = 4;
         Reset();
     }
     public override void Start()
     {
+        GetComponent<Renderer>().material = MaterialManager.GrassMat;
         Cost = 4;
 
     }
