@@ -45,11 +45,8 @@ public class AIAgent : MonoBehaviour
             }
         }
         Distance = Vector3.Distance(navGraph.SourceNode.transform.position, transform.position);
-        if (navGraph.FoundRoute == false)
-        {
-            RecievedPath = false;   
-        }
-        if (navGraph.FoundRoute && RecievedPath==false)
+
+        if (navGraph.FoundRoute && !RecievedPath)
         {
             foreach (var item in PathGameObjects)
             {

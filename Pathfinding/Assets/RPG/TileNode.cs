@@ -33,6 +33,7 @@ public abstract class TileNode : MonoBehaviour
         Walkable = true;
         Neighbours = new List<TileEdge>();
     }
+ 
     public TileNode(int Index, bool Walkable)
     {
         this.Index = Index;

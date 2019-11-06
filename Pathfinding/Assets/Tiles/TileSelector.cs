@@ -6,15 +6,34 @@ using UnityEditor;
 [ExecuteInEditMode]
 public enum TileType
 {
+    Airport,
     Blocked,
     Bridge,
     Empty,
+    Farm,
+    Fence,
+    Forrest,
     Grass,
     Highway,
     Hills,
+    Jungle,
+    Lake,
+    Lava,
+    MilitaryAirport,
+    Mines,
+    Ocean,
+    Path,
+    Power,
     Residential,
+    River,
+    Road,
+    Rocks,
     Snow,
-    Water
+    SpacePort,
+    Storage,
+    TankDepot,
+    TrainStation,
+    TrainTracks
 }
 [ExecuteInEditMode]
 public class TileSelector : MonoBehaviour
@@ -28,8 +47,7 @@ public class TileSelector : MonoBehaviour
     {
         if (!Application.isPlaying)
         {
-            gameObject.GetComponent<TileNode>().MaterialManager = tileMaterials;
-            gameObject.GetComponent<TileNode>().enabled = true;
+          
             if (type != PreviousType)
             {
                 foreach (var item in gameObject.GetComponents<TileNode>())
@@ -39,47 +57,98 @@ public class TileSelector : MonoBehaviour
 
                 switch (type)
                 {
-                    case TileType.Blocked:
-                        gameObject.AddComponent<Blocked>();
-
-                        gameObject.GetComponent<Blocked>().Reset();
-                        break;
-                    case TileType.Bridge:
-                        gameObject.AddComponent<Bridge>();
-                        gameObject.GetComponent<Bridge>().Reset();
-                        break;
-                    case TileType.Empty:
+                    default:
                         gameObject.AddComponent<Empty>();
-                        gameObject.GetComponent<Empty>().Reset();
                         break;
-                    case TileType.Grass:
+                    case (TileType.Airport):
+                        gameObject.AddComponent<Airport>();
+                        break;
+                    case (TileType.Blocked):
+                        gameObject.AddComponent<Blocked>();
+                        break;
+                    case (TileType.Bridge):
+                        gameObject.AddComponent<Bridge>();
+                        break;
+                    case (TileType.Empty):
+                        gameObject.AddComponent<Empty>();
+                        break;
+                    case (TileType.Farm):
+                        gameObject.AddComponent<Farm>();
+                        break;
+                    case (TileType.Fence):
+                        gameObject.AddComponent<Fence>();
+                        break;
+                    case (TileType.Forrest):
+                        gameObject.AddComponent<Forrest>();
+                        break;
+                    case (TileType.Grass):
                         gameObject.AddComponent<Grass>();
-                        gameObject.GetComponent<Grass>().Reset();
                         break;
-                    case TileType.Highway:
+                    case (TileType.Highway):
                         gameObject.AddComponent<Highway>();
-                        gameObject.GetComponent<Highway>().Reset();
                         break;
-                    case TileType.Hills:
+                    case (TileType.Hills):
                         gameObject.AddComponent<Hills>();
-                        gameObject.GetComponent<Hills>().Reset();
                         break;
-                    case TileType.Residential:
+                    case (TileType.Jungle):
+                        gameObject.AddComponent<Hills>();
+                        break;
+                    case (TileType.Lake):
+                        gameObject.AddComponent<Lake>();
+                        break;
+                    case (TileType.Lava):
+                        gameObject.AddComponent<Lava>();
+                        break;
+                    case (TileType.MilitaryAirport):
+                        gameObject.AddComponent<MilitaryAirport>();
+                        break;
+                    case (TileType.Mines):
+                        gameObject.AddComponent<Mines>();
+                        break;
+                    case (TileType.Ocean):
+                        gameObject.AddComponent<Ocean>();
+                        break;
+                    case (TileType.Path):
+                        gameObject.AddComponent<Path>();
+                        break;
+                    case (TileType.Power):
+                        gameObject.AddComponent<Power>();
+                        break;
+                    case (TileType.Residential):
                         gameObject.AddComponent<Residential>();
-                        gameObject.GetComponent<Residential>().Reset();
                         break;
-                    case TileType.Snow:
+                    case (TileType.River):
+                        gameObject.AddComponent<River>();
+                        break;
+                    case (TileType.Road):
+                        gameObject.AddComponent<Road>();
+                        break;
+                    case (TileType.Rocks):
+                        gameObject.AddComponent<Rocks>();
+                        break;
+                    case (TileType.Snow):
                         gameObject.AddComponent<Snow>();
-                        gameObject.GetComponent<Snow>().Reset();
                         break;
-                    case TileType.Water:
-                        gameObject.AddComponent<Water>();
-                        gameObject.GetComponent<Water>().Reset();
+                    case (TileType.SpacePort):
+                        gameObject.AddComponent<SpacePort>();
                         break;
-
+                    case (TileType.Storage):
+                        gameObject.AddComponent<Storage>();
+                        break;
+                    case (TileType.TankDepot):
+                        gameObject.AddComponent<TankDepot>();
+                        break;
+                    case (TileType.TrainStation):
+                        gameObject.AddComponent<TrainStation>();
+                        break;
+                    case (TileType.TrainTracks):
+                        gameObject.AddComponent<TrainTracks>();
+                        break;                  
                 }
+                gameObject.GetComponent<TileNode>().Reset();
                 PreviousType = type;
-
+                gameObject.GetComponent<TileNode>().MaterialManager = tileMaterials;
+                gameObject.GetComponent<TileNode>().enabled = true;
             }
         }
     }

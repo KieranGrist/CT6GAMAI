@@ -4,6 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Pathfinder : MonoBehaviour
 {
+    public bool TargetNodeFound = false;
+    public bool CoroutineRunning = false;
     public int TotalCost;
     public NavGraph TileMap;
     public GraphMap Graph;   
@@ -11,6 +13,7 @@ public abstract class Pathfinder : MonoBehaviour
     public List<int> Cost = new List<int>();
     public List<bool> Visited = new List<bool>();
     public List<int> GeneratedPath = new List<int>();
+
     public Pathfinder(GraphMap Graph)
     {
         this.Graph = Graph;
@@ -52,7 +55,7 @@ public abstract class Pathfinder : MonoBehaviour
         }        
         return Path;
     }
-    public List<int> CalculatePath(TileNode Source, TileNode Target)
+    public List<int> CalculatePath(TileNode Source, TileNode Target) 
     {
         List<int> Path = new List<int>();
 
@@ -66,6 +69,8 @@ public abstract class Pathfinder : MonoBehaviour
             TotalCost += TileMap.Nodes[currentNode].Cost;
             Path.Add(currentNode);
         }
+        GeneratedPath = Path;
+        TileMap.ARTIE.RecievedPath = false;
         return Path;
     }
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Dijkstras : Pathfinder
-{        bool TargetNodeFound = false;
-    bool CoroutineRunning = false;
+{     
     public Dijkstras(GraphMap navGraph) : base(navGraph)
     {
 
@@ -17,7 +16,7 @@ public class Dijkstras : Pathfinder
     {
         CoroutineRunning = true;
            yield return new WaitForSeconds(0);
-
+        TargetNodeFound = false;
         List<TileEdge> TraveresedEdges = new List<TileEdge>();
         PriorityQueue<int, TileEdge> MinPriorityQueue = new PriorityQueue<int, TileEdge>();
 
@@ -52,11 +51,12 @@ public class Dijkstras : Pathfinder
         }
         if (TargetNodeFound)
             GeneratedPath = CalculatePath(Source, Target);
+        CoroutineRunning = false;
     }
     public override bool CalculateRoute(TileNode Source, TileNode Target)
     {
         TileReset();
-        if (CoroutineRunning)
+        if (!CoroutineRunning)
         StartCoroutine(CR(Source,Target));
         return TargetNodeFound;
     }

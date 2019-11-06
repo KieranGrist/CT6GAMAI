@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
+public enum PathfinderType
+{
+    BreadthFirstSeach,
+    DepthFirstSearch,
+    Dijkstras,
+    AStar
+}
+[System.Serializable]
+[ExecuteInEditMode]
 public class NavGraph : MonoBehaviour
 {
     public AIAgent ARTIE;
     public TileMaterials MaterialManager;
+    public PathfinderType pathfindingType;
     public Pathfinder PathfindingTechnique;
-    Pathfinder PreviousPathfinder;
+     Pathfinder PreviousTechnique;
+    PathfinderType PreviousPathfinder;
     public GameObject Cube;
     public List<TileNode> Nodes = new List<TileNode>();
     GameObject TargetGameObject;
@@ -16,13 +27,45 @@ public class NavGraph : MonoBehaviour
     TileNode PreviousTarget;
     public TileNode SourceNode;
     public TileNode TargetNode;
-    bool SourceDrawn, TargetDrawn;
     public bool FoundRoute;
     // Start is called before the first frame update
-  
+
+    void TechniqueSelector()
+    {
+        if (!Application.isPlaying)
+        {
+            if (pathfindingType != PreviousPathfinder)
+            {
+                foreach (var item in gameObject.GetComponents<Pathfinder>())
+                {
+                    DestroyImmediate(item);
+                }
+
+                switch (pathfindingType)
+                {
+                    case PathfinderType.AStar:
+                        gameObject.AddComponent<Dijkstras>();
+                        break;
+                    case PathfinderType.BreadthFirstSeach:
+                        gameObject.AddComponent<BFS>();
+                        break;
+                    case PathfinderType.DepthFirstSearch:
+                        gameObject.AddComponent<DFS>();
+                        break;
+                    case PathfinderType.Dijkstras:
+                        gameObject.AddComponent<Dijkstras>();                        
+                        break;
+                }
+                PathfindingTechnique = gameObject.GetComponent<Pathfinder>();
+                gameObject.GetComponent<Pathfinder>().TileMap = GetComponent<NavGraph>();
+                PreviousPathfinder = pathfindingType;
+
+            }
+        }
+    }
     void Start()
     {
-        PreviousPathfinder = PathfindingTechnique;
+        TechniqueSelector();
         Nodes.Clear();
         Nodes.AddRange(FindObjectsOfType<TileNode>());
         for (int i = 0; i < Nodes.Count; i++)
@@ -63,17 +106,17 @@ public class NavGraph : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100.0f))
             {
                 FoundRoute = false;               
-                TargetNode = hit.transform.gameObject.GetComponent<TileNode>();
-                ARTIE.RecievedPath = false;
+                TargetNode = hit.transform.gameObject.GetComponent<TileNode>();   
             }
         }
     }
     // Update is called once per frame
     void Update()
-    {       
+    {
+  
         if (!Application.isPlaying)
         {
-            PreviousPathfinder = PathfindingTechnique;
+            TechniqueSelector();
             Nodes.Clear();
             Nodes.AddRange(FindObjectsOfType<TileNode>());
             for (int i = 0; i < Nodes.Count; i++)
@@ -96,24 +139,29 @@ public class NavGraph : MonoBehaviour
             {
                 PathfindingTechnique.Route.Clear();
                 PathfindingTechnique.GeneratedPath.Clear();
-                FoundRoute = false;      
-                StopAllCoroutines();
+                FoundRoute = false;
+
             }
-            if (PreviousTarget != TargetNode || PathfindingTechnique != PreviousPathfinder)
-            {
-                SourceDrawn = false;
-                TargetDrawn = false;     
+ 
+            if (PreviousTarget != TargetNode || PathfindingTechnique != PreviousTechnique)
+            {                
+                PathfindingTechnique.CoroutineRunning = false;                           
+   
                 PathfindingTechnique.Route.Clear();
                 PathfindingTechnique.GeneratedPath.Clear();
-                FoundRoute = false;      
+                FoundRoute = false;
                 PreviousSource = SourceNode;
                 PreviousTarget = TargetNode;
-                PreviousPathfinder = PathfindingTechnique;
+                PreviousTechnique = PathfindingTechnique;
             }
             if (!FoundRoute)            
                 FoundRoute = PathfindingTechnique.CalculateRoute(SourceNode, TargetNode);
-   
-         DrawFinish();
+           
+
+
+
+
+            DrawFinish();
         }
     }
 }
