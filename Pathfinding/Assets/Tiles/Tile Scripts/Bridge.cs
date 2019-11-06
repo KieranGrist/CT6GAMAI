@@ -5,20 +5,12 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Bridge : TileNode
 {
-    void Awake()
-    {
-        GetComponent<Renderer>().material = MaterialManager.BridgeMat;
-        Distance = 1.25f;
-        name = "Bridge Tile. ID: " + Index;
-        Cost = 5;
-        Reset();
-    }
-
     public override void Start()
     {
-        Reset();
+       
         GetComponent<Renderer>().material = MaterialManager.BridgeMat;
         Cost = 5;
+        name = "Bridge Tile. ID: " + Index;
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -29,9 +21,9 @@ public class Bridge : TileNode
     public override void Update()
     {
         GetComponent<Renderer>().material = MaterialManager.BridgeMat;
-        Cost = 5; 
-
-        if (!Application.isPlaying)
-            Reset();
+        Cost = 5;
+        name = "Bridge Tile. ID: " + Index;
+     
+           
     }
 }

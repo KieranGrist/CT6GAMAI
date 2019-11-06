@@ -5,20 +5,12 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Farm : TileNode
 {
-    void Awake()
-    {
-        GetComponent<Renderer>().material = MaterialManager.FarmMat;
-        Distance = 1.25f;
-        name = "Farm Tile. ID: " + Index;
-        Cost = 10;
-        Reset();
-    }
-
     public override void Start()
     {
-        Reset();
+       
         GetComponent<Renderer>().material = MaterialManager.FarmMat;
         Cost = 10;
+        name = "Farm Tile. ID: " + Index;
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -30,8 +22,8 @@ public class Farm : TileNode
     {
         GetComponent<Renderer>().material = MaterialManager.FarmMat;
         Cost = 10;
-
-        if (!Application.isPlaying)
-            Reset();
+        name = "Farm Tile. ID: " + Index;
+     
+           
     }
 }

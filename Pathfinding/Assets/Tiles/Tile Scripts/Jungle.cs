@@ -5,20 +5,14 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Jungle : TileNode
 {
-    void Awake()
-    {
-        GetComponent<Renderer>().material = MaterialManager.JungleMat;
-        Distance = 1.25f;
-        name = "Jungle Tile. ID: " + Index;
-        Cost = 40;
-        Reset();
-    }
+  
 
     public override void Start()
     {
-        Reset();
+       
         GetComponent<Renderer>().material = MaterialManager.JungleMat;
         Cost = 40;
+        name = "Jungle Tile. ID: " + Index;
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -30,8 +24,8 @@ public class Jungle : TileNode
     {
         GetComponent<Renderer>().material = MaterialManager.JungleMat;
         Cost = 40;
-
-        if (!Application.isPlaying)
-            Reset();
+        name = "Jungle Tile. ID: " + Index;
+     
+           
     }
 }

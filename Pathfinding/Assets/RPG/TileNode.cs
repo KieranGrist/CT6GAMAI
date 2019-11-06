@@ -27,8 +27,9 @@ public abstract class TileNode : MonoBehaviour
     public int Index;
     public bool Walkable;
     public List<TileEdge> Neighbours = new List<TileEdge>();
-    public TileNode()
+    public TileNode(TileMaterials mm)
     {
+        MaterialManager = mm;
         Index = 0;
         Walkable = true;
         Neighbours = new List<TileEdge>();

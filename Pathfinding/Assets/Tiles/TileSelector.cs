@@ -45,7 +45,7 @@ public class TileSelector : MonoBehaviour
     // Update is called once per frame
     void TileCreator()
     {
-        if (!Application.isPlaying)
+     
         {
           
             if (type != PreviousType)
@@ -91,7 +91,7 @@ public class TileSelector : MonoBehaviour
                         gameObject.AddComponent<Hills>();
                         break;
                     case (TileType.Jungle):
-                        gameObject.AddComponent<Hills>();
+                        gameObject.AddComponent<Jungle>();
                         break;
                     case (TileType.Lake):
                         gameObject.AddComponent<Lake>();
@@ -145,18 +145,15 @@ public class TileSelector : MonoBehaviour
                         gameObject.AddComponent<TrainTracks>();
                         break;                  
                 }
-                gameObject.GetComponent<TileNode>().Reset();
+ 
                 PreviousType = type;
-                gameObject.GetComponent<TileNode>().MaterialManager = tileMaterials;
+
+               
                 gameObject.GetComponent<TileNode>().enabled = true;
+                gameObject.GetComponent<TileNode>().Reset();
             }
         }
-    }
-    void Awake()
-    {
-        TileCreator();
-    }
- 
+    }  
     void Start()
     {
         TileCreator();

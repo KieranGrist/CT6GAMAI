@@ -5,20 +5,13 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Storage : TileNode
 {
-    void Awake()
-    {
-        GetComponent<Renderer>().material = MaterialManager.StorageMat;
-        Distance = 1.25f;
-        name = "Storage Tile. ID: " + Index;
-        Cost = 15;
-        Reset();
-    }
-
+  
     public override void Start()
     {
-        Reset();
+       
         GetComponent<Renderer>().material = MaterialManager.StorageMat;
         Cost = 15;
+        name = "Storage Tile. ID: " + Index;
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -30,8 +23,8 @@ public class Storage : TileNode
     {
         GetComponent<Renderer>().material = MaterialManager.StorageMat;
         Cost = 15;
-
-        if (!Application.isPlaying)
-            Reset();
+        name = "Storage Tile. ID: " + Index;
+     
+           
     }
 }

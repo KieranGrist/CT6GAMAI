@@ -5,20 +5,13 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class River : TileNode
 {
-    void Awake()
-    {
-        GetComponent<Renderer>().material = MaterialManager.RiverMat;
-        Distance = 1.25f;
-        name = "River Tile. ID: " + Index;
-        Cost = 20;
-        Reset();
-    }
-
+  
     public override void Start()
     {
-        Reset();
+       
         GetComponent<Renderer>().material = MaterialManager.RiverMat;
         Cost = 20;
+        name = "River Tile. ID: " + Index;
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -30,8 +23,8 @@ public class River : TileNode
     {
         GetComponent<Renderer>().material = MaterialManager.RiverMat;
         Cost = 20;
-
-        if (!Application.isPlaying)
-            Reset();
+        name = "River Tile. ID: " + Index;
+     
+           
     }
 }

@@ -32,7 +32,7 @@ public class NavGraph : MonoBehaviour
 
     void TechniqueSelector()
     {
-        if (!Application.isPlaying)
+     
         {
             if (pathfindingType != PreviousPathfinder)
             {
@@ -114,7 +114,7 @@ public class NavGraph : MonoBehaviour
     void Update()
     {
   
-        if (!Application.isPlaying)
+     if (!Application.isPlaying)
         {
             TechniqueSelector();
             Nodes.Clear();
@@ -127,7 +127,7 @@ public class NavGraph : MonoBehaviour
                 Nodes[i].Reset();
             }
             SourceNode = Nodes[0];
-            TargetNode = Nodes[200];
+            TargetNode = Nodes[Nodes.Count-1];
             PreviousSource = SourceNode;
             PreviousTarget = TargetNode;
 

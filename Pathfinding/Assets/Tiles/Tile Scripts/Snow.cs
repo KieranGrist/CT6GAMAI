@@ -5,20 +5,12 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Snow : TileNode
 {
-    void Awake()
-    {
-        GetComponent<Renderer>().material = MaterialManager.SnowMat;
-        Distance = 1.25f;
-        name = "Snow Tile. ID: " + Index;
-        Cost = 30;
-        Reset();
-    }
-
     public override void Start()
     {
-        Reset();
+       
         GetComponent<Renderer>().material = MaterialManager.SnowMat;
         Cost = 30;
+        name = "Snow Tile. ID: " + Index;
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -30,8 +22,8 @@ public class Snow : TileNode
     {
         GetComponent<Renderer>().material = MaterialManager.SnowMat;
         Cost = 30;
-
-        if (!Application.isPlaying)
-            Reset();
+        name = "Snow Tile. ID: " + Index;
+     
+           
     }
 }
