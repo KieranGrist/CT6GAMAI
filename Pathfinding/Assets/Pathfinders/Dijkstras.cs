@@ -43,7 +43,7 @@ public class Dijkstras : Pathfinder
             }
             for (int i = 0; i < Edge.To.Neighbours.Count; i++)
             {
-                KeyValuePair<int, TileEdge> valuepair = new KeyValuePair<int, TileEdge>(Edge.To.Neighbours[i].GetCost() + Edge.From.Cost, Edge.To.Neighbours[i]);
+                KeyValuePair<int, TileEdge> valuepair = new KeyValuePair<int, TileEdge>(Edge.To.Neighbours[i].GetCost() + Cost[Edge.To.Index], Edge.To.Neighbours[i]);
                 if (Edge.To.Walkable && !TraveresedEdges.Contains(Edge.To.Neighbours[i]) && !MinPriorityQueue.data.Contains(valuepair))
                 {
                     MinPriorityQueue.Enqueue(valuepair);

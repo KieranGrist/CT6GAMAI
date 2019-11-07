@@ -63,8 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AIAgent.cs" />
-    <Compile Include="Assets\ColorSeter.cs" />
-    <Compile Include="Assets\DistanceCalculator.cs" />
     <Compile Include="Assets\Graph\GraphEdge.cs" />
     <Compile Include="Assets\Graph\GraphMap.cs" />
     <Compile Include="Assets\Graph\GraphNode.cs" />
@@ -91,6 +89,7 @@
     <Compile Include="Assets\Tiles\Tile Scripts\Lake.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Lava.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\MilitaryAirport.cs" />
+    <Compile Include="Assets\Tiles\Tile Scripts\MilitaryBase.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Mines.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Ocean.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Path.cs" />
@@ -102,7 +101,6 @@
     <Compile Include="Assets\Tiles\Tile Scripts\Snow.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\SpacePort.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Storage.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Tank Depot.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Train Station.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Train Tracks.cs" />
     <Compile Include="Assets\Tiles\TileMaterials.cs" />

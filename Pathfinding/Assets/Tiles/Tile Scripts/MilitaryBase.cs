@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 
-public class Power : TileNode
+public class MilitaryBase : TileNode
 {
-
 
     public override void Start()
     {
        
-        GetComponent<Renderer>().material = MaterialManager.PowerMat;
+        GetComponent<Renderer>().material = MaterialManager.MillitaryBaseMat;
         Cost = 15;
-        name = "Power Tile. ID: " + Index;
+        name = "Military Base Tile. ID: " + Index;
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -22,10 +21,11 @@ public class Power : TileNode
 
     public override void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.PowerMat;
+        GetComponent<Renderer>().material = MaterialManager.MillitaryBaseMat;
         Cost = 15;
-        name = "Power Tile. ID: " + Index;
+        name = "Tank Depot Tile. ID: " + Index;
      
            
     }
 }
+

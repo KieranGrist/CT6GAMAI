@@ -20,6 +20,7 @@ public enum TileType
     Lake,
     Lava,
     MilitaryAirport,
+    MilitaryBase,
     Mines,
     Ocean,
     Path,
@@ -31,16 +32,15 @@ public enum TileType
     Snow,
     SpacePort,
     Storage,
-    TankDepot,
     TrainStation,
     TrainTracks
 }
-[ExecuteInEditMode]
+
 public class TileSelector : MonoBehaviour
 {
     public TileMaterials MaterialManager;
 
-    public TileType type = TileType.Empty;
+    public TileType type;
     TileType PreviousType;
     // Update is called once per frame
     void TileCreator()
@@ -102,6 +102,9 @@ public class TileSelector : MonoBehaviour
                     case (TileType.MilitaryAirport):
                         gameObject.AddComponent<MilitaryAirport>();
                         break;
+                    case (TileType.MilitaryBase):
+                        gameObject.AddComponent<MilitaryBase>();
+                        break;
                     case (TileType.Mines):
                         gameObject.AddComponent<Mines>();
                         break;
@@ -135,9 +138,7 @@ public class TileSelector : MonoBehaviour
                     case (TileType.Storage):
                         gameObject.AddComponent<Storage>();
                         break;
-                    case (TileType.TankDepot):
-                        gameObject.AddComponent<TankDepot>();
-                        break;
+          
                     case (TileType.TrainStation):
                         gameObject.AddComponent<TrainStation>();
                         break;

@@ -3,22 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 [System.Serializable]
-/*
-BLUE = WATER = 10
-GREEN = GRASS = 4 
-DARK GREEN = HILLS = 7
-WHITE = SNOW = 9
-RED = UNPASSABLE TILE = infinity
-Orange = Main  Road = 2 
-Light Orange = Bridge = 4
-Pink = Residential = 6
-
-Source = Purple
-Destination = Red
-
-Route = Transparent black 
-Path = Transparent Yellow
-*/
 public abstract class TileNode : MonoBehaviour
 {
     public TileMaterials MaterialManager;
@@ -29,6 +13,7 @@ public abstract class TileNode : MonoBehaviour
     public List<TileEdge> Neighbours = new List<TileEdge>();
     public TileNode()
     {
+        
         Index = 0;
         Walkable = true;
         Neighbours = new List<TileEdge>();
@@ -47,22 +32,19 @@ public abstract class TileNode : MonoBehaviour
         List<TileNode> Nodes = new List<TileNode>();
         Neighbours.Clear();
         Nodes.AddRange(FindObjectsOfType<TileNode>());
-
-        for (int i = 0; i < Nodes.Count; i++)
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, Distance);
+        int i = 0;
+        while (i < hitColliders.Length)
         {
             if (Nodes[i] != this)
-            {
-                
-                if (Vector3.Distance(transform.position, Nodes[i].transform.position) < Distance)
-                {
-                    Neighbours.Add(new TileEdge(this, Nodes[i]));
-                }
-            }
+                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), hitColliders[i].gameObject.GetComponent<TileNode>()));
+            i++;
         }
     }
-    /*
+
     private void OnDrawGizmosSelected()
     {
+    if (Application.isPlaying)
         foreach (var item in Neighbours)
         {
             Vector3 TextLocation = new Vector3();
@@ -75,5 +57,5 @@ public abstract class TileNode : MonoBehaviour
             Gizmos.DrawLine(item.From.transform.position, item.To.transform.position);
         }
     }
-    */
+    
 }

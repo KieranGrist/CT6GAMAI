@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-//[ExecuteInEditMode]
 public enum PathfinderType
 {
     BreadthFirstSeach,
@@ -11,7 +10,7 @@ public enum PathfinderType
     AStar
 }
 [System.Serializable]
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 public class NavGraph : MonoBehaviour
 {
     public AIAgent ARTIE;
@@ -63,9 +62,8 @@ public class NavGraph : MonoBehaviour
             }
         }
     }
-    void Start()
+    IEnumerator AddNodes()
     {
-        TechniqueSelector();
         Nodes.Clear();
         Nodes.AddRange(FindObjectsOfType<TileNode>());
         for (int i = 0; i < Nodes.Count; i++)
@@ -75,6 +73,12 @@ public class NavGraph : MonoBehaviour
             Nodes[i].GetComponent<TileNode>().enabled = true;
             Nodes[i].Reset();
         }
+        yield return new WaitForSeconds(0);
+    }
+    void Start()
+    {
+        TechniqueSelector();
+        StartCoroutine(AddNodes());
         PreviousSource = SourceNode;
         PreviousTarget = TargetNode;
 
@@ -113,24 +117,10 @@ public class NavGraph : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-  
-     if (!Application.isPlaying)
+
+        if (!Application.isPlaying)
         {
             TechniqueSelector();
-            Nodes.Clear();
-            Nodes.AddRange(FindObjectsOfType<TileNode>());
-            for (int i = 0; i < Nodes.Count; i++)
-            {
-                Nodes[i].Index = i;
-                Nodes[i].MaterialManager = MaterialManager;
-                Nodes[i].GetComponent<TileNode>().enabled = true;
-                Nodes[i].Reset();
-            }
-            SourceNode = Nodes[0];
-            TargetNode = Nodes[Nodes.Count-1];
-            PreviousSource = SourceNode;
-            PreviousTarget = TargetNode;
-
         }
         else
         {
@@ -142,9 +132,9 @@ public class NavGraph : MonoBehaviour
                 FoundRoute = false;
 
             }
- 
+
             if (PreviousTarget != TargetNode || PathfindingTechnique != PreviousTechnique)
-            {                    
+            {
                 PathfindingTechnique.Route.Clear();
                 PathfindingTechnique.GeneratedPath.Clear();
                 FoundRoute = false;
@@ -152,9 +142,9 @@ public class NavGraph : MonoBehaviour
                 PreviousTarget = TargetNode;
                 PreviousTechnique = PathfindingTechnique;
             }
-            if (!FoundRoute)            
+            if (!FoundRoute)
                 FoundRoute = PathfindingTechnique.CalculateRoute(SourceNode, TargetNode);
-           
+
 
 
 

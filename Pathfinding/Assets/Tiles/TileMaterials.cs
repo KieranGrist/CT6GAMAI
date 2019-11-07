@@ -18,6 +18,7 @@ public class TileMaterials : MonoBehaviour
     public Material LakeMat;
     public Material LavaMat;
     public Material MilitaryAirportMat;
+    public Material MillitaryBaseMat;
     public Material MinesMat;
     public Material OceanMat;
     public Material PathMat;
@@ -29,7 +30,6 @@ public class TileMaterials : MonoBehaviour
     public Material SnowMat;
     public Material SpacePortMat;
     public Material StorageMat;
-    public Material TankDepotMat;
     public Material TrainStationMat;
     public Material TrainTracksMat;
 }
