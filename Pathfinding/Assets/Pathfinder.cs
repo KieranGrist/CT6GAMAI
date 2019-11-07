@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Pathfinder : MonoBehaviour
 {
     public bool TargetNodeFound = false;
-    public bool CoroutineRunning = false;
     public int TotalCost;
     public NavGraph TileMap;
     public GraphMap Graph;   

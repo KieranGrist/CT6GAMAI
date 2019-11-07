@@ -5,7 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Storage : TileNode
 {
-  
     public override void Start()
     {
        

@@ -4,8 +4,7 @@ using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
 public class SpacePort : TileNode
-{
-  
+{ 
     public override void Start()
     {
        

@@ -5,7 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Forrest : TileNode
 {
-  
 
     public override void Start()
     {

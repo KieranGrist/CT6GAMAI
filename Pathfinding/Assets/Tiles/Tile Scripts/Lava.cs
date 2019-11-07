@@ -5,8 +5,8 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Lava : TileNode
 {
-  
-  
+
+
 
     public override void Start()
     {

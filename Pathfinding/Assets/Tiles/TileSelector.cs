@@ -38,7 +38,7 @@ public enum TileType
 [ExecuteInEditMode]
 public class TileSelector : MonoBehaviour
 {
-    public TileMaterials tileMaterials;
+    public TileMaterials MaterialManager;
 
     public TileType type = TileType.Empty;
     TileType PreviousType;
@@ -146,11 +146,10 @@ public class TileSelector : MonoBehaviour
                         break;                  
                 }
  
-                PreviousType = type;
-
-               
-                gameObject.GetComponent<TileNode>().enabled = true;
-                gameObject.GetComponent<TileNode>().Reset();
+                PreviousType = type;             
+       
+                gameObject.GetComponent<TileNode>().MaterialManager = MaterialManager;
+                gameObject.GetComponent<TileNode>().enabled = true;            
             }
         }
     }  

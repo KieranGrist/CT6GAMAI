@@ -5,7 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TrainTracks : TileNode
 {
-  
 
     public override void Start()
     {

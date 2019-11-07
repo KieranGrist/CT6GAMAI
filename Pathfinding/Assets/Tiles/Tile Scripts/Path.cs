@@ -5,7 +5,8 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Path : TileNode
 {
-  
+
+
 
     public override void Start()
     {

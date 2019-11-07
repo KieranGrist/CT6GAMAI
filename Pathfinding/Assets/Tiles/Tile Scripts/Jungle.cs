@@ -5,7 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Jungle : TileNode
 {
-  
 
     public override void Start()
     {

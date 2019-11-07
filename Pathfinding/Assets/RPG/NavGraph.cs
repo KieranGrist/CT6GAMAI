@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public enum PathfinderType
 {
     BreadthFirstSeach,
@@ -11,7 +11,7 @@ public enum PathfinderType
     AStar
 }
 [System.Serializable]
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class NavGraph : MonoBehaviour
 {
     public AIAgent ARTIE;
@@ -144,9 +144,7 @@ public class NavGraph : MonoBehaviour
             }
  
             if (PreviousTarget != TargetNode || PathfindingTechnique != PreviousTechnique)
-            {                
-                PathfindingTechnique.CoroutineRunning = false;                           
-   
+            {                    
                 PathfindingTechnique.Route.Clear();
                 PathfindingTechnique.GeneratedPath.Clear();
                 FoundRoute = false;

@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Mines : TileNode
 {
-  
+
 
     public override void Start()
     {

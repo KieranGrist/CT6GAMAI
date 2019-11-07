@@ -5,9 +5,9 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Airport : TileNode
 {
+
     public override void Start()
-    {
-       
+    {       
         GetComponent<Renderer>().material = MaterialManager.AirportMat;
         Cost = 15;
         name = "Airport Tile. ID: " + Index;

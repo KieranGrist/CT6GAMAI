@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Highway : TileNode
 {
-  
+
     public override void Start()
     {
        

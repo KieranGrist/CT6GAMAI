@@ -12,10 +12,11 @@ public class Dijkstras : Pathfinder
     {
         throw new System.NotImplementedException();
     }
-     IEnumerator CR(TileNode Source, TileNode Target)
+
+    public override bool CalculateRoute(TileNode Source, TileNode Target)
     {
-        CoroutineRunning = true;
-           yield return new WaitForSeconds(0);
+        TileReset();
+ 
         TargetNodeFound = false;
         List<TileEdge> TraveresedEdges = new List<TileEdge>();
         PriorityQueue<int, TileEdge> MinPriorityQueue = new PriorityQueue<int, TileEdge>();
@@ -51,13 +52,6 @@ public class Dijkstras : Pathfinder
         }
         if (TargetNodeFound)
             GeneratedPath = CalculatePath(Source, Target);
-        CoroutineRunning = false;
-    }
-    public override bool CalculateRoute(TileNode Source, TileNode Target)
-    {
-        TileReset();
-        if (!CoroutineRunning)
-        StartCoroutine(CR(Source,Target));
         return TargetNodeFound;
     }
 }

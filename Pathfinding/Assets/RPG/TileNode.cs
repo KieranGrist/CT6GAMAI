@@ -27,9 +27,8 @@ public abstract class TileNode : MonoBehaviour
     public int Index;
     public bool Walkable;
     public List<TileEdge> Neighbours = new List<TileEdge>();
-    public TileNode(TileMaterials mm)
+    public TileNode()
     {
-        MaterialManager = mm;
         Index = 0;
         Walkable = true;
         Neighbours = new List<TileEdge>();
@@ -61,6 +60,7 @@ public abstract class TileNode : MonoBehaviour
             }
         }
     }
+    /*
     private void OnDrawGizmosSelected()
     {
         foreach (var item in Neighbours)
@@ -75,5 +75,5 @@ public abstract class TileNode : MonoBehaviour
             Gizmos.DrawLine(item.From.transform.position, item.To.transform.position);
         }
     }
-
+    */
 }

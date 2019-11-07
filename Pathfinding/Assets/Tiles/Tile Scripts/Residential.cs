@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Residential : TileNode
 {
-  
+
     public override void Start()
     {
        

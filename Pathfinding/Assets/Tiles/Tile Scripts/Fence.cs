@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Fence : TileNode
 {
-  
+
 
     public override void Start()
     {

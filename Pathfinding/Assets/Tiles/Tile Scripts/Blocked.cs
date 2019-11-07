@@ -4,8 +4,8 @@ using UnityEngine;
 [System.Serializable]
 [ExecuteInEditMode]
 public class Blocked : TileNode
-{
-  
+{ 
+
     public override void Start()
     {
         Walkable = false;
