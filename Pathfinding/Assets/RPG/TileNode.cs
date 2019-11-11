@@ -3,48 +3,69 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 [System.Serializable]
+[ExecuteInEditMode]
 public abstract class TileNode : MonoBehaviour
 {
+    public bool NeedToReset = false;
     public TileMaterials MaterialManager;
+    public GameObject TileGameObject;
+    public List<GameObject> gameObjects = new List<GameObject>();
+    public bool CreatedObject = false;
     public int Cost = int.MaxValue;
-    public float Distance = 1.25f;
+    public float Distance = 50;
     public int Index;
     public bool Walkable;
+    public bool Created;
     public List<TileEdge> Neighbours = new List<TileEdge>();
     public TileNode()
     {
-        
+
         Index = 0;
         Walkable = true;
         Neighbours = new List<TileEdge>();
     }
- 
+
     public TileNode(int Index, bool Walkable)
     {
         this.Index = Index;
         this.Walkable = Walkable;
         Neighbours = new List<TileEdge>();
     }
-    public abstract void Start();
-    public abstract void Update();
-    public void Reset()
+    public void Start()
     {
-        List<TileNode> Nodes = new List<TileNode>();
-        Neighbours.Clear();
-        Nodes.AddRange(FindObjectsOfType<TileNode>());
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, Distance);
-        int i = 0;
-        while (i < hitColliders.Length)
-        {
-            if (Nodes[i] != this)
-                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), hitColliders[i].gameObject.GetComponent<TileNode>()));
-            i++;
-        }
+
     }
+    public void Update()
+    {   
+
+  
+    }
+    public abstract void Reset();
+    //{
+    //    //(TileGameObject);
+    //    List<TileNode> Nodes = new List<TileNode>();
+    //    Neighbours.Clear();
+    //    Nodes.AddRange(FindObjectsOfType<TileNode>());
+    //    List<Collider> hitObjects = new List<Collider>();
+ 
+    //    foreach (var item in Physics.OverlapSphere(transform.position, Distance))
+    //    {         
+    //        if (item.transform.gameObject != gameObject && item.GetComponent<TileNode>() )
+    //            hitObjects.Add(item);
+    //    }
+    //    gameObjects.Clear();
+    //    int i = 0;
+    //    while (i < hitObjects.Count)
+    //    {
+    //        gameObjects.Add(hitObjects[i].transform.gameObject);
+    //        Neighbours.Add(new TileEdge(GetComponent<TileNode>(), hitObjects[i].gameObject.GetComponent<TileNode>()));
+    //        i++;
+    //    }
+    //}
 
     private void OnDrawGizmosSelected()
     {
-    if (Application.isPlaying)
+        Gizmos.DrawWireSphere(transform.position, Distance);
         foreach (var item in Neighbours)
         {
             Vector3 TextLocation = new Vector3();
@@ -54,7 +75,12 @@ public abstract class TileNode : MonoBehaviour
 
             Handles.Label(TextLocation, "Cost " + item.To.GetComponent<TileNode>().Cost);
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(item.From.transform.position, item.To.transform.position);
+            Vector3 A, B;
+            A = item.From.transform.position;
+            A += new Vector3(0, 1, 0);
+            B = item.To.transform.position;
+            B += new Vector3(0, 1, 0);
+            Gizmos.DrawLine(A,B);
         }
     }
     

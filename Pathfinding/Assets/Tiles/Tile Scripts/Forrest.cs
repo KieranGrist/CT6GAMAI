@@ -2,16 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-
+[ExecuteInEditMode]
 public class Forrest : TileNode
 {
-
-    public override void Start()
+    public override void Reset()
     {
-       
-        GetComponent<Renderer>().material = MaterialManager.ForrestMat;
+        throw new System.NotImplementedException();
+    }
+
+    public  new void Start()
+    {
+
+        if (!Created)
+        {
+            GetComponent<Renderer>().material = MaterialManager.ForrestMat;
+        GameObject go = Instantiate(MaterialManager.ForrestGameObject, transform);
+        go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        go.transform.localScale = new Vector3(1, 1, 1);
+        CreatedObject = true;
+        TileGameObject = go;
+            Created = true;
+        }
         Cost = 20;
-        name = "Forrest Tile. ID: " + Index;
+        name = "Forrest Tile. ID: " + Index;          
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -19,12 +32,16 @@ public class Forrest : TileNode
     }
 
 
-    public override void Update()
+    public  new void Update()
     {
         GetComponent<Renderer>().material = MaterialManager.ForrestMat;
         Cost = 20;
         name = "Forrest Tile. ID: " + Index;
-     
-           
+        if (NeedToReset)
+        {
+            Reset();
+            NeedToReset = false;
+        }
+
     }
 }

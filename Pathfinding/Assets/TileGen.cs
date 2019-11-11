@@ -7,70 +7,45 @@ public class TileGen : MonoBehaviour
     public GameObject Cube;
     public TileMaterials materials;
     public List<GameObject> GO = new List<GameObject>();
-    public bool GenerateCube;
+    public bool CubeGenreated;
     public int Area;
     int PreviousArea = 0;
     // Start is called before the first frame update
     void Start()
     {
+        GenerateCube();
+    }
+    void GenerateCube()
+    {
         foreach (var item in GO)
         {
-            Destroy(item);
+            DestroyImmediate(item);
         }
-        for (float x = transform.position.x - Area; x < transform.position.x + Area; x++)
+        for (float x = transform.position.x  ; x < transform.position.x + (Area * 100); x += 100)
         {
-            for (float z = transform.position.z - Area; z < transform.position.z + Area; z++)
+            for (float z = transform.position.z  ; z < transform.position.z + (Area * 100); z += 100)
             {
                 GameObject go = Instantiate(Cube, transform.position, transform.rotation);
                 go.AddComponent<TileSelector>();
+                go.GetComponent<TileSelector>().MaterialManager = materials;
                 go.transform.parent = GetComponent<Transform>();
-                go.transform.position = new Vector3(x, 2, z);
+                go.transform.position = new Vector3(x, 0, z);
+                go.transform.localScale = new Vector3(100, 1, 100);
                 GO.Add(go);
             }
         }
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (GenerateCube)
+        if (CubeGenreated)
         {
-            foreach (var item in GO)
-            {
-                Destroy(item);
-            }
-            for (float x = transform.position.x - Area; x < transform.position.x + Area; x++)
-            {
-                for (float z = transform.position.z - Area; z < transform.position.z + Area; z++)
-                {
-                    GameObject go = Instantiate(Cube, transform.position, transform.rotation);
-                    go.AddComponent<TileSelector>();
-                    go.GetComponent<TileSelector>().tileMaterials = materials;
-                    go.transform.parent = GetComponent<Transform>();
-                    go.transform.position = new Vector3(x, 2, z);
-                    GO.Add(go);
-                }
-            }
-            GenerateCube = false;
+            GenerateCube();
+            CubeGenreated = false;
         }
         if (!Application.isPlaying && (Area != PreviousArea))
         {
-            foreach (var item in GO)
-            {
-                Destroy(item);
-            }
-            for (float x = transform.position.x - Area; x < transform.position.x + Area; x++)
-            {
-                for (float z = transform.position.z - Area; z < transform.position.z + Area; z++)
-                {
-                    GameObject go = Instantiate(Cube, transform.position, transform.rotation);
-                    go.AddComponent<TileSelector>();
-                    go.transform.parent = GetComponent<Transform>();
-                    go.transform.position = new Vector3(x, 2, z);
-                    GO.Add(go);
-                }
-            }
-
+            GenerateCube();
         }
         PreviousArea = Area;
     }

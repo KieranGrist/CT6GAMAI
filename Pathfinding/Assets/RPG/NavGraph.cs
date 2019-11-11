@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
+[ExecuteInEditMode]
 public enum PathfinderType
 {
     BreadthFirstSeach,
@@ -27,6 +28,7 @@ public class NavGraph : MonoBehaviour
     public TileNode SourceNode;
     public TileNode TargetNode;
     public bool FoundRoute;
+    public bool CoroutineRunning;
     // Start is called before the first frame update
 
     void TechniqueSelector()
@@ -64,6 +66,7 @@ public class NavGraph : MonoBehaviour
     }
     IEnumerator AddNodes()
     {
+        CoroutineRunning = true;
         Nodes.Clear();
         Nodes.AddRange(FindObjectsOfType<TileNode>());
         for (int i = 0; i < Nodes.Count; i++)
@@ -73,7 +76,9 @@ public class NavGraph : MonoBehaviour
             Nodes[i].GetComponent<TileNode>().enabled = true;
             Nodes[i].Reset();
         }
+        CoroutineRunning = false;
         yield return new WaitForSeconds(0);
+
     }
     void Start()
     {
@@ -121,6 +126,8 @@ public class NavGraph : MonoBehaviour
         if (!Application.isPlaying)
         {
             TechniqueSelector();
+         if(!CoroutineRunning)  
+                StartCoroutine(AddNodes());
         }
         else
         {
