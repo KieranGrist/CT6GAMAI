@@ -65,6 +65,7 @@ public class AIAgent : MonoBehaviour
 
                 if (Distance <= 0.05f)
                 {
+
                     Moving = false;
                     TargetLocation.Remove(TargetLocation[0]);
                     Speed.Remove(Speed[0]);
