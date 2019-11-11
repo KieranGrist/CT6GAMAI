@@ -27,10 +27,14 @@ public class Airport : TileNode
         foreach (var item in airports)
             if (item != this)
                 Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item));
+        foreach(var item in Neighbours)
+        {
+          //  item.To.Reset();
+        }
     }
     public  new void Start()
     {
-        
+        NeedToReset = true;
         GetComponent<Renderer>().material = MaterialManager.AirportMat;
         if (!Created)
         {
@@ -41,7 +45,7 @@ public class Airport : TileNode
         TileGameObject = go;
             Created = true;
         }
-        Cost = 15;
+        Cost = 2;
         name = "Airport Tile. ID: " + Index;          
         foreach (var item in Neighbours)
         {
@@ -53,7 +57,7 @@ public class Airport : TileNode
     public  new void Update()
     {
         GetComponent<Renderer>().material = MaterialManager.AirportMat;
-        Cost = 15;
+        Cost = 2;
         name = "Airport Tile. ID: " + Index;         
         if (NeedToReset)
         {

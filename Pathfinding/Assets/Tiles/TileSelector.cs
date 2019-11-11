@@ -39,7 +39,6 @@ public enum TileType
 public class TileSelector : MonoBehaviour
 {
     public TileMaterials MaterialManager;
-
     public TileType type = TileType.Grass;
     TileType PreviousType;
     // Update is called once per frame
@@ -124,7 +123,7 @@ public class TileSelector : MonoBehaviour
             }
 
             PreviousType = type;
-
+       
             gameObject.GetComponent<TileNode>().MaterialManager = MaterialManager;
             gameObject.GetComponent<TileNode>().enabled = true;
 
@@ -137,5 +136,6 @@ public class TileSelector : MonoBehaviour
     void Update()
     {
         TileCreator();
+  
     }
 }

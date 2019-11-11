@@ -11,6 +11,7 @@ public class AIAgent : MonoBehaviour
     public bool Moving = false;
     public List<Vector3> TargetLocation = new List<Vector3>();
     TileNode PreviousNode;
+    public float InitialSpeed = 25.0f; 
     public List<float> Speed = new List<float>();
     Vector3 Direction;
     int PreviousNodeID = int.MaxValue;
@@ -32,14 +33,7 @@ public class AIAgent : MonoBehaviour
             if (hit.transform.gameObject.GetComponent<TileNode>())
             {
                 if (hit.transform.gameObject.GetComponent<TileNode>().Index != PreviousNodeID)
-                {
-                    PreviousNodeID = hit.transform.gameObject.GetComponent<TileNode>().Index;
-                    GameObject GO = Instantiate(navGraph.Cube, transform.position, transform.rotation);
-                    GO.transform.position = PreviousNode.transform.position;   
-                    GO.transform.position += new Vector3(0, 0.1f, 0);
-                    GO.transform.localScale = new Vector3(1, 1, 1);
-                    GO.name = "Path Node";
-                    PathGameObjects.Add(GO);
+                {      
                     navGraph.SourceNode = hit.transform.gameObject.GetComponent<TileNode>();
                 }
             }
@@ -58,10 +52,10 @@ public class AIAgent : MonoBehaviour
             for (int i=navGraph.PathfindingTechnique.GeneratedPath.Count -1; i > 0; i-- )
             {
                 TargetLocation.Add(navGraph.Nodes[navGraph.PathfindingTechnique.GeneratedPath[i]].transform.position);
-                Speed.Add(5 / (float)navGraph.Nodes[navGraph.PathfindingTechnique.GeneratedPath[i]].Cost);
+                Speed.Add(InitialSpeed / (float)navGraph.Nodes[navGraph.PathfindingTechnique.GeneratedPath[i]].Cost);
             }
             TargetLocation.Add(navGraph.TargetNode.transform.position);
-            Speed.Add(5);
+            Speed.Add(InitialSpeed);
         }
         if (TargetLocation.Count > 0)
         {
@@ -84,8 +78,7 @@ public class AIAgent : MonoBehaviour
         }
         if (Moving == true)
         {
-            TargetLocation[0] = new Vector3(TargetLocation[0].x, 4, TargetLocation[0].z);
-            // direction, normalise, direction * DeltaTime and speed, add that to current location
+            TargetLocation[0] = new Vector3(TargetLocation[0].x, 10, TargetLocation[0].z);
             Direction = TargetLocation[0] - transform.position;
             Normalise = Direction.normalized;
             M = Normalise * Time.deltaTime * Speed[0];

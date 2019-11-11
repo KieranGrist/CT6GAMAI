@@ -6,13 +6,14 @@ using UnityEditor;
 [ExecuteInEditMode]
 public abstract class TileNode : MonoBehaviour
 {
+    public Vector3 GameObjectRotation;
     public bool NeedToReset = false;
     public TileMaterials MaterialManager;
     public GameObject TileGameObject;
     public List<GameObject> gameObjects = new List<GameObject>();
     public bool CreatedObject = false;
     public int Cost = int.MaxValue;
-    public float Distance = 50;
+    public float Distance = 60;
     public int Index;
     public bool Walkable;
     public bool Created;
@@ -41,27 +42,6 @@ public abstract class TileNode : MonoBehaviour
   
     }
     public abstract void Reset();
-    //{
-    //    //(TileGameObject);
-    //    List<TileNode> Nodes = new List<TileNode>();
-    //    Neighbours.Clear();
-    //    Nodes.AddRange(FindObjectsOfType<TileNode>());
-    //    List<Collider> hitObjects = new List<Collider>();
- 
-    //    foreach (var item in Physics.OverlapSphere(transform.position, Distance))
-    //    {         
-    //        if (item.transform.gameObject != gameObject && item.GetComponent<TileNode>() )
-    //            hitObjects.Add(item);
-    //    }
-    //    gameObjects.Clear();
-    //    int i = 0;
-    //    while (i < hitObjects.Count)
-    //    {
-    //        gameObjects.Add(hitObjects[i].transform.gameObject);
-    //        Neighbours.Add(new TileEdge(GetComponent<TileNode>(), hitObjects[i].gameObject.GetComponent<TileNode>()));
-    //        i++;
-    //    }
-    //}
 
     private void OnDrawGizmosSelected()
     {

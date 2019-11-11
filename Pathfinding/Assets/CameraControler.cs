@@ -31,9 +31,9 @@ public class CameraControler : MonoBehaviour
             transform.Rotate(new Vector3(-1, 0, 0), 1);
         if (Input.GetKey(KeyCode.R))
         {
-         
 
-
+            transform.eulerAngles = new Vector3(90, 0, 0);
+            transform.position = new Vector3(transform.position.x, 110, transform.position.z);
         }
     }
 }

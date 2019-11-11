@@ -20,6 +20,7 @@ public class NavGraph : MonoBehaviour
     public Pathfinder PathfindingTechnique;
      Pathfinder PreviousTechnique;
     PathfinderType PreviousPathfinder;
+    public LayerMask TileMask;
     public GameObject Cube;
     public List<TileNode> Nodes = new List<TileNode>();
     GameObject TargetGameObject;
@@ -29,12 +30,12 @@ public class NavGraph : MonoBehaviour
     public TileNode TargetNode;
     public bool FoundRoute;
     public bool CoroutineRunning;
+    public bool ResetAllNodes;
     // Start is called before the first frame update
 
     void TechniqueSelector()
-    {
-     
-        {
+    {     
+
             if (pathfindingType != PreviousPathfinder)
             {
                 foreach (var item in gameObject.GetComponents<Pathfinder>())
@@ -62,7 +63,7 @@ public class NavGraph : MonoBehaviour
                 PreviousPathfinder = pathfindingType;
 
             }
-        }
+
     }
     IEnumerator AddNodes()
     {
@@ -76,23 +77,23 @@ public class NavGraph : MonoBehaviour
             Nodes[i].GetComponent<TileNode>().enabled = true;
             Nodes[i].Reset();
         }
+        SourceNode = Nodes[0];
+        TargetNode = Nodes[Nodes.Count - 1];
         CoroutineRunning = false;
         yield return new WaitForSeconds(0);
 
     }
     void Start()
-    {
+    {         
         TechniqueSelector();
         StartCoroutine(AddNodes());
         PreviousSource = SourceNode;
         PreviousTarget = TargetNode;
-
     }
 
     void DrawFinish()
-    {  
+    {
         foreach (var item in Nodes)
-        {
             if (item == TargetNode)
             {
                 Destroy(TargetGameObject);
@@ -100,19 +101,17 @@ public class NavGraph : MonoBehaviour
                 TargetGameObject.transform.position = item.transform.position;
                 TargetGameObject.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 127);
                 TargetGameObject.transform.position += new Vector3(0, 1, 0);
-                TargetGameObject.transform.localScale = new Vector3(1, 1, 0.05f);
+                TargetGameObject.transform.localScale = new Vector3(100, 100, 0.05f);
                 TargetGameObject.name = "Target Node";
             }
-        }
-
     }
     void GraphInteraction()
     {       
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100.0f))
+            RaycastHit hit;   
+            if (Physics.Raycast(ray, out hit, float.PositiveInfinity, TileMask))
             {
                 FoundRoute = false;               
                 TargetNode = hit.transform.gameObject.GetComponent<TileNode>();   
@@ -128,6 +127,14 @@ public class NavGraph : MonoBehaviour
             TechniqueSelector();
          if(!CoroutineRunning)  
                 StartCoroutine(AddNodes());
+            if (ResetAllNodes)
+            {
+                foreach (var item in FindObjectsOfType<TileNode>())
+                    item.Reset();             
+                StartCoroutine(AddNodes());
+                ResetAllNodes = false;
+            }
+            
         }
         else
         {
@@ -151,11 +158,6 @@ public class NavGraph : MonoBehaviour
             }
             if (!FoundRoute)
                 FoundRoute = PathfindingTechnique.CalculateRoute(SourceNode, TargetNode);
-
-
-
-
-
             DrawFinish();
         }
     }

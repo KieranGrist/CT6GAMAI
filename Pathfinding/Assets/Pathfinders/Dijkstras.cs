@@ -12,6 +12,17 @@ public class Dijkstras : Pathfinder
     {
         throw new System.NotImplementedException();
     }
+    void Start()
+    {
+        Route = new List<int>();     
+     Cost = new List<int>();
+ Visited = new List<bool>();
+ GeneratedPath = new List<int>();
+        Route.Add(0);
+        Cost.Add(0);
+        Visited.Add(false);
+        GeneratedPath.Add(0);
+    }
 
     public override bool CalculateRoute(TileNode Source, TileNode Target)
     {
