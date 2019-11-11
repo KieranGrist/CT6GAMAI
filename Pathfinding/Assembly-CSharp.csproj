@@ -63,9 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AIAgent.cs" />
+    <Compile Include="Assets\CameraControler.cs" />
+    <Compile Include="Assets\DistanceCalculator.cs" />
     <Compile Include="Assets\Graph\GraphEdge.cs" />
     <Compile Include="Assets\Graph\GraphMap.cs" />
     <Compile Include="Assets\Graph\GraphNode.cs" />
+    <Compile Include="Assets\Grass And Flowers Pack 1\Example Scene\SimpleTextureDrawing.cs" />
     <Compile Include="Assets\Pathfinder.cs" />
     <Compile Include="Assets\Pathfinders\BFS.cs" />
     <Compile Include="Assets\Pathfinders\DFS.cs" />
@@ -78,9 +81,7 @@
     <Compile Include="Assets\Tiles\Tile Scripts\Airport.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Blocked.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Bridge.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Empty.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Farm.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Fence.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Forrest.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Grass.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Highway.cs" />
@@ -92,19 +93,15 @@
     <Compile Include="Assets\Tiles\Tile Scripts\MilitaryBase.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Mines.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Ocean.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Path.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Power.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Residential.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\River.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Road.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Rocks.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Snow.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\SpacePort.cs" />
     <Compile Include="Assets\Tiles\Tile Scripts\Storage.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Train Station.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Train Tracks.cs" />
     <Compile Include="Assets\Tiles\TileMaterials.cs" />
     <Compile Include="Assets\Tiles\TileSelector.cs" />
+    <None Include="Assets\Grass And Flowers Pack 1\Example Scene\Skyboxes\_skybox info.txt" />
+    <None Include="Assets\PBR Ground Materials #2 [Dirt, Grass &amp; Rocky]\Documentation.txt" />
+    <None Include="Assets\Rocks\readme.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/814853/CT6GAMAI/Pathfinding/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
