@@ -24,7 +24,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_2019_2_0;UNITY_2019_2;UNITY_2019;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_2019_2_0;UNITY_2019_2;UNITY_2019;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169;CS0649;IDE0051</NoWarn>
@@ -50,7 +50,7 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
-    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
+    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2019.2.0f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -62,41 +62,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AIAgent.cs" />
-    <Compile Include="Assets\CameraControler.cs" />
-    <Compile Include="Assets\DistanceCalculator.cs" />
     <Compile Include="Assets\Grass And Flowers Pack 1\Example Scene\SimpleTextureDrawing.cs" />
-    <Compile Include="Assets\Pathfinder.cs" />
-    <Compile Include="Assets\Pathfinders\ASTAR.cs" />
-    <Compile Include="Assets\Pathfinders\BFS.cs" />
-    <Compile Include="Assets\Pathfinders\DFS.cs" />
-    <Compile Include="Assets\Pathfinders\Dijkstras.cs" />
-    <Compile Include="Assets\PriorityQueue.cs" />
-    <Compile Include="Assets\RPG\NavGraph.cs" />
-    <Compile Include="Assets\RPG\TileEdge.cs" />
-    <Compile Include="Assets\RPG\TileNode.cs" />
-    <Compile Include="Assets\TileGen.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Airport.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Blocked.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Bridge.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Farm.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Forrest.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Grass.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Highway.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Hills.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Jungle.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Lake.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Lava.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\MilitaryAirport.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\MilitaryBase.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Mines.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Ocean.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Residential.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Rocks.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Snow.cs" />
-    <Compile Include="Assets\Tiles\Tile Scripts\Storage.cs" />
-    <Compile Include="Assets\Tiles\TileMaterials.cs" />
-    <Compile Include="Assets\Tiles\TileSelector.cs" />
+    <Compile Include="Assets\Scripts\AIAgent.cs" />
+    <Compile Include="Assets\Scripts\ArtieGenerator.cs" />
+    <Compile Include="Assets\Scripts\CameraControler.cs" />
+    <Compile Include="Assets\Scripts\DistanceCalculator.cs" />
+    <Compile Include="Assets\Scripts\Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\Pathfinders\ASTAR.cs" />
+    <Compile Include="Assets\Scripts\Pathfinders\BFS.cs" />
+    <Compile Include="Assets\Scripts\Pathfinders\DFS.cs" />
+    <Compile Include="Assets\Scripts\Pathfinders\Dijkstras.cs" />
+    <Compile Include="Assets\Scripts\PriorityQueue.cs" />
+    <Compile Include="Assets\Scripts\RPG\NavGraph.cs" />
+    <Compile Include="Assets\Scripts\RPG\TileEdge.cs" />
+    <Compile Include="Assets\Scripts\RPG\TileNode.cs" />
+    <Compile Include="Assets\Scripts\TileGen.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Airport.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Blocked.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Bridge.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Farm.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Forrest.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Grass.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Highway.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Hills.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Jungle.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Lake.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Lava.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\MilitaryAirport.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\MilitaryBase.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Mines.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Ocean.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Residential.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Rocks.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Snow.cs" />
+    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Storage.cs" />
+    <Compile Include="Assets\Scripts\Tiles\TileMaterials.cs" />
+    <Compile Include="Assets\Scripts\Tiles\TileSelector.cs" />
     <None Include="Assets\Grass And Flowers Pack 1\Example Scene\Skyboxes\_skybox info.txt" />
     <None Include="Assets\PBR Ground Materials #2 [Dirt, Grass &amp; Rocky]\Documentation.txt" />
     <None Include="Assets\Rocks\readme.txt" />
