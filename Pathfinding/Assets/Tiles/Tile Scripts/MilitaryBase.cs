@@ -53,9 +53,6 @@ public class MilitaryBase : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.MillitaryBaseMat;
-        Cost = 15;
-        name = "Military Base Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

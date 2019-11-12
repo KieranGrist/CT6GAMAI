@@ -53,10 +53,6 @@ public class Bridge : TileNode
     public  new void Update()
     {
         TileGameObject.transform.eulerAngles = GameObjectRotation;
-        GetComponent<Renderer>().material = MaterialManager.BridgeMat;
-        Cost = 5;
-        name = "Bridge Tile. ID: " + Index;
-
         if (NeedToReset)
         {
             Reset();

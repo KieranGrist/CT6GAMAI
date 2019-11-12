@@ -52,9 +52,6 @@ public class Lava : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.LavaMat;
-        Cost = 50;
-        name = "Lava Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

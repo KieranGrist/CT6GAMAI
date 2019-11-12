@@ -53,9 +53,6 @@ public class Jungle : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.JungleMat;
-        Cost = 40;
-        name = "Jungle Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

@@ -53,10 +53,6 @@ public class Residential : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.ResidentialMat;
-        Cost = 15;
-        name = "Residential Tile. ID: " + Index;
-
         if (NeedToReset)
         {
             Reset();

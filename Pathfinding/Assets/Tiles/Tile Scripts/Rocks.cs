@@ -52,9 +52,6 @@ public class Rocks : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.RocksMat;
-        Cost = 45;
-        name = "Rocks Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

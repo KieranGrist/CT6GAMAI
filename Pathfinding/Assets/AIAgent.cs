@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class AIAgent : MonoBehaviour
 {
     public List<GameObject> PathGameObjects = new List<GameObject>();
@@ -11,41 +10,44 @@ public class AIAgent : MonoBehaviour
     public bool Moving = false;
     public List<Vector3> TargetLocation = new List<Vector3>();
     TileNode PreviousNode;
-    public float InitialSpeed = 25.0f; 
+    public float InitialSpeed = 25.0f;
+    public LayerMask Mask;
     public List<float> Speed = new List<float>();
     Vector3 Direction;
     int PreviousNodeID = int.MaxValue;
     Vector3 Normalise;
     Vector3 M;
-    // Start is called before the first frame update
     void Start()
     {
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out hit, Mask))
+        {
+            PreviousNode = navGraph.SourceNode;
+            if (hit.transform.gameObject.GetComponent<TileNode>())
+                if (hit.transform.gameObject.GetComponent<TileNode>().Index != PreviousNodeID)
+                    navGraph.SourceNode = hit.transform.gameObject.GetComponent<TileNode>();
+        }
     }
-
-    // Update is called once per frame
     void Update()
     {
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mask))
         {
             PreviousNode = navGraph.SourceNode;
             if (hit.transform.gameObject.GetComponent<TileNode>())
-            {
                 if (hit.transform.gameObject.GetComponent<TileNode>().Index != PreviousNodeID)
-                {      
                     navGraph.SourceNode = hit.transform.gameObject.GetComponent<TileNode>();
-                }
-            }
         }
+
         Distance = Vector3.Distance(navGraph.SourceNode.transform.position, transform.position);
 
         if (navGraph.FoundRoute && !RecievedPath)
         {
-            foreach (var item in PathGameObjects)
-            {
+            foreach (var item in PathGameObjects)   
                 Destroy(item);
-            }
+  
             TargetLocation.Clear();
             Speed.Clear();
             RecievedPath = true;
@@ -63,9 +65,9 @@ public class AIAgent : MonoBehaviour
             {
                 Distance = Vector3.Distance(TargetLocation[0], transform.position);
 
-                if (Distance <= 0.05f)
+                if (Distance <= 0.5f)
                 {
-
+                    transform.position = TargetLocation[0];
                     Moving = false;
                     TargetLocation.Remove(TargetLocation[0]);
                     Speed.Remove(Speed[0]);
@@ -82,7 +84,7 @@ public class AIAgent : MonoBehaviour
             TargetLocation[0] = new Vector3(TargetLocation[0].x, 10, TargetLocation[0].z);
             Direction = TargetLocation[0] - transform.position;
             Normalise = Direction.normalized;
-            M = Normalise * Time.deltaTime * Speed[0];
+            M = Normalise * Time.deltaTime * Speed[0]; 
             transform.position += M;
         }
     }

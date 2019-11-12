@@ -38,7 +38,7 @@ public enum TileType
 [ExecuteInEditMode]
 public class TileSelector : MonoBehaviour
 {
-    public TileMaterials MaterialManager;
+    public NavGraph Map;
     public TileType type = TileType.Grass;
     TileType PreviousType;
     // Update is called once per frame
@@ -56,8 +56,6 @@ public class TileSelector : MonoBehaviour
             {
                 DestroyImmediate(item);
             }
-
-
             switch (type)
             {              
                 case (TileType.Airport):
@@ -118,13 +116,10 @@ public class TileSelector : MonoBehaviour
                 case (TileType.Storage):
                     gameObject.AddComponent<Storage>();
                     break;
-         
-
             }
-
-            PreviousType = type;
-       
-            gameObject.GetComponent<TileNode>().MaterialManager = MaterialManager;
+            Map.ResetAllNodes = true;
+            PreviousType = type;       
+            gameObject.GetComponent<TileNode>().MaterialManager = Map.MaterialManager;
             gameObject.GetComponent<TileNode>().enabled = true;
 
         }

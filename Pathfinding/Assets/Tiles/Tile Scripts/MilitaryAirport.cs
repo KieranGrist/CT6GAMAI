@@ -65,9 +65,6 @@ public class MilitaryAirport : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.MilitaryAirportMat;
-        Cost = 55;
-        name = "Millitary Airport Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

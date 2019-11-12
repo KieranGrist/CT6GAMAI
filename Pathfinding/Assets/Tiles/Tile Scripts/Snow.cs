@@ -52,9 +52,6 @@ public class Snow : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.SnowMat;
-        Cost = 30;
-        name = "Snow Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

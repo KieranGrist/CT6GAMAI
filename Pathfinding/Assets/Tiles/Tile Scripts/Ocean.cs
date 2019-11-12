@@ -52,9 +52,6 @@ public class Ocean : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.OceanMat;
-        Cost = 60;
-        name = "Ocean Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

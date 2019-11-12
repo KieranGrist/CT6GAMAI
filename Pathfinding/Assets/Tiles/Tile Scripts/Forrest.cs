@@ -52,9 +52,6 @@ public class Forrest : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.ForrestMat;
-        Cost = 20;
-        name = "Forrest Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

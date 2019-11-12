@@ -53,9 +53,6 @@ public class Blocked : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.BlockedMat;
-        Cost = int.MaxValue;
-        name = "Blocked Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

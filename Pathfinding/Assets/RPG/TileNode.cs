@@ -12,7 +12,7 @@ public abstract class TileNode : MonoBehaviour
     public GameObject TileGameObject;
     public List<GameObject> gameObjects = new List<GameObject>();
     public bool CreatedObject = false;
-    public int Cost = int.MaxValue;
+    public float Cost = float.PositiveInfinity;
     public float Distance = 60;
     public int Index;
     public bool Walkable;

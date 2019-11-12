@@ -52,9 +52,6 @@ public class Farm : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.FarmMat;
-        Cost = 10;
-        name = "Farm Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

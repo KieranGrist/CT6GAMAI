@@ -53,10 +53,7 @@ public class Storage : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.StorageMat;
-        Cost = 15;
-        name = "Storage Tile. ID: " + Index;
-
+      
         if (NeedToReset)
         {
             Reset();

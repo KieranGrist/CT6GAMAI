@@ -52,9 +52,6 @@ public class Hills : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.HillsMat;
-        Cost = 20;
-        name = "Hills Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

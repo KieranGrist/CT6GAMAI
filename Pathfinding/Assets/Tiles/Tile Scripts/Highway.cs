@@ -54,9 +54,6 @@ public class Highway : TileNode
     public  new void Update()
     {
         TileGameObject.transform.eulerAngles = GameObjectRotation;
-        GetComponent<Renderer>().material = MaterialManager.HighwayMat;
-        Cost = 2;
-        name = "Highway Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

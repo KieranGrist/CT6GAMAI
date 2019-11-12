@@ -52,9 +52,6 @@ public class Grass : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.GrassMat;
-        Cost = 5;
-        name = "Grass Tile. ID: " + Index;
         if (NeedToReset)
         {
             Reset();

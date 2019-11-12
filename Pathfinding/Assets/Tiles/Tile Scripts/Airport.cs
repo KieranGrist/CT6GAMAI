@@ -45,7 +45,7 @@ public class Airport : TileNode
         TileGameObject = go;
             Created = true;
         }
-        Cost = 2;
+        Cost = 0.5f;
         name = "Airport Tile. ID: " + Index;          
         foreach (var item in Neighbours)
         {
@@ -55,10 +55,7 @@ public class Airport : TileNode
 
 
     public  new void Update()
-    {
-        GetComponent<Renderer>().material = MaterialManager.AirportMat;
-        Cost = 2;
-        name = "Airport Tile. ID: " + Index;         
+    {   
         if (NeedToReset)
         {
             Reset();

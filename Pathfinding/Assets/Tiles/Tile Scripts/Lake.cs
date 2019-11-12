@@ -54,10 +54,6 @@ public class Lake : TileNode
 
     public  new void Update()
     {
-        GetComponent<Renderer>().material = MaterialManager.LakeMat;
-        Cost = 15;
-        name = "Lake Tile. ID: " + Index;
-
         if (NeedToReset)
         {
             Reset();

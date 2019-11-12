@@ -27,7 +27,7 @@ public class TileGen : MonoBehaviour
             {
                 GameObject go = Instantiate(Cube, transform.position, transform.rotation);
                 go.AddComponent<TileSelector>();
-                go.GetComponent<TileSelector>().MaterialManager = materials;
+                go.GetComponent<TileSelector>().Map.MaterialManager = materials;
                 go.transform.parent = GetComponent<Transform>();
                 go.transform.position = new Vector3(x, 0, z);
                 go.transform.localScale = new Vector3(100, 1, 100);
