@@ -5,7 +5,7 @@ using System;
 [System.Serializable]
 public class BFS : Pathfinder
 {
-    public override bool CalculateRoute(TileNode Source, TileNode Target)
+    public override bool CalculateRoute(AIAgent ARTIE, TileNode Source, TileNode Target)
     {
         DateTime StartTime = DateTime.Now;
         Queue<TileEdge> graphEdges = new Queue<TileEdge>();

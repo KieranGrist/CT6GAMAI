@@ -16,7 +16,7 @@ public abstract class Pathfinder : MonoBehaviour
     public List<int> GeneratedPath = new List<int>();
 
 
-    public abstract bool CalculateRoute(TileNode Source, TileNode Target);
+    public abstract bool CalculateRoute(AIAgent ARTIE, TileNode Source, TileNode Target);
     public void TileReset()
     {
         Route = new List<int>(NavGraph.map.Nodes.Count);
@@ -30,7 +30,7 @@ public abstract class Pathfinder : MonoBehaviour
         }
     }
 
-    public List<int> CalculatePath(TileNode Source, TileNode Target) 
+    public List<int> CalculatePath( TileNode Source, TileNode Target) 
     {
         List<int> Path = new List<int>();
 

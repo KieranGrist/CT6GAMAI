@@ -86,6 +86,7 @@ public class AIAgent : MonoBehaviour
     "Griffiths",
     "Moss"
    };
+    public bool Military;
     public bool Friendly = false;
     List<GameObject> PathGameObjects = new List<GameObject>();
     public bool RecievedPath = false;
@@ -172,6 +173,8 @@ public class AIAgent : MonoBehaviour
             style.normal.textColor = Color.green;
         else
             style.normal.textColor = Color.red;
+        if (Military)
+            style.normal.textColor = Color.blue;
         Handles.Label(TextLocation, name, style); 
     }
     void LateUpdate ()
@@ -184,7 +187,7 @@ public class AIAgent : MonoBehaviour
         if (!FoundRoute && SourceNode != null)
         {
             TargetNode = GenerateTarget();
-            FoundRoute = NavGraph.map.PathfindingTechnique.CalculateRoute(SourceNode, TargetNode);
+            FoundRoute = NavGraph.map.PathfindingTechnique.CalculateRoute(this,SourceNode, TargetNode);
         }
         MoveOnRoute();
     }

@@ -25,7 +25,7 @@ public class ASTAR : Pathfinder
         float F = G + H;
         return F;
     }
-    public override bool CalculateRoute(TileNode Source, TileNode Target)
+    public override bool CalculateRoute(AIAgent ARTIE,TileNode Source, TileNode Target)
     {
         DateTime StartTime = DateTime.Now;
         TileReset();
@@ -43,6 +43,15 @@ public class ASTAR : Pathfinder
             KeyValuePair<float, TileEdge> keyValuePair = MinPriorityQueue.Dequeue();
             TraveresedEdges.Add(keyValuePair.Value);
             TileEdge Edge = keyValuePair.Value;
+
+            if (Edge.To.GetComponent<MilitaryAirport>())
+                if (!ARTIE.Military)
+                {
+                    keyValuePair = MinPriorityQueue.Dequeue();
+                    TraveresedEdges.Add(keyValuePair.Value);
+                    Edge = keyValuePair.Value;
+                }
+                   
             if (Cost[Edge.To.Index] > Cost[Edge.From.Index] + Edge.GetCost())
             {
                 Route[Edge.To.Index] = Edge.From.Index;

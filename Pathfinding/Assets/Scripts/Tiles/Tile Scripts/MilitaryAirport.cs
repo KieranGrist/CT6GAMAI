@@ -9,35 +9,9 @@ public class MilitaryAirport : TileNode
     {
         Neighbours.Clear();
         List<Collider> hitObjects = new List<Collider>();
-        foreach (var item in Physics.OverlapSphere(transform.position, Distance))
-        {
-            if (item.transform.gameObject != gameObject && item.GetComponent<TileNode>())
-                hitObjects.Add(item);
-        }
-        gameObjects.Clear();
-        int i = 0;
-        while (i < hitObjects.Count)
-        {
-            gameObjects.Add(hitObjects[i].transform.gameObject);
-            Neighbours.Add(new TileEdge(GetComponent<TileNode>(), hitObjects[i].gameObject.GetComponent<TileNode>()));
-            i++;
-        }
-        List<Airport> airports = new List<Airport>();
-        airports.AddRange(FindObjectsOfType<Airport>());
-        foreach (var item in airports)
+        foreach (var item in NavGraph.map.Nodes)    
             if (item != this)
-                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item));
-
-        List<MilitaryAirport> militaryAirports = new List<MilitaryAirport>();
-        militaryAirports.AddRange(FindObjectsOfType<MilitaryAirport>());
-        foreach (var item in militaryAirports)
-            if (item != this)
-                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item));
-
-        foreach (var item in Neighbours)
-        {
-          //  item.To.Reset();
-        }
+                Neighbours.Add(new TileEdge(this, item));  
     
     }
 

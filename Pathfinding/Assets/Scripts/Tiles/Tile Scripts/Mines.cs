@@ -40,7 +40,7 @@ public class Mines : TileNode
             TileGameObject = go;
             Created = true;
         }
-        Cost = 60;
+        Cost = 100;
         name = "Mines Tile. ID: " + Index;          
         foreach (var item in Neighbours)
         {

@@ -16,7 +16,7 @@ public class Dijkstras : Pathfinder
         GeneratedPath.Add(0);
     }
 
-    public override bool CalculateRoute(TileNode Source, TileNode Target)
+    public override bool CalculateRoute(AIAgent ARTIE, TileNode Source, TileNode Target)
     {
         DateTime StartTime = DateTime.Now;
         TileReset();
@@ -41,17 +41,13 @@ public class Dijkstras : Pathfinder
                 Route[Edge.To.Index] = Edge.From.Index;
                 Cost[Edge.To.Index] = Cost[Edge.From.Index] + Edge.GetCost();
             }
-            if (Edge.To.Index == Target.Index)
-            {
-                TargetNodeFound = true;
-            }
+            if (Edge.To.Index == Target.Index)        
+                TargetNodeFound = true;       
             for (int i = 0; i < Edge.To.Neighbours.Count; i++)
             {
                 KeyValuePair<float, TileEdge> valuepair = new KeyValuePair<float, TileEdge>(Edge.To.Neighbours[i].GetCost() + Cost[Edge.To.Index], Edge.To.Neighbours[i]);
                 if (Edge.To.Walkable && !TraveresedEdges.Contains(Edge.To.Neighbours[i]) && !MinPriorityQueue.data.Contains(valuepair))
-                {
-                    MinPriorityQueue.Enqueue(valuepair);
-                }
+                    MinPriorityQueue.Enqueue(valuepair);              
             }
         }
         TimeCalculated = DateTime.Now - StartTime;
