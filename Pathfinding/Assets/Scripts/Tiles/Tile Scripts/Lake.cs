@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
     
 public class Lake : TileNode
 {
@@ -33,10 +33,10 @@ public class Lake : TileNode
     {
         NeedToReset = true;
 
-        GetComponent<Renderer>().material = MaterialManager.LakeMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.LakeMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.LakeGameObject, transform);
+            GameObject go = Instantiate(TileMaterials.Materials.LakeGameObject, transform);
             go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             go.transform.localScale = new Vector3(1, 1, 1);
             CreatedObject = true;

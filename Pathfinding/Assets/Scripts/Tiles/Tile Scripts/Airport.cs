@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class Airport : TileNode
 {
     public override void Reset()
@@ -32,20 +32,20 @@ public class Airport : TileNode
           //  item.To.Reset();
         }
     }
-    public  new void Start()
+    public new void Start()
     {
         NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.AirportMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.AirportMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.AirportGameObject,transform);
+            GameObject go = Instantiate(TileMaterials.Materials.AirportGameObject,transform);
         go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         go.transform.localScale = new Vector3(0.01f, 1, 0.01f);
         CreatedObject = true;
         TileGameObject = go;
             Created = true;
         }
-        Cost = 0.5f;
+        Cost = 1;
         name = "Airport Tile. ID: " + Index;          
         foreach (var item in Neighbours)
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class Highway : TileNode
 {
 
@@ -32,10 +32,10 @@ public class Highway : TileNode
     public  new void Start()
     {
         NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.HighwayMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.HighwayMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.HighwayGameObject, transform);
+            GameObject go = Instantiate(TileMaterials.Materials.HighwayGameObject, transform);
         go.transform.position = new Vector3(transform.position.x, 0.01f     , transform.position.z);
         go.transform.localScale = new Vector3(1, 1, 1);
         CreatedObject = true;

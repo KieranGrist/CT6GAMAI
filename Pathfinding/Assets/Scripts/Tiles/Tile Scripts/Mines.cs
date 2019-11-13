@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class Mines : TileNode
 {
     public override void Reset()
@@ -31,10 +31,10 @@ public class Mines : TileNode
     public  new void Start()
     {
         NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.MinesMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.MinesMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.MinesGameObject, transform);
+            GameObject go = Instantiate(TileMaterials.Materials.MinesGameObject, transform);
             go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             go.transform.localScale = new Vector3(1, 1, 1);
             CreatedObject = true;

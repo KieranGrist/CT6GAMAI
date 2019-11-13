@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class Rocks : TileNode
 {
     public override void Reset()
@@ -31,10 +31,10 @@ public class Rocks : TileNode
     public  new void Start()
     {
         NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.RocksMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.RocksMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.RocksGameObject, transform);
+            GameObject go = Instantiate(TileMaterials.Materials.RocksGameObject, transform);
             go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             go.transform.localScale = new Vector3(1, 1, 1);
             CreatedObject = true;

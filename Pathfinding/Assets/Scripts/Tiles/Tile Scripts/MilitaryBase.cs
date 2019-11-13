@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class MilitaryBase : TileNode
 {
     public override void Reset()
@@ -32,10 +32,10 @@ public class MilitaryBase : TileNode
     public  new void Start()
     {
         NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.MillitaryBaseMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.MillitaryBaseMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.MillitaryBaseGameObject, transform);
+            GameObject go = Instantiate(TileMaterials.Materials.MillitaryBaseGameObject, transform);
             go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             go.transform.localScale = new Vector3(1, 1, 1);
             CreatedObject = true;

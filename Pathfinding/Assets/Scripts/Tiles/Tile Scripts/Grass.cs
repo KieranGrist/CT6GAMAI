@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class Grass : TileNode
 {
     public override void Reset()
@@ -31,10 +31,10 @@ public class Grass : TileNode
     public  new void Start()
     {
         NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.GrassMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.GrassMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.EmptyGameObject, transform);
+            GameObject go = Instantiate(TileMaterials.Materials.EmptyGameObject, transform);
             go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             go.transform.localScale = new Vector3(1, 1, 1);
             CreatedObject = true;
@@ -42,7 +42,7 @@ public class Grass : TileNode
             Created = true;
         }
         Cost = 5;
-        name = "Grass Tile. ID: " + Index;          
+        name = "Grass Tile. ID: " + Index;
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
@@ -52,6 +52,7 @@ public class Grass : TileNode
 
     public  new void Update()
     {
+      
         if (NeedToReset)
         {
             Reset();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class Forrest : TileNode
 {
     public override void Reset()
@@ -33,8 +33,8 @@ public class Forrest : TileNode
         NeedToReset = true;
         if (!Created)
         {
-            GetComponent<Renderer>().material = MaterialManager.ForrestMat;
-        GameObject go = Instantiate(MaterialManager.ForrestGameObject, transform);
+            GetComponent<Renderer>().material = TileMaterials.Materials.ForrestMat;
+        GameObject go = Instantiate(TileMaterials.Materials.ForrestGameObject, transform);
         go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         go.transform.localScale = new Vector3(1, 1, 1);
         CreatedObject = true;

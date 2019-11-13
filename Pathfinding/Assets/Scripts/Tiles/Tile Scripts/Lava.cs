@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class Lava : TileNode
 {
     public override void Reset()
@@ -31,10 +31,10 @@ public class Lava : TileNode
     public  new void Start()
     {
         NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.LavaMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.LavaMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.EmptyGameObject, transform);
+            GameObject go = Instantiate(TileMaterials.Materials.EmptyGameObject, transform);
             go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             go.transform.localScale = new Vector3(1, 1, 1);
             CreatedObject = true;

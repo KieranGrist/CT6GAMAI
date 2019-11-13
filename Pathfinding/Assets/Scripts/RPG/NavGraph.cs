@@ -1,27 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[System.Serializable]
 public enum PathfinderType
 {
     AStar,
     BreadthFirstSeach,
     DepthFirstSearch,
     Dijkstras,
+    NoPath
 }
-[System.Serializable]
-[ExecuteInEditMode]
+
 public class NavGraph : MonoBehaviour
 {
     public List<TileNode> Nodes = new List<TileNode>();
-    public TileMaterials MaterialManager;
    public Pathfinder PathfindingTechnique;
     Pathfinder PreviousTechnique;
   public  PathfinderType pathfindingType;
     PathfinderType PreviousPathfinder;
     LayerMask TileMask;
     public bool ResetAllNodes;
+    public static NavGraph map;
 
+    void Awake()
+    {
+        InvokeRepeating("AddNodes", 0, 10);
+        map = this;
+      DontDestroyOnLoad(gameObject);
+
+        PreviousPathfinder = PathfinderType.NoPath;
+        TechniqueSelector();
+     
+    }
 
 
     void TechniqueSelector()
@@ -47,7 +56,6 @@ public class NavGraph : MonoBehaviour
                     break;
             }
             PathfindingTechnique = gameObject.GetComponent<Pathfinder>();
-            gameObject.GetComponent<Pathfinder>().Map = GetComponent<NavGraph>();
             PreviousPathfinder = pathfindingType;
         }
 
@@ -65,24 +73,16 @@ public class NavGraph : MonoBehaviour
                 Nodes.Remove(Nodes[i]);
             else
             {
-
-                Nodes[i].Index = i;
-                Nodes[i].MaterialManager = MaterialManager;
+                Nodes[i].Index = i;             
                 Nodes[i].GetComponent<TileNode>().enabled = true;
                 Nodes[i].Reset();
             }
         }
     }
-    void Start()
-    {
-        TechniqueSelector();
-        InvokeRepeating("AddNodes", 0, 10); 
-    }
+   
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {   
- 
-        TechniqueSelector();  
         if (ResetAllNodes)
         {
             AddNodes();
@@ -90,6 +90,7 @@ public class NavGraph : MonoBehaviour
                 item.Reset();
 
             ResetAllNodes = false;
-        }    
+        }
+        map = this;
     }
 }

@@ -16,7 +16,6 @@ Grass Flowers Pack Free
 public enum TileType
 {
     Airport,
-    Blocked,
     Bridge,
     Farm,
     Forrest,
@@ -33,12 +32,13 @@ public enum TileType
     Residential,
     Rocks,
     Snow,
-    Storage
+    Storage,
+
+    TileType_Max
 }
-[ExecuteInEditMode]
+
 public class TileSelector : MonoBehaviour
 {
-    public NavGraph Map;
     public TileType type = TileType.Grass;
     TileType PreviousType;
     // Update is called once per frame
@@ -60,10 +60,7 @@ public class TileSelector : MonoBehaviour
             {              
                 case (TileType.Airport):
                     gameObject.AddComponent<Airport>();
-                    break;
-                case (TileType.Blocked):
-                    gameObject.AddComponent<Blocked>();
-                    break;
+                    break;       
                 case (TileType.Bridge):
                     gameObject.AddComponent<Bridge>();                   
                     break;
@@ -117,15 +114,20 @@ public class TileSelector : MonoBehaviour
                     gameObject.AddComponent<Storage>();
                     break;
             }
-            Map.ResetAllNodes = true;
+            NavGraph.map.ResetAllNodes = true;
             PreviousType = type;       
-            gameObject.GetComponent<TileNode>().MaterialManager = Map.MaterialManager;
             gameObject.GetComponent<TileNode>().enabled = true;
 
         }
     }  
     void Start()
     {
+        /*
+         * generate random number between 0 - TileType_Max - 1 type = number 
+         */
+
+        type =TileType.Airport + Mathf.RoundToInt(Random.Range(0, (float)TileType.TileType_Max - 1));
+
         TileCreator();
     }
     void Update()

@@ -2,8 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class TileMaterials : MonoBehaviour
+
+ public class TileMaterials : MonoBehaviour
 {
+
+    public static TileMaterials Materials;
+    private void Awake()
+    {
+        if (Materials == null)
+        {
+            Materials = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     public Material AirportMat;
     public Material BlockedMat;
     public Material BridgeMat;

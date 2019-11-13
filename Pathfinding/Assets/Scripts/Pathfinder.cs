@@ -10,7 +10,6 @@ public abstract class Pathfinder : MonoBehaviour
     public TimeSpan TimeCalculated;
     public float FunctionTime;
     public bool TargetNodeFound = false;
-    public NavGraph Map;
     public List<int> Route = new List<int>();
     public List<float> Cost = new List<float>();
     public List<bool> Visited = new List<bool>();
@@ -20,10 +19,10 @@ public abstract class Pathfinder : MonoBehaviour
     public abstract bool CalculateRoute(TileNode Source, TileNode Target);
     public void TileReset()
     {
-        Route = new List<int>(Map.Nodes.Count);
-        Visited = new List<bool>(Map.Nodes.Count);
-        Cost = new List<float>(Map.Nodes.Count);
-        for (int i = 0; i < Map.Nodes.Count; i++)
+        Route = new List<int>(NavGraph.map.Nodes.Count);
+        Visited = new List<bool>(NavGraph.map.Nodes.Count);
+        Cost = new List<float>(NavGraph.map.Nodes.Count);
+        for (int i = 0; i < NavGraph.map.Nodes.Count; i++)
         {
             Route.Add(-10);
             Cost.Add(int.MaxValue);

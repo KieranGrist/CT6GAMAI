@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public abstract class TileNode : MonoBehaviour
 {
     public Vector3 GameObjectRotation;
     public bool NeedToReset = false;
-    public TileMaterials MaterialManager;
     public GameObject TileGameObject;
     public List<GameObject> gameObjects = new List<GameObject>();
     public bool CreatedObject = false;

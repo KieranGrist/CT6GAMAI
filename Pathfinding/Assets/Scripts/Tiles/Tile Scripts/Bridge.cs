@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class Bridge : TileNode
 {
     public override void Reset()
@@ -30,11 +30,11 @@ public class Bridge : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.BridgeMat;
+        NeedToReset = true;        
+        GetComponent<Renderer>().material = TileMaterials.Materials.BridgeMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.BridgeGameObject , transform);
+            GameObject go = Instantiate(TileMaterials.Materials.BridgeGameObject , transform);
         go.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
         go.transform.localScale = new Vector3(1, 1, 1);
         CreatedObject = true;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-[ExecuteInEditMode]
+
 public class MilitaryAirport : TileNode
 {
     public override void Reset()
@@ -44,17 +44,17 @@ public class MilitaryAirport : TileNode
     public  new void Start()
     {
         NeedToReset = true;
-        GetComponent<Renderer>().material = MaterialManager.MilitaryAirportMat;
+        GetComponent<Renderer>().material = TileMaterials.Materials.MilitaryAirportMat;
         if (!Created)
         {
-            GameObject go = Instantiate(MaterialManager.MilitaryAirportGameObject, transform);
+            GameObject go = Instantiate(TileMaterials.Materials.MilitaryAirportGameObject, transform);
             go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             go.transform.localScale = new Vector3(0.01f, 1, 0.01f);
             CreatedObject = true;
             TileGameObject = go;
             Created = true;
         }
-        Cost = 55;
+        Cost = 2;
         name = "Millitary Airport Tile. ID: " + Index;          
         foreach (var item in Neighbours)
         {
