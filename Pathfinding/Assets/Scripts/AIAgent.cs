@@ -48,7 +48,7 @@ public class AIAgent : MonoBehaviour {
     public bool RecievedPath = false;
     public bool Moving = false;
     public List<Vector3> TargetLocation = new List<Vector3>();
-    public float InitialSpeed = 25.0f;
+    public float InitialSpeed = 250.0f;
     public LayerMask Mask;
     public List<float> Speed = new List<float>();
     Vector3 Direction;
