@@ -14,7 +14,7 @@ public class CameraControler : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   void Update()
     {
         if (AI ==null)
         {
@@ -53,4 +53,5 @@ public class CameraControler : MonoBehaviour
 
 
     }
+
 }

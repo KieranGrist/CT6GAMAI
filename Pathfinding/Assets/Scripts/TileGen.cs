@@ -24,7 +24,6 @@ public class TileGen : MonoBehaviour
             {
                 GameObject go = Instantiate(Cube, transform.position, transform.rotation);
                 go.AddComponent<TileSelector>();
-     
                 go.transform.parent = GetComponent<Transform>();
                 go.transform.position = new Vector3(x, 0, z);
                 go.transform.localScale = new Vector3(100, 1, 100);
@@ -33,12 +32,14 @@ public class TileGen : MonoBehaviour
  
     }
     // Update is called once per frame
-    void Update()
+   void Update()
     {        
         if (!Application.isPlaying && (Area != PreviousArea))
         {
             GenerateCube();
+            PreviousArea = Area;
         }
-        PreviousArea = Area;
+     
     }
+
 }

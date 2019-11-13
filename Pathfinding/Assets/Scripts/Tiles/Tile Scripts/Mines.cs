@@ -30,7 +30,6 @@ public class Mines : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
         GetComponent<Renderer>().material = TileMaterials.Materials.MinesMat;
         if (!Created)
         {
@@ -47,15 +46,5 @@ public class Mines : TileNode
         {
             item.From = GetComponent<TileNode>();
         }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
-    }
+    }    
 }

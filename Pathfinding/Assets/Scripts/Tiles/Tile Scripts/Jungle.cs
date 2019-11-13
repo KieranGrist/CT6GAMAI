@@ -30,7 +30,7 @@ public class Jungle : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
+ 
 
         GetComponent<Renderer>().material = TileMaterials.Materials.JungleMat;
         if (!Created)
@@ -44,20 +44,7 @@ public class Jungle : TileNode
         }
         Cost = 40;
         name = "Jungle Tile. ID: " + Index;          
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
+        
     }
 
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
-
-    }
 }

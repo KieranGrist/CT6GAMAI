@@ -12,8 +12,9 @@ public class DistanceCalculator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   void Update()
     {
         Distance = Vector3.Distance(Target.transform.position, Source.transform.position);
     }
+    
 }

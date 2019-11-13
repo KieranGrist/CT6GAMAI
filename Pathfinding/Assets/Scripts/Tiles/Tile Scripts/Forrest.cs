@@ -5,6 +5,23 @@ using UnityEngine;
 
 public class Forrest : TileNode
 {
+
+
+    public new void Start()
+    {
+        if (!Created)
+        {
+            GetComponent<Renderer>().material = TileMaterials.Materials.ForrestMat;
+            GameObject go = Instantiate(TileMaterials.Materials.ForrestGameObject, transform);
+            go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            go.transform.localScale = new Vector3(1, 1, 1);
+            CreatedObject = true;
+            TileGameObject = go;
+            Created = true;
+        }
+        Cost = 20;
+        name = "Forrest Tile. ID: " + Index;
+    }
     public override void Reset()
     {
         Neighbours.Clear();
@@ -24,39 +41,7 @@ public class Forrest : TileNode
         }
         foreach (var item in Neighbours)
         {
-          //  item.To.Reset();
+            //  item.To.Reset();
         }
-    }
-
-    public  new void Start()
-    {
-        NeedToReset = true;
-        if (!Created)
-        {
-            GetComponent<Renderer>().material = TileMaterials.Materials.ForrestMat;
-        GameObject go = Instantiate(TileMaterials.Materials.ForrestGameObject, transform);
-        go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        go.transform.localScale = new Vector3(1, 1, 1);
-        CreatedObject = true;
-        TileGameObject = go;
-            Created = true;
-        }
-        Cost = 20;
-        name = "Forrest Tile. ID: " + Index;          
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
-
     }
 }

@@ -31,8 +31,6 @@ public class Lake : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
-
         GetComponent<Renderer>().material = TileMaterials.Materials.LakeMat;
         if (!Created)
         {
@@ -44,20 +42,6 @@ public class Lake : TileNode
             Created = true;
         }
         Cost = 15;
-        name = "Lake Tile. ID: " + Index;          
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
+        name = "Lake Tile. ID: " + Index;
     }
 }

@@ -43,7 +43,6 @@ public class MilitaryAirport : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
         GetComponent<Renderer>().material = TileMaterials.Materials.MilitaryAirportMat;
         if (!Created)
         {
@@ -59,16 +58,6 @@ public class MilitaryAirport : TileNode
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
         }
     }
 }

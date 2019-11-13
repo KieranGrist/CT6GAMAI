@@ -30,7 +30,6 @@ public class Ocean : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
         GetComponent<Renderer>().material = TileMaterials.Materials.OceanMat;
         if (!Created)
         {
@@ -46,16 +45,6 @@ public class Ocean : TileNode
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
         }
     }
 }

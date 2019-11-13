@@ -31,7 +31,6 @@ public class MilitaryBase : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
         GetComponent<Renderer>().material = TileMaterials.Materials.MillitaryBaseMat;
         if (!Created)
         {
@@ -47,16 +46,6 @@ public class MilitaryBase : TileNode
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
         }
     }
 }

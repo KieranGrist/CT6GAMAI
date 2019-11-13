@@ -30,7 +30,6 @@ public class Hills : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
         GetComponent<Renderer>().material = TileMaterials.Materials.HillsMat;
         if (!Created)
         {
@@ -42,20 +41,6 @@ public class Hills : TileNode
             Created = true;
         }
         Cost = 20;
-        name = "Hills Tile. ID: " + Index;          
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
+        name = "Hills Tile. ID: " + Index;
     }
 }

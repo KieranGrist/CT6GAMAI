@@ -30,7 +30,6 @@ public class Farm : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
         if (!Created)
         {
             GetComponent<Renderer>().material = TileMaterials.Materials.FarmMat;
@@ -42,21 +41,6 @@ public class Farm : TileNode
             Created = true;
         }
         Cost = 10;
-        name = "Farm Tile. ID: " + Index;          
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
-
+        name = "Farm Tile. ID: " + Index;
     }
 }

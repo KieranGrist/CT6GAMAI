@@ -7,7 +7,6 @@ using UnityEditor;
 public abstract class TileNode : MonoBehaviour
 {
     public Vector3 GameObjectRotation;
-    public bool NeedToReset = false;
     public GameObject TileGameObject;
     public List<GameObject> gameObjects = new List<GameObject>();
     public bool CreatedObject = false;
@@ -34,11 +33,6 @@ public abstract class TileNode : MonoBehaviour
     public void Start()
     {
 
-    }
-    public void Update()
-    {   
-
-  
     }
     public abstract void Reset();
 

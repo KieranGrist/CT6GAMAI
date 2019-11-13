@@ -18,12 +18,11 @@ public class NavGraph : MonoBehaviour
   public  PathfinderType pathfindingType;
     PathfinderType PreviousPathfinder;
     LayerMask TileMask;
-    public bool ResetAllNodes;
     public static NavGraph map;
 
     void Awake()
     {
-        InvokeRepeating("AddNodes", 0, 10);
+        AddNodes();
         map = this;
       DontDestroyOnLoad(gameObject);
 
@@ -63,34 +62,23 @@ public class NavGraph : MonoBehaviour
     void AddNodes()
     {
         Nodes.Clear();
-        List<TileNode> TempNodesList = new List<TileNode>();
-        TempNodesList.AddRange(FindObjectsOfType<TileNode>());
-        foreach(var item in TempNodesList)      
-                Nodes.Add(item);     
+        Nodes.AddRange(FindObjectsOfType<TileNode>());
         for (int i = 0; i < Nodes.Count; i++)
-        {
-            if (Nodes[i] == null)
-                Nodes.Remove(Nodes[i]);
-            else
-            {
-                Nodes[i].Index = i;             
-                Nodes[i].GetComponent<TileNode>().enabled = true;
-                Nodes[i].Reset();
-            }
-        }
+            Nodes[i].Index = i;
     }
    
     // Update is called once per frame
-    void Update()
+   void Update()
     {   
-        if (ResetAllNodes)
-        {
-            AddNodes();
-            foreach (var item in FindObjectsOfType<TileNode>())
-                item.Reset();
 
-            ResetAllNodes = false;
-        }
         map = this;
     }
+
+ public void ResetAllNodes()
+    {
+        AddNodes();
+        foreach (var item in Nodes)
+            item.Reset();
+    }
+
 }

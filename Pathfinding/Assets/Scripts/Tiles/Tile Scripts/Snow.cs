@@ -30,7 +30,6 @@ public class Snow : TileNode
 
     public  new void Start()
     {
-        NeedToReset = true;
         GetComponent<Renderer>().material = TileMaterials.Materials.SnowMat;
         if (!Created)
         {
@@ -46,16 +45,6 @@ public class Snow : TileNode
         foreach (var item in Neighbours)
         {
             item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
         }
     }
 }

@@ -33,7 +33,6 @@ public enum TileType
     Rocks,
     Snow,
     Storage,
-
     TileType_Max
 }
 
@@ -58,6 +57,7 @@ public class TileSelector : MonoBehaviour
             }
             switch (type)
             {              
+          
                 case (TileType.Airport):
                     gameObject.AddComponent<Airport>();
                     break;       
@@ -102,8 +102,7 @@ public class TileSelector : MonoBehaviour
                     break;
                 case (TileType.Residential):
                     gameObject.AddComponent<Residential>();
-                    break; 
-    
+                    break;     
                 case (TileType.Rocks):
                     gameObject.AddComponent<Rocks>();
                     break;
@@ -113,26 +112,23 @@ public class TileSelector : MonoBehaviour
                 case (TileType.Storage):
                     gameObject.AddComponent<Storage>();
                     break;
+            
             }
-            NavGraph.map.ResetAllNodes = true;
+            NavGraph.map.ResetAllNodes();
             PreviousType = type;       
             gameObject.GetComponent<TileNode>().enabled = true;
 
         }
     }  
-    void Start()
+    void Awake()
     {
-        /*
-         * generate random number between 0 - TileType_Max - 1 type = number 
-         */
-
-        type =TileType.Airport + Mathf.RoundToInt(Random.Range(0, (float)TileType.TileType_Max - 1));
-
-        TileCreator();
+        PreviousType = TileType.TileType_Max;
+        type = TileType.Airport + Mathf.RoundToInt(Random.Range(0, (float)TileType.TileType_Max - 1));    
     }
-    void Update()
+   void LateUpdate()
     {
-        TileCreator();
-  
+
+        TileCreator();  
     }
+ 
 }

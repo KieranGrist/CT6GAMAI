@@ -9,15 +9,14 @@ using UnityEngine;
     public static TileMaterials Materials;
     private void Awake()
     {
-        if (Materials == null)
-        {
+        Materials = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    private void Update ()
+    {
             Materials = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+    
+       
     }
     public Material AirportMat;
     public Material BlockedMat;

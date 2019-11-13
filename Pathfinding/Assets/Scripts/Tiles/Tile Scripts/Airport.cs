@@ -27,40 +27,20 @@ public class Airport : TileNode
         foreach (var item in airports)
             if (item != this)
                 Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item));
-        foreach(var item in Neighbours)
-        {
-          //  item.To.Reset();
-        }
     }
     public new void Start()
     {
-        NeedToReset = true;
         GetComponent<Renderer>().material = TileMaterials.Materials.AirportMat;
         if (!Created)
         {
-            GameObject go = Instantiate(TileMaterials.Materials.AirportGameObject,transform);
-        go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        go.transform.localScale = new Vector3(0.01f, 1, 0.01f);
-        CreatedObject = true;
-        TileGameObject = go;
+            GameObject go = Instantiate(TileMaterials.Materials.AirportGameObject, transform);
+            go.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            go.transform.localScale = new Vector3(0.01f, 1, 0.01f);
+            CreatedObject = true;
+            TileGameObject = go;
             Created = true;
         }
         Cost = 1;
-        name = "Airport Tile. ID: " + Index;          
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {   
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
-           
+        name = "Airport Tile. ID: " + Index;  
     }
 }

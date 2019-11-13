@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-public class AIAgent : MonoBehaviour {
 
-
-    public string[] FirstNames = new string[]
+public class AIAgent : MonoBehaviour
+{
+    string[] FirstNames = new string[]
     {
         "Kieran",
         "Alex",
@@ -23,12 +23,29 @@ public class AIAgent : MonoBehaviour {
        "Haleema",
        "Helen",
        "Emily",
-
-
-
+       "Liberty",
+       "Faye",
+       "Carrie",
+       "Elsie",
+       "Crystal",
+       "Maria",
+       "Ayla",
+       "Aminah",
+       "Amie",
+       "Jack",
+       "Ben",
+       "Adam",
+       "Tegan",
+       "Edan",
+       "Aliceson",
+       "Merle",
+       "Aiden",
+       "Allyson",
+       "Lyndsey",
+       "Stacia",       
         "Lauren"
     };
-    public string[] LastNames = new string[]
+    string[] LastNames = new string[]
      {
     "Stainton",
    "Peters",
@@ -41,6 +58,8 @@ public class AIAgent : MonoBehaviour {
     "Mitchell",
     "Newman",
     "Davey",
+    "Brown",
+    "Shade",
     "Rhodes",
     "Burke",
     "Howells",
@@ -70,19 +89,19 @@ public class AIAgent : MonoBehaviour {
     public bool Friendly = false;
     List<GameObject> PathGameObjects = new List<GameObject>();
     public bool RecievedPath = false;
-     bool Moving = false;
-     List<Vector3> TargetLocation = new List<Vector3>();
-     float InitialSpeed = 250.0f;
+    bool Moving = false;
+    List<Vector3> TargetLocation = new List<Vector3>();
+    float InitialSpeed = 250.0f;
     public LayerMask Mask;
-     List<float> Speed = new List<float>();
+    List<float> Speed = new List<float>();
     bool ResetAllNodes;
     bool FoundRoute;
     public TileNode SourceNode;
     public TileNode TargetNode;
     void Start()
-    {       
+    {
         Friendly = Random.value >= 0.5;
-        string ObjectName = name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)]; 
+        string ObjectName = name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(ray, out hit, Mask))
@@ -105,13 +124,16 @@ public class AIAgent : MonoBehaviour {
                 Speed.Add(InitialSpeed / (float)NavGraph.map.Nodes[NavGraph.map.PathfindingTechnique.GeneratedPath[i]].Cost);
             }
             TargetLocation.Add(TargetNode.transform.position);
-            Speed.Add(InitialSpeed/ TargetNode.Cost);
+            Speed.Add(InitialSpeed / TargetNode.Cost);
         }
 
-        if (TargetLocation.Count > 0)
-        { 
 
-            if (Vector3.Distance(TargetLocation[0], transform.position) <= 2)
+        if (TargetLocation.Count > 0)
+        {
+         /*   for (int i = 0; i < TargetLocation.Count - 1; i++)
+                Debug.DrawLine(TargetLocation[i], TargetLocation[i + 1], Color.red, 5);
+    */       
+    if (Vector3.Distance(TargetLocation[0], transform.position) <= 2)
             {
                 transform.position = TargetLocation[0];
                 Moving = false;
@@ -119,8 +141,8 @@ public class AIAgent : MonoBehaviour {
                 Speed.Remove(Speed[0]);
             }
             else
-              Moving = true;
-   
+                Moving = true;
+
             if (Moving == true)
             {
                 Vector3 Direction;
@@ -140,38 +162,36 @@ public class AIAgent : MonoBehaviour {
             RecievedPath = false;
         }
     }
+
     private void OnDrawGizmos()
     {
         Vector3 TextLocation = transform.position;
-        TextLocation += new Vector3(0, 2, 0);
+        TextLocation += new Vector3(-3, 13, 0);
         GUIStyle style = new GUIStyle();
         if (Friendly)
             style.normal.textColor = Color.green;
         else
             style.normal.textColor = Color.red;
-        Handles.Label(TextLocation, name, style);
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, 25);
+        Handles.Label(TextLocation, name, style); 
     }
     void LateUpdate ()
     {
-        foreach (var item in Physics.OverlapSphere(transform.position, 25))
+        foreach (var item in Physics.OverlapSphere(transform.position, 12))
         {
             if (item.transform.gameObject.GetComponent<TileNode>())
                 SourceNode = item.transform.gameObject.GetComponent<TileNode>();
         }
-
         if (!FoundRoute && SourceNode != null)
         {
-            List<TileNode> Nodes = NavGraph.map.Nodes;
-            if (Nodes.Contains(SourceNode))
-                Nodes.Remove(SourceNode);
-            if (Nodes.Contains(TargetNode))
-                Nodes.Remove(TargetNode);
-            TargetNode = Nodes[Random.Range(0, Nodes.Count - 1)];
+            TargetNode = GenerateTarget();
             FoundRoute = NavGraph.map.PathfindingTechnique.CalculateRoute(SourceNode, TargetNode);
         }
         MoveOnRoute();
+    }
+
+    private TileNode GenerateTarget()
+    {
+       return NavGraph.map.Nodes[Random.Range(0, NavGraph.map.Nodes.Count - 1)];
 
     }
 }

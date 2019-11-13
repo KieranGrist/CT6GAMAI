@@ -29,8 +29,7 @@ public class Bridge : TileNode
     }
 
     public  new void Start()
-    {
-        NeedToReset = true;        
+    {     
         GetComponent<Renderer>().material = TileMaterials.Materials.BridgeMat;
         if (!Created)
         {
@@ -42,21 +41,6 @@ public class Bridge : TileNode
             Created = true;
         }
         Cost = 5;
-        name = "Bridge Tile. ID: " + Index;          
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-        TileGameObject.transform.eulerAngles = GameObjectRotation;
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
+        name = "Bridge Tile. ID: " + Index;
     }
 }

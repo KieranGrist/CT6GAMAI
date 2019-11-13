@@ -22,15 +22,11 @@ public class Grass : TileNode
             Neighbours.Add(new TileEdge(GetComponent<TileNode>(), hitObjects[i].gameObject.GetComponent<TileNode>()));
             i++;
         }
-        foreach (var item in Neighbours)
-        {
-         //   item.To.NeedToReset = true;
-        }
     }
 
     public  new void Start()
     {
-        NeedToReset = true;
+
         GetComponent<Renderer>().material = TileMaterials.Materials.GrassMat;
         if (!Created)
         {
@@ -42,22 +38,6 @@ public class Grass : TileNode
             Created = true;
         }
         Cost = 5;
-        name = "Grass Tile. ID: " + Index;
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
-    }
-
-
-    public  new void Update()
-    {
-      
-        if (NeedToReset)
-        {
-            Reset();
-            NeedToReset = false;
-        }
-
+        name = "Grass Tile. ID: " + Index;   
     }
 }
