@@ -25,12 +25,11 @@ public class Vehicle : MonoBehaviour {
 
     //The thrust this agent can produce
     public float MaxForce = 1;
-
     //We use this to determine how fast the agent can turn, but just ignore it for, we won't be using it
     public float MaxTurnRate = 1.0f;
 
-
-    private SteeringBehaviours SB;
+   public Vector3 SteeringForce;
+    public SteeringBehaviours SB;
 
     // Use this for initialization
     void Start ()
@@ -40,9 +39,8 @@ public class Vehicle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update ()
-    {
-        Vector3 SteeringForce = SB.Calculate();
-
+    {     
+        SteeringForce = SB.Calculate();     
         Vector3 Acceleration = SteeringForce / Mass;
 
         Velocity += Acceleration;
@@ -52,7 +50,6 @@ public class Vehicle : MonoBehaviour {
         if (Velocity != Vector3.zero)
         {
             transform.position += Velocity * Time.deltaTime;
-
             transform.forward = Velocity.normalized;
         }
 

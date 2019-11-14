@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 2034765569}
   - component: {fileID: 2034765568}
   - component: {fileID: 2034765571}
+  - component: {fileID: 2034765572}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -304,9 +305,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2034765567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eba6596c6f8eba1479e4514040e79b18, type: 3}
+  m_Script: {fileID: 11500000, guid: b518b439da8a88d43ad331c764c127d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GO1: {fileID: 0}
-  GO2: {fileID: 0}
-  distance: 0
+  Nodes: []
+  PathfindingTechnique: {fileID: 0}
+  pathfindingType: 0
+--- !u!114 &2034765572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034765567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b8c7efc3744df4eb73baddfad74118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cube: {fileID: 2434254810959848533, guid: 55375d47af3ff5f45a3dc8d57420cc1b, type: 3}
+  GO: []
+  Area: 0

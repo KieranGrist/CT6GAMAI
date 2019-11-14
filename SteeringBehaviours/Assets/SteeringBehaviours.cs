@@ -5,19 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(Vehicle))]
 public class SteeringBehaviours : MonoBehaviour {
 
-    Vehicle vehicle;
+    public Vehicle vehicle;
 
     //SeekOn
-    bool IsSeekOn = false;
-    Vector3 SeekOnTargetPos;
-    float SeekOnStopDistance;
+    public bool IsSeekOn = false;
+    public Vector3 SeekOnTargetPos;
+    public float SeekOnStopDistance;
 
     //WanderOn
-    bool IsWanderOn = false;
+    public bool IsWanderOn = false;
     public float WanderRadius = 10f;
     public float WanderDistance = 10f;
     public float WanderJitter = 1f;
-    Vector3 WanderTarget = Vector3.zero;
+    public Vector3 WanderTarget = Vector3.zero;
 
 	// Use this for initialization
 	void Start ()
@@ -64,18 +64,47 @@ public class SteeringBehaviours : MonoBehaviour {
 
     Vector3 Seek(Vector3 TargetPos)
     {
-        Vector3 DesiredVelocity = (TargetPos - transform.position).normalized * vehicle.MaxSpeed;
+        Vector3 DesiredVelocity = ((TargetPos - transform.position).normalized) * vehicle.MaxSpeed;
 
         return (DesiredVelocity - vehicle.Velocity);
     }
 
     Vector3 Flee(Vector3 TargetPos)
     {
-        //TO-DO: Implement this method
+        Vector3 DesiredVelocity = (( transform.position - TargetPos).normalized) * vehicle.MaxSpeed;
 
-        return Vector3.zero;
+        return (DesiredVelocity - vehicle.Velocity);
     }
-
+    Vector3 Arrive (Vector3 TargetPos)
+    {     
+        Vector3 ToTarget = TargetPos - transform.position;
+        float Distance = ToTarget.magnitude;
+        float SlowingDistance = 0;
+        if (Distance > 5)
+        {
+            SlowingDistance = 3;
+        }
+        float Speed = Distance / SlowingDistance; 
+        Vector3 DesiredVelocity = ToTarget.normalized * Speed / Distance;
+        return DesiredVelocity;
+    }
+    void Pursuit(Vehicle Evader)
+    {
+        Vector3 ToEvader = Evader.transform.position - transform.position;
+        float RelativeHeading =  Vector3.Dot(transform.forward.normalized, Evader.transform.forward.normalized);
+        if (RelativeHeading > 0)
+            Seek(Evader.transform.position);
+        var LookAheadTime = ToEvader.magnitude / (vehicle.MaxSpeed + Evader.Velocity.magnitude);
+        var EvaderFuturePosition = Evader.transform.position + Evader.Velocity * LookAheadTime;
+        Seek(EvaderFuturePosition);
+    }
+    void Evade(Vehicle Pursuer)
+    {
+        Vector3 ToPursuer = Pursuer.transform.position - transform.position;
+        var LookAheadTime = ToPursuer.magnitude / (vehicle.MaxSpeed + Pursuer.Velocity.magnitude);
+        var PursuerFuturePosition = transform.position + Pursuer.Velocity * LookAheadTime;
+        Flee(PursuerFuturePosition);
+    }
     Vector3 Wander()
     {
         WanderTarget += new Vector3(
@@ -89,13 +118,16 @@ public class SteeringBehaviours : MonoBehaviour {
 
         Vector3 targetLocal = WanderTarget;
 
-        Vector3 targetWorld = transform.position + WanderTarget;
+        Vector3 TargetWorldPostion = vehicle.transform.position + WanderTarget;
 
-        targetWorld += transform.forward * WanderDistance;
+        TargetWorldPostion += vehicle.transform.forward * WanderDistance;
 
-        return targetWorld - transform.position;
+        return TargetWorldPostion - transform.position;
     }
+   void ObstacleAvoidence ()
+    {
 
+    }
     /// <summary>
     /// Will Seek to TargetPos until within StopDistance range from it
     /// </summary>
