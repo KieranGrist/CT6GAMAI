@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 [System.Serializable]
-
+public enum TileAffinity
+{
+    Player,
+    Enemy,
+    Unclaimed
+}
 public abstract class TileNode : MonoBehaviour
 {
     public Vector3 GameObjectRotation;
@@ -11,9 +16,10 @@ public abstract class TileNode : MonoBehaviour
     public List<GameObject> gameObjects = new List<GameObject>();
     public bool CreatedObject = false;
     public float Cost = float.PositiveInfinity;
-    public float Distance = 60;
+    public float Distance = 110;
     public int Index;
     public bool Walkable;
+    public TileAffinity Affinity;
     public bool Created;
     public List<TileEdge> Neighbours = new List<TileEdge>();
     public TileNode()

@@ -7,6 +7,7 @@ public class Lava : TileNode
 {
     public override void Reset()
     {
+        Walkable = false;
         Neighbours.Clear();
         List<Collider> hitObjects = new List<Collider>();
         foreach (var item in Physics.OverlapSphere(transform.position, Distance))

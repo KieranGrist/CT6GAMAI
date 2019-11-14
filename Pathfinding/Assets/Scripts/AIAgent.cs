@@ -102,6 +102,7 @@ public class AIAgent : MonoBehaviour
     void Start()
     {
         Friendly = Random.value >= 0.5;
+        Military = Random.value >= 0.5;
         string ObjectName = name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
@@ -174,7 +175,7 @@ public class AIAgent : MonoBehaviour
         else
             style.normal.textColor = Color.red;
         if (Military)
-            style.normal.textColor = Color.blue;
+            GetComponent<Renderer>().material.color = Color.blue;
         Handles.Label(TextLocation, name, style); 
     }
     void LateUpdate ()
@@ -194,7 +195,13 @@ public class AIAgent : MonoBehaviour
 
     private TileNode GenerateTarget()
     {
-       return NavGraph.map.Nodes[Random.Range(0, NavGraph.map.Nodes.Count - 1)];
+        TileNode RandomNode;
+        do
+            RandomNode = NavGraph.map.Nodes[Random.Range(0, NavGraph.map.Nodes.Count - 1)];
+        while ((!Military && (RandomNode.GetComponent<MilitaryAirport>()|| RandomNode.GetComponent<MilitaryBase>())) || RandomNode == SourceNode);
+        if (!RandomNode.Walkable)
+            RandomNode = NavGraph.map.Nodes[Random.Range(0, NavGraph.map.Nodes.Count - 1)];
+        return RandomNode;
 
     }
 }

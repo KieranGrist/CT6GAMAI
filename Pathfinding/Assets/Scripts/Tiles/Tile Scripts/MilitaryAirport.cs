@@ -7,16 +7,46 @@ public class MilitaryAirport : TileNode
 {
     public override void Reset()
     {
+
         Neighbours.Clear();
         List<Collider> hitObjects = new List<Collider>();
-        foreach (var item in NavGraph.map.Nodes)    
+        HashSet<TileNode> AddedNodes = new HashSet<TileNode>();
+        foreach (var item in Physics.OverlapSphere(transform.position, Distance))
+        {
+            if (item.transform.gameObject != gameObject && item.GetComponent<TileNode>())
+                hitObjects.Add(item);
+        }
+        foreach (var item in hitObjects)
+        {
             if (item != this)
-                Neighbours.Add(new TileEdge(this, item));  
-    
+            {
+                gameObjects.Add(item.transform.gameObject);
+                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item.gameObject.GetComponent<TileNode>()));
+                AddedNodes.Add(item.gameObject.GetComponent<TileNode>());
+            }
+
+        }
+        List<Airport> airports = new List<Airport>();
+        airports.AddRange(FindObjectsOfType<Airport>());
+        foreach (var item in airports)
+            if (item != this || !AddedNodes.Contains(item))
+            {
+                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item));
+                AddedNodes.Add(item);
+            }
+        List<MilitaryAirport> MilitaryAirports = new List<MilitaryAirport>();
+        MilitaryAirports.AddRange(FindObjectsOfType<MilitaryAirport>());
+        foreach (var item in MilitaryAirports )
+            if (item != this || !AddedNodes.Contains(item))
+            {
+                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item));
+                AddedNodes.Add(item);
+            }
     }
 
     public  new void Start()
     {
+    
         GetComponent<Renderer>().material = TileMaterials.Materials.MilitaryAirportMat;
         if (!Created)
         {
@@ -27,11 +57,9 @@ public class MilitaryAirport : TileNode
             TileGameObject = go;
             Created = true;
         }
-        Cost = 2;
+        Cost = 1;
         name = "Millitary Airport Tile. ID: " + Index;          
-        foreach (var item in Neighbours)
-        {
-            item.From = GetComponent<TileNode>();
-        }
+        foreach (var item in Neighbours)      
+            item.From = GetComponent<TileNode>();        
     }
 }

@@ -25,15 +25,15 @@ public class ASTAR : Pathfinder
         float F = G + H;
         return F;
     }
-    public override bool CalculateRoute(AIAgent ARTIE,TileNode Source, TileNode Target)
+    public override bool CalculateRoute(AIAgent ARTIE, TileNode Source, TileNode Target)
     {
         DateTime StartTime = DateTime.Now;
         TileReset();
         TargetNodeFound = false;
-        List<TileEdge> TraveresedEdges = new List<TileEdge>();
+        HashSet<TileEdge> TraveresedEdges = new HashSet<TileEdge>();
         PriorityQueue<float, TileEdge> MinPriorityQueue = new PriorityQueue<float, TileEdge>();
         Cost[Source.Index] = 0;
-        foreach(var item in Source.Neighbours)
+        foreach (var item in Source.Neighbours)
         {
             KeyValuePair<float, TileEdge> keyValuePair = new KeyValuePair<float, TileEdge>(0, item);
             MinPriorityQueue.Enqueue(keyValuePair);
@@ -43,26 +43,19 @@ public class ASTAR : Pathfinder
             KeyValuePair<float, TileEdge> keyValuePair = MinPriorityQueue.Dequeue();
             TraveresedEdges.Add(keyValuePair.Value);
             TileEdge Edge = keyValuePair.Value;
-
-            if (Edge.To.GetComponent<MilitaryAirport>())
-                if (!ARTIE.Military)
-                {
-                    keyValuePair = MinPriorityQueue.Dequeue();
-                    TraveresedEdges.Add(keyValuePair.Value);
-                    Edge = keyValuePair.Value;
-                }
-                   
             if (Cost[Edge.To.Index] > Cost[Edge.From.Index] + Edge.GetCost())
             {
                 Route[Edge.To.Index] = Edge.From.Index;
-                Cost[Edge.To.Index] = CalculateCost(Edge,Target);
+                Cost[Edge.To.Index] = CalculateCost(Edge, Target);
             }
+            if ((Edge.To.GetComponent<MilitaryAirport>() || Edge.To.GetComponent<MilitaryBase>()) && !ARTIE.Military)
+                Cost[Edge.To.Index] = float.PositiveInfinity;
             if (Edge.To.Index == Target.Index && !TargetNodeFound)
             {
                 TargetNodeFound = true;
             }
             foreach (var item in Edge.To.Neighbours)
-            {             
+            {
                 float G = item.GetCost() + Cost[Edge.To.Index];
                 float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
                 float Z = (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100;
@@ -75,7 +68,7 @@ public class ASTAR : Pathfinder
                 }
             }
         }
-        TimeCalculated =  DateTime.Now - StartTime;
+        TimeCalculated = DateTime.Now - StartTime;
         FunctionTime = (float)TimeCalculated.TotalMilliseconds;
         if (TargetNodeFound)
             GeneratedPath = CalculatePath(Source, Target);

@@ -41,7 +41,6 @@ public class ArtieGenerator : MonoBehaviour
             }
             if (!Generated && XMin != float.MaxValue)
             {
-
                 for (int i = 0; i < ArtieAmmount; i++)
                 {
                     GameObject go = Instantiate(Artie, transform.position, transform.rotation);
