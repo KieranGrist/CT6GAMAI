@@ -11,7 +11,7 @@ public class Vehicle : MonoBehaviour {
     /// <summary>
     /// This is applied to the current position every frame
     /// </summary>
-    public Vector3 Velocity;
+    public Vector2 Velocity;
 
     //Position, Heading and Side can be accessed from the transform component with transform.position, transform.forward and transform.right respectively
 
@@ -28,31 +28,34 @@ public class Vehicle : MonoBehaviour {
     //We use this to determine how fast the agent can turn, but just ignore it for, we won't be using it
     public float MaxTurnRate = 1.0f;
 
-   public Vector3 SteeringForce;
+    public Vector2 SteeringForce;
     public SteeringBehaviours SB;
-
+    public Vector2 Heading;
+    public Vector2 Side;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         SB = GetComponent<SteeringBehaviours>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {     
-        SteeringForce = SB.Calculate();     
-        Vector3 Acceleration = SteeringForce / Mass;
+    }
+    private void OnDrawGizmos()
+    {
+        
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        SteeringForce = SB.Calculate();
+        Vector2 Acceleration = SteeringForce / Mass;       
+        Velocity += Acceleration; 
 
-        Velocity += Acceleration;
-
-        Velocity = Vector3.ClampMagnitude(Velocity, MaxSpeed);
-
-        if (Velocity != Vector3.zero)
+        Velocity = Vector2.ClampMagnitude(Velocity, MaxSpeed);
+        Heading = Velocity.normalized; 
+        if (Velocity != Vector2.zero)
         {
-            transform.position += Velocity * Time.deltaTime;
-            transform.forward = Velocity.normalized;
+            transform.position += new Vector3(Velocity.x, 0 , Velocity.y) * Time.deltaTime;
+           // transform.forward = Velocity.normalized;
         }
 
         //transform.right should update on its own once we update the transform.forward
-	}
+    }
 }

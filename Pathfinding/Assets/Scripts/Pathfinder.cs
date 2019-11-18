@@ -5,7 +5,7 @@ using System;
 [System.Serializable]
 
 
-public abstract class Pathfinder : MonoBehaviour
+public abstract class Pathfinder 
 {
     public TimeSpan TimeCalculated;
     public float FunctionTime;

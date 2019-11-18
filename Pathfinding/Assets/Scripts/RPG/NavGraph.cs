@@ -36,25 +36,21 @@ public class NavGraph : MonoBehaviour
     {
         if (pathfindingType != PreviousPathfinder)
         {
-            foreach (var item in gameObject.GetComponents<Pathfinder>())
-               DestroyImmediate(item); 
-
             switch (pathfindingType)
             {
                 case PathfinderType.AStar:
-                    gameObject.AddComponent<ASTAR>();
+                    PathfindingTechnique = new ASTAR();
                     break;
                 case PathfinderType.BreadthFirstSeach:
-                    gameObject.AddComponent<BFS>();
+                    PathfindingTechnique = new BFS();
                     break;
                 case PathfinderType.DepthFirstSearch:
-                    gameObject.AddComponent<DFS>();
+                    PathfindingTechnique = new DFS();
                     break;
                 case PathfinderType.Dijkstras:
-                    gameObject.AddComponent<Dijkstras>();
+                    PathfindingTechnique = new Dijkstras();
                     break;
-            }
-            PathfindingTechnique = gameObject.GetComponent<Pathfinder>();
+            }         
             PreviousPathfinder = pathfindingType;
         }
 

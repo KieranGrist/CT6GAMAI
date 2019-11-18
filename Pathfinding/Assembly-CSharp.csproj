@@ -78,7 +78,6 @@
     <Compile Include="Assets\Scripts\RPG\TileNode.cs" />
     <Compile Include="Assets\Scripts\TileGen.cs" />
     <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Airport.cs" />
-    <Compile Include="Assets\Scripts\Tiles\Tile Scripts\BlankTile.cs" />
     <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Bridge.cs" />
     <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Farm.cs" />
     <Compile Include="Assets\Scripts\Tiles\Tile Scripts\Forrest.cs" />

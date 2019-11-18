@@ -19,16 +19,15 @@ public class TileGen : MonoBehaviour
 
             DestroyImmediate(item);
 
-        //for (float x = transform.position.x  ; x < transform.position.x + (Area * 100); x += 100)
-        //    for (float z = transform.position.z  ; z < transform.position.z + (Area * 100); z += 100)
-        for (float x = transform.position.x; x < transform.position.x + (Area); x++)
-            for (float z = transform.position.z; z < transform.position.z + (Area); z++)
+        for (float x = transform.position.x  ; x < transform.position.x + (Area * 100); x += 100)
+            for (float z = transform.position.z  ; z < transform.position.z + (Area * 100); z += 100)
+
             {
                 GameObject go = Instantiate(Cube, transform.position, transform.rotation);
-                go.AddComponent<BlankTile>();
+                go.AddComponent<TileSelector>();
                 go.transform.parent = GetComponent<Transform>();
                 go.transform.position = new Vector3(x, 0, z);
-                go.transform.localScale = new Vector3(1, 1, 1);
+                go.transform.localScale = new Vector3(100, 1, 100);
                 GO.Add(go);
             }
  
