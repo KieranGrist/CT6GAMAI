@@ -12,12 +12,12 @@ public class SteeringBehaviours : MonoBehaviour
     Vehicle _vehicle; //Reference to the vehicle attached to the current object
     [Header("Seek")]
     //SeekOn - Variables to control Seeks Behavior
-    public bool isSeekOn = false;  //If on AI will seek to a chosen location
+    private bool isSeekOn = false;  //If on AI will seek to a chosen location
     public Vector2 seekOnTargetPos; // Location to seek to 
     public float seekOnStopDistance; //Distance from the target, the AI will stop at the distance
     [Header("Wander")]
     //WanderOn
-    public bool isWanderOn = false; //If on the AI will randomly move around the map
+    private bool isWanderOn = false; //If on the AI will randomly move around the map
     public float wanderRadius = 10f; // Sets how large the wander radius is, if its outside this radius it will move back inside that radius
     public float turnChance = 0.05f; //How often the AI can turn, the higher this is the more it will jitter
     private readonly Vector2 _wanderTarget = Vector2.zero; // Sets the target to 0 
@@ -25,17 +25,18 @@ public class SteeringBehaviours : MonoBehaviour
 
     [Header("Obstacle")]
     //Obstacle Avodience On
-    public bool isObstacleAvoidanceOn = false; //If on the AI will attempt to avoid obstacles in its radius
-    public GameObject obstacleClosetGameObject; //The closet object to the player
+    private bool isObstacleAvoidanceOn = false; //If on the AI will attempt to avoid obstacles in its radius
+    private GameObject obstacleClosetGameObject; //The closet object to the player
     public Vector2 obstacleForce; // Vector that stores the current force applied to get away from that object
+    public ProjCube ProjectedCube;
     public float boxSize = 2; // Size of the collision box
         public bool foundObject = false;
     [Header("Evade")]
     //Evade On
-    public bool isEvadeOn = false;
+    private bool isEvadeOn = false;
     [Header("Pursue")]
     //Pursue On
-    public bool isPursueOn = false;
+    private bool isPursueOn = false;
     private void Start()
     {
         _vehicle = GetComponent<Vehicle>();
@@ -137,21 +138,8 @@ public class SteeringBehaviours : MonoBehaviour
         Vector2 wanderForce = _vehicle.Velocity.normalized + displacement;
         return wanderForce.normalized;
     }
-    void OnDrawGizmos()
-    { 
-        CalculateBox(out var position, out var box);
-    Gizmos.DrawCube(position, box);
-    }
 
-    private void CalculateBox(out Vector3 position, out Vector3 box)
-    {
-        position = new Vector3();
-        box = new Vector3();
-        position = transform.position;
-        position += transform.forward;
-        box = new Vector3(boxSize,boxSize,boxSize );
-    }
-    ///<summary>Will Avoid the Obstacles by going around the obstacle  </summary>
+///<summary>Will Avoid the Obstacles by going around the obstacle  </summary>
     Vector2 ObstacleAvoidance()
     {
         obstacleClosetGameObject = null;
@@ -160,16 +148,16 @@ public class SteeringBehaviours : MonoBehaviour
         Collider closetObject = new Collider();
         foundObject = false;
         Vector2 localPosOfClosestObstacle = new Vector2();
-        CalculateBox(out var position, out var box);
-        foreach (var item in Physics.OverlapBox(position, box))
+    
+        foreach (var item in ProjectedCube.CollidedObjects)
             if (Vector2.Distance(transform.position, item.transform.position) < distance &&
-                item.CompareTag("Obstacles"))
+                item.CompareTag("Obstacles") && item != gameObject)
             {
                 Vector2 LocalPos = transform.InverseTransformPoint(item.transform.position);
 
                 if (LocalPos.x >= 0)
                 {
-                    var ExpandedRadius = item.bounds.size.magnitude +
+                    var ExpandedRadius = item.GetComponent<Collider>().bounds.size.magnitude +
                                          _vehicle.GetComponent<Collider>().bounds.size.magnitude;
                     if (Mathf.Abs(LocalPos.y) < ExpandedRadius)
                     {
@@ -185,7 +173,7 @@ public class SteeringBehaviours : MonoBehaviour
                         {
                             distance = ip;
                             foundObject = true;
-                            closetObject = item;
+                            closetObject = item.GetComponent<Collider>();
                             obstacleClosetGameObject = item.gameObject;
                             localPosOfClosestObstacle = LocalPos;
                         }
@@ -196,7 +184,6 @@ public class SteeringBehaviours : MonoBehaviour
         Vector2 steeringForce = new Vector2();
         if (foundObject)
         {
-            Debug.Log("yay");
             //the closer the agent is to an object, the stronger the 
             //steering force should be
             var multiplier = 1.0f + (boxSize - localPosOfClosestObstacle.x) /
@@ -214,7 +201,7 @@ public class SteeringBehaviours : MonoBehaviour
                                localPosOfClosestObstacle.x) *
                                BrakingWeight;
             obstacleForce = transform.TransformPoint(steeringForce);
-            obstacleForce = new Vector2(obstacleForce.x, obstacleForce.y) * 15;
+            obstacleForce = new Vector2(obstacleForce.x, obstacleForce.y) ;
         }
   
         return obstacleForce;

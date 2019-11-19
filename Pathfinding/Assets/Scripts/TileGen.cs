@@ -4,6 +4,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TileGen : MonoBehaviour
 {
+    public LayerMask MASK;
     public GameObject Cube;
     public List<GameObject> GO = new List<GameObject>();
     public int Area;

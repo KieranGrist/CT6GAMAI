@@ -25,8 +25,6 @@ public class Vehicle : MonoBehaviour {
 
     //The thrust this agent can produce
     public float MaxForce = 1;
-    //We use this to determine how fast the agent can turn, but just ignore it for, we won't be using it
-    public float MaxTurnRate = 1.0f;
 
     public Vector2 SteeringForce;
     public SteeringBehaviours SB;

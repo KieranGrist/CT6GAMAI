@@ -1,22 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum PathfinderType
-{
-    AStar,
-    BreadthFirstSeach,
-    DepthFirstSearch,
-    Dijkstras,
-    NoPath
-}
+
 
 public class NavGraph : MonoBehaviour
 {
     public List<TileNode> Nodes = new List<TileNode>();
-   public Pathfinder PathfindingTechnique;
-    Pathfinder PreviousTechnique;
-  public  PathfinderType pathfindingType;
-    PathfinderType PreviousPathfinder;
+   public Pathfinder PathfindingTechnique;   
     LayerMask TileMask;
     public static NavGraph map;
 
@@ -25,35 +15,8 @@ public class NavGraph : MonoBehaviour
         AddNodes();
         map = this;
       DontDestroyOnLoad(gameObject);
-
-        PreviousPathfinder = PathfinderType.NoPath;
-        TechniqueSelector();
+        PathfindingTechnique = new ASTAR();
      
-    }
-
-
-    void TechniqueSelector()
-    {
-        if (pathfindingType != PreviousPathfinder)
-        {
-            switch (pathfindingType)
-            {
-                case PathfinderType.AStar:
-                    PathfindingTechnique = new ASTAR();
-                    break;
-                case PathfinderType.BreadthFirstSeach:
-                    PathfindingTechnique = new BFS();
-                    break;
-                case PathfinderType.DepthFirstSearch:
-                    PathfindingTechnique = new DFS();
-                    break;
-                case PathfinderType.Dijkstras:
-                    PathfindingTechnique = new Dijkstras();
-                    break;
-            }         
-            PreviousPathfinder = pathfindingType;
-        }
-
     }
     void AddNodes()
     {
