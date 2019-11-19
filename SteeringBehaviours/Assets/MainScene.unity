@@ -574,7 +574,7 @@ Transform:
   m_GameObject: {fileID: 712543393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 1000, y: 1, z: 1000}
   m_Children:
   - {fileID: 1538570769}
   - {fileID: 638004116}
@@ -723,8 +723,8 @@ MonoBehaviour:
   - {fileID: 1179786055626976837, guid: 94197aad5645c5e47a71f844229fd2d0, type: 3}
   - {fileID: 624506679185093063, guid: f02c656dff56c6c49983df66daabe8aa, type: 3}
   GenreatedObjects: []
-  Radius: 50
-  CluterAmmount: 500
+  Radius: 500
+  CluterAmmount: 1000
 --- !u!1 &1538570768
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,17 +928,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsSeekOn: 0
-  SeekOnTargetPos: {x: 0, y: 0, z: 0}
+  SeekOnTargetPos: {x: 0, y: 0}
   SeekOnStopDistance: 0
   IsWanderOn: 0
-  WanderRadius: 10
+  WanderRadius: 500
   TurnChance: 0.05
-  WanderTarget: {x: 0, y: 0, z: 0}
-  wanderForce: {x: 0, y: 0, z: 0}
+  wanderForce: {x: 0, y: 0}
   IsObstacleAvoidenceOn: 0
   ObstacleClosetGameObject: {fileID: 0}
-  ObstacleForce: {x: 0, y: 0, z: 0}
+  ObstacleForce: {x: 0, y: 0}
   BoxSize: 6
+  FoundObject: 0
   IsEvadeOn: 0
   IsPursueOn: 0
 --- !u!114 &2075445486
@@ -953,15 +953,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f48d1b58af8cd4db4253d78c8884f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: {x: 0, y: 0, z: 0}
+  Velocity: {x: 0, y: 0}
   Mass: 1
   MaxSpeed: 5
   MaxForce: 1
   MaxTurnRate: 1
-  SteeringForce: {x: 0, y: 0, z: 0}
+  SteeringForce: {x: 0, y: 0}
   SB: {fileID: 0}
-  Heading: {x: 0, y: 0, z: 0}
-  Side: {x: 0, y: 0, z: 0}
+  Heading: {x: 0, y: 0}
+  Side: {x: 0, y: 0}
 --- !u!114 &2075445487
 MonoBehaviour:
   m_ObjectHideFlags: 0

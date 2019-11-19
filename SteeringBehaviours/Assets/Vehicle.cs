@@ -53,7 +53,8 @@ public class Vehicle : MonoBehaviour {
         if (Velocity != Vector2.zero)
         {
             transform.position += new Vector3(Velocity.x, 0 , Velocity.y) * Time.deltaTime;
-           // transform.forward = Velocity.normalized;
+            Vector3 norm = Velocity.normalized;
+            transform.forward = new Vector3(norm.x, 0, norm.y);
         }
 
         //transform.right should update on its own once we update the transform.forward

@@ -1,81 +1,84 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Vehicle))]
 [System.Serializable]
 public class SteeringBehaviours : MonoBehaviour
 {
 
-    Vehicle vehicle; //Reference to the vehicicle attached to the current object
+    Vehicle _vehicle; //Reference to the vehicle attached to the current object
     [Header("Seek")]
     //SeekOn - Variables to control Seeks Behavior
-    public bool IsSeekOn = false;  //If on AI will seek to a choosen location
-    public Vector2 SeekOnTargetPos; // Location to seek to 
-    public float SeekOnStopDistance; //Distance from the target, the AI will stop at the distancve
+    public bool isSeekOn = false;  //If on AI will seek to a chosen location
+    public Vector2 seekOnTargetPos; // Location to seek to 
+    public float seekOnStopDistance; //Distance from the target, the AI will stop at the distance
     [Header("Wander")]
     //WanderOn
-    public bool IsWanderOn = false; //If on the AI will randomly move around the map
-    public float WanderRadius = 10f; // Sets how large the wander radius is, if its outside this radius it will move backinside
-    public float TurnChance = 0.05f; //How often the AI can turn, the higher this is the more it will jitter
-    public Vector2 WanderTarget = Vector2.zero; // Sets the target to 0 
+    public bool isWanderOn = false; //If on the AI will randomly move around the map
+    public float wanderRadius = 10f; // Sets how large the wander radius is, if its outside this radius it will move back inside that radius
+    public float turnChance = 0.05f; //How often the AI can turn, the higher this is the more it will jitter
+    private readonly Vector2 _wanderTarget = Vector2.zero; // Sets the target to 0 
     public Vector2 wanderForce; //Vector that stores the current wander force 
 
     [Header("Obstacle")]
     //Obstacle Avodience On
-    public bool IsObstacleAvoidenceOn = false; //If on the AI will attempt to avoid obstables in its radius
-    public GameObject ObstacleClosetGameObject; //The closet object to the player
-    public Vector2 ObstacleForce; // Vector that stores the current force applied to get away from that object
-    public float BoxSize = 2; // Size of the collision box
+    public bool isObstacleAvoidanceOn = false; //If on the AI will attempt to avoid obstacles in its radius
+    public GameObject obstacleClosetGameObject; //The closet object to the player
+    public Vector2 obstacleForce; // Vector that stores the current force applied to get away from that object
+    public float boxSize = 2; // Size of the collision box
+        public bool foundObject = false;
     [Header("Evade")]
     //Evade On
-    public bool IsEvadeOn = false;
+    public bool isEvadeOn = false;
     [Header("Pursue")]
     //Pursue On
-    public bool IsPursueOn = false;
+    public bool isPursueOn = false;
     private void Start()
     {
-        vehicle = GetComponent<Vehicle>();
+        _vehicle = GetComponent<Vehicle>();
     }
     ///<summary>Calculates the current vehicle force </summary>
     public Vector2 Calculate()
     {
         //Sets the velocity sum to 0
-        Vector2 VelocitySum = Vector2.zero;
+        Vector2 velocitySum = Vector2.zero;
         //Calculation ifs, if their bool is true they will calculate their force and add it to the velocity sum
-        if (IsSeekOn)
+        if (isSeekOn)
         {
-            if (Vector2.Distance(transform.position, SeekOnTargetPos) <= SeekOnStopDistance)
+            if (Vector2.Distance(transform.position, seekOnTargetPos) <= seekOnStopDistance)
             {
                 //We're close enough to "stop"
-                IsSeekOn = false;
+                isSeekOn = false;
 
                 //Set the vehicle's velocity back to zero
-                vehicle.Velocity = Vector2.zero;
+                _vehicle.Velocity = Vector2.zero;
             }
             else
-                VelocitySum += Seek(SeekOnTargetPos);
+                velocitySum += Seek(seekOnTargetPos);
         }
-        if (IsWanderOn)
-            VelocitySum += Wander();
-        if (IsObstacleAvoidenceOn)
-            VelocitySum += ObstacleAvoidence();
-        return VelocitySum;
+        if (isWanderOn)
+            velocitySum += Wander();
+        if (isObstacleAvoidanceOn)
+            velocitySum += ObstacleAvoidance();
+        return velocitySum;
     }
     ///<summary>Goes towards from a  location </summary>
-    Vector2 Seek(Vector2 TargetPos)
+    private Vector2 Seek(Vector2 targetPos)
     {
 
-        Vector2 DesiredVelocity = ((TargetPos - new Vector2(transform.position.x, transform.position.z)).normalized) * vehicle.MaxSpeed;
+        Vector2 desiredVelocity = ((targetPos - new Vector2(transform.position.x, transform.position.z)).normalized) * _vehicle.MaxSpeed;
 
-        return (DesiredVelocity - vehicle.Velocity);
+        return (desiredVelocity - _vehicle.Velocity);
     }
     ///<summary>Goes away from a  location </summary>
-    Vector2 Flee(Vector2 TargetPos)
+    private Vector2 Flee(Vector2 targetPos)
     {
-        Vector2 DesiredVelocity = ((new Vector2(transform.position.x, transform.position.z) - TargetPos).normalized) * vehicle.MaxSpeed;
+        Vector2 desiredVelocity = ((new Vector2(transform.position.x, transform.position.z) - targetPos).normalized) * _vehicle.MaxSpeed;
 
-        return (DesiredVelocity - vehicle.Velocity);
+        return (desiredVelocity - _vehicle.Velocity);
     }
     ///<summary>Slows down when close to a location </summary>
     Vector2 Arrive(Vector2 TargetPos)
@@ -98,7 +101,7 @@ public class SteeringBehaviours : MonoBehaviour
         float RelativeHeading = Vector2.Dot(transform.forward.normalized, Evader.transform.forward.normalized);
         if (RelativeHeading > 0)
             Seek(Evader.transform.position);
-        var LookAheadTime = ToEvader.magnitude / (vehicle.MaxSpeed + Evader.Velocity.magnitude);
+        var LookAheadTime = ToEvader.magnitude / (_vehicle.MaxSpeed + Evader.Velocity.magnitude);
         var EvaderFuturePosition = new Vector2(Evader.transform.position.x, Evader.transform.position.z) + Evader.Velocity * LookAheadTime;
         Seek(EvaderFuturePosition);
     }
@@ -106,7 +109,7 @@ public class SteeringBehaviours : MonoBehaviour
     void Evade(Vehicle Pursuer)
     {
         Vector2 ToPursuer = Pursuer.transform.position - transform.position;
-        var LookAheadTime = ToPursuer.magnitude / (vehicle.MaxSpeed + Pursuer.Velocity.magnitude);
+        var LookAheadTime = ToPursuer.magnitude / (_vehicle.MaxSpeed + Pursuer.Velocity.magnitude);
         var PursuerFuturePosition =new Vector2(transform.position.x, transform.position.z) + Pursuer.Velocity * LookAheadTime;
         Flee(PursuerFuturePosition);
     }
@@ -114,12 +117,12 @@ public class SteeringBehaviours : MonoBehaviour
     Vector2 Wander()
     {
         //https://gamedev.stackexchange.com/questions/106737/wander-steering-behaviour-in-3d
-        if (transform.position.magnitude > WanderRadius)
+        if (transform.position.magnitude > wanderRadius)
         {
-            var directionToCenter = (WanderTarget - new Vector2(transform.position.x,transform.position.z)).normalized;
-            wanderForce = vehicle.Velocity.normalized + directionToCenter;
+            var directionToCenter = (_wanderTarget - new Vector2(transform.position.x,transform.position.z)).normalized;
+            wanderForce = _vehicle.Velocity.normalized + directionToCenter;
         }
-        else if (Random.value < TurnChance)
+        else if (Random.value < turnChance)
             wanderForce = GetRandomWanderForce();
         wanderForce = new Vector2(wanderForce.x, wanderForce.y); //Ensures the force does not increase/decrease the height of ARTIE
         return wanderForce;
@@ -130,28 +133,44 @@ public class SteeringBehaviours : MonoBehaviour
         //https://gamedev.stackexchange.com/questions/106737/wander-steering-behaviour-in-3d
         var randomPoint = Random.insideUnitCircle;
         var displacement = new Vector2(randomPoint.x, randomPoint.y);
-        displacement = Quaternion.LookRotation(vehicle.Velocity) * displacement;
-        Vector2 wanderForce = vehicle.Velocity.normalized + displacement;
+        displacement = Quaternion.LookRotation(_vehicle.Velocity) * displacement;
+        Vector2 wanderForce = _vehicle.Velocity.normalized + displacement;
         return wanderForce.normalized;
     }
     void OnDrawGizmos()
+    { 
+        CalculateBox(out var position, out var box);
+    Gizmos.DrawCube(position, box);
+    }
+
+    private void CalculateBox(out Vector3 position, out Vector3 box)
     {
-        Gizmos.DrawWireCube(vehicle.transform.position , new Vector3(BoxSize , BoxSize, BoxSize ));
+        position = new Vector3();
+        box = new Vector3();
+        position = transform.position;
+        position += transform.forward;
+        box = new Vector3(boxSize,boxSize,boxSize );
     }
     ///<summary>Will Avoid the Obstacles by going around the obstacle  </summary>
-    Vector2 ObstacleAvoidence()
+    Vector2 ObstacleAvoidance()
     {
-        float Distance = float.MaxValue;
-        Collider ClosetObject = new Collider();
-        Vector2 LocalPosOfClosestObstacle = new Vector2();
-        foreach (var item in Physics.OverlapBox(transform.position, new Vector3(BoxSize, BoxSize, BoxSize)))
-            if (Vector2.Distance(transform.position, item.transform.position) < Distance && item.CompareTag("Obstacles"))
+        obstacleClosetGameObject = null;
+        obstacleForce = new Vector2();
+        float distance = float.MaxValue;
+        Collider closetObject = new Collider();
+        foundObject = false;
+        Vector2 localPosOfClosestObstacle = new Vector2();
+        CalculateBox(out var position, out var box);
+        foreach (var item in Physics.OverlapBox(position, box))
+            if (Vector2.Distance(transform.position, item.transform.position) < distance &&
+                item.CompareTag("Obstacles"))
             {
                 Vector2 LocalPos = transform.InverseTransformPoint(item.transform.position);
 
                 if (LocalPos.x >= 0)
                 {
-                    var ExpandedRadius = item.bounds.size.magnitude + vehicle.GetComponent<Collider>().bounds.size.magnitude;
+                    var ExpandedRadius = item.bounds.size.magnitude +
+                                         _vehicle.GetComponent<Collider>().bounds.size.magnitude;
                     if (Mathf.Abs(LocalPos.y) < ExpandedRadius)
                     {
                         var cX = LocalPos.x;
@@ -162,40 +181,43 @@ public class SteeringBehaviours : MonoBehaviour
 
                         if (ip <= 0.0)
                             ip = cX + SqrtPart;
-                        if (ip < Distance)
+                        if (ip < distance)
                         {
-                            Distance = ip;
-
-                            ClosetObject = item;
-                            ObstacleClosetGameObject = item.gameObject;
-                            LocalPosOfClosestObstacle = LocalPos;
+                            distance = ip;
+                            foundObject = true;
+                            closetObject = item;
+                            obstacleClosetGameObject = item.gameObject;
+                            localPosOfClosestObstacle = LocalPos;
                         }
                     }
                 }
             }
-        Vector2 SteeringForce = new Vector2();
-        if (ClosetObject)
+
+        Vector2 steeringForce = new Vector2();
+        if (foundObject)
         {
+            Debug.Log("yay");
             //the closer the agent is to an object, the stronger the 
             //steering force should be
-            var multiplier = 1.0f + (BoxSize - LocalPosOfClosestObstacle.x) /
-                                BoxSize;
-
+            var multiplier = 1.0f + (boxSize - localPosOfClosestObstacle.x) /
+                                boxSize;
+            var mag = closetObject.bounds.size.magnitude;
             //calculate the lateral force
-            SteeringForce.y = (ClosetObject.bounds.size.magnitude -
-                               LocalPosOfClosestObstacle.y) * multiplier;
+            steeringForce.y = (mag -
+                               localPosOfClosestObstacle.y) * multiplier;
 
             //apply a braking force proportional to the obstacles distance from
             //the vehicle. 
            var BrakingWeight = 0.2f;
 
-            SteeringForce.x = (ClosetObject.bounds.size.magnitude -
-                               LocalPosOfClosestObstacle.x) *
+            steeringForce.x = (mag -
+                               localPosOfClosestObstacle.x) *
                                BrakingWeight;
+            obstacleForce = transform.TransformPoint(steeringForce);
+            obstacleForce = new Vector2(obstacleForce.x, obstacleForce.y) * 15;
         }
-        ObstacleForce = transform.TransformPoint(SteeringForce);
-        ObstacleForce = new Vector2(ObstacleForce.x, ObstacleForce.y) * 5 ;
-        return ObstacleForce;
+  
+        return obstacleForce;
     }
     ///<summary>Will Avoid the walls by going in the Opposite direction of the wall </summary>
     void WallAvoidence()
@@ -210,34 +232,34 @@ public class SteeringBehaviours : MonoBehaviour
     /// <param name="StopDistance"></param>
     public void SeekOn(Vector2 TargetPos, float StopDistance = 0.01f)
     {
-        IsSeekOn = true;
-        SeekOnTargetPos = TargetPos;
-        SeekOnStopDistance = StopDistance;
+        isSeekOn = true;
+        seekOnTargetPos = TargetPos;
+        seekOnStopDistance = StopDistance;
     }
     ///<summary>Turns On Seek </summary>
     public void SeekOff()
     {
-        IsSeekOn = false;
+        isSeekOn = false;
     }
     ///<summary>Turns On Wander </summary>
     public void WanderOn()
     {
-        IsWanderOn = true;
+        isWanderOn = true;
     }
     ///<summary>Turns Off Wander </summary>
     public void WanderOff()
     {
-        IsWanderOn = false;
-        vehicle.Velocity = Vector2.zero;
+        isWanderOn = false;
+        _vehicle.Velocity = Vector2.zero;
     }
     ///<summary>Turns On Obstacle Avoidence</summary>
     public void ObstacleAvodienceOn()
     {
-        IsObstacleAvoidenceOn = true;
+        isObstacleAvoidanceOn = true;
     }
     ///<summary>Turns Off Obstacle Avoidence</summary>
     public void ObstacleAvodienceOff()
     {
-        IsObstacleAvoidenceOn = false;
+        isObstacleAvoidanceOn = false;
     }
 }
