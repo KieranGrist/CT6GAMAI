@@ -5,19 +5,18 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Vehicle))]
-[System.Serializable]
 public class SteeringBehaviours : MonoBehaviour
 {
     
     Vehicle _vehicle; //Reference to the vehicle attached to the current object
     [Header("Seek")]
     //SeekOn - Variables to control Seeks Behavior
-    private bool isSeekOn = false;  //If on AI will seek to a chosen location
+    public bool isSeekOn = false;  //If on AI will seek to a chosen location
     public Vector2 seekOnTargetPos; // Location to seek to 
     public float seekOnStopDistance; //Distance from the target, the AI will stop at the distance
     [Header("Wander")]
     //WanderOn
-    private bool isWanderOn = false; //If on the AI will randomly move around the map
+    public bool isWanderOn = false; //If on the AI will randomly move around the map
     public float wanderRadius = 10f; // Sets how large the wander radius is, if its outside this radius it will move back inside that radius
     public float turnChance = 0.05f; //How often the AI can turn, the higher this is the more it will jitter
     private readonly Vector2 _wanderTarget = Vector2.zero; // Sets the target to 0 
@@ -25,18 +24,18 @@ public class SteeringBehaviours : MonoBehaviour
 
     [Header("Obstacle")]
     //Obstacle Avodience On
-    private bool isObstacleAvoidanceOn = false; //If on the AI will attempt to avoid obstacles in its radius
+    public bool isObstacleAvoidanceOn = false; //If on the AI will attempt to avoid obstacles in its radius
     private GameObject obstacleClosetGameObject; //The closet object to the player
     public Vector2 obstacleForce; // Vector that stores the current force applied to get away from that object
     public ProjCube ProjectedCube;
     public float boxSize = 2; // Size of the collision box
-        public bool foundObject = false;
+    private bool foundObject = false;
     [Header("Evade")]
     //Evade On
-    private bool isEvadeOn = false;
+    public bool isEvadeOn = false;
     [Header("Pursue")]
     //Pursue On
-    private bool isPursueOn = false;
+    public bool isPursueOn = false;
     private void Start()
     {
         _vehicle = GetComponent<Vehicle>();
@@ -49,7 +48,7 @@ public class SteeringBehaviours : MonoBehaviour
         //Calculation ifs, if their bool is true they will calculate their force and add it to the velocity sum
         if (isSeekOn)
         {
-            if (Vector2.Distance(transform.position, seekOnTargetPos) <= seekOnStopDistance)
+            if (Vector3.Distance(transform.position, new Vector3 (seekOnTargetPos.x,10, seekOnTargetPos.y)) <= seekOnStopDistance)
             {
                 //We're close enough to "stop"
                 isSeekOn = false;
@@ -201,7 +200,7 @@ public class SteeringBehaviours : MonoBehaviour
                                localPosOfClosestObstacle.x) *
                                BrakingWeight;
             obstacleForce = transform.TransformPoint(steeringForce);
-            obstacleForce = new Vector2(obstacleForce.x, obstacleForce.y) ;
+            obstacleForce = new Vector2(obstacleForce.x, obstacleForce.y) * 5 ;
         }
   
         return obstacleForce;

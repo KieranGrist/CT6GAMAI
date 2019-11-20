@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[RequireComponent(typeof(SteeringBehaviours))]
 public class AIAgent : MonoBehaviour
 {
     string[] FirstNames = new string[]
@@ -87,49 +86,34 @@ public class AIAgent : MonoBehaviour
     "Griffiths",
     "Moss"
    };
-
+    [Header("Affinities")]
     public bool Military;
     public bool Friendly = false;
+    [Header("Pathfinding")]
     public TileNode SourceNode;
     public TileNode TargetNode;
-    List<GameObject> PathGameObjects = new List<GameObject>();
+
+    [Header("Movement")]
     public bool RecievedPath = false;
-    bool Moving = false;
-    List<Vector3> TargetLocation = new List<Vector3>();
-    float InitialSpeed = 250.0f;
-    public LayerMask Mask;
-    List<float> Speed = new List<float>();
-    bool ResetAllNodes;
+    public List<Vector3> TargetLocation = new List<Vector3>();
+    List<GameObject> PathGameObjects = new List<GameObject>();
+
     bool FoundRoute;
 
-   
+    [Header("Collision Detection")]
+    public LayerMask Mask;
+
     [Header("Steering Behaviors")]
-    public Vector2 Velocity;
-
-    //Position, Heading and Side can be accessed from the transform component with transform.position, transform.forward and transform.right respectively
-
-    //"Constant" values, they are public so we can adjust them through the editor
-
-    //Represents the weight of an object, will effect its acceleration
-    public float Mass = 1;
-
-    //The maximum speed this agent can move per second
-    public float MaxSpeed = 1;
-
-    //The thrust this agent can produce
-    public float MaxForce = 1;
-    public float MaxTurnRate = 1.0f;
-    public Vector2 SteeringForce;
     public SteeringBehaviours SB;
-    public Vector2 Heading;
-    public Vector2 Side;
+
     void Start()
     {
         SB = GetComponent<SteeringBehaviours>();
-        SB.ObstacleAvodienceOn();
-        SB.ProjectedCube = SB.GetComponentInParent<ProjCube>();
+       // SB.ObstacleAvodienceOn();
+        SB.ProjectedCube = SB.GetComponentInChildren<ProjCube>();
         Friendly = Random.value >= 0.5;
-        Military = Random.value >= 0.5;
+        Military = false;
+        // Military = Random.value >= 0.5;
         string ObjectName = name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
@@ -144,42 +128,23 @@ public class AIAgent : MonoBehaviour
             foreach (var item in PathGameObjects)
                 Destroy(item);
 
-            TargetLocation.Clear();
-            Speed.Clear();
+            TargetLocation.Clear();   
             RecievedPath = true;
             for (int i = NavGraph.map.PathfindingTechnique.GeneratedPath.Count - 1; i > 0; i--)
             {
-                TargetLocation.Add(NavGraph.map.Nodes[NavGraph.map.PathfindingTechnique.GeneratedPath[i]].transform.position);
-                Speed.Add(InitialSpeed / (float)NavGraph.map.Nodes[NavGraph.map.PathfindingTechnique.GeneratedPath[i]].Cost);
+                TargetLocation.Add(NavGraph.map.Nodes[NavGraph.map.PathfindingTechnique.GeneratedPath[i]].transform.position);                    
             }
             TargetLocation.Add(TargetNode.transform.position);
-            Speed.Add(InitialSpeed / TargetNode.Cost);
-        }
-        SB.SeekOn(new Vector2(TargetNode.transform.position.x, TargetNode.transform.position.z));
-        SteeringForce = SB.Calculate();
-        Vector2 Acceleration = SteeringForce / Mass;
-        Velocity += Acceleration;
+        }    
 
-        Velocity = Vector2.ClampMagnitude(Velocity, MaxSpeed);
-        Heading = Velocity.normalized;
-        if (Velocity != Vector2.zero)
-        {
-            transform.position += new Vector3(Velocity.x, 0, Velocity.y) * Time.deltaTime;
-            Vector3 norm = Velocity.normalized;
-            transform.forward = new Vector3(norm.x, 0, norm.y);
-        }
         if (TargetLocation.Count > 0)
         {
-
-            if (Vector3.Distance(TargetLocation[0], transform.position) <= 2)
-            {
-                transform.position = TargetLocation[0];
-                Moving = false;
+            SB.SeekOn(new Vector2(TargetLocation[0].x, TargetLocation[0].z));
+            if (Vector3.Distance(TargetLocation[0], transform.position) <= 12)
                 TargetLocation.Remove(TargetLocation[0]);
-                Speed.Remove(Speed[0]);
-            }
-
         }
+        else
+            FoundRoute = false; 
     }
 
     private void OnDrawGizmos()
@@ -199,7 +164,7 @@ public class AIAgent : MonoBehaviour
     {
         foreach (var item in Physics.OverlapSphere(transform.position, 12))
         {
-            if (item.transform.gameObject.GetComponent<TileNode>())
+            if (item.gameObject.GetComponent<TileNode>())
                 SourceNode = item.transform.gameObject.GetComponent<TileNode>();
         }
         if (!FoundRoute && SourceNode != null)
@@ -215,7 +180,7 @@ public class AIAgent : MonoBehaviour
         TileNode RandomNode;
         do
             RandomNode = NavGraph.map.Nodes[Random.Range(0, NavGraph.map.Nodes.Count - 1)];
-        while ((!Military && (RandomNode.GetComponent<MilitaryAirport>()|| RandomNode.GetComponent<MilitaryBase>())) || RandomNode == SourceNode);
+        while ((!Military && RandomNode.Military) || RandomNode == SourceNode);
         if (!RandomNode.Walkable)
             RandomNode = NavGraph.map.Nodes[Random.Range(0, NavGraph.map.Nodes.Count - 1)];
         return RandomNode;

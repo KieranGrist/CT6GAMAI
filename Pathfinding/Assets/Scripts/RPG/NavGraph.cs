@@ -29,7 +29,6 @@ public class NavGraph : MonoBehaviour
     // Update is called once per frame
    void Update()
     {   
-
         map = this;
     }
 

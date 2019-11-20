@@ -12,11 +12,17 @@ public class ProjCube : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        CollidedObjects.Add(other.gameObject);
-    }   
+      if (other.CompareTag("Obstacles"))
+            CollidedObjects.Add(other.gameObject);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Obstacles"))
+            CollidedObjects.Remove(other.gameObject);
+    }
     // Update is called once per frame
     void LateUpdate()
     {
-        CollidedObjects.Clear();
+      //  CollidedObjects.Clear();
     }
 }

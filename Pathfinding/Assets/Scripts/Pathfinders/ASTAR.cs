@@ -48,7 +48,7 @@ public class ASTAR : Pathfinder
                 Route[Edge.To.Index] = Edge.From.Index;
                 Cost[Edge.To.Index] = CalculateCost(Edge, Target);
             }
-            if ((Edge.To.GetComponent<MilitaryAirport>() || Edge.To.GetComponent<MilitaryBase>()) && !ARTIE.Military)
+            if (    Edge.To.Military && !ARTIE.Military)
                 Cost[Edge.To.Index] = float.PositiveInfinity;
             if (Edge.To.Index == Target.Index && !TargetNodeFound)
             {

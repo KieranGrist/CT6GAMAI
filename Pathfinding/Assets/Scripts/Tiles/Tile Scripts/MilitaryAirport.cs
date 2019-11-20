@@ -7,7 +7,7 @@ public class MilitaryAirport : TileNode
 {
     public override void Reset()
     {
-
+        Military = true;
         Neighbours.Clear();
         List<Collider> hitObjects = new List<Collider>();
         HashSet<TileNode> AddedNodes = new HashSet<TileNode>();

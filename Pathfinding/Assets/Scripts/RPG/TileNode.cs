@@ -19,6 +19,7 @@ public abstract class TileNode : MonoBehaviour
     public float Distance = 110;
     public int Index;
     public bool Walkable;
+    public bool Military; 
     public TileAffinity Affinity;
     public bool Created;
     public List<TileEdge> Neighbours = new List<TileEdge>();
@@ -52,7 +53,7 @@ public abstract class TileNode : MonoBehaviour
             TextLocation.y = item.From.transform.position.y + (item.To.transform.position.y - item.From.transform.position.y) / 2;
             TextLocation.z = item.From.transform.position.z + (item.To.transform.position.z - item.From.transform.position.z) / 2;
 
-            Handles.Label(TextLocation, "Cost " + item.To.GetComponent<TileNode>().Cost);
+            Handles.Label(TextLocation, "Cost " + item.To.Cost);
             Gizmos.color = Color.blue;
             Vector3 A, B;
             A = item.From.transform.position;

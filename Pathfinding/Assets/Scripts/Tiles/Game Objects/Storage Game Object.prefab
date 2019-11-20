@@ -43,11 +43,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: warehouse
       objectReference: {fileID: 0}
-    - target: {fileID: -6697962432626532349, guid: 6a81dd56d53bf4c4d911d1b4215ca39b,
+    - target: {fileID: -927199367670048503, guid: 6a81dd56d53bf4c4d911d1b4215ca39b,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 527902d4fb10f01418e9e1bcf2cf488a, type: 2}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532557146240308298, guid: 6a81dd56d53bf4c4d911d1b4215ca39b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: -1359483909695637252, guid: 6a81dd56d53bf4c4d911d1b4215ca39b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6a81dd56d53bf4c4d911d1b4215ca39b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -113,6 +123,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.010000004
       objectReference: {fileID: 0}
+    - target: {fileID: -6697962432626532349, guid: 6a81dd56d53bf4c4d911d1b4215ca39b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 527902d4fb10f01418e9e1bcf2cf488a, type: 2}
     - target: {fileID: 7602110125592555261, guid: 6a81dd56d53bf4c4d911d1b4215ca39b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

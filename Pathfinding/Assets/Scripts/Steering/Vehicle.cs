@@ -21,7 +21,7 @@ public class Vehicle : MonoBehaviour {
     public float Mass = 1;
 
     //The maximum speed this agent can move per second
-    public float MaxSpeed = 1;
+    public float MaxSpeed = 10;
 
     //The thrust this agent can produce
     public float MaxForce = 1;

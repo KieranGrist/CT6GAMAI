@@ -46,6 +46,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: rocks (2)
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f3fcc5cde807e0e468ed655fd5460fd6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f3fcc5cde807e0e468ed655fd5460fd6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -130,6 +135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: rocks (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f3fcc5cde807e0e468ed655fd5460fd6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f3fcc5cde807e0e468ed655fd5460fd6,
         type: 3}
@@ -216,6 +226,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: rocks (1)
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f3fcc5cde807e0e468ed655fd5460fd6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f3fcc5cde807e0e468ed655fd5460fd6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -300,6 +315,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: rocks
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f3fcc5cde807e0e468ed655fd5460fd6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f3fcc5cde807e0e468ed655fd5460fd6,
         type: 3}

@@ -44,8 +44,8 @@ public class ArtieGenerator : MonoBehaviour
                 for (int i = 0; i < ArtieAmmount; i++)
                 {
                     GameObject go = Instantiate(Artie, transform.position, transform.rotation);
-                    go.transform.position = new Vector3(Random.Range(XMin, XMax), 10, Random.Range(ZMin, ZMax));
-                    go.AddComponent<AIAgent>();
+                    go.transform.position = new Vector3(Random.Range(XMin, XMax), 10, Random.Range(ZMin, ZMax));      
+                    go.transform.localScale = new Vector3(10,10,10);      
                     go.GetComponent<AIAgent>().Mask = Mask;
                 }
                 Generated = true;

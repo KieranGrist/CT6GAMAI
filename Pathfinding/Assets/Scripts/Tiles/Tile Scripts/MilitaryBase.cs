@@ -22,11 +22,7 @@ public class MilitaryBase : TileNode
             Neighbours.Add(new TileEdge(GetComponent<TileNode>(), hitObjects[i].gameObject.GetComponent<TileNode>()));
             i++;
         }
-
-        foreach (var item in Neighbours)
-        {
-          ////  item.To.Reset();
-        }
+        Military = true;
     }
 
     public  new void Start()
