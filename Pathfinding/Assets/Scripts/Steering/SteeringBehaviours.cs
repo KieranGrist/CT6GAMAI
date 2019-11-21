@@ -30,6 +30,11 @@ public class SteeringBehaviours : MonoBehaviour
     public ProjCube ProjectedCube;
     public float boxSize = 2; // Size of the collision box
     private bool foundObject = false;
+
+    [Header("Wall")]
+    //Obstacle Wall avodience On
+    public bool isWallAvodienceOn = false;
+    public float WallAvodidenceDistance = 10;
     [Header("Evade")]
     //Evade On
     public bool isEvadeOn = false;
@@ -63,6 +68,8 @@ public class SteeringBehaviours : MonoBehaviour
             velocitySum += Wander();
         if (isObstacleAvoidanceOn)
             velocitySum += ObstacleAvoidance();
+        if (isWallAvodienceOn)
+            velocitySum += WallAvoidence();
         return velocitySum;
     }
     ///<summary>Goes towards from a  location </summary>
@@ -147,8 +154,8 @@ public class SteeringBehaviours : MonoBehaviour
         Collider closetObject = new Collider();
         foundObject = false;
         Vector2 localPosOfClosestObstacle = new Vector2();
-    
-        foreach (var item in ProjectedCube.CollidedObjects)
+
+        foreach (var item in Physics.OverlapBox(transform.position, ProjectedCube.transform.localScale, ProjectedCube.transform.rotation))
             if (Vector2.Distance(transform.position, item.transform.position) < distance &&
                 item.CompareTag("Obstacles") && item != gameObject)
             {
@@ -206,9 +213,25 @@ public class SteeringBehaviours : MonoBehaviour
         return obstacleForce;
     }
     ///<summary>Will Avoid the walls by going in the Opposite direction of the wall </summary>
-    void WallAvoidence()
+    Vector2 WallAvoidence()
     {
-
+        Vector3 Norm = new Vector3( _vehicle.Velocity.x, 0, _vehicle.Velocity.y).normalized;
+        var Feelers = new[]
+        {
+           transform.position + (Norm * WallAvodidenceDistance),
+           transform.position + Quaternion.AngleAxis(45, Vector3.up) * Norm * (WallAvodidenceDistance / 2),
+           transform.position + Quaternion.AngleAxis(-45, Vector3.up) * Norm * (WallAvodidenceDistance / 2)
+        };
+        foreach (var item in Feelers)
+        {
+            LayerMask mask = LayerMask.GetMask("Walls");
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position,item ,out hit, WallAvodidenceDistance,mask))     
+                Debug.DrawRay(transform.position, item - transform.position, Color.red);
+            else
+                Debug.DrawRay(transform.position,   item - transform.position, Color.blue);
+        }
+        return new Vector2();
     }
 
     /// <summary>
@@ -247,5 +270,14 @@ public class SteeringBehaviours : MonoBehaviour
     public void ObstacleAvodienceOff()
     {
         isObstacleAvoidanceOn = false;
+    }
+    public void WallAvodienceOn()
+    {
+        isWallAvodienceOn = true;
+    }
+    ///<summary>Turns Off Obstacle Avoidence</summary>
+    public void WallAvodienceOff()
+    {
+        isWallAvodienceOn = false;
     }
 }

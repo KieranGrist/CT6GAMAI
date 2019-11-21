@@ -24,7 +24,7 @@ public class ArtieGenerator : MonoBehaviour
             if (!Generated)
             {
                 XMin = float.MaxValue;
-                XMax = float.MinValue;
+                XMax = float.MinValue;                
                 ZMax = float.MinValue;
                 ZMin = float.MaxValue;
                 foreach (var item in NavGraph.map.Nodes)
@@ -44,8 +44,8 @@ public class ArtieGenerator : MonoBehaviour
                 for (int i = 0; i < ArtieAmmount; i++)
                 {
                     GameObject go = Instantiate(Artie, transform.position, transform.rotation);
-                    go.transform.position = new Vector3(Random.Range(XMin, XMax), 10, Random.Range(ZMin, ZMax));      
-                    go.transform.localScale = new Vector3(10,10,10);      
+                    go.transform.position = new Vector3(Random.Range(XMin, XMax), 100, Random.Range(ZMin, ZMax));      
+                    go.transform.localScale = new Vector3(1,1,1);      
                     go.GetComponent<AIAgent>().Mask = Mask;
                 }
                 Generated = true;

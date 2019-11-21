@@ -2,9 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class ASTAR : Pathfinder
+[System.Serializable]
+public class ASTAR 
 {
-  
+    public TimeSpan TimeCalculated;
+    public float FunctionTime;
+    public bool TargetNodeFound = false;
+    public List<int> Route = new List<int>();
+    public List<float> Cost = new List<float>();
+    public List<bool> Visited = new List<bool>();
+    public List<int> GeneratedPath = new List<int>();
+
+    public void TileReset()
+    {
+        Route = new List<int>(NavGraph.map.Nodes.Count);
+        Visited = new List<bool>(NavGraph.map.Nodes.Count);
+        Cost = new List<float>(NavGraph.map.Nodes.Count);
+        for (int i = 0; i < NavGraph.map.Nodes.Count; i++)
+        {
+            Route.Add(-10);
+            Cost.Add(int.MaxValue);
+            Visited.Add(false);
+        }
+    }
+
+    public List<int> CalculatePath(TileNode Source, TileNode Target)
+    {
+        List<int> Path = new List<int>();
+
+        int currentNode = Target.Index;
+        Path.Add(currentNode);
+        while (currentNode != Source.Index)
+        {
+            currentNode = Route[currentNode];
+            Path.Add(currentNode);
+        }
+        GeneratedPath = Path;
+        return Path;
+    }
     void Start()
     {
         Route = new List<int>();
@@ -25,7 +60,7 @@ public class ASTAR : Pathfinder
         float F = G + H;
         return F;
     }
-    public override bool CalculateRoute(AIAgent ARTIE, TileNode Source, TileNode Target)
+    public bool CalculateRoute(AIAgent ARTIE, TileNode Source, TileNode Target)
     {
         DateTime StartTime = DateTime.Now;
         TileReset();
@@ -48,12 +83,14 @@ public class ASTAR : Pathfinder
                 Route[Edge.To.Index] = Edge.From.Index;
                 Cost[Edge.To.Index] = CalculateCost(Edge, Target);
             }
-            if (    Edge.To.Military && !ARTIE.Military)
+            if (Edge.To.Military && !ARTIE.Military)
                 Cost[Edge.To.Index] = float.PositiveInfinity;
             if (Edge.To.Index == Target.Index && !TargetNodeFound)
             {
                 TargetNodeFound = true;
+                break;
             }
+       
             foreach (var item in Edge.To.Neighbours)
             {
                 float G = item.GetCost() + Cost[Edge.To.Index];
@@ -63,9 +100,7 @@ public class ASTAR : Pathfinder
                 float F = G + H;
                 KeyValuePair<float, TileEdge> valuepair = new KeyValuePair<float, TileEdge>(F, item);
                 if (Edge.To.Walkable && !TraveresedEdges.Contains(item) && !MinPriorityQueue.data.Contains(valuepair))
-                {
-                    MinPriorityQueue.Enqueue(valuepair);
-                }
+                    MinPriorityQueue.Enqueue(valuepair);           
             }
         }
         TimeCalculated = DateTime.Now - StartTime;

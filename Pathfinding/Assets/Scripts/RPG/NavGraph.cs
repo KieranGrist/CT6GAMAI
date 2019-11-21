@@ -6,7 +6,7 @@ using UnityEngine;
 public class NavGraph : MonoBehaviour
 {
     public List<TileNode> Nodes = new List<TileNode>();
-   public Pathfinder PathfindingTechnique;   
+   public ASTAR PathfindingTechnique;   
     LayerMask TileMask;
     public static NavGraph map;
 
@@ -14,9 +14,7 @@ public class NavGraph : MonoBehaviour
     {
         AddNodes();
         map = this;
-      DontDestroyOnLoad(gameObject);
-        PathfindingTechnique = new ASTAR();
-     
+      DontDestroyOnLoad(gameObject);     
     }
     void AddNodes()
     {

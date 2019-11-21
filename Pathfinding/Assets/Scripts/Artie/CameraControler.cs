@@ -13,9 +13,7 @@ public class CameraControler : MonoBehaviour
    void Update()
     {
         if (AI ==null)
-        {
             AI = FindObjectOfType<AIAgent>().transform.gameObject;
-        }
         if (Input.GetKey(KeyCode.LeftShift))
             Speed = 15;
         else
@@ -38,14 +36,13 @@ public class CameraControler : MonoBehaviour
             transform.Rotate(new Vector3(-1, 0, 0), 1);
         if (Input.GetKey(KeyCode.R))
         {
-
             transform.eulerAngles = new Vector3(90, 0, 0);
-            transform.position = new Vector3(transform.position.x, 110, transform.position.z);
+            transform.position = new Vector3(transform.position.x, 20, transform.position.z);
         }
         if (Input.GetKey(KeyCode.F))
             ToggleFocus = !ToggleFocus;
         if (ToggleFocus)
-            transform.position = new Vector3(AI.transform.position.x, 110, AI.transform.position.z);
+            transform.position = new Vector3(AI.transform.position.x, 20, AI.transform.position.z);
 
 
     }

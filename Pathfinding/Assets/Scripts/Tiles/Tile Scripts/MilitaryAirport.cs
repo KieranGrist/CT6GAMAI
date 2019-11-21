@@ -31,7 +31,7 @@ public class MilitaryAirport : TileNode
         foreach (var item in airports)
             if (item != this || !AddedNodes.Contains(item))
             {
-                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item));
+                Neighbours.Add(new TileEdge(this, item));
                 AddedNodes.Add(item);
             }
         List<MilitaryAirport> MilitaryAirports = new List<MilitaryAirport>();
@@ -39,7 +39,7 @@ public class MilitaryAirport : TileNode
         foreach (var item in MilitaryAirports )
             if (item != this || !AddedNodes.Contains(item))
             {
-                Neighbours.Add(new TileEdge(GetComponent<TileNode>(), item));
+                Neighbours.Add(new TileEdge(this, item));
                 AddedNodes.Add(item);
             }
     }

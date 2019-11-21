@@ -45,7 +45,6 @@ public abstract class TileNode : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, Distance);
         foreach (var item in Neighbours)
         {
             Vector3 TextLocation = new Vector3();

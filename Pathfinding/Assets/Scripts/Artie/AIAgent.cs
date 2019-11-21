@@ -43,7 +43,8 @@ public class AIAgent : MonoBehaviour
        "Allyson",
        "Lyndsey",
        "Stacia",       
-        "Lauren"
+        "Lauren",
+        "Sarah"
     };
     string[] LastNames = new string[]
      {
@@ -82,6 +83,7 @@ public class AIAgent : MonoBehaviour
     "Baldwin",
     "Wilkinson",
     "Wade",
+    "Ryan",
     "Williams",
     "Griffiths",
     "Moss"
@@ -109,7 +111,8 @@ public class AIAgent : MonoBehaviour
     void Start()
     {
         SB = GetComponent<SteeringBehaviours>();
-       // SB.ObstacleAvodienceOn();
+        SB.ObstacleAvodienceOn();
+        SB.WallAvodienceOn();
         SB.ProjectedCube = SB.GetComponentInChildren<ProjCube>();
         Friendly = Random.value >= 0.5;
         Military = false;
@@ -135,16 +138,19 @@ public class AIAgent : MonoBehaviour
                 TargetLocation.Add(NavGraph.map.Nodes[NavGraph.map.PathfindingTechnique.GeneratedPath[i]].transform.position);                    
             }
             TargetLocation.Add(TargetNode.transform.position);
-        }    
+        }
 
         if (TargetLocation.Count > 0)
         {
             SB.SeekOn(new Vector2(TargetLocation[0].x, TargetLocation[0].z));
-            if (Vector3.Distance(TargetLocation[0], transform.position) <= 12)
+            if (Vector3.Distance(TargetLocation[0], transform.position) <= 3)
                 TargetLocation.Remove(TargetLocation[0]);
         }
         else
-            FoundRoute = false; 
+        {
+            FoundRoute = false;
+            RecievedPath = false;
+        }
     }
 
     private void OnDrawGizmos()
@@ -160,7 +166,7 @@ public class AIAgent : MonoBehaviour
             GetComponent<Renderer>().material.color = Color.blue;
         Handles.Label(TextLocation, name, style); 
     }
-    void LateUpdate ()
+    void Update ()
     {
         foreach (var item in Physics.OverlapSphere(transform.position, 12))
         {

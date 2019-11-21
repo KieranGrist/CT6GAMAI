@@ -67,7 +67,6 @@
     <Compile Include="Assets\Scripts\Artie\ArtieGenerator.cs" />
     <Compile Include="Assets\Scripts\Artie\CameraControler.cs" />
     <Compile Include="Assets\Scripts\DistanceCalculator.cs" />
-    <Compile Include="Assets\Scripts\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\Pathfinders\ASTAR.cs" />
     <Compile Include="Assets\Scripts\PriorityQueue.cs" />
     <Compile Include="Assets\Scripts\RPG\NavGraph.cs" />

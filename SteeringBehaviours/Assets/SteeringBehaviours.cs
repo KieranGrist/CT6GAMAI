@@ -5,19 +5,18 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Vehicle))]
-[System.Serializable]
 public class SteeringBehaviours : MonoBehaviour
 {
 
     Vehicle _vehicle; //Reference to the vehicle attached to the current object
     [Header("Seek")]
     //SeekOn - Variables to control Seeks Behavior
-    private bool isSeekOn = false;  //If on AI will seek to a chosen location
+    public bool isSeekOn = false;  //If on AI will seek to a chosen location
     public Vector2 seekOnTargetPos; // Location to seek to 
     public float seekOnStopDistance; //Distance from the target, the AI will stop at the distance
     [Header("Wander")]
     //WanderOn
-    private bool isWanderOn = false; //If on the AI will randomly move around the map
+    public bool isWanderOn = false; //If on the AI will randomly move around the map
     public float wanderRadius = 10f; // Sets how large the wander radius is, if its outside this radius it will move back inside that radius
     public float turnChance = 0.05f; //How often the AI can turn, the higher this is the more it will jitter
     private readonly Vector2 _wanderTarget = Vector2.zero; // Sets the target to 0 
@@ -25,18 +24,24 @@ public class SteeringBehaviours : MonoBehaviour
 
     [Header("Obstacle")]
     //Obstacle Avodience On
-    private bool isObstacleAvoidanceOn = false; //If on the AI will attempt to avoid obstacles in its radius
+    public bool isObstacleAvoidanceOn = false; //If on the AI will attempt to avoid obstacles in its radius
     private GameObject obstacleClosetGameObject; //The closet object to the player
     public Vector2 obstacleForce; // Vector that stores the current force applied to get away from that object
     public ProjCube ProjectedCube;
     public float boxSize = 2; // Size of the collision box
-        public bool foundObject = false;
+    private bool foundObject = false;
+
+    [Header("Wall")]
+    //Obstacle Wall avodience On
+    public bool isWallAvodienceOn = false;
+    public Vector2 wallForce; // Vector that stores the current force applied to get away from that object
+    public float WallAvodidenceDistance = 10;
     [Header("Evade")]
     //Evade On
-    private bool isEvadeOn = false;
+    public bool isEvadeOn = false;
     [Header("Pursue")]
     //Pursue On
-    private bool isPursueOn = false;
+    public bool isPursueOn = false;
     private void Start()
     {
         _vehicle = GetComponent<Vehicle>();
@@ -49,7 +54,7 @@ public class SteeringBehaviours : MonoBehaviour
         //Calculation ifs, if their bool is true they will calculate their force and add it to the velocity sum
         if (isSeekOn)
         {
-            if (Vector2.Distance(transform.position, seekOnTargetPos) <= seekOnStopDistance)
+            if (Vector3.Distance(transform.position, new Vector3(seekOnTargetPos.x, 10, seekOnTargetPos.y)) <= seekOnStopDistance)
             {
                 //We're close enough to "stop"
                 isSeekOn = false;
@@ -64,6 +69,8 @@ public class SteeringBehaviours : MonoBehaviour
             velocitySum += Wander();
         if (isObstacleAvoidanceOn)
             velocitySum += ObstacleAvoidance();
+        if (isWallAvodienceOn)
+            velocitySum += WallAvoidence();
         return velocitySum;
     }
     ///<summary>Goes towards from a  location </summary>
@@ -111,7 +118,7 @@ public class SteeringBehaviours : MonoBehaviour
     {
         Vector2 ToPursuer = Pursuer.transform.position - transform.position;
         var LookAheadTime = ToPursuer.magnitude / (_vehicle.MaxSpeed + Pursuer.Velocity.magnitude);
-        var PursuerFuturePosition =new Vector2(transform.position.x, transform.position.z) + Pursuer.Velocity * LookAheadTime;
+        var PursuerFuturePosition = new Vector2(transform.position.x, transform.position.z) + Pursuer.Velocity * LookAheadTime;
         Flee(PursuerFuturePosition);
     }
     ///<summary>Returns a force to Wander towards </summary>
@@ -120,7 +127,7 @@ public class SteeringBehaviours : MonoBehaviour
         //https://gamedev.stackexchange.com/questions/106737/wander-steering-behaviour-in-3d
         if (transform.position.magnitude > wanderRadius)
         {
-            var directionToCenter = (_wanderTarget - new Vector2(transform.position.x,transform.position.z)).normalized;
+            var directionToCenter = (_wanderTarget - new Vector2(transform.position.x, transform.position.z)).normalized;
             wanderForce = _vehicle.Velocity.normalized + directionToCenter;
         }
         else if (Random.value < turnChance)
@@ -138,8 +145,7 @@ public class SteeringBehaviours : MonoBehaviour
         Vector2 wanderForce = _vehicle.Velocity.normalized + displacement;
         return wanderForce.normalized;
     }
-
-///<summary>Will Avoid the Obstacles by going around the obstacle  </summary>
+    ///<summary>Will Avoid the Obstacles by going around the obstacle  </summary>
     Vector2 ObstacleAvoidance()
     {
         obstacleClosetGameObject = null;
@@ -148,8 +154,8 @@ public class SteeringBehaviours : MonoBehaviour
         Collider closetObject = new Collider();
         foundObject = false;
         Vector2 localPosOfClosestObstacle = new Vector2();
-    
-        foreach (var item in ProjectedCube.CollidedObjects)
+
+        foreach (var item in Physics.OverlapBox(transform.position, ProjectedCube.transform.localScale, transform.rotation))
             if (Vector2.Distance(transform.position, item.transform.position) < distance &&
                 item.CompareTag("Obstacles") && item != gameObject)
             {
@@ -195,7 +201,7 @@ public class SteeringBehaviours : MonoBehaviour
 
             //apply a braking force proportional to the obstacles distance from
             //the vehicle. 
-           var BrakingWeight = 0.2f;
+            var BrakingWeight = 0.2f;
 
             steeringForce.x = (mag -
                                localPosOfClosestObstacle.x) *
@@ -203,13 +209,52 @@ public class SteeringBehaviours : MonoBehaviour
             obstacleForce = transform.TransformPoint(steeringForce);
             obstacleForce = new Vector2(obstacleForce.x, obstacleForce.y) ;
         }
-  
+
         return obstacleForce;
     }
     ///<summary>Will Avoid the walls by going in the Opposite direction of the wall </summary>
-    void WallAvoidence()
+    Vector2 WallAvoidence()
     {
+        Vector3 Norm = new Vector3(_vehicle.Velocity.x, 0, _vehicle.Velocity.y).normalized;
+        var Feelers = new[]
+        {
+           transform.position + (Norm * WallAvodidenceDistance),
+           transform.position + Quaternion.AngleAxis(45, Vector3.up) * Norm * (WallAvodidenceDistance / 2),
+           transform.position + Quaternion.AngleAxis(-45, Vector3.up) * Norm * (WallAvodidenceDistance / 2)
+        };
+        var DistToThis = 0.0f;
+        var DistToClosest = float.MaxValue;
+        Collider ClosestWall = new Collider();
+        Vector2 SteeringForce,
+          ClosestPoint;  //holds the closest intersection point
+        ClosestPoint = new Vector2();
+        SteeringForce = new Vector2();
+        foreach (var item in Feelers)
+        {
+            LayerMask mask = LayerMask.GetMask("Walls");
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, item, out hit, WallAvodidenceDistance, mask))
+            {
+                Debug.DrawRay(transform.position, item - transform.position, Color.red);
+                DistToThis = Vector2.Distance(new Vector2(transform.position.x, transform.position.y),new Vector2(item.x, item.z));
+                if (DistToThis < DistToClosest)
+                {
+                    DistToClosest = DistToThis;
+                    ClosestWall = hit.collider;
+                    ClosestPoint = new Vector2(hit.normal.x, hit.normal.z);
+                }
+            }
+            else
+                Debug.DrawRay(transform.position, item - transform.position, Color.blue);
 
+            if (ClosestWall)
+            {                
+                Vector2 OverShoot = new Vector2(item.x, item.z) - ClosestPoint;
+                SteeringForce  = new Vector2(hit.normal.x, hit.normal.z) * OverShoot.magnitude;
+            }
+        }
+        wallForce = SteeringForce;
+        return SteeringForce;
     }
 
     /// <summary>
@@ -248,5 +293,14 @@ public class SteeringBehaviours : MonoBehaviour
     public void ObstacleAvodienceOff()
     {
         isObstacleAvoidanceOn = false;
+    }
+    public void WallAvodienceOn()
+    {
+        isWallAvodienceOn = true;
+    }
+    ///<summary>Turns Off Obstacle Avoidence</summary>
+    public void WallAvodienceOff()
+    {
+        isWallAvodienceOn = false;
     }
 }
