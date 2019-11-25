@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Vehicle))]
 public class SteeringBehaviours : MonoBehaviour
 {
+    [Header("Calculated")]
+  public  Vector2 velocitySum;
 
     Vehicle _vehicle; //Reference to the vehicle attached to the current object
     [Header("Seek")]
@@ -14,6 +16,8 @@ public class SteeringBehaviours : MonoBehaviour
     public bool isSeekOn = false;  //If on AI will seek to a chosen location
     public Vector2 seekOnTargetPos; // Location to seek to 
     public float seekOnStopDistance; //Distance from the target, the AI will stop at the distance
+    public Vector2 seekForce; //Vector that stores the current seek force 
+    public GameObject TargetGameObject;
     [Header("Wander")]
     //WanderOn
     public bool isWanderOn = false; //If on the AI will randomly move around the map
@@ -25,12 +29,12 @@ public class SteeringBehaviours : MonoBehaviour
     [Header("Obstacle")]
     //Obstacle Avodience On
     public bool isObstacleAvoidanceOn = false; //If on the AI will attempt to avoid obstacles in its radius
-    private GameObject obstacleClosetGameObject; //The closet object to the player
     public Vector2 obstacleForce; // Vector that stores the current force applied to get away from that object
     public ProjCube ProjectedCube;
-    public float boxSize = 2; // Size of the collision box
-    private bool foundObject = false;
-
+    public float BoxSize = 3;
+    public bool foundObject = false;
+    public float distance = float.MaxValue;
+    public Collider closetObject = new Collider();
     [Header("Wall")]
     //Obstacle Wall avodience On
     public bool isWallAvodienceOn = false;
@@ -49,15 +53,16 @@ public class SteeringBehaviours : MonoBehaviour
     ///<summary>Calculates the current vehicle force </summary>
     public Vector2 Calculate()
     {
-        //Sets the velocity sum to 0
-        Vector2 velocitySum = Vector2.zero;
+        seekOnTargetPos = new Vector2(TargetGameObject.transform.position.x, TargetGameObject.transform.position.z);
+           //Sets the velocity sum to 0
+           velocitySum = Vector2.zero;
         //Calculation ifs, if their bool is true they will calculate their force and add it to the velocity sum
         if (isSeekOn)
         {
-            if (Vector3.Distance(transform.position, new Vector3(seekOnTargetPos.x, 10, seekOnTargetPos.y)) <= seekOnStopDistance)
+            if (Vector3.Distance(transform.position, new Vector3(seekOnTargetPos.x, _vehicle.transform.position.y, seekOnTargetPos.y)) <= seekOnStopDistance)
             {
                 //We're close enough to "stop"
-                isSeekOn = false;
+                SeekOff();
 
                 //Set the vehicle's velocity back to zero
                 _vehicle.Velocity = Vector2.zero;
@@ -68,7 +73,7 @@ public class SteeringBehaviours : MonoBehaviour
         if (isWanderOn)
             velocitySum += Wander();
         if (isObstacleAvoidanceOn)
-            velocitySum += ObstacleAvoidance();
+            velocitySum += ObstacleAvoidance(); 
         if (isWallAvodienceOn)
             velocitySum += WallAvoidence();
         return velocitySum;
@@ -78,8 +83,8 @@ public class SteeringBehaviours : MonoBehaviour
     {
 
         Vector2 desiredVelocity = ((targetPos - new Vector2(transform.position.x, transform.position.z)).normalized) * _vehicle.MaxSpeed;
-
-        return (desiredVelocity - _vehicle.Velocity);
+        seekForce = (desiredVelocity - _vehicle.Velocity);
+        return seekForce;
     }
     ///<summary>Goes away from a  location </summary>
     private Vector2 Flee(Vector2 targetPos)
@@ -148,113 +153,78 @@ public class SteeringBehaviours : MonoBehaviour
     ///<summary>Will Avoid the Obstacles by going around the obstacle  </summary>
     Vector2 ObstacleAvoidance()
     {
-        obstacleClosetGameObject = null;
+        //Set the width of the box to be the bounds of the agent and the length to the speed
+        ProjectedCube.transform.localScale = new Vector3(gameObject.GetComponent<Collider>().bounds.size.x  , ProjectedCube.transform.localScale.y, BoxSize + (_vehicle.Velocity.magnitude / _vehicle.MaxSpeed) * BoxSize);
+        //Make sure the box is transformed infront of the player
+        ProjectedCube.transform.localPosition = new Vector3(0, 0, ProjectedCube.transform.localScale.z / 2);
         obstacleForce = new Vector2();
-        float distance = float.MaxValue;
-        Collider closetObject = new Collider();
+        distance = float.MaxValue;
+        closetObject = new Collider();
         foundObject = false;
         Vector2 localPosOfClosestObstacle = new Vector2();
+        foreach (var item in ProjectedCube.CollidedObjects)
+        {
 
-        foreach (var item in Physics.OverlapBox(transform.position, ProjectedCube.transform.localScale, transform.rotation))
-            if (Vector2.Distance(transform.position, item.transform.position) < distance &&
-                item.CompareTag("Obstacles") && item != gameObject)
+            Vector3 InvTransPoint = new Vector3();
+            InvTransPoint = transform.InverseTransformPoint(item.gameObject.transform.position);
+            Vector2 LocalPos = new Vector2(InvTransPoint.x, InvTransPoint.z);
+
+            if (LocalPos.y >= 0)
             {
-                Vector2 LocalPos = transform.InverseTransformPoint(item.transform.position);
-
-                if (LocalPos.x >= 0)
+                var ExpandedRadius = item.bounds.size.magnitude +
+                                     _vehicle.GetComponent<Collider>().bounds.size.magnitude;
+                if (Mathf.Abs(LocalPos.y) < ExpandedRadius)
                 {
-                    var ExpandedRadius = item.GetComponent<Collider>().bounds.size.magnitude +
-                                         _vehicle.GetComponent<Collider>().bounds.size.magnitude;
-                    if (Mathf.Abs(LocalPos.y) < ExpandedRadius)
+                    var cX = LocalPos.x;
+                    var cY = LocalPos.y;
+                    var SqrtPart = Mathf.Sqrt(ExpandedRadius * ExpandedRadius - cY * cY);
+
+                    var ip = cX - SqrtPart;
+
+                    if (ip <= 0.0)
+                        ip = cX + SqrtPart;
+                    if (ip < distance)
                     {
-                        var cX = LocalPos.x;
-                        var cY = LocalPos.y;
-                        var SqrtPart = Mathf.Sqrt(ExpandedRadius * ExpandedRadius - cY * cY);
-
-                        var ip = cX - SqrtPart;
-
-                        if (ip <= 0.0)
-                            ip = cX + SqrtPart;
-                        if (ip < distance)
-                        {
-                            distance = ip;
-                            foundObject = true;
-                            closetObject = item.GetComponent<Collider>();
-                            obstacleClosetGameObject = item.gameObject;
-                            localPosOfClosestObstacle = LocalPos;
-                        }
+                        distance = ip;
+                        foundObject = true;
+                        closetObject = item;                        
+                        localPosOfClosestObstacle = LocalPos;
                     }
                 }
             }
+        }
 
         Vector2 steeringForce = new Vector2();
         if (foundObject)
         {
             //the closer the agent is to an object, the stronger the 
             //steering force should be
-            var multiplier = 1.0f + (boxSize - localPosOfClosestObstacle.x) /
-                                boxSize;
+            var multiplier = 1.0f + (BoxSize - localPosOfClosestObstacle.x) /
+                                BoxSize;
             var mag = closetObject.bounds.size.magnitude;
+            var BrakingWeight = 0.2f;
+
             //calculate the lateral force
             steeringForce.y = (mag -
-                               localPosOfClosestObstacle.y) * multiplier;
+                               localPosOfClosestObstacle.y) * BrakingWeight;
 
             //apply a braking force proportional to the obstacles distance from
             //the vehicle. 
-            var BrakingWeight = 0.2f;
+     
 
             steeringForce.x = (mag -
                                localPosOfClosestObstacle.x) *
                                BrakingWeight;
-            obstacleForce = transform.TransformPoint(steeringForce);
-            obstacleForce = new Vector2(obstacleForce.x, obstacleForce.y) ;
+            Vector3 TransformedForce = transform.TransformPoint(steeringForce);
+            obstacleForce = new Vector2(TransformedForce.x, TransformedForce.z);
         }
-
         return obstacleForce;
+
     }
     ///<summary>Will Avoid the walls by going in the Opposite direction of the wall </summary>
     Vector2 WallAvoidence()
     {
-        Vector3 Norm = new Vector3(_vehicle.Velocity.x, 0, _vehicle.Velocity.y).normalized;
-        var Feelers = new[]
-        {
-           transform.position + (Norm * WallAvodidenceDistance),
-           transform.position + Quaternion.AngleAxis(45, Vector3.up) * Norm * (WallAvodidenceDistance / 2),
-           transform.position + Quaternion.AngleAxis(-45, Vector3.up) * Norm * (WallAvodidenceDistance / 2)
-        };
-        var DistToThis = 0.0f;
-        var DistToClosest = float.MaxValue;
-        Collider ClosestWall = new Collider();
-        Vector2 SteeringForce,
-          ClosestPoint;  //holds the closest intersection point
-        ClosestPoint = new Vector2();
-        SteeringForce = new Vector2();
-        foreach (var item in Feelers)
-        {
-            LayerMask mask = LayerMask.GetMask("Walls");
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, item, out hit, WallAvodidenceDistance, mask))
-            {
-                Debug.DrawRay(transform.position, item - transform.position, Color.red);
-                DistToThis = Vector2.Distance(new Vector2(transform.position.x, transform.position.y),new Vector2(item.x, item.z));
-                if (DistToThis < DistToClosest)
-                {
-                    DistToClosest = DistToThis;
-                    ClosestWall = hit.collider;
-                    ClosestPoint = new Vector2(hit.normal.x, hit.normal.z);
-                }
-            }
-            else
-                Debug.DrawRay(transform.position, item - transform.position, Color.blue);
-
-            if (ClosestWall)
-            {                
-                Vector2 OverShoot = new Vector2(item.x, item.z) - ClosestPoint;
-                SteeringForce  = new Vector2(hit.normal.x, hit.normal.z) * OverShoot.magnitude;
-            }
-        }
-        wallForce = SteeringForce;
-        return SteeringForce;
+        return new Vector2();
     }
 
     /// <summary>

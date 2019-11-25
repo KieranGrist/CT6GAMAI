@@ -11,9 +11,9 @@ public class Sheep : MonoBehaviour {
 	void Start ()
     {
         SB = GetComponent<SteeringBehaviours>();
-        //  SB.WanderOn();
+//  SB.WanderOn();
         SB.WallAvodienceOn();
-        //SB.ObstacleAvodienceOn();
+        SB.ObstacleAvodienceOn();
 	}
 	
 	// Update is called once per frame

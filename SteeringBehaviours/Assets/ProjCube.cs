@@ -4,15 +4,17 @@ using UnityEngine;
 [System.Serializable]
 public class ProjCube : MonoBehaviour
 {
-   public List<GameObject> CollidedObjects;
-    // Start is called before the first frame update
-    void Start()
+   public List<Collider> CollidedObjects;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Obstacles"))
+            CollidedObjects.Add(other);
     }
-    // Update is called once per frame
-    void LateUpdate()
+    private void OnTriggerExit(Collider other)
     {
-      //  CollidedObjects.Clear();
+        if (other.CompareTag("Obstacles"))
+            CollidedObjects.Remove(other);
     }
+
 }

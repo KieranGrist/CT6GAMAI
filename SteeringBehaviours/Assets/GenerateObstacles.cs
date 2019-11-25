@@ -24,7 +24,7 @@ public class GenerateObstacles : MonoBehaviour
                 go.transform.position = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
                 go.transform.position.Normalize();
                 go.transform.position *= Radius;
-                go.transform.position += new Vector3(transform.position.x, 16, transform.position.z);
+                go.transform.position += new Vector3(transform.position.x, 1, transform.position.z);
                 go.transform.parent = transform;
                 go.AddComponent<Rigidbody>();
                 go.tag = "Obstacles";

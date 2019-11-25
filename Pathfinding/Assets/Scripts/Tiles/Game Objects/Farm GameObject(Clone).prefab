@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5822249186764087361}
   m_Layer: 9
   m_Name: Cube (3)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 6477034746704975992}
   - component: {fileID: 2010881155671194841}
   - component: {fileID: 8082919555176706744}
+  - component: {fileID: 7530879324000728006}
   m_Layer: 0
   m_Name: HouseRoof
   m_TagString: Obstacles
@@ -185,6 +186,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 3498433547547372887, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &7530879324000728006
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398149002287476821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 3498433547547372887, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
 --- !u!1 &615344419214088332
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +212,7 @@ GameObject:
   - component: {fileID: 954178140253241573}
   - component: {fileID: 4359172244634430650}
   - component: {fileID: 8841668556705404674}
+  - component: {fileID: 146380313036698324}
   m_Layer: 0
   m_Name: HouseSide
   m_TagString: Obstacles
@@ -278,6 +294,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 6519202622750030915, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &146380313036698324
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615344419214088332}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 6519202622750030915, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
 --- !u!1 &786304520561760999
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +353,7 @@ GameObject:
   - component: {fileID: 5385931653025251498}
   - component: {fileID: 7233428840039836830}
   - component: {fileID: 9129257844857711828}
+  - component: {fileID: 9223157180021138148}
   m_Layer: 0
   m_Name: HouseFoundation
   m_TagString: Obstacles
@@ -391,6 +422,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!64 &9129257844857711828
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217365359659526232}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 5085172053156667987, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &9223157180021138148
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -517,6 +562,7 @@ GameObject:
   - component: {fileID: 229236389714782599}
   - component: {fileID: 4144155675734921891}
   - component: {fileID: 777765099367390212}
+  - component: {fileID: 1842588349249835501}
   m_Layer: 0
   m_Name: HouseVerandaRoof
   m_TagString: Obstacles
@@ -598,6 +644,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 6702761548351881135, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &1842588349249835501
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427574394592441767}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 6702761548351881135, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
 --- !u!1 &1819701378537159761
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +670,7 @@ GameObject:
   - component: {fileID: 7576584001007520256}
   - component: {fileID: 8128949966419111639}
   - component: {fileID: 4022558177919509500}
+  - component: {fileID: 1855839102557798265}
   m_Layer: 0
   m_Name: HouseFrontVeranda
   m_TagString: Obstacles
@@ -691,6 +752,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -3796579908365427429, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &1855839102557798265
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819701378537159761}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -3796579908365427429, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
 --- !u!1 &1921989598413909963
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +775,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577509835641159882}
-  - component: {fileID: 5134559851785436015}
   m_Layer: 0
   m_Name: barn
   m_TagString: Obstacles
@@ -725,20 +799,6 @@ Transform:
   m_Father: {fileID: 6607643698511306952}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!64 &5134559851785436015
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1921989598413909963}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}
 --- !u!1 &2147487991861304209
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +813,7 @@ GameObject:
   - component: {fileID: 841308368815699203}
   m_Layer: 9
   m_Name: Cube (9)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -843,6 +903,7 @@ GameObject:
   - component: {fileID: 4170366625170564897}
   - component: {fileID: 8314254317658501761}
   - component: {fileID: 3527608325233088143}
+  - component: {fileID: 6204123980159999718}
   m_Layer: 0
   m_Name: HouseSideSteps
   m_TagString: Obstacles
@@ -924,6 +985,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -2302878130839655534, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &6204123980159999718
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2435596706139346128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -2302878130839655534, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
 --- !u!1 &2857264181677317152
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +1013,7 @@ GameObject:
   - component: {fileID: 5953424640281456586}
   m_Layer: 9
   m_Name: Cube (11)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1025,7 +1100,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4079802551130442066}
-  - component: {fileID: 5626306935285240510}
   m_Layer: 0
   m_Name: farmhouse
   m_TagString: Obstacles
@@ -1056,20 +1130,6 @@ Transform:
   m_Father: {fileID: 6607643698511306952}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!64 &5626306935285240510
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2923518115942294976}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}
 --- !u!1 &3119456993907716344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,6 +1142,7 @@ GameObject:
   - component: {fileID: 613212585131707776}
   - component: {fileID: 3495873093955800707}
   - component: {fileID: 4639581439369955816}
+  - component: {fileID: 4765143638614162822}
   m_Layer: 0
   m_Name: HouseMain
   m_TagString: Obstacles
@@ -1163,6 +1224,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 1471405605533442928, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &4765143638614162822
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119456993907716344}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 1471405605533442928, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
 --- !u!1 &3485190823158385805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,7 +1249,7 @@ GameObject:
   - component: {fileID: 1877055228642272132}
   - component: {fileID: 5770581859995450827}
   - component: {fileID: 5168606126898644883}
-  - component: {fileID: 6171379220115245685}
+  - component: {fileID: 3232266314513329970}
   m_Layer: 0
   m_Name: BarnSupport
   m_TagString: Obstacles
@@ -1242,7 +1317,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6171379220115245685
+--- !u!64 &3232266314513329970
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1267,7 +1342,7 @@ GameObject:
   - component: {fileID: 1761294987927337774}
   - component: {fileID: 4346114287032804077}
   - component: {fileID: 4915259711552720329}
-  - component: {fileID: 7330595250095082318}
+  - component: {fileID: 6713052874920858444}
   m_Layer: 0
   m_Name: BarnRoof
   m_TagString: Obstacles
@@ -1335,7 +1410,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7330595250095082318
+--- !u!64 &6713052874920858444
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1363,7 +1438,7 @@ GameObject:
   - component: {fileID: 6728309489898041956}
   m_Layer: 9
   m_Name: Cube (10)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1452,7 +1527,7 @@ GameObject:
   - component: {fileID: 8975235052589954855}
   - component: {fileID: 5187707761307254743}
   - component: {fileID: 2901954392319205637}
-  - component: {fileID: 4010860423127195498}
+  - component: {fileID: 1912182444087552263}
   m_Layer: 0
   m_Name: BarnStructure
   m_TagString: Obstacles
@@ -1520,7 +1595,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4010860423127195498
+--- !u!64 &1912182444087552263
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1548,7 +1623,7 @@ GameObject:
   - component: {fileID: 2243198515932125626}
   m_Layer: 9
   m_Name: Cube (6)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1638,6 +1713,7 @@ GameObject:
   - component: {fileID: 2756595170581874299}
   - component: {fileID: 4840199263986475907}
   - component: {fileID: 1941195311497554765}
+  - component: {fileID: 8083004582415040407}
   m_Layer: 0
   m_Name: HouseSideRoof
   m_TagString: Obstacles
@@ -1719,6 +1795,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -4307552498046076264, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &8083004582415040407
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362617461578828378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -4307552498046076264, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
 --- !u!1 &7936563977623355406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,7 +1823,7 @@ GameObject:
   - component: {fileID: 1639213405920856459}
   m_Layer: 9
   m_Name: Cube (4)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1825,7 +1915,7 @@ GameObject:
   - component: {fileID: 5035719914389212966}
   m_Layer: 9
   m_Name: Cube (2)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1915,6 +2005,7 @@ GameObject:
   - component: {fileID: 1559504784255424679}
   - component: {fileID: 7442168116070019172}
   - component: {fileID: 8269215415138473933}
+  - component: {fileID: 1125212080796436302}
   m_Layer: 0
   m_Name: HouseVerandaFence
   m_TagString: Obstacles
@@ -1996,6 +2087,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 2815353077649229579, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
+--- !u!64 &1125212080796436302
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169880500754106533}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 2815353077649229579, guid: a7b4d1391f39b774ea0e263f93c39a90, type: 3}
 --- !u!1 &8170630364008247833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,7 +2115,7 @@ GameObject:
   - component: {fileID: 6031298856503049494}
   m_Layer: 9
   m_Name: Cube (8)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2102,7 +2207,7 @@ GameObject:
   - component: {fileID: 4858296722407349038}
   m_Layer: 9
   m_Name: Cube (5)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

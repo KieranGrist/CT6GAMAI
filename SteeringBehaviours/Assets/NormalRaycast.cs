@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalRaycast : MonoBehaviour
 {
     public Vector3 Normal;
+    public float WallAvodidenceDistance = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,19 +20,21 @@ public class NormalRaycast : MonoBehaviour
         RaycastHit hit;
         var Feelers = new[]
 {
-           transform.position + (Norm * 10),
-           transform.position + Quaternion.AngleAxis(45, Vector3.up) * Norm * (10 / 2),
-           transform.position + Quaternion.AngleAxis(-45, Vector3.up) * Norm * (10 / 2)
+                  transform.position + (Norm * WallAvodidenceDistance),
+                  transform.position + Quaternion.AngleAxis(45, Vector3.up) * Norm * (WallAvodidenceDistance / 2),
+                  transform.position + Quaternion.AngleAxis(-45, Vector3.up) * Norm * (WallAvodidenceDistance / 2)
         };
         foreach (var item in Feelers)
-            if (Physics.Raycast(transform.position, item, out hit, 10, mask))
+        {
+            if (Physics.Raycast(transform.position, item - transform.position, out hit, item.magnitude, mask))
             {
                 Debug.DrawRay(transform.position, item - transform.position, Color.red);
                 Normal = hit.normal;
             }
             else
             {
-                Debug.DrawRay(transform.position, item - transform.position, Color.blue );
+                Debug.DrawRay(transform.position, item - transform.position, Color.blue);
             }
+        }
     }
 }
