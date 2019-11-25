@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(Rigidbody))]
 public class Node : MonoBehaviour
 {
     public List<Edge> Neighbours = new List<Edge>();
@@ -9,14 +9,19 @@ public class Node : MonoBehaviour
     public float Distance = 2;
     public int Index;
     public bool Walkable = true;
-
+    Rigidbody rb;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
+        rb.freezeRotation = true;
+        gameObject.layer = LayerMask.GetMask("Node");
+        Walkable = true;
         //physics .check box if something is above it not walkable 
         //Physics.CheckBox()
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -32,35 +37,20 @@ public class Node : MonoBehaviour
         this.Walkable = Walkable;
         Neighbours = new List<Edge>();
     }
-    private void OnDrawGizmos()
-    {       
-        Gizmos.DrawWireCube(transform.position + new Vector3(0, 1, 0), new Vector3(1, 1, 1));
-        Gizmos.DrawWireCube(transform.position + new Vector3(0, 0, 0), new Vector3(2.8f, 0, 2.8f));
-    }
     public void Reset()
-    {
+    { 
         name = "Node " + Index;
-        Debug.Log(name + " Debug log");
-        foreach (var item in Physics.OverlapBox(transform.position + new Vector3(0, 1, 0), new Vector3(1, 1, 1), transform.rotation, LayerMask.GetMask("Obstacle")))
-        {
+        foreach (var item in Physics.OverlapBox(transform.position + new Vector3(0, 1, 0), transform.localScale, transform.rotation, LayerMask.GetMask("Obstacle")))
             if (item.gameObject != gameObject)
                 Walkable = false;
-            Debug.Log(item.name);
-        }
-
-
+        Neighbours = new List<Edge>();
         Neighbours.Clear();
         List<Collider> hitObjects = new List<Collider>();
-        foreach (var item in Physics.OverlapSphere(transform.position, Distance))
-        {
-            if (item.transform.gameObject != gameObject && item.GetComponent<Node>())
-                hitObjects.Add(item);
-        }  
-        int i = 0;
-        foreach (var item in  hitObjects)
-        {
-            Neighbours.Add(new Edge(GetComponent<Node>(), hitObjects[i].gameObject.GetComponent<Node>()));
-            i++;
-        }
+        foreach (var item in Physics.OverlapBox(transform.position, new Vector3((transform.localScale.x * 2) /2 - 0.2f , transform.localScale.y / 2 , (transform.localScale.z * 2) / 2 - 0.2f)))
+            if (item.transform.gameObject != gameObject && item.gameObject.GetComponent<Node>())
+                hitObjects.Add(item);             
+        foreach (var item in  hitObjects)   
+            Neighbours.Add(new Edge(this, item.gameObject.GetComponent<Node>()));
+   
     }
 }
