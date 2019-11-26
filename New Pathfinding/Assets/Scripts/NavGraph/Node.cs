@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody))]
+
 public abstract class Node : MonoBehaviour
 {
     public List<Edge> Neighbours = new List<Edge>();
@@ -21,12 +21,8 @@ public abstract class Node : MonoBehaviour
         Walkable = true;        
     }
     // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if (Walkable)
-            GetComponent<Renderer>().material.color = Color.black;
-        else
-            GetComponent<Renderer>().material.color = Color.green;
         name = "Node " + Index;
     }
 

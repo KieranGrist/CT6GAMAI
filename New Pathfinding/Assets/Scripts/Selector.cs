@@ -6,50 +6,36 @@ public enum RoadTypes
     Blank,
     Straight,
     Corner,
-
     RoadtypeMax
 }
 [ExecuteInEditMode]
 public class Selector : MonoBehaviour
 {
     public RoadTypes type = RoadTypes.Blank;
-  public  RoadTypes PreviousType;
-
+    public RoadTypes PreviousType;
     // Start is called before the first frame update
     void Start()
     {
-
+        RoadSelector();
     }
-    void TileCreator()
+    /// <summary>
+    /// This should only run once the procedural generation has finished
+    /// Only needs to be ran once!
+    /// </summary>
+   public void RoadSelector()
     {
-        if (type != PreviousType)
+        type = RoadTypes.Blank;
+        if (GetComponent<Node>())
+            DestroyImmediate(GetComponent<Node>());
+        foreach (var item in Physics.OverlapBox(transform.position + new Vector3(0, 0.5F, 0), new Vector3(transform.localScale.x * 0.5f, 1, transform.localScale.z * 0.5f), transform.rotation, LayerMask.GetMask("Road")))
         {
-            if (gameObject.GetComponent<Node>())
-                DestroyImmediate(gameObject.GetComponent<Node>());     
-            switch (type)
-            {
-                case RoadTypes.RoadtypeMax:
-                case RoadTypes.Blank:
-                    if (gameObject.GetComponent<Rigidbody>())
-                        DestroyImmediate(gameObject.GetComponent<Rigidbody>());
-           
-                    break;
-                case RoadTypes.Straight:
-                    gameObject.AddComponent<Straight>();
-                    break;
-                case RoadTypes.Corner:
-                    gameObject.AddComponent<Corner>();
-                    break;
-            }
-
+            gameObject.AddComponent<RoadTile>();
+                if (item.GetComponent<Straight>())
+                    type = RoadTypes.Straight;
+            if (item.GetComponent<Corner>())
+                type = RoadTypes.Corner;
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (Application.isPlaying && type == RoadTypes.Blank)
-        GetComponent<Renderer>().material.color = Color.green;
-        TileCreator();
-        PreviousType = type;
+        if(type == RoadTypes.Blank)
+        DestroyImmediate(gameObject);
     }
 }

@@ -6,7 +6,10 @@ public class RoadTile : Node
 {
     public override void Reset()
     {
+        Vector3 P = transform.position;
+        gameObject.AddComponent<Rigidbody>();
         RB();
+        transform.position = P;
         Cost = 5;
         name = "Node " + Index;
         foreach (var item in Physics.OverlapBox(transform.position + new Vector3(0, 0.5F, 0), new Vector3(transform.localScale.x * 0.5f, 1, transform.localScale.z * 0.5f), transform.rotation, LayerMask.GetMask("Obstacle")))
@@ -26,10 +29,10 @@ public class RoadTile : Node
         }
         else
         {
-            GetComponent<Renderer>().material.color = Color.green;
             DestroyImmediate(GetComponent<Rigidbody>());
             DestroyImmediate(this);
         }
+      DestroyImmediate(gameObject.GetComponent<Rigidbody>());
     }
 }
 

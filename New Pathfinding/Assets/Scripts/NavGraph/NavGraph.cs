@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class NavGraph : MonoBehaviour
 {
+    //Pipeline : Create Node Tile Map ->  Generate Racetrack -> Generate Obstabcles -> Selector -> Generate Nav Mash - > Place AI units -> AI units select personality -> Place Player -> AI Unit Pathfinding -> Play!
+
     public List<Node> Nodes = new List<Node>();
     public ASTAR PathfindingTechnique;
     LayerMask TileMask;
     public static NavGraph map;
     public bool ResetMap;
-    void Awake()
+    void Start  ()
     {
         AddNodes();
         map = this;
