@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
-public class Node : MonoBehaviour
+public abstract class Node : MonoBehaviour
 {
     public List<Edge> Neighbours = new List<Edge>();
     public float Cost = float.PositiveInfinity;
@@ -11,46 +11,31 @@ public class Node : MonoBehaviour
     public bool Walkable = true;
     Rigidbody rb;
     // Start is called before the first frame update
-    void Awake()
+   public void RB()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
         rb.freezeRotation = true;
         gameObject.layer = LayerMask.GetMask("Node");
-        Walkable = true;
-        //physics .check box if something is above it not walkable 
-        //Physics.CheckBox()
+        Walkable = true;        
     }
     // Update is called once per frame
     void Update()
     {
         if (Walkable)
-            GetComponent<Renderer>().material.color = Color.green;
+            GetComponent<Renderer>().material.color = Color.black;
         else
-            GetComponent<Renderer>().material.color = Color.red;
+            GetComponent<Renderer>().material.color = Color.green;
         name = "Node " + Index;
     }
-    public Node(int Index, bool Walkable)
+
+    private void OnDrawGizmos()
     {
-        this.Index = Index;
-        this.Walkable = Walkable;
-        Neighbours = new List<Edge>();
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(transform.position + new Vector3(0, 0.5F, 0), new Vector3(transform.localScale.x, 1, transform.localScale.z));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector3((transform.localScale.x *2) - transform.localScale.x * 0.5f, 0.1f, (transform.localScale.z * 2) - transform.localScale.z *0.5f));
     }
-    public void Reset()
-    { 
-        name = "Node " + Index;
-        foreach (var item in Physics.OverlapBox(transform.position + new Vector3(0, 1, 0), transform.localScale, transform.rotation, LayerMask.GetMask("Obstacle")))
-            if (item.gameObject != gameObject)
-                Walkable = false;
-        Neighbours = new List<Edge>();
-        Neighbours.Clear();
-        List<Collider> hitObjects = new List<Collider>();
-        foreach (var item in Physics.OverlapBox(transform.position, new Vector3((transform.localScale.x * 2) /2 - 0.2f , transform.localScale.y / 2 , (transform.localScale.z * 2) / 2 - 0.2f)))
-            if (item.transform.gameObject != gameObject && item.gameObject.GetComponent<Node>())
-                hitObjects.Add(item);             
-        foreach (var item in  hitObjects)   
-            Neighbours.Add(new Edge(this, item.gameObject.GetComponent<Node>()));
-   
-    }
+    public abstract void Reset();
 }
