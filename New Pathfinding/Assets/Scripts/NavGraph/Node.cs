@@ -17,7 +17,7 @@ public abstract class Node : MonoBehaviour
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
         rb.freezeRotation = true;
-        gameObject.layer = LayerMask.GetMask("Node");
+        gameObject.layer = 10;
         Walkable = true;        
     }
     // Update is called once per frame
@@ -31,7 +31,7 @@ public abstract class Node : MonoBehaviour
         Gizmos.color = Color.black;
         Gizmos.DrawWireCube(transform.position + new Vector3(0, 0.5F, 0), new Vector3(transform.localScale.x, 1, transform.localScale.z));
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector3((transform.localScale.x *2) - transform.localScale.x * 0.5f, 0.1f, (transform.localScale.z * 2) - transform.localScale.z *0.5f));
+        Gizmos.DrawWireCube(transform.position + transform.forward , new Vector3((transform.localScale.x *2) - transform.localScale.x * 0.5f, 0.1f, (transform.localScale.z * 2) - transform.localScale.z *0.5f));
     }
     public abstract void Reset();
 }

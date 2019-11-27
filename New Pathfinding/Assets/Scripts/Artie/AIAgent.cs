@@ -160,11 +160,10 @@ public class AIAgent : MonoBehaviour
     }
     void Update ()
     {
-        foreach (var item in Physics.OverlapSphere(transform.position, 1))
-        {
-            if (item.gameObject.GetComponent<Node>())
-                SourceNode = item.transform.gameObject.GetComponent<Node>();
-        }
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, float.MaxValue, LayerMask.GetMask("Node")))
+            if (hit.collider.gameObject.GetComponent<Node>())
+                SourceNode = hit.transform.gameObject.GetComponent<Node>();
+  
         if (!FoundRoute && SourceNode != null)
         {
             TargetNode = GenerateTarget();

@@ -157,7 +157,7 @@ public class SteeringBehaviours : MonoBehaviour
 
         foreach (var item in Physics.OverlapBox(transform.position, ProjectedCube.transform.localScale, transform.rotation))
             if (Vector2.Distance(transform.position, item.transform.position) < distance &&
-                item.CompareTag("Obstacles") && item != gameObject)
+                item.CompareTag("Dynamic Obstacles") && item != gameObject)
             {
                 Vector2 LocalPos = transform.InverseTransformPoint(item.transform.position);
 

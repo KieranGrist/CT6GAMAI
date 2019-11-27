@@ -8,15 +8,14 @@ public class NavGraph : MonoBehaviour
 
     public List<Node> Nodes = new List<Node>();
     public ASTAR PathfindingTechnique;
-    LayerMask TileMask;
     public static NavGraph map;
     public bool ResetMap;
     void Start  ()
     {
+        ResetMap = true;
         AddNodes();
         map = this;
         DontDestroyOnLoad(gameObject);
-        ResetAllNodes();
     }
     void AddNodes()
     {
@@ -30,7 +29,11 @@ public class NavGraph : MonoBehaviour
     void Update()
     {
         map = this;
-        if (ResetMap) { ResetAllNodes();  ResetMap = false; }
+        if (ResetMap)
+        {
+            ResetAllNodes();
+            ResetMap = false;
+        }
 
     }
 
