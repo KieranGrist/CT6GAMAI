@@ -62,38 +62,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Deviants\Assassin.cs" />
-    <Compile Include="Assets\Scripts\Deviants\CloseQuarters.cs" />
-    <Compile Include="Assets\Scripts\Deviants\Commander.cs" />
-    <Compile Include="Assets\Scripts\Deviants\HeavyWeapons.cs" />
-    <Compile Include="Assets\Scripts\Deviants\Marksman.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Alert.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Fight.cs" />
-    <Compile Include="Assets\Scripts\Enemy\GetHealth.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Patrol.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Rearm.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Run.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Stealth.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Helper.cs" />
+    <Compile Include="Assets\Scripts\AI Drivers\Aggresive.cs" />
+    <Compile Include="Assets\Scripts\AI Drivers\Default.cs" />
+    <Compile Include="Assets\Scripts\Artie\AIAgent.cs" />
+    <Compile Include="Assets\Scripts\Artie\ArtieGenerator.cs" />
+    <Compile Include="Assets\Scripts\Artie\CameraControler.cs" />
+    <Compile Include="Assets\Scripts\NavGraph\Edge.cs" />
+    <Compile Include="Assets\Scripts\NavGraph\NavGraph.cs" />
+    <Compile Include="Assets\Scripts\NavGraph\Node.cs" />
+    <Compile Include="Assets\Scripts\NavGraph\NodeGenerator.cs" />
+    <Compile Include="Assets\Scripts\Pathfinder\ASTAR.cs" />
+    <Compile Include="Assets\Scripts\Pathfinder\PriorityQueue.cs" />
+    <Compile Include="Assets\Scripts\Pipeline.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\State.cs" />
-    <Compile Include="Assets\Scripts\Transition.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Ammo.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Knife.cs" />
-    <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Radio.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Rifle.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Shotgun.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Sniper.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
-    <Compile Include="Assets\Scripts\World\Armoury.cs" />
-    <Compile Include="Assets\Scripts\World\CommandersRoom.cs" />
-    <Compile Include="Assets\Scripts\World\Exfill.cs" />
-    <Compile Include="Assets\Scripts\World\GenerateLevel.cs" />
-    <Compile Include="Assets\Scripts\World\InteligenceRoom.cs" />
-    <Compile Include="Assets\Scripts\World\LandingZone.cs" />
+    <Compile Include="Assets\Scripts\Road\RaceTrack.cs" />
+    <Compile Include="Assets\Scripts\Road\Road.cs" />
+    <Compile Include="Assets\Scripts\Road\Selector.cs" />
+    <Compile Include="Assets\Scripts\Road\Types\Corner.cs" />
+    <Compile Include="Assets\Scripts\Road\Types\FinishLine.cs" />
+    <Compile Include="Assets\Scripts\Road\Types\Grids.cs" />
+    <Compile Include="Assets\Scripts\Road\Types\Straight.cs" />
+    <Compile Include="Assets\Scripts\Steering\ProjCube.cs" />
+    <Compile Include="Assets\Scripts\Steering\SteeringBehaviours.cs" />
+    <Compile Include="Assets\Scripts\Steering\Vehicle.cs" />
+    <Compile Include="Assets\Scripts\Tiles\HazardTile.cs" />
+    <Compile Include="Assets\Scripts\Tiles\RoadTile.cs" />
+    <Compile Include="Assets\Scripts\Tiles\ShortCutTile.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/814853/CT6GAMAI/Epsilon/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
