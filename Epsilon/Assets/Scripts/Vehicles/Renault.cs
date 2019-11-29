@@ -10,8 +10,9 @@ public class Renault : Vehicle
     void Start()
     {
         mass = 712;
-        maxSpeed = 191;
-        acceleration = 80;
+        maxSpeed = 20;
+        acceleration = 500;
         turningForce = 4;
+        breakPower = 1.1f;
     }
 }

@@ -124,7 +124,8 @@ public abstract class AIAgent : MonoBehaviour {
         //SB.WallAvodienceOn();
       SB.ProjectedCube = SB.GetComponentInChildren<ProjCube>(); 
 
-        string ObjectName = name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
+        name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
+   
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(ray, out hit, Mask))
@@ -198,12 +199,6 @@ public abstract class AIAgent : MonoBehaviour {
 
     private Node NextTarget()
     {
-        /* Statck is LIFO
-         * Finish Line
-         * Sector 1
-         * Sector 2
-         * Sector 3
-         */
          if (SectorNodes.Count <= 0)
         {
             if (Physics.Raycast(RaceTrack.raceTrack.Sector3.transform.position, -transform.up, out RaycastHit hit, float.PositiveInfinity, Mask))

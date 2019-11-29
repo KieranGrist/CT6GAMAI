@@ -28,7 +28,8 @@ public class Pipeline : MonoBehaviour
         TimeCalculated = DateTime.Now - StartTime;
         NavMeshTime = (float)TimeCalculated.Milliseconds;
 
-        ArtieGenerator.AIGen.PlaceAIUnits();
+var temp=        ArtieGenerator.AIGen.PlaceAIUnits();
+
         ArtieGenerator.AIGen.AIPersonalitySelector();
         var T = 0; var I = 0;
         foreach (var item in Grids.Grid.GridList)
@@ -39,6 +40,24 @@ public class Pipeline : MonoBehaviour
                 break;
             }       
             I++;
+        }
+        switch (temp)
+        {
+            case "Ferrari":
+                Player.player.gameObject.AddComponent<Ferrari>();
+                break;
+            case "Mercedes":
+                Player.player.gameObject.AddComponent<Mercedes>();
+  
+                break;
+            case "Ford":
+                Player.player.gameObject.AddComponent<Ford>();
+   
+                break;
+            case "Renault":
+                Player.player.gameObject.AddComponent<Renault>();
+        
+                break;
         }
         Player.player.PlacePlayer(T);
     }

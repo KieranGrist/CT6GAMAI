@@ -54,7 +54,10 @@ public abstract class Vehicle :MonoBehaviour
         velocity = Vector3.Lerp(velocity, velocity * Time.smoothDeltaTime, Time.smoothDeltaTime);
         speed = velocity.magnitude;
     }
-
+    public void Reset()
+    {
+        velocity = new Vector2();
+    }
     public void Accelerate()
     {
 

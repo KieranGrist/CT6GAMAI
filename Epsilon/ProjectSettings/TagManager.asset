@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Dynamic Obstacles
   - Wall
+  - Obstacle
+  - AI
   layers:
   - Default
   - TransparentFX
