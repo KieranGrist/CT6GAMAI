@@ -34,10 +34,10 @@ public class FinishLine : MonoBehaviour
     private void Update ()
     {
         finishLine = this;
-        //TimeCalculated = DateTime.Now - StartTime;
-        //CurrentLapTime = (float)TimeCalculated.TotalSeconds;
-        //LastLapText.text = "Last Lap Time : " + LastLap;
-        //CurrentLapText.text = "Current Lap Time : " + CurrentLapTime;
-        //BestLapText.text = "Best Lap Time : " + BestLap;
+        TimeCalculated = DateTime.Now - StartTime;
+        CurrentLapTime = (float)TimeCalculated.TotalSeconds;
+        LastLapText.text = "Last Lap Time : " + LastLap;
+        CurrentLapText.text = "Current Lap Time : " + CurrentLapTime;
+        BestLapText.text = "Best Lap Time : " + BestLap;
     }
 }

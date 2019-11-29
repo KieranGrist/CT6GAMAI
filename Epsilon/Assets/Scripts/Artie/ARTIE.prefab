@@ -12,9 +12,6 @@ GameObject:
   - component: {fileID: 8634317553749008143}
   - component: {fileID: 7865772896206070675}
   - component: {fileID: 3417143601370532229}
-  - component: {fileID: 48859249706919608}
-  - component: {fileID: 48859249706919611}
-  - component: {fileID: 48859249706919610}
   - component: {fileID: 3694660736589702795}
   m_Layer: 0
   m_Name: ARTIE
@@ -98,75 +95,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &48859249706919608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48859249706919589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da8883f4398d3c4c982848c53087313, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Velocity: {x: 0, y: 0}
-  Mass: 1
-  MaxSpeed: 10
-  MaxForce: 1
-  MaxTurnRate: 1
-  SteeringForce: {x: 0, y: 0}
-  SB: {fileID: 48859249706919611}
-  Heading: {x: 0, y: 0}
-  Side: {x: 0, y: 0}
---- !u!114 &48859249706919611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48859249706919589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86108c662c08817479591fa46dc10c5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSeekOn: 0
-  seekOnTargetPos: {x: 0, y: 0}
-  seekOnStopDistance: 0
-  isWanderOn: 0
-  wanderRadius: 10
-  turnChance: 0.05
-  wanderForce: {x: 0, y: 0}
-  isObstacleAvoidanceOn: 0
-  obstacleForce: {x: 0, y: 0}
-  ProjectedCube: {fileID: 48859251234340410}
-  boxSize: 2
-  isWallAvodienceOn: 0
-  wallForce: {x: 0, y: 0}
-  WallAvodidenceDistance: 10
-  isEvadeOn: 0
-  isPursueOn: 0
---- !u!114 &48859249706919610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48859249706919589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 285f7d078a7c9f14dae91e5d65aea638, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SourceNode: {fileID: 0}
-  TargetNode: {fileID: 0}
-  RecievedPath: 0
-  TargetLocation: []
-  Mask:
-    serializedVersion: 2
-    m_Bits: 0
-  SB: {fileID: 48859249706919611}
 --- !u!54 &3694660736589702795
 Rigidbody:
   m_ObjectHideFlags: 0

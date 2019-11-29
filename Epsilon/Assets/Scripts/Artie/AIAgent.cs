@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System;
-public class AIAgent : MonoBehaviour
-{
+public abstract class AIAgent : MonoBehaviour { 
 
-    [Header("State Variables")]
-    float AgentHealth = 100;
-    bool AggresiveNature = false;
-
-
+    //Name Lists effects what names the AI can recieve
     string[] FirstNames = new string[]
-    {
+   {
         "Kieran",
         "Alex",
         "Gavin",
@@ -48,10 +42,10 @@ public class AIAgent : MonoBehaviour
        "Aiden",
        "Allyson",
        "Lyndsey",
-       "Stacia",       
+       "Stacia",
         "Lauren",
         "Sarah"
-    };
+   };
     string[] LastNames = new string[]
      {
     "Stainton",
@@ -94,51 +88,67 @@ public class AIAgent : MonoBehaviour
     "Griffiths",
     "Moss"
    };
+
+    // Values that effect the state that the AI is in  
+    [Header("State Variables")]
+    float AgentHealth = 100;
+    bool AggresiveNature = false;
+
+    //Values that effect the pathfinding of the AI 
     [Header("Pathfinding")]
     public Node SourceNode;
     public Node TargetNode;
     public Stack<Node> SectorNodes = new Stack<Node>();
 
-
+    //Values that control the movement of the ai
     [Header("Movement")]
-    public SteeringBehaviours SB;
     public bool RecievedPath = false;
     public List<Vector3> TargetLocation = new List<Vector3>();
     List<GameObject> PathGameObjects = new List<GameObject>();
-
-
-    bool FoundRoute = false;
     LayerMask Mask;
 
-
+    //Values that effect the steering of the AI
+    [Header("Steering Behaviors")]
+    public Vector2 SteeringForce;
+    public SteeringBehaviours SB;
+    public Vector2 Heading;
+    public Vector2 Side;
+    public Vector2 Velocity;
+    public Vehicle vehicle;
     void Start()
     {
+
         Mask = LayerMask.GetMask("Node");
         SB = GetComponent<SteeringBehaviours>();
         //SB.ObstacleAvodienceOn();
         //SB.WallAvodienceOn();
-        SB.ProjectedCube = SB.GetComponentInChildren<ProjCube>(); 
-      //  string ObjectName = name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
+      SB.ProjectedCube = SB.GetComponentInChildren<ProjCube>(); 
+
+        string ObjectName = name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(ray, out hit, Mask))
             if (hit.transform.gameObject.GetComponent<Node>())
                 SourceNode = hit.transform.gameObject.GetComponent<Node>();
     }
-    void MoveOnRoute()
+ public void MoveOnRoute()
     {
-        if (FoundRoute && !RecievedPath)
+        if (!RecievedPath)
         {
-            foreach (var item in PathGameObjects)
-                Destroy(item);
 
-            TargetLocation.Clear();   
-            RecievedPath = true;
-            for (int i = NavGraph.map.PathfindingTechnique.GeneratedPath.Count - 1; i > 0; i--)
+            if (SourceNode && TargetNode)
             {
-                TargetLocation.Add(NavGraph.map.Nodes[NavGraph.map.PathfindingTechnique.GeneratedPath[i]].transform.position);                    
+                TargetLocation.Clear();
+                TargetLocation = new List<Vector3>();
+                RecievedPath = true;
+                var Path = ASTAR.CalculatePath(SourceNode, TargetNode);
+                if (Path.Count > 0)
+                    for (int i = Path.Count - 1; i > 0; i--)
+                    {
+                        TargetLocation.Add(NavGraph.map.Nodes[Path[i]].transform.position);
+                    }
+                TargetLocation.Add(TargetNode.transform.position);
             }
-            TargetLocation.Add(TargetNode.transform.position);
         }
 
         if (TargetLocation.Count > 0)
@@ -149,7 +159,14 @@ public class AIAgent : MonoBehaviour
         }
         else
         {
-            FoundRoute = false;
+            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 20.0f, Mask))
+            {
+                var Temp = hit.collider.gameObject.GetComponent<Node>();
+                if (Temp)
+                    SourceNode = Temp;
+            }
+            TargetNode = NextTarget(); 
+             
             RecievedPath = false;
         }
     }
@@ -164,18 +181,19 @@ public class AIAgent : MonoBehaviour
     }
     void Update ()
     {
-        if (!FoundRoute)
-        {
-            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 20.0f, Mask))
-            {
-                var Temp = hit.collider.gameObject.GetComponent<Node>();
-                if (Temp)
-                    SourceNode = Temp;
-            }
-            TargetNode = NextTarget();
-            FoundRoute = NavGraph.map.PathfindingTechnique.CalculateRoute(this,SourceNode, TargetNode);
-        }
         MoveOnRoute();
+        SteeringForce = SB.Calculate();
+        Vector2 Acceleration = SteeringForce / vehicle.Mass;
+        Velocity += Acceleration;
+
+        Velocity = Vector2.ClampMagnitude(Velocity, vehicle.MaxSpeed);
+        Heading = Velocity.normalized;
+        if (Velocity != Vector2.zero)
+        {
+            transform.position += new Vector3(Velocity.x, 0, Velocity.y) * Time.deltaTime;
+            Vector3 norm = Velocity.normalized;
+            transform.forward = new Vector3(norm.x, 0, norm.y);
+        }
     }
 
     private Node NextTarget()

@@ -62,11 +62,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AI Drivers\Aggresive.cs" />
-    <Compile Include="Assets\Scripts\AI Drivers\Default.cs" />
     <Compile Include="Assets\Scripts\Artie\AIAgent.cs" />
     <Compile Include="Assets\Scripts\Artie\ArtieGenerator.cs" />
     <Compile Include="Assets\Scripts\Artie\CameraControler.cs" />
+    <Compile Include="Assets\Scripts\Driver Profiles\Aggresive.cs" />
+    <Compile Include="Assets\Scripts\Driver Profiles\Default.cs" />
     <Compile Include="Assets\Scripts\NavGraph\Edge.cs" />
     <Compile Include="Assets\Scripts\NavGraph\NavGraph.cs" />
     <Compile Include="Assets\Scripts\NavGraph\Node.cs" />
@@ -84,10 +84,14 @@
     <Compile Include="Assets\Scripts\Road\Types\Straight.cs" />
     <Compile Include="Assets\Scripts\Steering\ProjCube.cs" />
     <Compile Include="Assets\Scripts\Steering\SteeringBehaviours.cs" />
-    <Compile Include="Assets\Scripts\Steering\Vehicle.cs" />
     <Compile Include="Assets\Scripts\Tiles\HazardTile.cs" />
     <Compile Include="Assets\Scripts\Tiles\RoadTile.cs" />
     <Compile Include="Assets\Scripts\Tiles\ShortCutTile.cs" />
+    <Compile Include="Assets\Scripts\Vehicles\Ferrari.cs" />
+    <Compile Include="Assets\Scripts\Vehicles\Ford.cs" />
+    <Compile Include="Assets\Scripts\Vehicles\Mercedes.cs" />
+    <Compile Include="Assets\Scripts\Vehicles\Renault.cs" />
+    <Compile Include="Assets\Scripts\Vehicles\Vehicle.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/814853/CT6GAMAI/Epsilon/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

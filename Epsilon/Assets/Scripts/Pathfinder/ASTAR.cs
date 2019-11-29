@@ -1,27 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-[System.Serializable]
-public class ASTAR 
+public static class ASTAR
 {
-    public bool TargetNodeFound = false;
-    public List<int> Route = new List<int>();
-    public List<float> Cost = new List<float>();
-    public List<int> GeneratedPath = new List<int>();
-    public void TileReset()
-    {
-        Route = new List<int>(NavGraph.map.Nodes.Count);
-        Cost = new List<float>(NavGraph.map.Nodes.Count);
-        for (int i = 0; i < NavGraph.map.Nodes.Count; i++)
-        {
-            Route.Add(-10);
-            Cost.Add(int.MaxValue);
-        }
-    }
-
-
-    float CalculateCost(Edge Edge, Node Target)
+    static float CalculateCost(Edge Edge, Node Target, List<float> Cost)
     {
         float G = Cost[Edge.From.Index] + Edge.GetCost();
         float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
@@ -30,9 +12,17 @@ public class ASTAR
         float F = G + H;
         return F;
     }
-    public bool CalculateRoute(AIAgent ARTIE, Node Source, Node Target)
+    static List<int> CalculateRoute(Node Source, Node Target)
     {
-        TileReset();
+        bool TargetNodeFound = false;
+        List<int> Route = new List<int>(NavGraph.map.Nodes.Count);
+        List<float> Cost = new List<float>(NavGraph.map.Nodes.Count);
+        List<int> GeneratedPath = new List<int>();
+        for (int i = 0; i < NavGraph.map.Nodes.Count; i++)
+        {
+            Route.Add(-10);
+            Cost.Add(int.MaxValue);
+        }
         TargetNodeFound = false;
         HashSet<Edge> TraveresedEdges = new HashSet<Edge>();
         PriorityQueue<float, Edge> MinPriorityQueue = new PriorityQueue<float, Edge>();
@@ -50,16 +40,15 @@ public class ASTAR
             if (Cost[Edge.To.Index] > Cost[Edge.From.Index] + Edge.GetCost())
             {
                 Route[Edge.To.Index] = Edge.From.Index;
-                Cost[Edge.To.Index] = CalculateCost(Edge, Target);
+                Cost[Edge.To.Index] = CalculateCost(Edge, Target, Cost);
             }
             if (Edge.To.Index == Target.Index && !TargetNodeFound)
             {
                 TargetNodeFound = true;
-                CalculatePath(Source,Target);
                 break;
-            }       
+            }
             foreach (var item in Edge.To.Neighbours)
-            {   
+            {
                 float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
                 float Z = (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100;
                 float H = X + Z;
@@ -67,22 +56,24 @@ public class ASTAR
                 float F = G + H;
                 var valuepair = new KeyValuePair<float, Edge>(F, item);
                 if (Edge.To.Walkable && !TraveresedEdges.Contains(item) && !MinPriorityQueue.data.Contains(valuepair))
-                    MinPriorityQueue.Enqueue(valuepair);           
+                    MinPriorityQueue.Enqueue(valuepair);
             }
         }
 
-        return TargetNodeFound;
+        return Route;
     }
-    public void CalculatePath(Node Source, Node Target)
+    public static List<int> CalculatePath(Node Source, Node Target)
     {
-        GeneratedPath.Clear();
-        GeneratedPath = new List<int>();
-    int currentNode = Target.Index;
+        var Route = CalculateRoute(Source, Target);
+        var GeneratedPath = new List<int>();
+        int currentNode = Target.Index;
         GeneratedPath.Add(currentNode);
+
         while (currentNode != Source.Index)
         {
             currentNode = Route[currentNode];
             GeneratedPath.Add(currentNode);
         }
+        return GeneratedPath;
     }
 }

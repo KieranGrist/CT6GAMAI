@@ -60,7 +60,8 @@ public class SteeringBehaviours : MonoBehaviour
                 isSeekOn = false;
 
                 //Set the vehicle's velocity back to zero
-                _vehicle.Velocity = Vector2.zero;
+                //TODO: Talk to jay to make sure I can do without setting it back to 0 due to it being vehicles
+             //   _vehicle.Velocity = Vector2.zero; 
             }
             else
                 velocitySum += Seek(seekOnTargetPos);
@@ -283,7 +284,6 @@ public class SteeringBehaviours : MonoBehaviour
     public void WanderOff()
     {
         isWanderOn = false;
-        _vehicle.Velocity = Vector2.zero;
     }
     ///<summary>Turns On Obstacle Avoidence</summary>
     public void ObstacleAvodienceOn()

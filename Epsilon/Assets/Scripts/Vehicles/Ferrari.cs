@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Default : MonoBehaviour
+public class Ferrari : Vehicle
 {
     // Start is called before the first frame update
     void Start()
