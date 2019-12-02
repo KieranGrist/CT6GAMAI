@@ -15,7 +15,6 @@ public enum RoadDirection
 public class Straight : Road
 {
     public RoadDirection roadDirection = RoadDirection.North;
-   public int RoadMaxSpeed;
     private void Update()
     {
         switch (roadDirection)

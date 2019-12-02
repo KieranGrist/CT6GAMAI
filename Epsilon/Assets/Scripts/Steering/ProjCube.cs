@@ -6,13 +6,18 @@ public class ProjCube : MonoBehaviour
 {
    public List<GameObject> CollidedObjects;
     // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.CompareTag("Dynamic Obstacles"))
+        {
+            CollidedObjects.Add(other.gameObject);
+        }
     }
-    // Update is called once per frame
-    void LateUpdate()
+    private void OnTriggerExit(Collider other)
     {
-      //  CollidedObjects.Clear();
+        if (other.CompareTag("Dynamic Obstacles"))
+        {
+            CollidedObjects.Remove(other.gameObject);
+        }
     }
 }

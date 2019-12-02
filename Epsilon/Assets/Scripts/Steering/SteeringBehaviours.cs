@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Serialization;
-
-[RequireComponent(typeof(Vehicle))]
+    
 public class SteeringBehaviours : MonoBehaviour
 {
 
@@ -35,7 +34,7 @@ public class SteeringBehaviours : MonoBehaviour
     //Obstacle Wall avodience On
     public bool isWallAvodienceOn = false;
     public Vector2 wallForce; // Vector that stores the current force applied to get away from that object
-    public float WallAvodidenceDistance = 10;
+    public float WallAvodidenceDistance = 2;
     [Header("Evade")]
     //Evade On
     public bool isEvadeOn = false;
@@ -230,11 +229,9 @@ public class SteeringBehaviours : MonoBehaviour
         Vector2 ClosestPoint = new Vector2();
         SteeringForce = new Vector2();
         LayerMask mask = LayerMask.GetMask("Walls");
-        RaycastHit hit;
         foreach (var item in Feelers)
-        {
-
-            if (Physics.Raycast(transform.position, item - transform.position, out hit, WallAvodidenceDistance, mask))
+        {  
+            if (Physics.Raycast(transform.position, item - transform.position, out RaycastHit hit, WallAvodidenceDistance, mask))
             {
                 Debug.DrawRay(transform.position, item - transform.position, Color.red);
                 DistToThis = Vector2.Distance(new Vector2(transform.position.x, transform.position.y), new Vector2(item.x, item.z));
@@ -248,7 +245,7 @@ public class SteeringBehaviours : MonoBehaviour
             else
                 Debug.DrawRay(transform.position, item - transform.position, Color.blue);
 
-            if (ClosestWall)
+            if (ClosestWall && hit.collider)
             {
                 Vector2 OverShoot = new Vector2(hit.transform.position.x, hit.transform.position.z) - ClosestPoint;
                 SteeringForce = new Vector2(hit.normal.x, hit.normal.z)* OverShoot.magnitude;

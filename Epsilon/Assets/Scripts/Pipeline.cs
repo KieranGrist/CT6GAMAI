@@ -23,16 +23,16 @@ public class Pipeline : MonoBehaviour
         TimeCalculated = DateTime.Now - StartTime;
         SelectorTime = (float)TimeCalculated.Milliseconds;
 
+     
+
+       ArtieGenerator.AIGen.PlaceAIUnits();
         StartTime = DateTime.Now;
         NavGraph.map.GenerateNavMesh();
         TimeCalculated = DateTime.Now - StartTime;
         NavMeshTime = (float)TimeCalculated.Milliseconds;
-
-var temp=        ArtieGenerator.AIGen.PlaceAIUnits();
-
         ArtieGenerator.AIGen.AIPersonalitySelector();
         var T = 0; var I = 0;
-        foreach (var item in Grids.Grid.GridList)
+        foreach (var item in RacingGrid.Grid.GridList)
         {
             if (!item.Key)
             {
@@ -41,25 +41,10 @@ var temp=        ArtieGenerator.AIGen.PlaceAIUnits();
             }       
             I++;
         }
-        switch (temp)
-        {
-            case "Ferrari":
-                Player.player.gameObject.AddComponent<Ferrari>();
-                break;
-            case "Mercedes":
-                Player.player.gameObject.AddComponent<Mercedes>();
-  
-                break;
-            case "Ford":
-                Player.player.gameObject.AddComponent<Ford>();
-   
-                break;
-            case "Renault":
-                Player.player.gameObject.AddComponent<Renault>();
-        
-                break;
-        }
-        Player.player.PlacePlayer(T);
+
+
+        LapManager.manager.StartRace();
+
     }
 
     // Update is called once per frame

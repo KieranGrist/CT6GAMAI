@@ -10,12 +10,15 @@ public class NavGraph : MonoBehaviour
     public static NavGraph map;
     private void Update()
     {
+
         map = this;
+
+
     }
     void Awake ()
     {
         map = this;
-        DontDestroyOnLoad(gameObject.transform.parent);
+        DontDestroyOnLoad(transform);
     }
    public void GenerateNavMesh()
     {

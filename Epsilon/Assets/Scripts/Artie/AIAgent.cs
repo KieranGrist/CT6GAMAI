@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+[System.Serializable]
+
 public abstract class AIAgent : MonoBehaviour { 
 
     //Name Lists effects what names the AI can recieve
@@ -89,88 +91,87 @@ public abstract class AIAgent : MonoBehaviour {
     "Moss"
    };
 
-    // Values that effect the state that the AI is in  
+    // Values that effect the state that the AI is in , some values that effect the state can be found in vehicle 
     [Header("State Variables")]
-    float AgentHealth = 100;
-    bool AggresiveNature = false;
+    public float Artie_Drive; //Default State
+    public float Artie_OverTake;
+    public float Artie_Defend;
+    public float Artie_Pit;
+    public float Artie_GoForShortCut; //If one exists
+    public float Artie_GoForRandomItem; //If exists
+    public float Artie_Aggresive;
+
+    public StateMachine ArtieStateMachine;
+    public State<AIAgent> pState;
+    public string Team;
+
 
     //Values that effect the pathfinding of the AI 
     [Header("Pathfinding")]
     public Node SourceNode;
     public Node TargetNode;
-    public Stack<Node> SectorNodes = new Stack<Node>();
 
     //Values that control the movement of the ai
     [Header("Movement")]
     public bool RecievedPath = false;
     public List<Vector3> TargetLocation = new List<Vector3>();
     List<GameObject> PathGameObjects = new List<GameObject>();
-    LayerMask Mask;
+ public   LayerMask Mask;
 
     //Values that effect the steering of the AI
     [Header("Steering Behaviors")]
-    public Vector2 SteeringForce;
     public SteeringBehaviours SB;
-    public Vector2 Heading;
-    public Vector2 Side;
-    public Vector2 Velocity;
     public Vehicle vehicle;
+
     void Start()
     {
+        if (GetComponent<Ford>())
+            Team = "Ford";
+            if (GetComponent<Mercedes>())
+            Team = "Mercedes";
+        if (GetComponent<Renault>())
+            Team = "Renault";
+        if (GetComponent<Ferrari>())
+            Team = "Ferrari";
 
-        Mask = LayerMask.GetMask("Node");
-        SB = GetComponent<SteeringBehaviours>();
-        //SB.ObstacleAvodienceOn();
-        //SB.WallAvodienceOn();
-      SB.ProjectedCube = SB.GetComponentInChildren<ProjCube>(); 
+        if (Physics.Raycast(RaceTrack.raceTrack.FinishLine.transform.position, -transform.up, out RaycastHit item, float.PositiveInfinity, Mask))
+          TargetNode = item.transform.GetComponent<Node>();
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 20.0f, Mask))
+        {
+            var Temp = hit.collider.gameObject.GetComponent<Node>();
+            if (Temp)
+                SourceNode = Temp;
+        }
 
         name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
-   
-        RaycastHit hit;
-        Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out hit, Mask))
-            if (hit.transform.gameObject.GetComponent<Node>())
-                SourceNode = hit.transform.gameObject.GetComponent<Node>();
-    }
- public void MoveOnRoute()
-    {
-        if (!RecievedPath)
-        {
 
-            if (SourceNode && TargetNode)
-            {
-                TargetLocation.Clear();
-                TargetLocation = new List<Vector3>();
-                RecievedPath = true;
-                var Path = ASTAR.CalculatePath(SourceNode, TargetNode);
-                if (Path.Count > 0)
-                    for (int i = Path.Count - 1; i > 0; i--)
-                    {
-                        TargetLocation.Add(NavGraph.map.Nodes[Path[i]].transform.position);
-                    }
-                TargetLocation.Add(TargetNode.transform.position);
-            }
-        }
+        Mask = LayerMask.GetMask("Node");
 
-        if (TargetLocation.Count > 0)
-        {
-            SB.SeekOn(new Vector2(TargetLocation[0].x, TargetLocation[0].z));
-            if (Vector3.Distance(TargetLocation[0], transform.position) <= 2)
-                TargetLocation.Remove(TargetLocation[0]);
-        }
-        else
-        {
-            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 20.0f, Mask))
-            {
-                var Temp = hit.collider.gameObject.GetComponent<Node>();
-                if (Temp)
-                    SourceNode = Temp;
-            }
-            TargetNode = NextTarget(); 
-             
-            RecievedPath = false;
-        }
+        vehicle = GetComponent<Vehicle>();
+
+
+
+        SB = GetComponent<SteeringBehaviours>();
+        SB.ProjectedCube = SB.GetComponentInChildren<ProjCube>();
+    //    SB.ObstacleAvodienceOn();
+     //   SB.WallAvodienceOn(); 
+
+
+        ArtieStateMachine = new StateMachine();
+        // ArtieStateMachine.defendState = new Defend();
+        ArtieStateMachine.driveState = new Drive();
+        //ArtieStateMachine.overtakeState = new Overtake();
+        //ArtieStateMachine.pitState = new Pit();
+        //ArtieStateMachine.randomItemState = new RandomItem();
+        //ArtieStateMachine.shortcutState = new Shortcut();
+        pState = ArtieStateMachine.driveState;
+        ArtieStateMachine.Artie = this;
+        ArtieStateMachine.Update();
+        pState.Execute(this);
     }
+
+
+  
 
     private void OnDrawGizmos()
     {
@@ -180,36 +181,15 @@ public abstract class AIAgent : MonoBehaviour {
             style.normal.textColor = Color.green;        
         Handles.Label(TextLocation, name, style); 
     }
-    void Update ()
+    public virtual void  Update ()
     {
-        MoveOnRoute();
-        SteeringForce = SB.Calculate();
-        Vector2 Acceleration = SteeringForce / vehicle.Mass;
-        Velocity += Acceleration;
-
-        Velocity = Vector2.ClampMagnitude(Velocity, vehicle.MaxSpeed);
-        Heading = Velocity.normalized;
-        if (Velocity != Vector2.zero)
-        {
-            transform.position += new Vector3(Velocity.x, 0, Velocity.y) * Time.deltaTime;
-            Vector3 norm = Velocity.normalized;
-            transform.forward = new Vector3(norm.x, 0, norm.y);
-        }
+        ArtieStateMachine.Update();
+        pState.Execute(this);
+        /* these are needed for any states*/
+    //    Heading = vehicle.Velocity.normalized;     
+        Vector3 norm = vehicle.Velocity.normalized;
+        transform.forward = new Vector3(norm.x, 0, norm.y);    
     }
 
-    private Node NextTarget()
-    {
-         if (SectorNodes.Count <= 0)
-        {
-            if (Physics.Raycast(RaceTrack.raceTrack.Sector3.transform.position, -transform.up, out RaycastHit hit, float.PositiveInfinity, Mask))
-                SectorNodes.Push(hit.transform.GetComponent<Node>());
-            if (Physics.Raycast(RaceTrack.raceTrack.Sector2.transform.position, -transform.up, out  hit, float.PositiveInfinity, Mask))
-                SectorNodes.Push(hit.transform.GetComponent<Node>());
-            if (Physics.Raycast(RaceTrack.raceTrack.Sector1.transform.position, -transform.up, out  hit, float.PositiveInfinity, Mask))
-                SectorNodes.Push(hit.transform.GetComponent<Node>());
-            if (Physics.Raycast(FinishLine.finishLine.transform.position, -transform.up, out  hit, float.PositiveInfinity, Mask))
-                SectorNodes.Push(hit.transform.GetComponent<Node>());
-        }
-        return SectorNodes.Pop();
-    }
+    
 }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grids : MonoBehaviour
+public class RacingGrid : MonoBehaviour
 {
     public GameObject Grid1, Grid2, Grid3, Grid4, Grid5, Grid6, Grid7, Grid8;
-    public static Grids Grid;
+    public static RacingGrid Grid;
     public List<KeyValuePair<bool, GameObject>> GridList = new List<KeyValuePair<bool, GameObject>>();
     // Start is called before the first frame update
     void Awake()

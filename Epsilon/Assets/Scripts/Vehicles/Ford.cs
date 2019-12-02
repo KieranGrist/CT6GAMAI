@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Ford : Vehicle
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        mass = 666;
+        maxSpeed = 17;
+        acceleration = 592;
+        turningForce = 4;
+        breakPower = 1.1F;
+        GetComponent<Renderer>().material.color = Color.blue;
     }
 }

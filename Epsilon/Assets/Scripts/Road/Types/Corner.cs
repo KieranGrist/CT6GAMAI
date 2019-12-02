@@ -25,7 +25,7 @@ public class Corner : Road
                 gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
                 break;
             case CornerDirection.NorthToWest:
-                gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+                gameObject.transform.eulerAngles = new Vector3(0, 0 , 0);
                 break;
             case CornerDirection.SouthToEast:
                 gameObject.transform.eulerAngles = new Vector3(0, 180, 0);

@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Obstacle
   - AI
+  - Checkpoints
+  - Agent
   layers:
   - Default
   - TransparentFX

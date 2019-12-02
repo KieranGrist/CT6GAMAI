@@ -5,12 +5,7 @@ public static class ASTAR
 {
     static float CalculateCost(Edge Edge, Node Target, List<float> Cost)
     {
-        float G = Cost[Edge.From.Index] + Edge.GetCost();
-        float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
-        float Z = (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100;
-        float H = X + Z;
-        float F = G + H;
-        return F;
+        return (Cost[Edge.From.Index] + Edge.To.Cost) + ((Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100 + (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100);
     }
     static List<int> CalculateRoute(Node Source, Node Target)
     {
@@ -32,12 +27,12 @@ public static class ASTAR
             KeyValuePair<float, Edge> keyValuePair = new KeyValuePair<float, Edge>(0, item);
             MinPriorityQueue.Enqueue(keyValuePair);
         }
-        while (MinPriorityQueue.Count() > 0)
+        while (MinPriorityQueue.count > 0)
         {
             KeyValuePair<float, Edge> keyValuePair = MinPriorityQueue.Dequeue();
             TraveresedEdges.Add(keyValuePair.Value);
             Edge Edge = keyValuePair.Value;
-            if (Cost[Edge.To.Index] > Cost[Edge.From.Index] + Edge.GetCost())
+            if (Cost[Edge.To.Index] > Cost[Edge.From.Index] + Edge.To.Cost)
             {
                 Route[Edge.To.Index] = Edge.From.Index;
                 Cost[Edge.To.Index] = CalculateCost(Edge, Target, Cost);
@@ -48,14 +43,12 @@ public static class ASTAR
                 break;
             }
             foreach (var item in Edge.To.Neighbours)
-            {
-                float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
-                float Z = (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100;
-                float H = X + Z;
-                float G = item.GetCost() + Cost[Edge.To.Index];
-                float F = G + H;
+            {    
+
+                float F = (item.To.Cost + Cost[Edge.To.Index] )+ ((Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100 + (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100);
                 var valuepair = new KeyValuePair<float, Edge>(F, item);
-                if (Edge.To.Walkable && !TraveresedEdges.Contains(item) && !MinPriorityQueue.data.Contains(valuepair))
+                if (!TraveresedEdges.Contains(item)) //Check if traveresed edges contains items before running the expensive contains for min priority queue
+                if (Edge.To.Walkable  && !MinPriorityQueue.data.Contains(valuepair))
                     MinPriorityQueue.Enqueue(valuepair);
             }
         }
@@ -68,7 +61,6 @@ public static class ASTAR
         var GeneratedPath = new List<int>();
         int currentNode = Target.Index;
         GeneratedPath.Add(currentNode);
-
         while (currentNode != Source.Index)
         {
             currentNode = Route[currentNode];

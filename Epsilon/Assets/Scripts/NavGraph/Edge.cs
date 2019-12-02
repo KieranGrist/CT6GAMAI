@@ -11,8 +11,5 @@ public class Edge
         this.From = From;
         this.To = To;
     }
-    public float GetCost()
-    {
-        return To.Cost;
-    }
+
 }

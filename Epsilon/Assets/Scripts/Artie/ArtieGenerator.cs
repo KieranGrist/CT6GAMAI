@@ -16,30 +16,27 @@ public class ArtieGenerator : MonoBehaviour
     /// <summary>
     /// Places the AI units on randomly selected units. DOES NOT REQUIRE TO ADD AI AGENT
     /// </summary>
-    public string PlaceAIUnits()
+    public void PlaceAIUnits()
     {
-        for (int i = 0; i < 7; i++)
+        TempAI = new List<GameObject>();
+        for (int i = 0; i < 8; i++)
         {
             var num = 10;
             do
             {
-                num = Random.Range(0, Grids.Grid.GridList.Count);
-                if (!Grids.Grid.GridList[num].Key)
+                num = Random.Range(0, RacingGrid.Grid.GridList.Count);
+                if (!RacingGrid.Grid.GridList[num].Key)
                 {
                     GameObject go = Instantiate(Artie, transform.position, transform.rotation);
-                    go.transform.position = Grids.Grid.GridList[num].Value.transform.position;             
+                    go.transform.position = RacingGrid.Grid.GridList[num].Value.transform.position;
                     go.transform.localScale = new Vector3(1, 1, 1);
+                    go.AddComponent<SteeringBehaviours>();
                     TempAI.Add(go);
                 }
             }
-            while (Grids.Grid.GridList[num].Key);
+            while (RacingGrid.Grid.GridList[num].Key);
+            RacingGrid.Grid.GridList[num] = new KeyValuePair<bool, GameObject>(true, RacingGrid.Grid.GridList[num].Value);
 
-        
-        
-
-
-            Grids.Grid.GridList[num] = new KeyValuePair<bool, GameObject>(true, Grids.Grid.GridList[num].Value);
-        
         }
         var TBD = new GameObject();
         var VehicleList = new List<KeyValuePair<bool, string>>();
@@ -55,7 +52,8 @@ public class ArtieGenerator : MonoBehaviour
         VehicleList.Add(new KeyValuePair<bool, string>(false, "Renault"));
         VehicleList.Add(new KeyValuePair<bool, string>(false, "Renault"));
 
-  foreach(var item in TempAI) {
+        foreach (var item in TempAI)
+        {
             var num = 10;
             do
             {
@@ -66,30 +64,22 @@ public class ArtieGenerator : MonoBehaviour
                     {
                         case "Ferrari":
                             item.AddComponent<Ferrari>();
-                            VehicleList[num] = new KeyValuePair<bool, string>(true, "Used");
+            
                             break;
                         case "Mercedes":
-                            item.AddComponent<Mercedes>();
-                            VehicleList[num] = new KeyValuePair<bool, string>(true, "Used");
+                            item.AddComponent<Mercedes>();                   
                             break;
                         case "Ford":
-                            item.AddComponent<Ford>();
-                            VehicleList[num] = new KeyValuePair<bool, string>(true, "Used");
+                            item.AddComponent<Ford>();                       
                             break;
                         case "Renault":
-                            item.AddComponent<Renault>();
-                            VehicleList[num] = new KeyValuePair<bool, string>(true, "Used");
+                            item.AddComponent<Renault>();               
                             break;
                     }
                 }
             }
-            while (Grids.Grid.GridList[num].Key);
-
-
-
-
-
-            Grids.Grid.GridList[num] = new KeyValuePair<bool, GameObject>(true, Grids.Grid.GridList[num].Value);
+            while (VehicleList[num].Key);
+            VehicleList[num] = new KeyValuePair<bool, string>(true, "Used");
 
         }
 
@@ -104,16 +94,13 @@ public class ArtieGenerator : MonoBehaviour
             I++;
         }
         Destroy(TBD);
-        return VehicleList[T].Value;
     }
     public void AIPersonalitySelector()
-    {
-      
+    {      
         foreach(var item in TempAI)
         {
             item.AddComponent<Default>();
 
         }
     }
-
 }

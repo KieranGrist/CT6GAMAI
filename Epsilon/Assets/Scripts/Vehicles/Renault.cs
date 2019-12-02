@@ -9,10 +9,11 @@ public class Renault : Vehicle
     // Start is called before the first frame update
     void Start()
     {
-        mass = 712;
-        maxSpeed = 20;
-        acceleration = 500;
+        mass = 736;
+        maxSpeed = 18;
+        acceleration = 420;
         turningForce = 4;
-        breakPower = 1.1f;
+        breakPower = 1.1F;
+        GetComponent<Renderer>().material.color = Color.yellow;
     }
 }
