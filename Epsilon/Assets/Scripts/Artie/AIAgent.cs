@@ -154,14 +154,14 @@ public Node targetNode;
 
         sb = GetComponent<SteeringBehaviours>();
         sb.ProjectedCube = sb.GetComponentInChildren<ProjCube>();
-        //    SB.ObstacleAvodienceOn();
+        sb.ObstacleAvodienceOn();
         //   SB.WallAvodienceOn(); 
-
+        sb.OvertakeOn();
 
         artieStateMachine = new StateMachine();
         // ArtieStateMachine.defendState = new Defend();
         artieStateMachine.driveState = new Drive();
-        //ArtieStateMachine.overtakeState = new Overtake();
+        artieStateMachine.overtakeState = new Overtake();
         artieStateMachine.pitState = new Pit();
         //ArtieStateMachine.randomItemState = new RandomItem();
         //ArtieStateMachine.shortcutState = new Shortcut();

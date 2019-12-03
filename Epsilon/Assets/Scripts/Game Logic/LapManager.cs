@@ -7,13 +7,13 @@ using UnityEngine.UI;
 /// </summary>
 public class LapManager : MonoBehaviour
 {
-    public static LapManager manager;
-    public List<Vehicle> CarPositions;
     public Text Order;
-    public List<Vehicle> RacingCars;
+    public static LapManager manager;
+     List<Vehicle> CarPositions;
+    List<Vehicle> RacingCars;
+
+
     public int Lap = 0;
-    public int CurrentWayPont =4 ;
-    int PreviousWayPont = 3;
     int VIC;
     public void StartRace()
     {
@@ -70,7 +70,6 @@ public class LapManager : MonoBehaviour
     }
     private void Awake()
     {
-        PreviousWayPont = 3;
         manager = this;
     }
     public void VehiclePassedCheckPoint(int WayPointNumber, Vehicle vehicle)
@@ -94,6 +93,10 @@ public class LapManager : MonoBehaviour
                 VIC++;
                 vehicle.StartLap();
 
+        }
+        if (Lap > 15 && WayPointNumber == 1)
+        {
+            vehicle.StopRacing();
         }
     }
     private void Update()

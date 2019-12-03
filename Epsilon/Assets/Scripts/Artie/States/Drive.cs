@@ -66,7 +66,8 @@ public class Drive : State<AIAgent>
     }
     public override void Execute(AIAgent agent)
     {
-      MoveOnRoute(agent);
+        agent.vehicle.BoostOff();
+        MoveOnRoute(agent);
         agent.vehicle.Accelerate(agent.sb.Calculate());
     }
 

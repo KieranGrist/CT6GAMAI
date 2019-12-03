@@ -157,6 +157,7 @@ public class SteeringBehaviours : MonoBehaviour
         ProjectedCube.transform.localScale = new Vector3(gameObject.GetComponent<Collider>().bounds.size.x  , ProjectedCube.transform.localScale.y, BoxSize + (_vehicle.Velocity.magnitude / _vehicle.MaxSpeed) * BoxSize);
         //Make sure the box is transformed infront of the player
         ProjectedCube.transform.localPosition = new Vector3(0, 0, ProjectedCube.transform.localScale.z / 2);
+
         obstacleForce = new Vector2();
         distance = float.MaxValue;
         closetObject = new Collider();

@@ -10,9 +10,26 @@ public class Default : AIAgent
         
     new void Update()
     {
-
-    
         artieOverTake = 0;
+        if (vehicle.RacePosition != 0)
+        {
+            var R = LapManager.manager.CarPositions[vehicle.RacePosition - 1].transform;
+
+            if (Vector3.Distance(transform.position, R.transform.position) < 1)
+            {
+                var Desire = 0.0f;
+                var Reference = LapManager.manager.CarPositions[vehicle.RacePosition - 1];
+                if (Reference.MaxSpeed < vehicle.MaxSpeed)
+                    Desire += 0.5f;
+                if (Reference.Mass > vehicle.Mass)
+                    Desire += 0.5f;
+                if (Reference.Fuel < vehicle.Fuel)
+                    Desire += 0.5f;
+                if (Reference.CurrentLapTime > vehicle.CurrentLap)
+                    Desire += 0.5f;
+                artieOverTake = Desire;
+            }
+        }   
         artieDefend =0;
         Fuel = vehicle.Fuel;
         FuelSubtacted = vehicle.Fuel - 100;

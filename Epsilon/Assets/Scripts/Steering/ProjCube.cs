@@ -8,16 +8,29 @@ public class ProjCube : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Dynamic Obstacles"))
-        {
+
             CollidedObjects.Add(other.gameObject);
-        }
+
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Dynamic Obstacles"))
-        {
+
             CollidedObjects.Remove(other.gameObject);
+    }
+    public Vector3 CheckForAI(GameObject Other)
+    {
+        var distance = float.MaxValue;
+        var ret = new Vector3();
+        foreach(var item in CollidedObjects)
+        {
+            var d  = Vector3.Distance(Other.transform.position, item.transform.position);
+            if (d < distance)
+            {
+                distance = d;
+                ret = item.transform.position
+            }
+
         }
+        return new Vector3();
     }
 }

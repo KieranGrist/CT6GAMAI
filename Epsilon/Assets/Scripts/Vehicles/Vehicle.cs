@@ -44,6 +44,9 @@ public abstract class Vehicle :MonoBehaviour
     [ReadOnly] public float CurrentLapTime =0;
     [ReadOnly] public float PreviusLapTime =0;
     [ReadOnly] public float Difference =0;
+
+
+
     /// <summary>
     /// Current Velocity of the vehicle
     /// </summary>
@@ -120,7 +123,12 @@ public abstract class Vehicle :MonoBehaviour
         }
 
     }
-    public void BoostCar()
+    public void BoostOn()
+    {
+        SpeedBoost = maxSpeed * 1.2f;
+        BoostEnabled = true;
+    }
+    public void BoostOff()
     {
         SpeedBoost = maxSpeed * 1.2f;
         BoostEnabled = true;
@@ -138,9 +146,7 @@ public abstract class Vehicle :MonoBehaviour
 
     private void Update()
     {
-               TriggerTimer += Time.deltaTime;
-
-
+        TriggerTimer += Time.deltaTime;
         if (transform.position.y < -10)
             Reset();
         transform.position += new Vector3(Velocity.x, 0, Velocity.y) * Time.deltaTime;
@@ -153,10 +159,10 @@ public abstract class Vehicle :MonoBehaviour
     {
         velocity = new Vector2();
         var ARTIE = GetComponent<AIAgent>();
-        //       if (ARTIE)
-        //{
-        //    transform.position = lastCheckpoint.transform.position;
-        //}
+               if (ARTIE)
+        {
+            transform.position = lastCheckpoint.transform.position;
+        }
 
     }
     private void OnTriggerEnter(Collider other)
@@ -183,7 +189,14 @@ public abstract class Vehicle :MonoBehaviour
 
 
     }
-
+    public void StopRacing()
+    {
+        fuel = 0;
+        velocity = new Vector2();
+        GetComponent<AIAgent>().enabled = false;
+        GetComponent<SteeringBehaviours>().enabled = false;
+        GetComponent<Vehicle>().enabled = false;
+    }
     public void Accelerate(Vector2 Force)
     {
         if (fuel > 0)
@@ -193,13 +206,12 @@ public abstract class Vehicle :MonoBehaviour
             {
                 if (BoostEnabled)
                 {
-                    if (Speed <= SpeedBoost)
-                    {
+                    if (Speed <= SpeedBoost)           
+                        Force *= acceleration;
                         velocity += new Vector2(Force.x, Force.y) / Mass;
                         velocity = Vector2.ClampMagnitude(velocity, SpeedBoost);
-                        Force *= acceleration;
-                    }
-                }
+                 
+                 }
                 else
                 {
                     if (Speed <= MaxSpeed)
