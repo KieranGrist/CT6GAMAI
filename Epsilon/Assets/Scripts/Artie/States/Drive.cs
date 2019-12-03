@@ -45,7 +45,7 @@ public class Drive : State<AIAgent>
                 agent.TargetLocation.Clear();
                 agent.TargetLocation = new List<Vector3>();
                 agent.RecievedPath = true;
-                var Path = ASTAR.CalculatePath(agent.SourceNode, agent.TargetNode);
+                var Path = ASTAR.aSTAR.CalculatePath(agent.SourceNode, agent.TargetNode);
                 if (Path.Count > 0)
                     for (int i = Path.Count - 1; i > 0; i--)
                     {

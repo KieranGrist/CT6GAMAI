@@ -14,6 +14,7 @@ public class LapManager : MonoBehaviour
     public int Lap = 0;
     public int CurrentWayPont =4 ;
     int PreviousWayPont = 3;
+    int VIC;
     public void StartRace()
     {
         RacingCars.AddRange(FindObjectsOfType<Vehicle>());
@@ -21,46 +22,48 @@ public class LapManager : MonoBehaviour
             CarPositions.Add(item);
         foreach ( var item in RacingCars)
         {
-      
+            item.StartLap();
+            item.CurrentLap = 0;
+            Lap = 0;
             if (item.transform.position == RacingGrid.Grid.Grid1.transform.position)
             {
                 CarPositions[0] = item;
-                item.Position = 0;
+                item.RacePosition = 0;
             }
             if (item.transform.position == RacingGrid.Grid.Grid2.transform.position)
             {
                 CarPositions[1] = item;
-                item.Position = 1;
+                item.RacePosition = 1;
             }
             if (item.transform.position == RacingGrid.Grid.Grid3.transform.position)
             {
                 CarPositions[2] = item;
-                item.Position = 2;
+                item.RacePosition = 2;
             }
             if (item.transform.position == RacingGrid.Grid.Grid4.transform.position)
             {
                 CarPositions[3] = item;
-                item.Position = 3;
+                item.RacePosition = 3;
             }
             if (item.transform.position == RacingGrid.Grid.Grid5.transform.position)
             {
                 CarPositions[4] = item;
-                item.Position = 4;
+                item.RacePosition = 4;
             }
             if (item.transform.position == RacingGrid.Grid.Grid6.transform.position)
             {
                 CarPositions[5] = item;
-                item.Position = 5;
+                item.RacePosition = 5;
             }
             if (item.transform.position == RacingGrid.Grid.Grid7.transform.position)
             {
                 CarPositions[6] = item;
-                item.Position = 6;
+                item.RacePosition = 6;
             }
             if (item.transform.position == RacingGrid.Grid.Grid8.transform.position)
             { 
                 CarPositions[7] = item;
-                item.Position = 7;
+                item.RacePosition = 7;
             }
 
         }
@@ -70,18 +73,35 @@ public class LapManager : MonoBehaviour
         PreviousWayPont = 3;
         manager = this;
     }
-    public int VehiclePassedCheckPoint(int WayPointNumber, Vehicle vehicle)
+    public void VehiclePassedCheckPoint(int WayPointNumber, Vehicle vehicle)
     {
-         //Create a run an algoritum which correctly tracks vehicles around the track
-        return 0;
+        bool AlreadyChecked = false;
+        if (vehicle.CurrentLap > Lap && WayPointNumber == 1) //Vehicle is on new lap
+        {
+            vehicle.EndLap();
+            Lap = vehicle.CurrentLap;
+            vehicle.RacePosition = 0;
+       CarPositions[0] = vehicle;
+            VIC = 1;
+            vehicle.StartLap();
+            AlreadyChecked = true;
+        }
+        if (WayPointNumber == 1 && !AlreadyChecked)
+        {
+                vehicle.EndLap();
+                CarPositions[VIC] = vehicle;
+            vehicle.RacePosition = VIC;
+                VIC++;
+                vehicle.StartLap();
 
+        }
     }
     private void Update()
     {
         manager = this;
-        //Order.text = "";
-        //foreach (var item in CarPositions)
-        //    Order.text += item.name + "\n";
+        Order.text = "Lap: " + Lap +"\n";
+        foreach (var item in CarPositions)
+            Order.text += item.RacePosition+1 + ": "+  item.name + " Lap Time " + item.CurrentLapTime + " " + item.Difference+ "\n";
 
     }
 

@@ -11,16 +11,23 @@ public class Default : AIAgent
     new void Update()
     {
 
-        Artie_Drive = Helper.DistanceToItem(transform, TargetNode.transform); //The AI will always have some basic want to get to their target node as this is what makes them fast
+    
         Artie_OverTake = 0;
         Artie_Defend =0;
         Fuel = vehicle.Fuel;
         FuelSubtacted = vehicle.Fuel - 100;
         FuelInverse = FuelSubtacted * -1;
-        FuelDivided = FuelInverse / 10;
-        Artie_Pit = 0; // ((vehicle.Fuel - 100) * -1) / 10; 
+        FuelDivided = FuelInverse / 100;
+        Artie_Pit = FuelDivided;
         Artie_GoForShortCut =-1; //If one exists
         Artie_GoForRandomItem =-1; //If exists
+
+         Artie_Drive = 1 - FuelDivided;
+        if (vehicle.PerformingStop())
+        {
+            Artie_Drive = 0;
+            Artie_Pit = 1;
+        }
         base.Update();
 
     }

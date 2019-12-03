@@ -37,7 +37,7 @@ public class StateMachine
    // public Defend defendState;
     public Drive driveState;
     //public Overtake overtakeState;
-    //public Pit pitState;
+    public Pit pitState;
     //public RandomItem randomItemState;
     //public Shortcut shortcutState;
 
@@ -53,9 +53,9 @@ public class StateMachine
     public void CheckDesire()
     {
         Transform Reference;
-        if (Artie.vehicle.Position != 7)
+        if (Artie.vehicle.RacePosition != 7)
         {
-            Reference = LapManager.manager.CarPositions[Artie.vehicle.Position + 1].transform;
+            Reference = LapManager.manager.CarPositions[Artie.vehicle.RacePosition + 1].transform;
             goDefend.Status = Artie.Artie_Defend;
             goDefend.DistanceToWayPoint = Helper.DistanceToItem(Artie.transform, Reference);
             goDefend.UnclappedDesire = K * (Artie.Artie_Defend / Helper.DistanceToItem(Artie.transform, Reference));
@@ -73,9 +73,9 @@ public class StateMachine
         DriveDesire = Mathf.Clamp(K * (Artie.Artie_Drive / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f); ;
 
         Reference = null;
-        if (Artie.vehicle.Position != 0)
+        if (Artie.vehicle.RacePosition != 0)
         {
-            Reference = LapManager.manager.CarPositions[Artie.vehicle.Position - 1].transform;
+            Reference = LapManager.manager.CarPositions[Artie.vehicle.RacePosition - 1].transform;
             goOvertake.Status = Artie.Artie_OverTake;
             goOvertake.DistanceToWayPoint = Helper.DistanceToItem(Artie.transform, Reference);
             goOvertake.UnclappedDesire = K * (Artie.Artie_OverTake / Helper.DistanceToItem(Artie.transform, Reference));
@@ -115,12 +115,12 @@ public class StateMachine
         AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(DriveDesire, driveState));
         //AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(OvertakeDesire, overtakeState));
         //AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(RandomItemDesire, randomItemState));
-        //AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(PitDesire, pitState));
+        AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(PitDesire, pitState));
         //AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(ShortcutDesire, shortcutState));
 
         AIAgentQueue.Sort();
         HighestDesire = AIAgentQueue.TaskQueue[AIAgentQueue.TaskQueue.Count - 1].Key;
-        Artie.pState = driveState;// Transition<AIAgent>.Transist(Artie.pState, Artie.pState, AIAgentQueue.TaskQueue[AIAgentQueue.TaskQueue.Count - 1].Value, true);
+        Artie.pState =  Transition<AIAgent>.Transist(Artie.pState, Artie.pState, AIAgentQueue.TaskQueue[AIAgentQueue.TaskQueue.Count - 1].Value, true);
 
     }
 

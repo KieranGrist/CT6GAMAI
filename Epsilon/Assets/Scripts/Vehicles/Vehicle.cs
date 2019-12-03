@@ -1,21 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
 [System.Serializable]
+
+public class ReadOnlyAttribute : PropertyAttribute
+{
+
+}
+//https://answers.unity.com/questions/489942/how-to-make-a-readonly-property-in-inspector.html
+[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+public class ReadOnlyDrawer : PropertyDrawer
+{
+    public override float GetPropertyHeight(SerializedProperty property,
+                                            GUIContent label)
+    {
+        return EditorGUI.GetPropertyHeight(property, label, true);
+    }
+
+    public override void OnGUI(Rect position,
+                               SerializedProperty property,
+                               GUIContent label)
+    {
+        GUI.enabled = false;
+        EditorGUI.PropertyField(position, property, label, true);
+        GUI.enabled = true;
+    }
+}
+
 public abstract class Vehicle :MonoBehaviour
-{  
+{
+
+
     [Header("Lap")]
-    public int CurrentLap;
-    public int LastCheckPoint;
+    [ReadOnly] public int CurrentLap;
+    [ReadOnly] public int LastCheckPoint;
     [Header("Position in Race")]
-    public int Position;
+    [ReadOnly] public int RacePosition;
     [Header("Time")]
-    public TimeSpan LapTime;
-    DateTime StartTime;
-    public float CurrentLapTime =0;
-    public float PreviusLapTime =0;
-    public float Difference =0;
+    [ReadOnly] public TimeSpan LapTime;
+    [ReadOnly] DateTime StartTime;
+    [ReadOnly] public float CurrentLapTime =0;
+    [ReadOnly] public float PreviusLapTime =0;
+    [ReadOnly] public float Difference =0;
     /// <summary>
     /// Current Velocity of the vehicle
     /// </summary>
@@ -64,15 +92,32 @@ public abstract class Vehicle :MonoBehaviour
     protected float fuel = 100;
     protected GameObject lastCheckpoint;
     protected float SpeedBoost;
-    bool BoostEnabled;
-    bool PitSpeed;
-    public void PitLane()
+    protected bool BoostEnabled;
+    protected bool PitSpeed;
+    protected bool StopActive = false;
+    protected float TriggerTimer = 2;
+    public bool PerformingStop()
+    {
+        return StopActive;
+    }
+    public void PitEnter()
     {
         PitSpeed = true;
     }
+    public void PitExit()
+    {
+        StopActive = false;
+        PitSpeed = false;   
+    }
     public void PerformStop()
     {
-        fuel += 2 * Time.deltaTime;
+        StopActive = true;
+        fuel += 1;
+        fuel = Mathf.Clamp(fuel, -1, 100);
+        if (fuel >= 98)
+        {
+            StopActive = false;
+        }
 
     }
     public void BoostCar()
@@ -93,10 +138,13 @@ public abstract class Vehicle :MonoBehaviour
 
     private void Update()
     {
+               TriggerTimer += Time.deltaTime;
+
+
         if (transform.position.y < -10)
             Reset();
         transform.position += new Vector3(Velocity.x, 0, Velocity.y) * Time.deltaTime;
-        velocity = Vector3.Lerp(velocity, velocity * Time.smoothDeltaTime, Time.smoothDeltaTime);
+        velocity = Vector2.Lerp(velocity, velocity * Time.smoothDeltaTime, Time.smoothDeltaTime);
         speed = velocity.magnitude;
         CurrentLapTime = (float)LapTime.TotalSeconds;
         Difference = CurrentLapTime - PreviusLapTime;
@@ -106,17 +154,34 @@ public abstract class Vehicle :MonoBehaviour
         velocity = new Vector2();
         var ARTIE = GetComponent<AIAgent>();
         //       if (ARTIE)
+        //{
+        //    transform.position = lastCheckpoint.transform.position;
+        //}
 
-    }   
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Checkpoints"))
         {
             lastCheckpoint = other.gameObject;
-            CurrentLap=   LapManager.manager.VehiclePassedCheckPoint(other.gameObject.GetComponent<Checkpoint>().CheckpointTag, this);
             LastCheckPoint = other.gameObject.GetComponent<Checkpoint>().CheckpointTag;
         }
-  
+        if (TriggerTimer >= 2)
+        {        
+            if (other.CompareTag("Checkpoints"))
+            {
+                TriggerTimer = 0;
+                var FinishLine = other.GetComponent<Checkpoint>().CheckpointTag;
+                if (FinishLine == 1)
+                {
+                    CurrentLap++;
+                    LapManager.manager.VehiclePassedCheckPoint(other.gameObject.GetComponent<Checkpoint>().CheckpointTag, this);
+                }
+            }
+
+        }
+
+
     }
 
     public void Accelerate(Vector2 Force)

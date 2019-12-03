@@ -12,6 +12,6 @@ public class Mercedes : Vehicle
         acceleration = 475;
         turningForce = 4;
         breakPower = 1.1F;
-        GetComponent<Renderer>().material.color = new Color(192, 192, 192);
+        GetComponent<Renderer>().material.color = Color.black;
     }
 }

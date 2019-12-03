@@ -100,7 +100,7 @@ public abstract class AIAgent : MonoBehaviour {
     public float Artie_GoForShortCut; //If one exists
     public float Artie_GoForRandomItem; //If exists
     public float Artie_Aggresive;
-
+    public float Artie_Timer;
     public StateMachine ArtieStateMachine;
     public State<AIAgent> pState;
     public string Team;
@@ -161,7 +161,7 @@ public abstract class AIAgent : MonoBehaviour {
         // ArtieStateMachine.defendState = new Defend();
         ArtieStateMachine.driveState = new Drive();
         //ArtieStateMachine.overtakeState = new Overtake();
-        //ArtieStateMachine.pitState = new Pit();
+       ArtieStateMachine.pitState = new Pit();
         //ArtieStateMachine.randomItemState = new RandomItem();
         //ArtieStateMachine.shortcutState = new Shortcut();
         pState = ArtieStateMachine.driveState;

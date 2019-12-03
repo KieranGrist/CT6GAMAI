@@ -18,6 +18,7 @@ public class PriorityQueue<T ,Q> where T : IComparable<T>
 
     public void Enqueue(KeyValuePair<T,Q> item)
     {
+
         data.Add(item);
     }
 

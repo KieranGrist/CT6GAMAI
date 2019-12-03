@@ -15,13 +15,14 @@ public class Pit : State<AIAgent>
                 var Temp = hit.collider.gameObject.GetComponent<Node>();
                 if (Temp)
                     agent.SourceNode = Temp;
-            }     
+            }
             if (agent.SourceNode && agent.TargetNode)
             {
                 agent.TargetLocation.Clear();
                 agent.TargetLocation = new List<Vector3>();
                 agent.RecievedPath = true;
-                var Path = ASTAR.CalculatePath(agent.SourceNode, agent.TargetNode);
+
+                var Path = ASTAR.aSTAR.CalculatePath(agent.SourceNode, agent.TargetNode);
                 if (Path.Count > 0)
                     for (int i = Path.Count - 1; i > 0; i--)
                     {
@@ -49,44 +50,57 @@ public class Pit : State<AIAgent>
             if (agent.Team == "Mercedes")
             {
                 Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.MercedesPit.transform.position);
-                if (Physics.Raycast(Pitlane.pitlane.MercedesPit.transform.position, -agent.transform.up, out RaycastHit item, float.PositiveInfinity, agent.Mask))
+                if (Physics.Raycast(Pitlane.pitlane.MercedesPit.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out RaycastHit item, float.PositiveInfinity, agent.Mask))
                     agent.TargetNode = item.transform.GetComponent<Node>();
                 agent.RecievedPath = false;
             }
             if (agent.Team == "Ford")
             {
                 Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.FordPit.transform.position);
-                if (Physics.Raycast(Pitlane.pitlane.FordPit.transform.position, -agent.transform.up, out RaycastHit item, float.PositiveInfinity, agent.Mask))
+                if (Physics.Raycast(Pitlane.pitlane.FordPit.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out RaycastHit item, float.PositiveInfinity, agent.Mask))
                     agent.TargetNode = item.transform.GetComponent<Node>();
                 agent.RecievedPath = false;
             }
             if (agent.Team == "Ferrari")
             {
                 Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.FerrariPit.transform.position);
-                if (Physics.Raycast(Pitlane.pitlane.FerrariPit.transform.position, -agent.transform.up, out RaycastHit item, float.PositiveInfinity, agent.Mask))
+                if (Physics.Raycast(Pitlane.pitlane.FerrariPit.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out RaycastHit item, float.PositiveInfinity, agent.Mask))
                     agent.TargetNode = item.transform.GetComponent<Node>();
                 agent.RecievedPath = false;
             }
             if (agent.Team == "Renault")
             {
                 Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.RenaultPit.transform.position);
-                if (Physics.Raycast(Pitlane.pitlane.RenaultPit.transform.position, -agent.transform.up, out RaycastHit item, float.PositiveInfinity, agent.Mask))
+                if (Physics.Raycast(Pitlane.pitlane.RenaultPit.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out RaycastHit item, float.PositiveInfinity, agent.Mask))
                     agent.TargetNode = item.transform.GetComponent<Node>();
                 agent.RecievedPath = false;
             }
             FirstTime = false;
         }
         MoveOnRoute(agent);
-          agent.vehicle.Accelerate(agent.SB.Calculate());
+        agent.vehicle.Accelerate(agent.SB.Calculate());
+        if (agent.Team == "Mercedes")
+            Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.MercedesPit.transform.position);
+        if (agent.Team == "Ford")
+            Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.FordPit.transform.position);
+        if (agent.Team == "Ferrari")
+            Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.FerrariPit.transform.position);
+
+        if (agent.Team == "Renault")
+            Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.RenaultPit.transform.position);
 
 
         if (Distance < 4)
         {
-            FirstTime = true;
+            agent.Artie_Pit = 1;
+            agent.Artie_Drive = 0;
             agent.vehicle.PerformStop();
-            if (agent.vehicle.Fuel > 100)
+
+            if (agent.vehicle.Fuel >= 98)
             {
+                FirstTime = true;
                 agent.Artie_Pit = 0;
+                agent.Artie_Drive = 1;
             }
         }
     }

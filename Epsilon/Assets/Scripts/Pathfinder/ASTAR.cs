@@ -1,18 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public static class ASTAR
+[System.Serializable]
+public class ASTAR :MonoBehaviour
 {
+    public static ASTAR aSTAR;
+    public List<KeyValuePair<Node, Node>> NodesAlreadySearched = new List<KeyValuePair<Node, Node>>();
+    public List<List<int>> RoutesGenerated = new List<List<int>>();
+    private void Awake()
+    {
+        aSTAR = this;
+    }
+    private void Update()
+    {
+        aSTAR = this;
+    }
+
     static float CalculateCost(Edge Edge, Node Target, List<float> Cost)
     {
         return (Cost[Edge.From.Index] + Edge.To.Cost) + ((Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100 + (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100);
     }
     static List<int> CalculateRoute(Node Source, Node Target)
-    {
+    {     
         bool TargetNodeFound = false;
         List<int> Route = new List<int>(NavGraph.map.Nodes.Count);
         List<float> Cost = new List<float>(NavGraph.map.Nodes.Count);
-        List<int> GeneratedPath = new List<int>();
         for (int i = 0; i < NavGraph.map.Nodes.Count; i++)
         {
             Route.Add(-10);
@@ -44,7 +56,6 @@ public static class ASTAR
             }
             foreach (var item in Edge.To.Neighbours)
             {    
-
                 float F = (item.To.Cost + Cost[Edge.To.Index] )+ ((Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100 + (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100);
                 var valuepair = new KeyValuePair<float, Edge>(F, item);
                 if (!TraveresedEdges.Contains(item)) //Check if traveresed edges contains items before running the expensive contains for min priority queue
@@ -55,9 +66,16 @@ public static class ASTAR
 
         return Route;
     }
-    public static List<int> CalculatePath(Node Source, Node Target)
+    public List<int> CalculatePath(Node Source, Node Target)
     {
-        var Route = CalculateRoute(Source, Target);
+        var Route = new List<int>();
+        if (!NodesAlreadySearched.Contains(new KeyValuePair<Node, Node>(Source, Target)))
+            Route = CalculateRoute(Source, Target);
+        else
+        {
+            var i =NodesAlreadySearched.IndexOf(new KeyValuePair<Node, Node>(Source, Target));
+            return (RoutesGenerated[i]);
+        }
         var GeneratedPath = new List<int>();
         int currentNode = Target.Index;
         GeneratedPath.Add(currentNode);
@@ -66,6 +84,8 @@ public static class ASTAR
             currentNode = Route[currentNode];
             GeneratedPath.Add(currentNode);
         }
+        NodesAlreadySearched.Add(new KeyValuePair<Node, Node>(Source, Target));
+        RoutesGenerated.Add(GeneratedPath);
         return GeneratedPath;
     }
 }
