@@ -12,21 +12,21 @@ public class Default : AIAgent
     {
 
     
-        Artie_OverTake = 0;
-        Artie_Defend =0;
+        artieOverTake = 0;
+        artieDefend =0;
         Fuel = vehicle.Fuel;
         FuelSubtacted = vehicle.Fuel - 100;
         FuelInverse = FuelSubtacted * -1;
         FuelDivided = FuelInverse / 100;
-        Artie_Pit = FuelDivided;
-        Artie_GoForShortCut =-1; //If one exists
-        Artie_GoForRandomItem =-1; //If exists
+        artiePit = FuelDivided;
+        artieGoForShortCut =-1; //If one exists
+        artieGoForRandomItem =-1; //If exists
 
-         Artie_Drive = 1 - FuelDivided;
+         artieDrive = 1 - FuelDivided;
         if (vehicle.PerformingStop())
         {
-            Artie_Drive = 0;
-            Artie_Pit = 1;
+            artieDrive = 0;
+            artiePit = 1;
         }
         base.Update();
 

@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-[System.Serializable]
-
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 public abstract class AIAgent : MonoBehaviour { 
 
     //Name Lists effects what names the AI can recieve
-    string[] FirstNames = new string[]
+    readonly string[] _firstNames = new string[]
    {
         "Kieran",
         "Alex",
@@ -21,8 +22,8 @@ public abstract class AIAgent : MonoBehaviour {
         "Dale",
         "Georgina",
         "Nicole",
-        "Keria",
-       "Haleema",
+        "Kara",
+       "Hailee",
        "Helen",
        "Emily",
        "Liberty",
@@ -31,24 +32,25 @@ public abstract class AIAgent : MonoBehaviour {
        "Elsie",
        "Crystal",
        "Maria",
-       "Ayla",
-       "Aminah",
+       "Ayala",
+       "Alanah",
        "Amie",
        "Jack",
        "Ben",
        "Adam",
        "Tegan",
        "Edan",
-       "Aliceson",
+       "Alison",
        "Merle",
-       "Aiden",
+       "Aden",
        "Allyson",
        "Lyndsey",
        "Stacia",
         "Lauren",
         "Sarah"
    };
-    string[] LastNames = new string[]
+
+    readonly string[] _lastNames = new string[]
      {
     "Stainton",
    "Peters",
@@ -92,98 +94,97 @@ public abstract class AIAgent : MonoBehaviour {
    };
 
     // Values that effect the state that the AI is in , some values that effect the state can be found in vehicle 
-    [Header("State Variables")]
-    public float Artie_Drive; //Default State
-    public float Artie_OverTake;
-    public float Artie_Defend;
-    public float Artie_Pit;
-    public float Artie_GoForShortCut; //If one exists
-    public float Artie_GoForRandomItem; //If exists
-    public float Artie_Aggresive;
-    public float Artie_Timer;
-    public StateMachine ArtieStateMachine;
+[Header("State Variables")]
+    public float artieDrive; //Default State
+ public float artieOverTake;
+ public float artieDefend;
+    public float artiePit;
+ public float artieGoForShortCut; //If one exists
+ public float artieGoForRandomItem; //If exists
+public float artieAggresive;
+    public float artieTimer;
+    public StateMachine artieStateMachine;
     public State<AIAgent> pState;
-    public string Team;
+    public string team;
 
 
     //Values that effect the pathfinding of the AI 
-    [Header("Pathfinding")]
-    public Node SourceNode;
-    public Node TargetNode;
+    public Node sourceNode;
+public Node targetNode;
 
     //Values that control the movement of the ai
-    [Header("Movement")]
-    public bool RecievedPath = false;
-    public List<Vector3> TargetLocation = new List<Vector3>();
-    List<GameObject> PathGameObjects = new List<GameObject>();
- public   LayerMask Mask;
+    public bool recievedPath = false;
+ public List<Vector3> targetLocation = new List<Vector3>();
+    List<GameObject> _pathGameObjects = new List<GameObject>();
+ public   LayerMask mask;
 
     //Values that effect the steering of the AI
-    [Header("Steering Behaviors")]
-    public SteeringBehaviours SB;
+
+    public SteeringBehaviours sb;
     public Vehicle vehicle;
 
     void Start()
     {
         if (GetComponent<Ford>())
-            Team = "Ford";
-            if (GetComponent<Mercedes>())
-            Team = "Mercedes";
+            team = "Ford";
+        if (GetComponent<Mercedes>())
+            team = "Mercedes";
         if (GetComponent<Renault>())
-            Team = "Renault";
+            team = "Renault";
         if (GetComponent<Ferrari>())
-            Team = "Ferrari";
+            team = "Ferrari";
 
-        if (Physics.Raycast(RaceTrack.raceTrack.FinishLine.transform.position, -transform.up, out RaycastHit item, float.PositiveInfinity, Mask))
-          TargetNode = item.transform.GetComponent<Node>();
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 20.0f, Mask))
+        if (Physics.Raycast(RaceTrack.raceTrack.FinishLine.transform.position, -transform.up, out RaycastHit item,
+            float.PositiveInfinity, mask))
+            targetNode = item.transform.GetComponent<Node>();
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 20.0f, mask))
         {
             var Temp = hit.collider.gameObject.GetComponent<Node>();
             if (Temp)
-                SourceNode = Temp;
+                sourceNode = Temp;
         }
 
-        name = FirstNames[Random.Range(0, FirstNames.Length)] + " " + LastNames[Random.Range(0, LastNames.Length)];
+        name = _firstNames[Random.Range(0, _firstNames.Length)] + " " + _lastNames[Random.Range(0, _lastNames.Length)];
 
-        Mask = LayerMask.GetMask("Node");
+        mask = LayerMask.GetMask("Node");
 
         vehicle = GetComponent<Vehicle>();
 
 
 
-        SB = GetComponent<SteeringBehaviours>();
-        SB.ProjectedCube = SB.GetComponentInChildren<ProjCube>();
-    //    SB.ObstacleAvodienceOn();
-     //   SB.WallAvodienceOn(); 
+        sb = GetComponent<SteeringBehaviours>();
+        sb.ProjectedCube = sb.GetComponentInChildren<ProjCube>();
+        //    SB.ObstacleAvodienceOn();
+        //   SB.WallAvodienceOn(); 
 
 
-        ArtieStateMachine = new StateMachine();
+        artieStateMachine = new StateMachine();
         // ArtieStateMachine.defendState = new Defend();
-        ArtieStateMachine.driveState = new Drive();
+        artieStateMachine.driveState = new Drive();
         //ArtieStateMachine.overtakeState = new Overtake();
-       ArtieStateMachine.pitState = new Pit();
+        artieStateMachine.pitState = new Pit();
         //ArtieStateMachine.randomItemState = new RandomItem();
         //ArtieStateMachine.shortcutState = new Shortcut();
-        pState = ArtieStateMachine.driveState;
-        ArtieStateMachine.Artie = this;
-        ArtieStateMachine.Update();
+        pState = artieStateMachine.driveState;
+        artieStateMachine.Artie = this;
+        artieStateMachine.Update();
         pState.Execute(this);
     }
 
 
-  
+
 
     private void OnDrawGizmos()
     {
-        Vector3 TextLocation = transform.position;
-        TextLocation += new Vector3(0, 1, 0);
+        Vector3 textLocation = transform.position;
+        textLocation += new Vector3(0, 1, 0);
         GUIStyle style = new GUIStyle();
             style.normal.textColor = Color.green;        
-        Handles.Label(TextLocation, name, style); 
+        Handles.Label(textLocation, name, style); 
     }
     public virtual void  Update ()
     {
-        ArtieStateMachine.Update();
+        artieStateMachine.Update();
         pState.Execute(this);
         /* these are needed for any states*/
     //    Heading = vehicle.Velocity.normalized;     

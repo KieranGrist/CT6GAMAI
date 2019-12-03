@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using UnityEngine;
 [System.Serializable]
 public struct DesireDebug
@@ -56,39 +56,39 @@ public class StateMachine
         if (Artie.vehicle.RacePosition != 7)
         {
             Reference = LapManager.manager.CarPositions[Artie.vehicle.RacePosition + 1].transform;
-            goDefend.Status = Artie.Artie_Defend;
+            goDefend.Status = Artie.artieDefend;
             goDefend.DistanceToWayPoint = Helper.DistanceToItem(Artie.transform, Reference);
-            goDefend.UnclappedDesire = K * (Artie.Artie_Defend / Helper.DistanceToItem(Artie.transform, Reference));
-            DefendDesire = Mathf.Clamp(K * (Artie.Artie_Defend / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
+            goDefend.UnclappedDesire = K * (Artie.artieDefend / Helper.DistanceToItem(Artie.transform, Reference));
+            DefendDesire = Mathf.Clamp(K * (Artie.artieDefend / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
         }
         else
             DefendDesire = 0; //As this is the last car there is nothing to defend from
 
 
         Reference = null;
-        Reference = Artie.TargetNode.transform;
-        goDrive.Status = Artie.Artie_Drive;
+        Reference = Artie.targetNode.transform;
+        goDrive.Status = Artie.artieDrive;
         goDrive.DistanceToWayPoint = Helper.DistanceToItem(Artie.transform, Reference);
-        goDrive.UnclappedDesire = K * (Artie.Artie_Drive / Helper.DistanceToItem(Artie.transform, Reference));
-        DriveDesire = Mathf.Clamp(K * (Artie.Artie_Drive / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f); ;
+        goDrive.UnclappedDesire = K * (Artie.artieDrive / Helper.DistanceToItem(Artie.transform, Reference));
+        DriveDesire = Mathf.Clamp(K * (Artie.artieDrive / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f); ;
 
         Reference = null;
         if (Artie.vehicle.RacePosition != 0)
         {
             Reference = LapManager.manager.CarPositions[Artie.vehicle.RacePosition - 1].transform;
-            goOvertake.Status = Artie.Artie_OverTake;
+            goOvertake.Status = Artie.artieOverTake;
             goOvertake.DistanceToWayPoint = Helper.DistanceToItem(Artie.transform, Reference);
-            goOvertake.UnclappedDesire = K * (Artie.Artie_OverTake / Helper.DistanceToItem(Artie.transform, Reference));
-            OvertakeDesire = Mathf.Clamp(K * (Artie.Artie_OverTake / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
+            goOvertake.UnclappedDesire = K * (Artie.artieOverTake / Helper.DistanceToItem(Artie.transform, Reference));
+            OvertakeDesire = Mathf.Clamp(K * (Artie.artieOverTake / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
 
         }
         else
             OvertakeDesire = 0;
         Reference = Pitlane.pitlane.transform;
-        goPit.Status = Artie.Artie_Pit;
+        goPit.Status = Artie.artiePit;
         goPit.DistanceToWayPoint = Helper.DistanceToItem(Artie.transform, Reference);
-        goPit.UnclappedDesire = K * (Artie.Artie_Pit / Helper.DistanceToItem(Artie.transform, Reference));
-        PitDesire = Mathf.Clamp(K * (Artie.Artie_Pit / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
+        goPit.UnclappedDesire = K * (Artie.artiePit / Helper.DistanceToItem(Artie.transform, Reference));
+        PitDesire = Mathf.Clamp(K * (Artie.artiePit / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
 
         /* Not Implemented
         goRandomItem.Status = DrinkStatus();
