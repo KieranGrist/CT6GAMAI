@@ -1,87 +1,90 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[System.Serializable]
-public class ASTAR :MonoBehaviour
+public  class ASTAR :MonoBehaviour
 {
-    public static ASTAR aSTAR;
+    public static ASTAR AStar;
     public List<KeyValuePair<Node, Node>> NodesAlreadySearched = new List<KeyValuePair<Node, Node>>();
     public List<List<int>> RoutesGenerated = new List<List<int>>();
     private void Awake()
     {
-        aSTAR = this;
+        AStar = this;
     }
     private void Update()
     {
-        aSTAR = this;
+        AStar = this;
     }
-
-    static float CalculateCost(Edge Edge, Node Target, List<float> Cost)
+    static  List<int> CalculateRoute(Node Source, Node Target)
     {
-        float G = Cost[Edge.From.Index] + Edge.GetCost();
-        float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
-        float Z = (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100;
-        float H = X + Z;
-        float F = G + H;
-        return F;
-    }
-    static List<int> CalculateRoute(Node Source, Node Target)
-    {     
-        bool TargetNodeFound = false;
-        List<int> Route = new List<int>(NavGraph.map.Nodes.Count);
-        List<float> Cost = new List<float>(NavGraph.map.Nodes.Count);
+        var Route = new List<int>(NavGraph.map.Nodes.Count);
+        var Cost = new List<float>(NavGraph.map.Nodes.Count);
+
+
         for (int i = 0; i < NavGraph.map.Nodes.Count; i++)
         {
             Route.Add(-10);
             Cost.Add(int.MaxValue);
         }
-        TargetNodeFound = false;
         HashSet<Edge> TraveresedEdges = new HashSet<Edge>();
         PriorityQueue<float, Edge> MinPriorityQueue = new PriorityQueue<float, Edge>();
         Cost[Source.Index] = 0;
+
         foreach (var item in Source.Neighbours)
         {
             KeyValuePair<float, Edge> keyValuePair = new KeyValuePair<float, Edge>(0, item);
             MinPriorityQueue.Enqueue(keyValuePair);
         }
+
         while (MinPriorityQueue.count > 0)
         {
+
+
             KeyValuePair<float, Edge> keyValuePair = MinPriorityQueue.Dequeue();
             TraveresedEdges.Add(keyValuePair.Value);
             Edge Edge = keyValuePair.Value;
-            if (Cost[Edge.To.Index] > Cost[Edge.From.Index] + Edge.To.Cost)
+            if (Cost[Edge.To.Index] > Cost[Edge.From.Index] + Edge.GetCost())
             {
                 Route[Edge.To.Index] = Edge.From.Index;
-                Cost[Edge.To.Index] = CalculateCost(Edge, Target, Cost);
+                float HCost = (Mathf.Abs(Target.transform.position.x - Edge.To.transform.position.x)) + (Mathf.Abs(Target.transform.position.z - Edge.To.transform.position.z));
+                float GCost = Cost[Edge.From.Index] + Edge.GetCost();
+                float FCost = GCost + HCost;
+                Cost[Edge.To.Index] = FCost;
+
             }
-            if (Edge.To.Index == Target.Index && !TargetNodeFound)
-            {
-                TargetNodeFound = true;
+
+            if (Edge.To.Index == Target.Index)
                 break;
-            }
             foreach (var item in Edge.To.Neighbours)
             {
-                float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
-                float Z = (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100;
-                float H = X + Z;
-                float G = item.GetCost() + Cost[Edge.To.Index];
-                float F = G + H; var valuepair = new KeyValuePair<float, Edge>(F, item);
-                if (!TraveresedEdges.Contains(item)) //Check if traveresed edges contains items before running the expensive contains for min priority queue
-                if (Edge.To.Walkable  && !MinPriorityQueue.data.Contains(valuepair))
-                    MinPriorityQueue.Enqueue(valuepair);
+                float HCost = (Mathf.Abs(Target.transform.position.x - Edge.To.transform.position.x)) + (Mathf.Abs(Target.transform.position.z - Edge.To.transform.position.z));
+                float GCost = Cost[Edge.To.Index] + item.GetCost();
+                float FCost = GCost + HCost;
+                MinPriorityQueue.UpdateCost(item, FCost);
+                KeyValuePair<float, Edge> valuepair = new KeyValuePair<float, Edge>(FCost, item);
+                if (!TraveresedEdges.Contains(item))
+                {
+
+                    //Check if traveresed edges contains items before running the expensive contains for min priority queue
+                    if (Edge.To.Walkable && !MinPriorityQueue.data.Contains(valuepair))
+                    {
+                        MinPriorityQueue.Enqueue(valuepair);
+
+                    }
+                }
             }
         }
 
         return Route;
     }
-    public List<int> CalculatePath(Node Source, Node Target)
+
+    public  List<int> CalculatePath(Node Source, Node Target)
     {
         var Route = new List<int>();
         if (!NodesAlreadySearched.Contains(new KeyValuePair<Node, Node>(Source, Target)))
             Route = CalculateRoute(Source, Target);
         else
         {
-            var i =NodesAlreadySearched.IndexOf(new KeyValuePair<Node, Node>(Source, Target));
+            var i = NodesAlreadySearched.IndexOf(new KeyValuePair<Node, Node>(Source, Target));
             return (RoutesGenerated[i]);
         }
         var GeneratedPath = new List<int>();

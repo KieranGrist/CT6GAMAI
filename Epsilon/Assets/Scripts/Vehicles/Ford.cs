@@ -6,10 +6,13 @@ public class Ford : Vehicle
 {
     void Start()
     {
-        mass = 666;
+        //Minium of 650 maxium of 800
+        mass = Random.Range(650, 800);
         DefaultMass = mass;
-        maxSpeed = 19;
-        acceleration = 9;
+        //Max Speed kept between 15 - 25;
+        maxSpeed = Random.Range(15, 25);
+        //Mas speed divided by 0.4
+        acceleration = maxSpeed / 0.4f;
         GetComponent<Renderer>().material.color = Color.blue;
     }
 }

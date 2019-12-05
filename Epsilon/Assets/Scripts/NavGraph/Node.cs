@@ -24,8 +24,6 @@ public abstract class Node : MonoBehaviour
     public void GenerateNeighbours()
     {
         List<Node> hitObjects = new List<Node>();
-
-        Cost = 5;
         name = "Node: " + Index;
         var Scale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z );
         foreach (var item in Physics.OverlapBox(transform.position + transform.forward * .5f, Scale * 0.5f, transform.rotation))

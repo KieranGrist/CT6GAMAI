@@ -43,7 +43,7 @@ public class LapManager : MonoBehaviour
             vehicle.StartLap();
             AlreadyChecked = true;
         }
-        if (WayPointNumber == 1 && !AlreadyChecked)
+        if (WayPointNumber == 1 && !AlreadyChecked && vehicle.CurrentLap == Lap)
         {
                 vehicle.EndLap();
             CarPositions.Add(vehicle);

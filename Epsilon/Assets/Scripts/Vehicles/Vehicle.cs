@@ -173,7 +173,6 @@ public abstract class Vehicle :MonoBehaviour
     {
         fuel = 0;
         GetComponent<AIAgent>().enabled = false;
-        GetComponent<Vehicle>().enabled = false;
     }
     public void Accelerate(Vector2 Force)
     {

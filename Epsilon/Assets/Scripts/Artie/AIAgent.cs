@@ -47,7 +47,33 @@ public abstract class AIAgent : MonoBehaviour {
        "Lyndsey",
        "Stacia",
         "Lauren",
-        "Sarah"
+        "Sarah",
+        "Matt",
+        "Paul",
+        "Maddie",
+        "Lando",
+        "Lewis",
+        "Sebastian",
+        "Carlos",
+        "Sergio",
+        "Piere",
+        "Nicco",
+        "Esteban",
+        "Robert",
+        "George",
+        "Charles",
+        "Max",
+        "Alex",
+        "Lance",
+        "Kevin",
+        "Roman",
+        "Jules",
+        "Peter",
+        "Mikey",
+        "Valtteri",
+        "Daniel"
+
+
    };
 
     readonly string[] _lastNames = new string[]
@@ -90,7 +116,30 @@ public abstract class AIAgent : MonoBehaviour {
     "Ryan",
     "Williams",
     "Griffiths",
-    "Moss"
+    "Moss",
+    "Austin",
+    "Hamilton",
+    "Vettel",
+    "Bottas",
+    "Verstappen",
+    "Albon",
+    "Leclerc",
+    "Magnussen",
+    "Grosjean",
+    "Bottas",
+    "Gasly",
+    "Ricciardo",
+    "Hulkenberg",
+    "Norris",
+    "Sainz",
+    "Perez",
+    "Stroll",
+    "Raikkonen",
+    "Giovinazzi",
+    "Albon",
+    "Kvyat",
+    "Russell",
+    "Kubica"
    };
 
     // Values that effect the state that the AI is in , some values that effect the state can be found in vehicle 
@@ -104,19 +153,21 @@ public abstract class AIAgent : MonoBehaviour {
 
 
     //Values that effect the pathfinding of the AI 
-    public Node sourceNode;
-public Node targetNode;
+    private Node sourceNode;
+    public Node targetNode;
 
     //Values that control the movement of the ai
-    public bool recievedPath = false;
- public List<Vector3> targetLocation = new List<Vector3>();
-    List<GameObject> _pathGameObjects = new List<GameObject>();
+    private bool recievedPath = false;
+ public List<Transform> targetLocation = new List<Transform>();
  public   LayerMask mask;
 
     //Values that effect the steering of the AI
 
     public SteeringBehaviours steeringBehaviour;
     public Vehicle vehicle;
+
+    public Node SourceNode { get => sourceNode; }
+    public bool RecievedPath { get => recievedPath;}
 
     void Start()
     {
@@ -164,8 +215,41 @@ public Node targetNode;
         artieStateMachine.Artie = this;
     }
 
+    public void SetSourceNode()
+    {
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 20.0f, mask))
+        {
+            var Temp = hit.collider.gameObject.GetComponent<Node>();
+            if (Temp)
+                sourceNode = Temp;
+        }
+    }
+
+    public void MoveOnRoute()
+    {
+        if (targetLocation.Count > 0)
+        {
+            recievedPath = true;
+            steeringBehaviour.SeekOn(new Vector2(targetLocation[0].transform.position.x, targetLocation[0].transform.position.z));
+
+            //if (targetLocation.Count > 0)
+            //{
+            //    Vector3 forward = targetLocation[0].forward;
+            //    Vector3 toOther = transform.position - targetLocation[0].transform.position;
+            //    if (Vector3.Dot(forward, toOther) >= 0) //is infront of the target node skip to next target
+            //        targetLocation.Remove(targetLocation[0]);
+            //}
+            if (targetLocation.Count > 0)
+            {
+                if (Vector3.Distance(targetLocation[0].transform.position, transform.position) <= 3.325f)
+                    targetLocation.Remove(targetLocation[0]);
+            }
 
 
+        }
+        else
+            recievedPath = false;
+    }
 
     private void OnDrawGizmos()
     {
@@ -173,7 +257,12 @@ public Node targetNode;
         textLocation += new Vector3(0, 1, 0);
         GUIStyle style = new GUIStyle();
             style.normal.textColor = Color.green;        
-        Handles.Label(textLocation, name, style); 
+        Handles.Label(textLocation, name, style);
+        Gizmos.color = Color.green;
+        if (targetLocation.Count > 0)
+            foreach (var item in targetLocation)
+                Gizmos.DrawWireCube(item.transform.position + new Vector3(0, 1, 0), new Vector3(4, 1, 4));
+
     }
     public virtual void  Update ()
     {

@@ -18,7 +18,7 @@ public class RoadTile : Node
         RB();
 
 
-
+        Walkable = true;
         if (Physics.BoxCast(transform.position - new Vector3(0, 20, 0), Scale, transform.up, out RaycastHit hit, transform.rotation, float.PositiveInfinity, LayerMask.GetMask("Road")))
             transform.rotation = hit.transform.GetComponent<Road>().transform.rotation;
         else

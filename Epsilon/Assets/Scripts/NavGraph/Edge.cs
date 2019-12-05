@@ -13,6 +13,6 @@ public class Edge
     }
    public float GetCost()
     {
-        return this.From.Cost + this.To.Cost;
+        return Vector3.Distance(From.transform.position, To.transform.position);
     }
 }

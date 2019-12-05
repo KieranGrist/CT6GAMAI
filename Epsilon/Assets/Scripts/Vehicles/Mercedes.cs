@@ -7,10 +7,13 @@ public class Mercedes : Vehicle
     // Start is called before the first frame update
     void Start()
     {
-        mass = 690;
+        //Minium of 650 maxium of 800
+        mass = Random.Range(650, 800);
         DefaultMass = mass;
-        maxSpeed = 18;
-        acceleration = 9;
+        //Max Speed kept between 15 - 25;
+        maxSpeed = Random.Range(15, 25);
+        //Mas speed divided by 0.4
+        acceleration = maxSpeed / 0.4f;
         GetComponent<Renderer>().material.color = Color.black;
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Driver Profiles\Aggresive.cs" />
     <Compile Include="Assets\Scripts\Driver Profiles\Default.cs" />
     <Compile Include="Assets\Scripts\Game Logic\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\Game Logic\DistanceChecker.cs" />
     <Compile Include="Assets\Scripts\Game Logic\LapManager.cs" />
     <Compile Include="Assets\Scripts\NavGraph\Edge.cs" />
     <Compile Include="Assets\Scripts\NavGraph\NavGraph.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Assets\Scripts\Vehicles\Mercedes.cs" />
     <Compile Include="Assets\Scripts\Vehicles\Renault.cs" />
     <Compile Include="Assets\Scripts\Vehicles\Vehicle.cs" />
+    <Compile Include="Assets\Showcase\Artie.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/814853/CT6GAMAI/Epsilon/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

@@ -24,55 +24,41 @@ public class Drive : State<AIAgent>
 
 
 
-
+        Debug.LogError("Failed to find any nodes!");
         //THIS SHOULD NEVER RUN!!!!!!
         return item.transform.GetComponent<Node>();
 
     }
-    void MoveOnRoute(AIAgent agent)
-    {
-        if (!agent.recievedPath)
-        {
-            if (Physics.Raycast(agent.transform.position, -agent.transform.up, out RaycastHit hit, 20.0f, agent.mask))
-            {
-                var Temp = hit.collider.gameObject.GetComponent<Node>();
-                if (Temp)
-                    agent.sourceNode = Temp;
-            }
-            agent.targetNode = NextTarget(agent);
-            if (agent.sourceNode && agent.targetNode)
-            {
-                agent.targetLocation.Clear();
-                agent.targetLocation = new List<Vector3>();
-                agent.recievedPath = true;
-                var Path = ASTAR.aSTAR.CalculatePath(agent.sourceNode, agent.targetNode);
-                if (Path.Count > 0)
-                    for (int i = Path.Count - 1; i > 0; i--)
-                    {
-                        agent.targetLocation.Add(NavGraph.map.Nodes[Path[i]].transform.position);
-                    }
-                agent.targetLocation.Add(agent.targetNode.transform.position);
-            }
-        }
 
-        if (agent.targetLocation.Count > 0)
+    void PathToCheckPoint(AIAgent agent)
+    { 
+        agent.SetSourceNode();
+        if (agent.SourceNode && agent.targetNode)
         {
-            agent.steeringBehaviour.SeekOn(new Vector2(agent.targetLocation[0].x, agent.targetLocation[0].z));
-            if (Vector3.Distance(agent.targetLocation[0], agent.transform.position) <= 4)
-                agent.targetLocation.Remove(agent.targetLocation[0]);
-       
-            if (Vector3.Dot(agent.transform.position , agent.targetLocation[0]) <=0)
-                agent.targetLocation.Remove(agent.targetLocation[0]);
+            agent.targetLocation.Clear();
+            agent.targetLocation = new List<Transform>();
+            var Path = ASTAR.AStar.CalculatePath(agent.SourceNode, agent.targetNode);
+            if (Path.Count > 0)
+                for (int i = Path.Count - 1; i > 0; i--)
+                {
+                    agent.targetLocation.Add(NavGraph.map.Nodes[Path[i]].transform);
+                }
+            agent.targetLocation.Add(agent.targetNode.transform);
         }
-        else
-            agent.recievedPath = false;
     }
+
     public override void Execute(AIAgent agent)
     {
         agent.steeringBehaviour.OvertakeOff();
         agent.vehicle.BoostOff();
-        MoveOnRoute(agent);
+ 
         agent.vehicle.Accelerate(agent.steeringBehaviour.Calculate());
+        if (!agent.RecievedPath)
+        {
+            agent.targetNode = NextTarget(agent);
+            PathToCheckPoint(agent);
+        }
+        agent.MoveOnRoute();
     }
 
 }
