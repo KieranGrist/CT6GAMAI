@@ -10,10 +10,9 @@ public class Renault : Vehicle
     void Start()
     {
         mass = 736;
-        maxSpeed = 18;
-        acceleration = 420;
-        turningForce = 4;
-        breakPower = 1.1F;
+        DefaultMass = mass;
+        maxSpeed = 17;
+        acceleration = 9;
         GetComponent<Renderer>().material.color = Color.yellow;
     }
 }

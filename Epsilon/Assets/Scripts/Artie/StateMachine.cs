@@ -9,72 +9,53 @@ public class StateMachine
     [Header("Desire")]
     public float DriveDesire; //Default State
     public float OvertakeDesire;
-    public float DefendDesire;
     public float PitDesire;
     public float ShortcutDesire; //If one exists
     public float RandomItemDesire; //If exists
                                    //public float Artie_Aggresive;
     public float HighestDesire;
-    public float SleepTimer;
-    [Header("Debug")]
-
+ 
     [Header("States")]
     public PQueue<AIAgent> AIAgentQueue = new PQueue<AIAgent>();
-
-   // public Defend defendState;
     public Drive driveState;
     public Overtake overtakeState;
     public Pit pitState;
-    //public RandomItem randomItemState;
-    //public Shortcut shortcutState;
+    float T;
 
     public void Update()
     {
-        SleepTimer += Time.deltaTime;
-        if (SleepTimer >= 2)
-        {
-            SleepTimer = 0;
+        if (T > 2)
             CheckState();
-        }
+        else
+            T += Time.deltaTime;
     }
     public void CheckDesire()
     {
+        DriveDesire = 0;
+        OvertakeDesire = 0;
+        PitDesire = 0;
         Transform Reference;
-        if (Artie.vehicle.RacePosition != 7)
-        {
-            Reference = LapManager.manager.CarPositions[Artie.vehicle.RacePosition + 1].transform;
-            DefendDesire = Mathf.Clamp(K * (Artie.artieDefend / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
-        }
-        else
-            DefendDesire = 0; //As this is the last car there is nothing to defend from
-
-
         Reference = null;
         Reference = Artie.targetNode.transform;
-        DriveDesire = Mathf.Clamp(K * (Artie.artieDrive / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f); ;
-
+        if (Reference)
+            DriveDesire = Mathf.Clamp(K * (Artie.artieDrive / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
         Reference = null;
-        if (Artie.vehicle.RacePosition != 0)
-        {
-            Reference = LapManager.manager.CarPositions[Artie.vehicle.RacePosition - 1].transform;
+        var veh = Artie.steeringBehaviour.ProjectedCube.CheckForAI(Artie.vehicle);
+        if(veh)
+            Reference = veh.transform;
+        if (Reference)
             OvertakeDesire = Mathf.Clamp(K * (Artie.artieOverTake / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
-
-        }
-        else
-            OvertakeDesire = 0;
+        Reference = null;
         Reference = Pitlane.pitlane.transform;
-        PitDesire = Mathf.Clamp(K * (Artie.artiePit / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
-
-
+        if (Reference)
+            PitDesire = Mathf.Clamp(K * (Artie.artiePit / Helper.DistanceToItem(Artie.transform, Reference)), 0.0f, 1.0f);
     }
 
 
     void CheckState()
     {
         AIAgentQueue.TaskQueue.Clear();
-
         CheckDesire();
-        //AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(DefendDesire, defendState));
         AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(DriveDesire, driveState));
         AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(OvertakeDesire, overtakeState));
         AIAgentQueue.TaskQueue.Add(new KeyValuePair<float, State<AIAgent>>(PitDesire, pitState));

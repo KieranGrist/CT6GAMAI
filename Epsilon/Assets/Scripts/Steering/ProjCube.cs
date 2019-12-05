@@ -17,20 +17,31 @@ public class ProjCube : MonoBehaviour
 
             CollidedObjects.Remove(other.gameObject);
     }
-    public Vector3 CheckForAI(GameObject Other)
+    /// <summary>
+    /// Returns the closet ai within the projection cube
+    /// </summary>
+    /// <param name="Other"></param>
+    /// <returns></returns>
+    public Vehicle CheckForAI(Vehicle Other)
     {
         var distance = float.MaxValue;
-        var ret = new Vector3();
+        Vehicle ret = Other;
+        ret = null;
         foreach(var item in CollidedObjects)
         {
-            var d  = Vector3.Distance(Other.transform.position, item.transform.position);
-            if (d < distance)
+            var Ref = item.GetComponent<Vehicle>();
+            if (Ref)
             {
-                distance = d;
-                ret = item.transform.position
-            }
+                var d = Vector3.Distance(Other.transform.position, item.transform.position);
 
+                if (d < distance)
+                {
+                    distance = d;
+                    ret = Ref;
+                }
+            }
         }
-        return new Vector3();
+        return ret;
     }
+
 }

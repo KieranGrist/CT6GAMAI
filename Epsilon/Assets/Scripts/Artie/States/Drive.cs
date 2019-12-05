@@ -9,17 +9,17 @@ public class Drive : State<AIAgent>
         var Num = agent.vehicle.LastCheckPoint + 1;
         RaycastHit item;
         if (Num == 2)
-            if (Physics.Raycast(RaceTrack.raceTrack.Sector1.transform.position, -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
+            if (Physics.Raycast(RaceTrack.raceTrack.Sector1.transform.position + new Vector3(0,20,0), -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
                 return item.transform.GetComponent<Node>();
         if (Num == 3)
-            if (Physics.Raycast(RaceTrack.raceTrack.Sector2.transform.position, -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
+            if (Physics.Raycast(RaceTrack.raceTrack.Sector2.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
                 return item.transform.GetComponent<Node>();
         if (Num == 4) //Comming from pit lane
-            if (Physics.Raycast(RaceTrack.raceTrack.Sector1.transform.position, -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
+            if (Physics.Raycast(RaceTrack.raceTrack.Sector1.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
                 return item.transform.GetComponent<Node>();
 
 
-        if (Physics.Raycast(RaceTrack.raceTrack.FinishLine.transform.position, -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
+        if (Physics.Raycast(RaceTrack.raceTrack.FinishLine.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
             return item.transform.GetComponent<Node>();
 
 
@@ -57,8 +57,11 @@ public class Drive : State<AIAgent>
 
         if (agent.targetLocation.Count > 0)
         {
-            agent.sb.SeekOn(new Vector2(agent.targetLocation[0].x, agent.targetLocation[0].z));
-            if (Vector3.Distance(agent.targetLocation[0], agent.transform.position) <= 2)
+            agent.steeringBehaviour.SeekOn(new Vector2(agent.targetLocation[0].x, agent.targetLocation[0].z));
+            if (Vector3.Distance(agent.targetLocation[0], agent.transform.position) <= 4)
+                agent.targetLocation.Remove(agent.targetLocation[0]);
+       
+            if (Vector3.Dot(agent.transform.position , agent.targetLocation[0]) <=0)
                 agent.targetLocation.Remove(agent.targetLocation[0]);
         }
         else
@@ -66,9 +69,10 @@ public class Drive : State<AIAgent>
     }
     public override void Execute(AIAgent agent)
     {
+        agent.steeringBehaviour.OvertakeOff();
         agent.vehicle.BoostOff();
         MoveOnRoute(agent);
-        agent.vehicle.Accelerate(agent.sb.Calculate());
+        agent.vehicle.Accelerate(agent.steeringBehaviour.Calculate());
     }
 
 }

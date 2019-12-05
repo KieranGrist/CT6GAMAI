@@ -68,7 +68,6 @@
     <Compile Include="Assets\Scripts\Artie\CameraControler.cs" />
     <Compile Include="Assets\Scripts\Artie\Helper.cs" />
     <Compile Include="Assets\Scripts\Artie\StateMachine.cs" />
-    <Compile Include="Assets\Scripts\Artie\States\Defend.cs" />
     <Compile Include="Assets\Scripts\Artie\States\Drive.cs" />
     <Compile Include="Assets\Scripts\Artie\States\Overtake.cs" />
     <Compile Include="Assets\Scripts\Artie\States\Pit.cs" />

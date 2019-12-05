@@ -57,7 +57,7 @@ public class Overtake : State<AIAgent>
 
         if (agent.targetLocation.Count > 0)
         {
-            agent.sb.SeekOn(new Vector2(agent.targetLocation[0].x, agent.targetLocation[0].z));
+            agent.steeringBehaviour.SeekOn(new Vector2(agent.targetLocation[0].x, agent.targetLocation[0].z));
             if (Vector3.Distance(agent.targetLocation[0], agent.transform.position) <= 2)
                 agent.targetLocation.Remove(agent.targetLocation[0]);
         }
@@ -66,12 +66,16 @@ public class Overtake : State<AIAgent>
     }
     public override void Execute(AIAgent agent)
     {
-        var Reference = LapManager.manager.CarPositions[agent.vehicle.RacePosition - 1].transform;
-        if (Vector3.Distance(agent.transform.position, Reference.transform.position) <1)
-            agent.vehicle.BoostOn();
 
+        var Reference = agent.steeringBehaviour.ProjectedCube.CheckForAI(agent.vehicle);
+        if (Reference)
+        {
+            agent.steeringBehaviour.OvertakeOn();
+            agent.vehicle.BoostOn();
+        }
         MoveOnRoute(agent);
-        agent.vehicle.Accelerate(agent.sb.Calculate());
+        agent.vehicle.Accelerate(agent.steeringBehaviour.Calculate());
+
     }
 }
 

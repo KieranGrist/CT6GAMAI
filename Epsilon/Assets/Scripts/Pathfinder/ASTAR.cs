@@ -18,7 +18,12 @@ public class ASTAR :MonoBehaviour
 
     static float CalculateCost(Edge Edge, Node Target, List<float> Cost)
     {
-        return (Cost[Edge.From.Index] + Edge.To.Cost) + ((Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100 + (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100);
+        float G = Cost[Edge.From.Index] + Edge.GetCost();
+        float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
+        float Z = (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100;
+        float H = X + Z;
+        float F = G + H;
+        return F;
     }
     static List<int> CalculateRoute(Node Source, Node Target)
     {     
@@ -55,9 +60,12 @@ public class ASTAR :MonoBehaviour
                 break;
             }
             foreach (var item in Edge.To.Neighbours)
-            {    
-                float F = (item.To.Cost + Cost[Edge.To.Index] )+ ((Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100 + (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100);
-                var valuepair = new KeyValuePair<float, Edge>(F, item);
+            {
+                float X = (Mathf.Abs(Edge.From.transform.position.x - Target.transform.position.x)) / 100;
+                float Z = (Mathf.Abs(Edge.From.transform.position.z - Target.transform.position.z)) / 100;
+                float H = X + Z;
+                float G = item.GetCost() + Cost[Edge.To.Index];
+                float F = G + H; var valuepair = new KeyValuePair<float, Edge>(F, item);
                 if (!TraveresedEdges.Contains(item)) //Check if traveresed edges contains items before running the expensive contains for min priority queue
                 if (Edge.To.Walkable  && !MinPriorityQueue.data.Contains(valuepair))
                     MinPriorityQueue.Enqueue(valuepair);

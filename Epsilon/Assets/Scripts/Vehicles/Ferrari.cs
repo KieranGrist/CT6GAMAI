@@ -8,10 +8,9 @@ public class Ferrari : Vehicle
     void Start()
     {
         mass = 672;
-        maxSpeed = 17;
-        acceleration = 511;
-        turningForce = 4;
-        breakPower = 1.1F;
+        DefaultMass = mass;
+        maxSpeed = 20;
+        acceleration = 9;
         GetComponent<Renderer>().material.color = Color.red;
     }
 

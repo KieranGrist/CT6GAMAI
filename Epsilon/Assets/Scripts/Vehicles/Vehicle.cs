@@ -47,58 +47,33 @@ public abstract class Vehicle :MonoBehaviour
 
 
 
-    /// <summary>
-    /// Current Velocity of the vehicle
-    /// </summary>
-    /// 
-    public Vector2 Velocity { get => velocity; }
-    /// <summary>
-    /// How Heavy the vehicle is
-    /// </summary>
-    public float Mass { get => mass; }
-
-    /// <summary>
-    /// How Quickly the vehicle can accelerate to top speed
-    /// </summary>
-    public float Acceleration { get => acceleration;  }
-    /// <summary>
-    /// CurrentSpeed Of Vehicle
-    /// </summary>
-    public float Speed { get => speed; }
-    /// <summary>
-    /// How Quickly the vehicle can turn 
-    /// </summary>
-    public float TurningForce { get => turningForce; }
-    /// <summary>
-    /// Max Speed of the vehicle
-    /// </summary>
-    public float MaxSpeed { get => maxSpeed; }
-    /// <summary>
-    /// Break Power of the vehicle
-    /// </summary>
-    public float BreakPower { get => breakPower; }
-    public float Fuel { get => fuel; }
-
-    protected Vector2 velocity;
-
     protected float mass = 1;
-
     protected float acceleration = 2;
-
-    protected float speed = 0;
-
-    protected float turningForce;
-
     protected float maxSpeed = 15;
+    protected float DefaultMass;
 
-    protected float breakPower = 15;
-    protected float fuel = 100;
-    protected GameObject lastCheckpoint;
-    protected float SpeedBoost;
-    protected bool BoostEnabled;
-    protected bool PitSpeed;
-    protected bool StopActive = false;
-    protected float TriggerTimer = 2;
+    private float fuelUsedPerLap = 0;
+    private float speed = 0;
+    private float fuel = 100;
+    private Vector2 velocity;
+
+    private float NewMass;
+    private float PreviousFuel = 0;
+    private GameObject lastCheckpoint;
+    private float SpeedBoost;
+    private bool BoostEnabled;
+    private bool PitSpeed;
+    private bool StopActive = false;
+    private float TriggerTimer = 2;
+
+    public float Mass { get => mass; set => mass = value; }
+    public float Acceleration { get => acceleration; set => acceleration = value; }
+    public float MaxSpeed { get => maxSpeed; set => maxSpeed = value; }
+    public float FuelUsedPerLap { get => fuelUsedPerLap; set => fuelUsedPerLap = value; }
+    public float Speed { get => speed; set => speed = value; }
+    public float Fuel { get => fuel; set => fuel = value; }
+    public Vector2 Velocity { get => velocity; set => velocity = value; }
+
     public bool PerformingStop()
     {
         return StopActive;
@@ -136,16 +111,21 @@ public abstract class Vehicle :MonoBehaviour
 
     public void StartLap()
     {
-         StartTime = DateTime.Now;
+        PreviousFuel = fuel;
+        StartTime = DateTime.Now;
     }
     public void EndLap()
     {
+
+        fuelUsedPerLap =  PreviousFuel - fuel;
         PreviusLapTime = CurrentLapTime;
         LapTime = DateTime.Now - StartTime;
     }
 
     private void Update()
     {
+        NewMass = DefaultMass + fuel;
+        mass = NewMass; 
         TriggerTimer += Time.deltaTime;
         if (transform.position.y < -10)
             Reset();
@@ -192,9 +172,7 @@ public abstract class Vehicle :MonoBehaviour
     public void StopRacing()
     {
         fuel = 0;
-        velocity = new Vector2();
         GetComponent<AIAgent>().enabled = false;
-        GetComponent<SteeringBehaviours>().enabled = false;
         GetComponent<Vehicle>().enabled = false;
     }
     public void Accelerate(Vector2 Force)
@@ -227,7 +205,7 @@ public abstract class Vehicle :MonoBehaviour
                 velocity += new Vector2(Force.x, Force.y) / Mass;
                 velocity = Vector2.ClampMagnitude(velocity, 5);
             }
-            fuel -= Time.deltaTime;   
+            fuel -= Time.smoothDeltaTime *0.25f;   
         }
 
     }
@@ -249,19 +227,4 @@ public abstract class Vehicle :MonoBehaviour
    
 
     }
-    public void TurnLeft()
-    {
-        transform.Rotate(new Vector3(0, -TurningForce, 0));
-    }
-    public void TurnRight()
-    {
-        transform.Rotate(new Vector3(0, TurningForce, 0));
-    }
-   public void Brake()
-    {
-        velocity /= BreakPower;
-    }
-
-
-
 }

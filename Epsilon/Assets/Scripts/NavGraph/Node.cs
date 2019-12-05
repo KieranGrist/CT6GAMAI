@@ -27,7 +27,7 @@ public abstract class Node : MonoBehaviour
 
         Cost = 5;
         name = "Node: " + Index;
-        var Scale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z * 0.5f);
+        var Scale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z );
         foreach (var item in Physics.OverlapBox(transform.position + transform.forward * .5f, Scale * 0.5f, transform.rotation))
         {
             Node Temp = item.gameObject.GetComponent<Node>();
@@ -45,12 +45,12 @@ public abstract class Node : MonoBehaviour
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireCube(transform.position + new Vector3(0, 0.5F, 0), new Vector3(transform.localScale.x, 1, transform.localScale.z));
+
+
         Gizmos.color = Color.red;
-
-
-        var Scale = new Vector3(transform.localScale.x , transform.localScale.y , transform.localScale.z * 0.5f);
+        var Scale = new Vector3(transform.localScale.x , transform.localScale.y , transform.localScale.z );
         var Matrix = Gizmos.matrix;
-        Gizmos.matrix = Matrix4x4.TRS(transform.position + transform.forward * .5f, transform.rotation, Scale *2);
+        Gizmos.matrix = Matrix4x4.TRS(transform.position + transform.forward , transform.rotation, Scale *2);
 
         Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
         Gizmos.matrix = Matrix;

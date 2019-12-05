@@ -96,13 +96,8 @@ public abstract class AIAgent : MonoBehaviour {
     // Values that effect the state that the AI is in , some values that effect the state can be found in vehicle 
 [Header("State Variables")]
     public float artieDrive; //Default State
- public float artieOverTake;
- public float artieDefend;
+    public float artieOverTake;
     public float artiePit;
- public float artieGoForShortCut; //If one exists
- public float artieGoForRandomItem; //If exists
-public float artieAggresive;
-    public float artieTimer;
     public StateMachine artieStateMachine;
     public State<AIAgent> pState;
     public string team;
@@ -120,7 +115,7 @@ public Node targetNode;
 
     //Values that effect the steering of the AI
 
-    public SteeringBehaviours sb;
+    public SteeringBehaviours steeringBehaviour;
     public Vehicle vehicle;
 
     void Start()
@@ -152,11 +147,11 @@ public Node targetNode;
 
 
 
-        sb = GetComponent<SteeringBehaviours>();
-        sb.ProjectedCube = sb.GetComponentInChildren<ProjCube>();
-        sb.ObstacleAvodienceOn();
+        steeringBehaviour = GetComponent<SteeringBehaviours>();
+        steeringBehaviour.ProjectedCube = steeringBehaviour.GetComponentInChildren<ProjCube>();
+        steeringBehaviour.ObstacleAvodienceOn();
         //   SB.WallAvodienceOn(); 
-        sb.OvertakeOn();
+        steeringBehaviour.OvertakeOn();
 
         artieStateMachine = new StateMachine();
         // ArtieStateMachine.defendState = new Defend();
@@ -167,8 +162,6 @@ public Node targetNode;
         //ArtieStateMachine.shortcutState = new Shortcut();
         pState = artieStateMachine.driveState;
         artieStateMachine.Artie = this;
-        artieStateMachine.Update();
-        pState.Execute(this);
     }
 
 

@@ -7,10 +7,9 @@ public class Ford : Vehicle
     void Start()
     {
         mass = 666;
-        maxSpeed = 17;
-        acceleration = 592;
-        turningForce = 4;
-        breakPower = 1.1F;
+        DefaultMass = mass;
+        maxSpeed = 19;
+        acceleration = 9;
         GetComponent<Renderer>().material.color = Color.blue;
     }
 }

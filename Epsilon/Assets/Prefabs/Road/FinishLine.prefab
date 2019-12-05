@@ -595,7 +595,7 @@ Transform:
   m_GameObject: {fileID: 8944817840725717303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -39, y: 0, z: 25}
-  m_LocalScale: {x: 10, y: 1, z: 20}
+  m_LocalScale: {x: 20, y: 1, z: 40}
   m_Children:
   - {fileID: 2071693201346058378}
   - {fileID: 8404119898917155839}
@@ -678,4 +678,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadDirection: 0
-  RoadMaxSpeed: 0
