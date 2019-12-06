@@ -15,7 +15,7 @@ public class Drive : State<AIAgent>
             if (Physics.Raycast(RaceTrack.raceTrack.Sector2.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
                 return item.transform.GetComponent<Node>();
         if (Num == 4) //Comming from pit lane
-            if (Physics.Raycast(RaceTrack.raceTrack.Sector1.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
+            if (Physics.Raycast(RaceTrack.raceTrack.FinishLine.transform.position + new Vector3(0, 20, 0), -agent.transform.up, out item, float.PositiveInfinity, agent.mask))
                 return item.transform.GetComponent<Node>();
 
 
