@@ -97,10 +97,14 @@ public class ArtieGenerator : MonoBehaviour
     }
     public void AIPersonalitySelector()
     {      
+
         foreach(var item in TempAI)
         {
-            item.AddComponent<Default>();
-
+          bool Aggresive = Random.value >= 0.5;
+            if (Aggresive)
+                item.AddComponent<Aggresive>();
+            else
+                    item.AddComponent<Default>();
         }
     }
 }

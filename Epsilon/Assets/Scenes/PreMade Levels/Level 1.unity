@@ -1338,7 +1338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Order: {fileID: 697659005}
   CarPositions: []
-  MaxLaps: 2
+  MaxLaps: 30
   Lap: 0
 --- !u!114 &1492365537
 MonoBehaviour:

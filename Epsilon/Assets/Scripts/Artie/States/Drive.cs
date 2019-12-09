@@ -74,12 +74,12 @@ public class Drive : State<AIAgent>
         agent.vehicle.BoostOff(); //Turns of vehicle boos
  
         agent.vehicle.Accelerate(agent.steeringBehaviour.Calculate()); //Calculates the velocity with steering behaviors then acclerates in that direction
-        if (!agent.RecievedPath) //
+        if (!agent.RecievedPath) //If the AI hasnt recieved a path calculate one
         {
-            agent.targetNode = NextTarget(agent);
-            PathToCheckPoint(agent);
+            agent.targetNode = NextTarget(agent); //Set the target node to be the next checkpoint
+            PathToCheckPoint(agent); //Create a path to that target
         }
-        agent.MoveOnRoute();
+        agent.MoveOnRoute(); //Move the AI allong the generated path
     }
 
 }
