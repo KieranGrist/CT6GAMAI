@@ -24,9 +24,11 @@ public abstract class Node : MonoBehaviour
     public void GenerateNeighbours()
     {
         List<Node> hitObjects = new List<Node>();
+
+        Cost = 5;
         name = "Node: " + Index;
         var Scale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z );
-        foreach (var item in Physics.OverlapBox(transform.position , Scale * 0.5f, transform.rotation))
+        foreach (var item in Physics.OverlapBox(transform.position + transform.forward * .5f, Scale * 0.5f, transform.rotation))
         {
             Node Temp = item.gameObject.GetComponent<Node>();
             if (item.transform.gameObject != gameObject && Temp != null)
@@ -41,17 +43,18 @@ public abstract class Node : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(transform.position + new Vector3(0, 0.5F, 0), new Vector3(transform.localScale.x, 1, transform.localScale.z));
+
+            Gizmos.color = Color.black;
+            Gizmos.DrawWireCube(transform.position + new Vector3(0, 0.5F, 0), new Vector3(transform.localScale.x, 1, transform.localScale.z));
+            Gizmos.color = Color.red;
 
 
-        Gizmos.color = Color.red;
-        var Scale = new Vector3(transform.localScale.x , transform.localScale.y , transform.localScale.z );
-        var Matrix = Gizmos.matrix;
-        Gizmos.matrix = Matrix4x4.TRS(transform.position + transform.forward , transform.rotation, Scale *2);
+            var Scale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z );
+            var Matrix = Gizmos.matrix;
+            Gizmos.matrix = Matrix4x4.TRS(transform.position + transform.forward * .5f, transform.rotation, Scale * 2);
 
-        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
-        Gizmos.matrix = Matrix;
-    }
+            Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+            Gizmos.matrix = Matrix;
+        }
     public abstract void Reset();
 }
