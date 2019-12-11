@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
+///<summary>
+/// Class to store the Neighbours of two nodes
+/// </summary>
 public class Edge
 {
-    public Node From;
-    public Node To;
-    public Edge(Node From, Node To)
+    public Node From; //Where the edge is comming from
+    public Node To; //Where the edge is going to 
+    public Edge(Node From, Node To) //Constructor for edge which sets the from and two
     {
         this.From = From;
         this.To = To;
     }
-   public float GetCost()
+    /// <summary>
+    /// Gets the current distance of the edge
+    /// </summary>
+    /// <returns>
+    /// Distance between the from node and the two node
+    /// </returns>
+    public float GetCost() 
     {
         return Vector3.Distance(From.transform.position, To.transform.position);
     }
