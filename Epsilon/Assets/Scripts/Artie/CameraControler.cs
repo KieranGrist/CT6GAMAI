@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class CameraControler : MonoBehaviour
 {
-    float Speed;
-    public GameObject AI;
-    public bool ToggleFocus;
-    // Start is called before the first frame update
-
-    // Update is called once per frame
+    public GameObject AI; //AI Object to follow 
+ 
    void Update()
     {
-        if (AI ==null && FindObjectOfType<AIAgent>())
-            AI = FindObjectOfType<AIAgent>().transform.gameObject;
-        transform.parent = AI.transform;
-        transform.localPosition = new Vector3(0, 5, -5);
-
-
+        if (AI ==null && FindObjectOfType<AIAgent>()) //if AI hasnt been assigned and it can find an AI
+            AI = FindObjectOfType<AIAgent>().transform.gameObject; //Focus on AI agent found 
+        transform.parent = AI.transform; //Set the parent of the camera to be that of the AI
+        transform.localPosition = new Vector3(0, 5, -5); //Force the camera to be in a third view perspective
     }
 
 }

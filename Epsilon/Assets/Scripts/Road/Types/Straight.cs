@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
- * Straight has a ENUM direction which controls what way the AI pathfinding can go 
- */
+/// <summary>
+/// Controlls which direction the road is facing in 
+/// </summary>
 public enum RoadDirection
 {
     North,
@@ -12,12 +12,16 @@ public enum RoadDirection
     West
 }
 [ExecuteInEditMode]
+
+/// <summary>
+/// Class to control straights
+/// </summary>
 public class Straight : Road
 {
-    public RoadDirection roadDirection = RoadDirection.North;
+ public    RoadDirection roadDirection = RoadDirection.North; //Road direction
     private void Update()
     {
-        switch (roadDirection)
+        switch (roadDirection) //Switch the road direction
         { 
            case RoadDirection.North:
                 gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
@@ -32,6 +36,5 @@ public class Straight : Road
                 gameObject.transform.eulerAngles = new Vector3(0, 270, 0);
                 break;
         }
-        gameObject.layer = 9;
     }
 }

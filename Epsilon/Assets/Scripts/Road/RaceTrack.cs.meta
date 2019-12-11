@@ -3,7 +3,20 @@ guid: 1df69f054718b3a41bf0a76b3cf7d8ee
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - FinishLine: {instanceID: 0}
+  - Sector1: {instanceID: 0}
+  - Sector2: {instanceID: 0}
+  - StraightPrefab: {fileID: 5431907996992357194, guid: b12a5b478e0d0864b8fbd503e6a63f35,
+      type: 3}
+  - CornerPrefab: {fileID: 8761725794205367476, guid: 33a4e6d241260d8489dcfe23e41d810d,
+      type: 3}
+  - PitPrefab: {fileID: 5077555323181305732, guid: b6623039b17e5c04fb5725752e3a49b8,
+      type: 3}
+  - GridPrefab: {fileID: 8481712569696833338, guid: b60d9ef8b1cec034bae74e6e6aa49452,
+      type: 3}
+  - FinishPrefab: {fileID: 8944817840725717303, guid: 1368e72ca1ca1e243bb9978d81d8c49c,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
