@@ -16,6 +16,20 @@ public class NavGraph : MonoBehaviour
     { 
         map = this; //set reference to be this 
     }
+      public void GenerateTrackNavMesh()
+    {
+        Nodes.Clear();
+        Nodes.AddRange(FindObjectsOfType<Node>());
+        for (int i = 0; i < Nodes.Count; i++)
+            Nodes[i].Reset();
+        Nodes.Clear();
+        Nodes.AddRange(FindObjectsOfType<Node>());
+        for (int i = 0; i < Nodes.Count; i++)
+        {
+            Nodes[i].Index = i;
+            Nodes[i].GenerateNeighboursDefault();
+        }
+    }
     /// <summary>
     /// Searched for nodes and adds them to the list
     /// Also resets the nodes and ensures their neihbours have been set

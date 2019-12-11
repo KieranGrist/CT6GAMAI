@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/// <summary>
-/// Class to store locations of checkpoints
-/// </summary>
+
 public class RaceTrack : MonoBehaviour
 {
     public GameObject FinishLine, Sector1, Sector2;
@@ -15,31 +13,41 @@ public class RaceTrack : MonoBehaviour
     public GameObject FinishPrefab;
     public List<GameObject> gameObjects = new List<GameObject>();
     public static RaceTrack raceTrack;
+    [Tooltip("How many tracks are to be placed down before the race track goes back to the start")]
+    public int TrackLength = 30;
     public bool GenMap;
     GameObject PreviousPiece;
-    int Id;
+    public int Id;
+public    int Stuck = 0; // If This is 5 the loop has become stuck for some reason 
+    public int PreviousI = 0;
     // Start is called before the first frame update
 
-        /// <summary>
-        /// Generates a new track
-        /// </summary>
-    public void GenerateTrack()
+    public IEnumerator GenerateTrack()
     {
         foreach (var item in gameObjects)
+        {
             Destroy(item);
+        }
         gameObjects.Clear();
 
         Id = 1;
-        GameObject GO = Instantiate(GridPrefab, transform);
+        GameObject GO = Instantiate(StraightPrefab, transform);
+        GO.transform.position = new Vector3(0, 0, -120);
+        gameObjects.Add(GO);
+        GO.name = Id.ToString(); Id++;
+
+
+         GO = Instantiate(GridPrefab, transform);
         GO.transform.position = new Vector3(0, 0, 0);
         gameObjects.Add(GO);
         GO.name = Id.ToString(); Id++;
 
-
+  
         GO = Instantiate(FinishPrefab, transform);
         GO.transform.position = new Vector3(0, 0, 40);
         gameObjects.Add(GO);
         GO.name = Id.ToString(); Id++;
+
 
         GO = Instantiate(StraightPrefab, transform);
         GO.transform.position = new Vector3(0, 0, -40);
@@ -52,11 +60,9 @@ public class RaceTrack : MonoBehaviour
         GO.name = Id.ToString(); Id++;
 
 
-
         GO = Instantiate(StraightPrefab, transform);
         GO.transform.position = new Vector3(0, 0, 120);
         gameObjects.Add(GO);
-
         GO.name = Id.ToString(); Id++;
         PreviousPiece = GO;
 
@@ -64,26 +70,74 @@ public class RaceTrack : MonoBehaviour
         //Random Loop
         //Choose Piece
         //Direction of piece comes from the piece before it so if the piece is going to the west the direction would be east as direction is based on where it came from not going to.
-        for (int i = 0; i < 15; i++)
+         Stuck = 0; // If This is 5 the loop has become stuck for some reason 
+         PreviousI = 0; ;
+        for (int i = 0; i < TrackLength ; i++) //+5
         {
+            yield return new WaitForSeconds(1);
             var TrackPiece = Random.value >= .5f; // True = Straight, false = corner;
 
             if (TrackPiece)
             {
-                GenStraight();
+                if (GenStraight()) //The Track has reached  a dead end;
+                {
+                    if (i == PreviousI)
+                        Stuck++;
+                    else
+                        Stuck = 0;
+                    Destroy(gameObjects[(i - 1) + 5]);
+                    gameObjects.Remove(gameObjects[(i - 1) + 5]);
+                    i -= 2;
+                    PreviousPiece = gameObjects[i + 5];
+                }
+
             }
             else
             {
-                GenCorner();
+                if (GenCorner()) //
+                {
+                    if (i == PreviousI)
+                        Stuck++;
+                    else
+                        Stuck = 0;
+                    PreviousI = i;
+                    Destroy(gameObjects[(i - 1) + 5]);
+                    gameObjects.Remove(gameObjects[(i - 1) + 5]);
+                    i -= 2;
+                    PreviousPiece = gameObjects[i + 5];
+
+        
+                }
+
+            }
+            if (Stuck > 5)
+            {
+                Destroy(gameObjects[(i) + 5]);
+                Destroy(gameObjects[(i - 1) + 5]);
+                Destroy(gameObjects[(i - 2) + 5]);
+                Destroy(gameObjects[(i - 3) + 5]);
+                Destroy(gameObjects[(i - 4) + 5]);
+
+                gameObjects.Remove(gameObjects[(i) + 5]);
+                gameObjects.Remove(gameObjects[(i - 1) + 5]);
+                gameObjects.Remove(gameObjects[(i - 2) + 5]);
+                gameObjects.Remove(gameObjects[(i - 3) + 5]);
+                gameObjects.Remove(gameObjects[(i - 4) + 5]);
+                i -= 5;
+
             }
         }
 
+        //Create a navgraph which is the size of the roads width
+        NodeGenerator.MapGen.GenerateMapForTrack();
     }
-    void GenStraight()
+    bool GenStraight()
     {
-        var GO = Instantiate(StraightPrefab, transform);
-        GO.name = Id.ToString(); Id++;
-        gameObjects.Add(GO);
+        GameObject GO;
+
+        GO = Instantiate(StraightPrefab, transform);
+
+       
         if (PreviousPiece.GetComponent<Straight>())
             if (PreviousPiece.GetComponent<Straight>())
             {
@@ -132,42 +186,29 @@ public class RaceTrack : MonoBehaviour
                     GO.transform.position = PreviousPiece.transform.position - new Vector3(30, 0, 0);
                     break;
             }
-        Debug.Log(GO.name + " Collision Log");
-        foreach (var item in Physics.OverlapBox(GO.transform.position, GO.transform.localScale * .5f,GO.transform.rotation, LayerMask.GetMask("Road")))
+        foreach (var item in Physics.OverlapBox(GO.transform.position, GO.transform.localScale * .35f, GO.transform.rotation, LayerMask.GetMask("Road")))
         {
-            Debug.Log(item.name);
-            Debug.Log(item.transform.parent.name);
-
-            if (item.transform.parent.gameObject != GO || item.gameObject != GO)
-
-            { 
-
-                    Debug.Log(GO.name + " Collision Log");
-
-                    Debug.Log(item.name);
-
-                    Debug.Log(item.transform.parent.name);
-
-                    Debug.Log("Collided");
-
-                
-
+            if (item.gameObject != GO)
+            {
+                Destroy(GO);
+                return true;
             }
-
-        
         }
-
-
-
-        PreviousPiece = GO;
-
-    }
-    void GenCorner()
-    {
-        var GO = Instantiate(CornerPrefab, transform);
-        GO.name = Id.ToString(); Id++;
-
         gameObjects.Add(GO);
+        GO.name = Id.ToString(); Id++;
+        PreviousPiece = GO;
+        return false;
+    }
+
+    bool GenCorner()
+    {
+
+        GameObject GO;
+
+
+        GO = Instantiate(CornerPrefab, transform);
+
+   
         if (PreviousPiece.GetComponent<Straight>())
             switch (PreviousPiece.GetComponent<Straight>().roadDirection)
             {
@@ -294,30 +335,21 @@ public class RaceTrack : MonoBehaviour
 
             }
 
-        foreach (var item in Physics.OverlapBox(GO.transform.position, GO.transform.localScale * .5f, GO.transform.rotation, LayerMask.GetMask("Road")))
+        foreach (var item in Physics.OverlapBox(GO.transform.position, GO.transform.localScale * .35f, GO.transform.rotation, LayerMask.GetMask("Road")))
         {
-      
 
-            if (item.transform.parent.gameObject != GO || item.gameObject != GO )
-
+            if (item.gameObject != GO)
             {
 
-                Debug.Log(GO.name + " Collision Log");
-
-                Debug.Log(item.name);
-
-                Debug.Log(item.transform.parent.name);
-
-                Debug.Log("Collided");
-
+                Destroy(GO);
+                return true;
             }
-
         }
 
-
-
-    PreviousPiece = GO;
-
+        gameObjects.Add(GO);
+        GO.name = Id.ToString(); Id++;
+        PreviousPiece = GO;
+        return false;
     }
     public void GenerateObstacles()
     {
@@ -333,11 +365,16 @@ public class RaceTrack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TrackLength = Mathf.Clamp(TrackLength, 10, 200);
+
         raceTrack = this;
         if (GenMap)
         {
             GenMap = false;
-            GenerateTrack();
+         StartCoroutine(   GenerateTrack());
         }
+        int i = 1;
+        foreach (var item in gameObjects) {
+            item.name = i.ToString(); i++;                }
     }
 }

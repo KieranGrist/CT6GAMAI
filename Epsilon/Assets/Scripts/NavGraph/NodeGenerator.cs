@@ -32,6 +32,38 @@ public class NodeGenerator : MonoBehaviour
                 TempNodes.Add(go); //Add it to the list
             }
     }
+
+    public void GenerateMapForTrack()
+    {
+        foreach (var item in TempNodes)
+        {
+            Destroy(item);
+        }
+        var OldGapBetweeenNodes = GapBetweenNodes;
+        GapBetweenNodes = 8;
+        var OldArea = Area;
+        Area = 200;
+        DateTime StartTime = DateTime.Now;
+        float t = transform.position.x + (Area * GapBetweenNodes);
+        t *= 0.5f;
+        for (float x = transform.position.x - t; x < (transform.position.x + (Area * GapBetweenNodes)) * 0.5f; x += GapBetweenNodes)
+            for (float z = transform.position.z - t; z < (transform.position.z + (Area * GapBetweenNodes)) * 0.5f; z += GapBetweenNodes)
+            {
+                GameObject go = Instantiate(Cube, new Vector3(x, 0, z), transform.rotation, transform);
+                go.transform.localScale = new Vector3(GapBetweenNodes, 0.01f, GapBetweenNodes);
+                TimeCalculated = DateTime.Now - StartTime;
+                FunctionTime = (float)TimeCalculated.TotalSeconds;
+                
+                TempNodes.Add(go);
+                go.AddComponent<ProcdualNode>();
+
+            }
+        GapBetweenNodes = OldGapBetweeenNodes;
+        Area = OldArea;
+        NavGraph.map.GenerateTrackNavMesh();
+
+    }
+    }
     /// <summary>
     /// Add selectors to the nodes
     /// </summary>

@@ -88,7 +88,8 @@
     <Compile Include="Assets\Scripts\Pathfinder\ASTAR.cs" />
     <Compile Include="Assets\Scripts\Pathfinder\PriorityQueue.cs" />
     <Compile Include="Assets\Scripts\Pipeline.cs" />
-    <Compile Include="Assets\Scripts\Road\RaceTrack.cs" />
+    <Compile Include="Assets\Scripts\Procedual\ProcdualNode.cs" />
+    <Compile Include="Assets\Scripts\Procedual\RaceTrack.cs" />
     <Compile Include="Assets\Scripts\Road\Road.cs" />
     <Compile Include="Assets\Scripts\Road\Selector.cs" />
     <Compile Include="Assets\Scripts\Road\Types\Corner.cs" />

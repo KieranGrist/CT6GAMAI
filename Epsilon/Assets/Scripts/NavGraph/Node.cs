@@ -22,9 +22,26 @@ public abstract class Node : MonoBehaviour
         rb.freezeRotation = true; //Freeze its rotation
         gameObject.layer = 10;  //Set the layer of the game object to be 10
     }
+    public void GenerateNeighboursDefault()
+    {
+        List<Node> hitObjects = new List<Node>();
+        Cost = 5;
+        name = "Node: " + Index;
+        var Scale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        foreach (var item in Physics.OverlapBox(transform.position , Scale * 0.5f, transform.rotation))
+        {
+            Node Temp = item.gameObject.GetComponent<Node>();
+            if (item.transform.gameObject != gameObject && Temp != null)
+                if (Temp.Walkable)
+                    hitObjects.Add(Temp);
+        }
+        foreach (var item in hitObjects)
+            Neighbours.Add(new Edge(this, item));
+        Destroy(gameObject.GetComponent<Rigidbody>());
+    }
     /// <summary>
-    /// Looks for nodes around it to be neighbours with
     /// </summary>
+    /// Looks for nodes around it to be neighbours with
     public void GenerateNeighbours()
     {
         List<Node> hitObjects = new List<Node>();  //List of hit nodes

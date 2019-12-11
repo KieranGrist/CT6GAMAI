@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 1093177832}
   - component: {fileID: 1093177830}
   - component: {fileID: 1093177833}
+  - component: {fileID: 1093177834}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -278,8 +279,25 @@ MonoBehaviour:
   FinishPrefab: {fileID: 8944817840725717303, guid: 1368e72ca1ca1e243bb9978d81d8c49c,
     type: 3}
   gameObjects: []
-  GenMap: 0
+  TrackLength: 0
+  GenMap: 1
+  Id: 0
+  Stuck: 0
+  PreviousI: 0
 --- !u!114 &1093177833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093177829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b31efd129f8e7934181adebd05f86610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Nodes: []
+--- !u!114 &1093177834
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -291,9 +309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c8d3ddf0bffe74b8de13dd36ca320f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GapBetweenNodes: 8
-  Area: 80
-  Cube: {fileID: 0}
+  GapBetweenNodes: 1
+  Area: 0
+  Cube: {fileID: 3520572018954989743, guid: 4e4ea14724410ee4aa6ef0575f1b668c, type: 3}
+  FunctionTime: 0
 --- !u!1 &1761870933
 GameObject:
   m_ObjectHideFlags: 0
