@@ -1,30 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Pipeline : MonoBehaviour {
-
+/// <summary>
+/// Class that handles what order the world procedures are done in
+/// </summary>
+public class Pipeline : MonoBehaviour {    
     public bool GenerateTrack = false;
     public bool GenerateObstacles = false;
-
     void Start()
     {    
-        //NodeGenerator.MapGen.GenerateMap();
         if (GenerateTrack)
         RaceTrack.raceTrack.GenerateTrack();
         if (GenerateObstacles)
             RaceTrack.raceTrack.GenerateObstacles();
 
-       // NodeGenerator.MapGen.AddSelector();    
-       //ArtieGenerator.AIGen.PlaceAIUnits();
-       // NavGraph.map.GenerateNavMesh();
-       // ArtieGenerator.AIGen.AIPersonalitySelector();
-       // LapManager.manager.StartRace();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+      //  NodeGenerator.MapGen.GenerateMap(); //Generate a map 
+       // NodeGenerator.MapGen.AddSelector();   //Add selectors to nodes
+       //ArtieGenerator.AIGen.PlaceAIUnits(); //Place the AI units 
+       // NavGraph.map.GenerateNavMesh(); //Generate the nav mesh 
+       // ArtieGenerator.AIGen.AIPersonalitySelector(); // Add driver profiles 
+        //LapManager.manager.StartRace(); //Start the race 
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Class to store locations of checkpoints
+/// </summary>
 public class RaceTrack : MonoBehaviour
 {
     public GameObject FinishLine, Sector1, Sector2;
@@ -16,10 +18,14 @@ public class RaceTrack : MonoBehaviour
     public bool GenMap;
     GameObject PreviousPiece;
     int Id;
-
+    public static RaceTrack raceTrack; //Static reference to this script
+    public GameObject FinishLine, Sector1, Sector2; //Checkpoint game objects
     // Start is called before the first frame update
 
-    public void GenerateTrack()
+        /// <summary>
+        /// Generates a new track
+        /// </summary>
+     void GenerateTrack()
     {
         foreach (var item in gameObjects)
             Destroy(item);
@@ -51,7 +57,7 @@ public class RaceTrack : MonoBehaviour
 
         GO = Instantiate(StraightPrefab, transform);
         GO.transform.position = new Vector3(0, 0, 120);
-        gameObjects.Add(GO);
+        gameObjects.Add(GO);
         GO.name = Id.ToString(); Id++;
         PreviousPiece = GO;
 
@@ -131,15 +137,15 @@ public class RaceTrack : MonoBehaviour
         foreach (var item in Physics.OverlapBox(GO.transform.position, GO.transform.localScale * .5f,GO.transform.rotation, LayerMask.GetMask("Road")))
         {
             Debug.Log(item.name);
-            Debug.Log(item.transform.parent.name);
-            if (item.transform.parent.gameObject != GO || item.gameObject != GO)
-            { 
-                    Debug.Log(GO.name + " Collision Log");
-                    Debug.Log(item.name);
-                    Debug.Log(item.transform.parent.name);
-                    Debug.Log("Collided");
-                
-            }
+            Debug.Log(item.transform.parent.name);
+            if (item.transform.parent.gameObject != GO || item.gameObject != GO)
+            { 
+                    Debug.Log(GO.name + " Collision Log");
+                    Debug.Log(item.name);
+                    Debug.Log(item.transform.parent.name);
+                    Debug.Log("Collided");
+                
+            }
         
         }
 
@@ -278,19 +284,19 @@ public class RaceTrack : MonoBehaviour
                     break;
 
 
-            }
+            }
         foreach (var item in Physics.OverlapBox(GO.transform.position, GO.transform.localScale * .5f, GO.transform.rotation, LayerMask.GetMask("Road")))
         {
-      
-            if (item.transform.parent.gameObject != GO || item.gameObject != GO )
-            {
-                Debug.Log(GO.name + " Collision Log");
-                Debug.Log(item.name);
-                Debug.Log(item.transform.parent.name);
-                Debug.Log("Collided");
-            }
-        }
-
+      
+            if (item.transform.parent.gameObject != GO || item.gameObject != GO )
+            {
+                Debug.Log(GO.name + " Collision Log");
+                Debug.Log(item.name);
+                Debug.Log(item.transform.parent.name);
+                Debug.Log("Collided");
+            }
+        }
+
     PreviousPiece = GO;
 
     }

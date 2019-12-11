@@ -7,15 +7,21 @@ using System.Linq;
 /// Helper class, this is used by the AIs to determine desier
 /// </summary>
 [System.Serializable]
-public class Helper
+ public class Helper
 {
 
-         
-    public static float DistanceToItem(Transform Agent, Transform Target, float MaxDistance = 10)
+         /// <summary>
+         /// Get the current distance from the agent to a target item
+         /// </summary>
+         /// <param name="Agent"></param>
+         /// <param name="Target"></param>
+         /// <param name="MaxDistance"></param>
+         /// <returns></returns>
+public     static float DistanceToItem(Transform Agent, Transform Target, float MaxDistance = 10)
     {
-        //INVERSE LERP TO KEEP IT IN MY RANGE OF 0 TO 1
-        float RET = Mathf.Clamp(Mathf.InverseLerp(0, MaxDistance, Vector3.Distance(Agent.position, Target.position)), 0, 1);
-        return RET;
+  
+        float RET = Mathf.Clamp(Mathf.InverseLerp(0, MaxDistance, Vector3.Distance(Agent.position, Target.position)), 0, 1);       //Get distance between the two items, then inverse lerp that to be within the max distance then clamp it betweeen 0 and 1 
+        return RET; //Return RET
     }
 }
 /// <summary>
@@ -25,9 +31,15 @@ public class Helper
 [System.Serializable]
 public class PQueue<T>
 {
-    public List<KeyValuePair<float, State<T>>> TaskQueue = new List<KeyValuePair<float, State<T>>>();
+    /// <summary>
+    /// List of keyvalue pairs used to be a task queue 
+    /// </summary>
+   public  List<KeyValuePair<float, State<T>>> TaskQueue = new List<KeyValuePair<float, State<T>>>();
+    /// <summary>
+    /// sort the list by the float/ desire
+    /// </summary>
     public void Sort()
     {
-       TaskQueue = TaskQueue.OrderBy(x => x.Key ).ToList();
+       TaskQueue = TaskQueue.OrderBy(x => x.Key ).ToList(); //Order by the x.key then set it to be the current task queue list
     }
 }
