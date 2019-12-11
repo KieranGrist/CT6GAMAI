@@ -897,7 +897,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AI: {fileID: 0}
-  ToggleFocus: 1
 --- !u!1001 &1080959266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1277,9 +1276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GapBetweenNodes: 4
-  Area: 65
+  Area: 70
   Cube: {fileID: 3520572018954989743, guid: 4e4ea14724410ee4aa6ef0575f1b668c, type: 3}
-  FunctionTime: 0
 --- !u!114 &1492365533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,10 +1291,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Artie: {fileID: 48859249706919589, guid: 16e5aee598630f242bc6a063696cab2d, type: 3}
-  Generated: 0
-  Mask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &1492365534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1337,9 +1331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Order: {fileID: 697659005}
-  CarPositions: []
   MaxLaps: 30
-  Lap: 0
 --- !u!114 &1492365537
 MonoBehaviour:
   m_ObjectHideFlags: 0

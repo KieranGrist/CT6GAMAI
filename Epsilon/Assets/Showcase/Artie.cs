@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Artie : MonoBehaviour
+ public class Artie : MonoBehaviour
 {
     //Values that effect the pathfinding of the AI 
-    public Node sourceNode;
-    public Node targetNode;
-    public Node previousSourceNode;
-    public Node previousTargetNode;
-    public GameObject Target;
+     Node sourceNode;
+     Node targetNode;
+     Node previousSourceNode;
+     Node previousTargetNode;
+     GameObject Target;
     //Values that control the movement of the ai
-    public bool recievedPath = false;
-    public List<Transform> targetLocation = new List<Transform>();
-    public LayerMask mask;
+     bool recievedPath = false;
+     List<Transform> targetLocation = new List<Transform>();
+     LayerMask mask;
 
 
     void Start()

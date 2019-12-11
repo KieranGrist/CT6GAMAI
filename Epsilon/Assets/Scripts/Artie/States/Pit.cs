@@ -83,35 +83,40 @@ public class Pit : State<AIAgent>
             Distance = Vector3.Distance(agent.transform.position, Pitlane.pitlane.RenaultPit.transform.position); //Sets distance to be from the AI to the Renault pit
         return Distance; //Return the distance
     }
-    public override void Execute(AIAgent agent)
+    /// <summary>
+    /// Execute the Pit state
+    ///  Send the vehicle to the pits
+    /// </summary>
+    /// <param name="agent"></param>
+    public override void Execute(AIAgent agent) 
     {
-        agent.steeringBehaviour.OvertakeOff();
-        agent.vehicle.BoostOff();
+        agent.steeringBehaviour.OvertakeOff(); //Turn of Overtaking
+        agent.vehicle.BoostOff(); //Turn of vehicle boost
 
-        if (GetDistanceToGarrage(agent) < 4)
+        if (GetDistanceToGarrage(agent) < 4) //If vehicle is close enough to teams garrage 
         {
-            agent.artiePit = 1;
-            agent.artieDrive = 0;
-            agent.vehicle.PerformStop();
-
-            if (agent.vehicle.Fuel >= 98)
+            agent.artiePit = 1; //Force the ai to be in the pit state
+            agent.artieDrive = 0; //Force the ai to stop racing 
+            agent.vehicle.PerformStop(); //Perform the pit stop
+             
+            if (agent.vehicle.Fuel >= 98) //If fuel is high enough to continue race 
             {
-                FirstTime = true;
-                agent.artiePit = 0;
-                agent.artieDrive = 1;
+                FirstTime = true; //Set first time to true
+                agent.artiePit = 0; //Force the ai to stop the pit
+                agent.artieDrive = 1; //Force the ai to drive again
             }
         }
-        else
+        else //Else Drive towards the pits
         {
-            agent.vehicle.Accelerate(agent.steeringBehaviour.Calculate());
-            if (FirstTime)
+            agent.vehicle.Accelerate(agent.steeringBehaviour.Calculate()); //Drive to target position
+            if (FirstTime) //if First time create a path to the garage
             {
-               PathToPit(agent);
-                FirstTime = false;
+               PathToPit(agent); //Calls garage pathing function 
+                FirstTime = false; //Sets first time to false
             }
-            if(!agent.RecievedPath)
-                     PathToPit(agent);
-            agent.MoveOnRoute();
+            if(!agent.RecievedPath) //If for some reason it hasnt recieved a path create one to the garage
+                     PathToPit(agent); //Calls garage pathing function
+            agent.MoveOnRoute(); //Move the ai along the route
         }
     }
 }

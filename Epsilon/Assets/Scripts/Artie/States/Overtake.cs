@@ -40,7 +40,11 @@ public class Overtake : State<AIAgent>
         return item.transform.GetComponent<Node>(); //Try to return a hit node
 
     }
-
+    /// <summary>
+    /// Execute the overtake state
+    /// Overtake the car infront
+    /// </summary>
+    /// <param name="agent"></param>
     public override void Execute(AIAgent agent)
     {
         if (!agent.RecievedPath) //If the AI hasnt recieved a path calculate one        

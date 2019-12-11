@@ -29,7 +29,7 @@ public class ReadOnlyDrawer : PropertyDrawer
     }
 }
 
-public abstract class Vehicle :MonoBehaviour
+ public abstract class Vehicle :MonoBehaviour
 {
 
 
@@ -39,8 +39,8 @@ public abstract class Vehicle :MonoBehaviour
     [Header("Position in Race")]
     [ReadOnly] public int RacePosition;
     [Header("Time")]
-    [ReadOnly] public TimeSpan LapTime;
-    [ReadOnly] DateTime StartTime;
+ TimeSpan LapTime;
+ DateTime StartTime;
     [ReadOnly] public float CurrentLapTime =0;
     [ReadOnly] public float PreviusLapTime =0;
     [ReadOnly] public float Difference =0;
@@ -114,7 +114,7 @@ public abstract class Vehicle :MonoBehaviour
         PreviousFuel = fuel;
         StartTime = DateTime.Now;
     }
-    public void EndLap()
+     public void EndLap()
     {
 
         fuelUsedPerLap =  PreviousFuel - fuel;
@@ -135,7 +135,7 @@ public abstract class Vehicle :MonoBehaviour
         CurrentLapTime = (float)LapTime.TotalSeconds;
         Difference = CurrentLapTime - PreviusLapTime;
     }
-    public void Reset()
+     void Reset()
     {
         velocity = new Vector2();
         var ARTIE = GetComponent<AIAgent>();
@@ -209,7 +209,7 @@ public abstract class Vehicle :MonoBehaviour
 
     }
 
-    public void Accelerate()
+     void Accelerate()
     {
         if (fuel > 0)
         {
