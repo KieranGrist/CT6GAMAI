@@ -18,6 +18,7 @@ public class Pitlane : MonoBehaviour
         MercedesPit.GetComponent<Renderer>().material.color = Color.black; //Set colour of object to be black
         RenaultPit.GetComponent<Renderer>().material.color = Color.yellow; //Set colour of object to be yellow
     }
+    /*
     private void OnTriggerEnter(Collider other)
     {
         var vic = other.GetComponent<Vehicle>(); //gets the vehicle component of the collider
@@ -30,6 +31,7 @@ public class Pitlane : MonoBehaviour
         if (vic) //If vic exists       
             vic.PitExit(); //Call pit enter script
     }
+    */
     // Update is called once per frame
     void Update()
     {
